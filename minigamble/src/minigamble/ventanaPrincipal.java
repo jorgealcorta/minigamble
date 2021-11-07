@@ -25,9 +25,9 @@ public class ventanaPrincipal extends JFrame {
 		frame = new JFrame("mingamble.start");
 		frame.setSize(800, 500);
 		
-		frame.pack();--------------------------------------------
+		frame.pack();
 		
-		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
