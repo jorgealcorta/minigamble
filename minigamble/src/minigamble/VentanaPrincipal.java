@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 
-public class ventanaPrincipal extends JFrame {
+public class VentanaPrincipal extends JFrame {
 	
 	
 	private JButton bStart;
@@ -23,7 +23,7 @@ public class ventanaPrincipal extends JFrame {
 	
 	
 	
-	public ventanaPrincipal() {
+	public VentanaPrincipal() {
 		
 		
 		frame = new JFrame("minigamble.start");
@@ -37,8 +37,8 @@ public class ventanaPrincipal extends JFrame {
 		
 		try { 
 			
-			background = new ImageIcon( ventanaPrincipal.class.getResource("multimedia/background.png").toURI().toURL() ); 
-			bStart = new JButton( new ImageIcon( ventanaPrincipal.class.getResource("multimedia/yellow_button1.png").toURI().toURL() ) );
+			background = new ImageIcon( VentanaPrincipal.class.getResource("multimedia/background.png").toURI().toURL() ); 
+			bStart = new JButton( new ImageIcon( VentanaPrincipal.class.getResource("multimedia/yellow_button1.png").toURI().toURL() ) );
 		} catch (Exception e1) {  // Si hay error, botones texto
 			bStart = new JButton( "Start" );
 			JLabel background = new JLabel();
