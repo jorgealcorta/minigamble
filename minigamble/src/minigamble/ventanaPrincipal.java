@@ -40,8 +40,9 @@ public class ventanaPrincipal extends JFrame {
 			background = new JLabel();
 		}
 		
+		
 		frame.add(background);
-		//frame.add(bStart, BorderLayout.CENTER);
+		//frame.add(bStart, BorderLayout.CENTER);jajajaj
 		frame.setVisible(true);
 		pPrincipal = new JPanel();
 		 
