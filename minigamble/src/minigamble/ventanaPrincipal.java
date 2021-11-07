@@ -13,6 +13,7 @@ public class ventanaPrincipal extends JFrame {
 	private JButton bStart;
 	private JPanel pPrincipal;
 	private JFrame frame;
+	private JLabel background;
 	
 	
 	
@@ -23,13 +24,16 @@ public class ventanaPrincipal extends JFrame {
 		
 		
 		frame = new JFrame("mingamble.start");
-		frame.setSize(800, 500);
+		frame.setSize(1200, 700);
 		
-		frame.pack();
+		background = new JLabel( new ImageIcon("/multimedia/background.png"));
 		
 		frame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
+		frame.add(background);
+		
+		
 		frame.setVisible(true);
 		pPrincipal = new JPanel();
 		 
