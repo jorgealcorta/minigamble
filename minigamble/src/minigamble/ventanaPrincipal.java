@@ -26,14 +26,22 @@ public class ventanaPrincipal extends JFrame {
 		frame = new JFrame("mingamble.start");
 		frame.setSize(1200, 700);
 		
-		background = new JLabel( new ImageIcon("/multimedia/background.png"));
 		
 		frame.setDefaultCloseOperation( JFrame.DISPOSE_ON_CLOSE );
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
+		
+		
+		try { 
+			background = new JLabel( new ImageIcon( ventanaPrincipal.class.getResource("multimedia/background.png").toURI().toURL() ) );
+			bStart = new JButton( new ImageIcon( ventanaPrincipal.class.getResource("multimedia/yellow_button1.png").toURI().toURL() ) );
+		} catch (Exception e1) {  // Si hay error, botones texto
+			bStart = new JButton( "Start" );
+			background = new JLabel();
+		}
+		
 		frame.add(background);
-		
-		
+		//frame.add(bStart, BorderLayout.CENTER);
 		frame.setVisible(true);
 		pPrincipal = new JPanel();
 		 
