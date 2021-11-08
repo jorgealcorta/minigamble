@@ -8,6 +8,8 @@ import javax.swing.JFrame;
 
 public class VentanaPrincipal extends Canvas{
 	
+	private static final long serialVersionUID = 1L;
+
 	public VentanaPrincipal(String title, Game game) {
 		JFrame frame = new JFrame(title);
 		

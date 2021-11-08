@@ -1,20 +1,26 @@
 package minigamble;
 
 import java.awt.Canvas;
+import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+
 
 public class Game extends Canvas implements Runnable{
 	
 	private static final long serialVersionUID = -5339514091919298198L;
+	Inicio inicio = new Inicio(); 				// Pantalla inicio
 	
 	public Game() {
 		new VentanaPrincipal("Minigamble!", this);
+		this.addMouseListener(inicio); 				// aÃ±ado un mouseListener a la pantalla inicio
+		
+		
 	}
 	
 	//HILOS
 
 	private Thread thread;
-	private boolean running = false; // Variable para guardar si el hilo está runeando o no
+	private boolean running = false; // Variable para guardar si el hilo estï¿½ runeando o no
 
 	public synchronized void start() {
 		thread = new Thread(this);
@@ -56,7 +62,7 @@ public class Game extends Canvas implements Runnable{
 			frames++;
 			
 			if(System.currentTimeMillis() - timer > 1000) { // Escribe los FPS una vez cada segundo.
-				timer += 1000; // Si la diferencia entre el tiempo real y el timer es de más de 1000ms, implica que ha pasado un segundo.
+				timer += 1000; // Si la diferencia entre el tiempo real y el timer es de mï¿½s de 1000ms, implica que ha pasado un segundo.
 				System.out.println("FPS : " + frames); // Printea los frames que se han registrado en ese segundo.
 				frames = 0; // Resetea frames.
 			}
@@ -71,11 +77,21 @@ public class Game extends Canvas implements Runnable{
 	private void render() {
 		BufferStrategy bs = this.getBufferStrategy(); // El Buffer Strategy representa el mecanismo para organizar memoria compleja en una ventana.
 		if(bs == null) { // El valor default es null.
-			this.createBufferStrategy(3); // The number of buffers it creates.
+			this.createBufferStrategy(3); // El numero de buffers que crea
+			return;
 		}
+		
+		Graphics g = bs.getDrawGraphics();		
+		
+		inicio.render(g); 	// pinto la pantalla inicio
+		
+		g.dispose();
+		bs.show();
+		
 	}
 
 	public static void main(String[] args) {
+		
 		new Game();
 	}
 }
