@@ -48,7 +48,7 @@ public class Inicio extends MouseAdapter{
 		b1_state = false;	// cambia el estado del programa a levantado
 		b2_state = false;
 		
-		if( mouseOver(mox, moy, 500, 390, 190, 50) && mouseOver(mrx, mry, 500, 390, 190, 50)){ // si se ha presionado y soltado encima del segundo boton termina el programa
+		if( mouseOver(mox, moy, 500, 390, 190, 50) && mouseOver(mrx, mry, 500, 394, 190, 50)){ // si se ha presionado y soltado encima del segundo boton termina el programa
 			System.exit(1); 
 		}	
 		
