@@ -95,23 +95,20 @@ public class Inicio extends MouseAdapter{
 		
 		g.drawImage(backgroundIMG, 0, 0, null);   // Dibuja el fondo
 		
+		g.setFont(fButton);
 		if(b1_state == false) {					// Dibuja el botón 1 y texto del botón sin presionar
 			g.drawImage(b1IMG_false, 500, 290, null);		
-			g.setFont(fButton);
 			g.drawString("Comenzar", 515, 322);
 		}else {									// Dibuja el botón 1 y texto del botón presionado
 			g.drawImage(b1IMG_true, 500, 294, null);
-			g.setFont(fButton);
 			g.drawString("Comenzar", 515, 326);
 		}
 		
 		if(b2_state == false) {					// Dibuja el botón 2 y texto del botón sin presionar
 			g.drawImage(b2IMG_false, 500, 390, null);
-			g.setFont(fButton);
 			g.drawString("Salir", 557, 422);
 		}else {									// Dibuja el botón 2 y texto del botón presionado
 			g.drawImage(b2IMG_true, 500, 394, null);
-			g.setFont(fButton);
 			g.drawString("Salir", 557, 426);
 		}
 				
