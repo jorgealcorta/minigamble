@@ -16,7 +16,8 @@ public class Game extends Canvas implements Runnable{
 	public Game() {
 		new VentanaPrincipal("Minigamble!", this);
 		this.addMouseListener(inicio); 				// añado un mouseListener a la pantalla inicio
-				
+		this.addMouseMotionListener(inicio);
+		
 		handler = new Handler();
 	}
 	

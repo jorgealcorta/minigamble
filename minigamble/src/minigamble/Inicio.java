@@ -1,5 +1,7 @@
 package minigamble;
 
+import java.awt.*;
+import java.awt.event.*;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GraphicsEnvironment;
@@ -12,7 +14,7 @@ import java.io.InputStream;
 import javax.swing.ImageIcon;
 
 
-public class Inicio extends MouseAdapter{
+public class Inicio   implements MouseMotionListener, MouseListener  {
 	
 	public  static Font customFont;
 	
@@ -28,6 +30,27 @@ public class Inicio extends MouseAdapter{
 	
 	private int mox;				//Posición en la que se presiona el ratón
 	private int moy;
+	private int mdx;
+	private int mdy;
+	private int mrx;
+	private int mry;
+	
+	
+	public void mouseDragged(MouseEvent e) {
+		mdx = e.getX();
+		mdy = e.getY();
+		
+				
+		if( mouseOver(mdx, mdy, 500, 290, 190, 50)== false ){	
+			b1_state = false;
+		}
+		
+		if( mouseOver(mdx, mdy, 500, 390, 190, 50)== false ){
+			b2_state = false;
+		}
+	}
+	
+	
 	
 	
 	
@@ -46,19 +69,19 @@ public class Inicio extends MouseAdapter{
 	}
 	
 	public void mouseReleased(MouseEvent e) { 
-		int mrx = e.getX();	// guarda la posición en la que se suelta
-		int mry = e.getY();
+		mrx = e.getX();	// guarda la posición en la que se suelta
+		mry = e.getY();
+		
+		if(b2_state == true){ // si se ha presionado y soltado encima del segundo boton termina el programa
+			System.exit(1); 
+		}
 		
 		b1_state = false;	// cambia el estado del programa a levantado
 		b2_state = false;
 		
-		if( mouseOver(mox, moy, 500, 390, 190, 50) && mouseOver(mrx, mry, 500, 394, 190, 50)){ // si se ha presionado y soltado encima del segundo boton termina el programa
-			System.exit(1); 
-		}	
 		
 	}	
 	
-
 	
 	
 	
@@ -74,9 +97,22 @@ public class Inicio extends MouseAdapter{
 		}else {
 			return false;
 		}
-		
-		
 	}
+	
+	
+	public void mouseMoved(MouseEvent e) {			
+	}
+
+	public void mouseClicked(MouseEvent e) {			
+	}
+
+	public void mouseEntered(MouseEvent e) {		
+	}
+
+	public void mouseExited(MouseEvent e) {		
+	}
+
+	
 	
 	public void render(Graphics g) {
 		
@@ -117,21 +153,22 @@ public class Inicio extends MouseAdapter{
 		
 		g.drawImage(backgroundIMG, 0, 0, null);   // Dibuja el fondo
 		
+	
 		g.setFont(fButton);
-		if(b1_state == false) {					// Dibuja el botón 1 y texto del botón sin presionar
-			g.drawImage(b1IMG_false, 500, 290, null);		
-			g.drawString("Comenzar", 515, 322);
-		}else {									// Dibuja el botón 1 y texto del botón presionado
+		if(b1_state == true) {				// Dibuja el botón 1 y texto del botón presionado
 			g.drawImage(b1IMG_true, 500, 294, null);
-			g.drawString("Comenzar", 515, 326);
+			g.drawString("Comenzar", 515, 326);			
+		}else {								// Dibuja el botón 1 y texto del botón sin presionar
+			g.drawImage(b1IMG_false, 500, 290, null);		
+			g.drawString("Comenzar", 515, 322);		
 		}
 		
-		if(b2_state == false) {					// Dibuja el botón 2 y texto del botón sin presionar
-			g.drawImage(b2IMG_false, 500, 390, null);
-			g.drawString("Salir", 557, 422);
-		}else {									// Dibuja el botón 2 y texto del botón presionado
+		if(b2_state == true) {					// Dibuja el botón 2 y texto del botón presionado
 			g.drawImage(b2IMG_true, 500, 394, null);
 			g.drawString("Salir", 557, 426);
+		}else {									// Dibuja el botón 2 y texto del botón sin presionar
+			g.drawImage(b2IMG_false, 500, 390, null);
+			g.drawString("Salir", 557, 422);
 		}
 				
 		
@@ -144,6 +181,9 @@ public class Inicio extends MouseAdapter{
 		//g.drawRect(500, 390, 190, 50); 		//posicion del botón 2
 	
 	}
+
+
+
 	
 
 }
