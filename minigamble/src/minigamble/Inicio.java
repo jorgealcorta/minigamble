@@ -173,7 +173,7 @@ public class Inicio   implements MouseMotionListener, MouseListener  {
 				
 		
 		g.setFont(title);
-		g.drawString("hola", 430, 150); //Dibuja el título
+		g.drawString("Minigamble", 430, 150); //Dibuja el título
 		
 		
 		
