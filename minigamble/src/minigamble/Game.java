@@ -15,7 +15,7 @@ public class Game extends Canvas implements Runnable{
 	
 	public Game() {
 		new VentanaPrincipal("Minigamble!", this);
-		this.addMouseListener(inicio); 				// añado un mouseListener a la pantalla inicio
+		this.addMouseListener(inicio); 				// anyado un mouseListener a la pantalla inicio
 		this.addMouseMotionListener(inicio);
 		
 		handler = new Handler();
@@ -26,7 +26,7 @@ public class Game extends Canvas implements Runnable{
 	//HILOS
 
 	private Thread thread;
-	private boolean running = false; // Variable para guardar si el hilo est� runeando o no
+	private boolean running = false; // Variable para guardar si el hilo esta runeando o no
 
 	public synchronized void start() {
 		thread = new Thread(this);
@@ -68,7 +68,7 @@ public class Game extends Canvas implements Runnable{
 			frames++;
 			
 			if(System.currentTimeMillis() - timer > 1000) { // Escribe los FPS una vez cada segundo.
-				timer += 1000; // Si la diferencia entre el tiempo real y el timer es de m�s de 1000ms, implica que ha pasado un segundo.
+				timer += 1000; // Si la diferencia entre el tiempo real y el timer es de mas de 1000ms, implica que ha pasado un segundo.
 				System.out.println("FPS : " + frames); // Printea los frames que se han registrado en ese segundo.
 				frames = 0; // Resetea frames.
 			}

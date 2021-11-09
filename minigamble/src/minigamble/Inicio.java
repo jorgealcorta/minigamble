@@ -16,19 +16,19 @@ import javax.swing.ImageIcon;
 
 public class Inicio   implements MouseMotionListener, MouseListener  {
 	
-	public  static Font customFont;
+//	public  static Font customFont;
 	
 	private ImageIcon background;	// Fondo
 	
-	private ImageIcon b1_false;		// botón 1
+	private ImageIcon b1_false;		// boton 1
 	private ImageIcon b1_true;
 	private boolean b1_state = false;
 	
-	private ImageIcon b2_false;		// botón 2 
+	private ImageIcon b2_false;		// boton 2 
 	private ImageIcon b2_true;
 	private boolean b2_state = false;
 	
-	private int mox;				//Posición en la que se presiona el ratón
+	private int mox;				//Posicion en la que se presiona el raton
 	private int moy;
 	private int mdx;
 	private int mdy;
@@ -58,18 +58,18 @@ public class Inicio   implements MouseMotionListener, MouseListener  {
 		mox = e.getX();	// guarda la posición en la que se presiona
 		moy = e.getY();
 		
-		if( mouseOver(mox, moy, 500, 290, 190, 50) ){	// si se presiona encima del botón 1 se cambia su estado
+		if( mouseOver(mox, moy, 500, 290, 190, 50) ){	// si se presiona encima del boton 1 se cambia su estado
 			b1_state = true;
 		}
 		
-		if( mouseOver(mox, moy, 500, 390, 190, 50) ){	// si se presiona encima del botón 2 se cambia su estado
+		if( mouseOver(mox, moy, 500, 390, 190, 50) ){	// si se presiona encima del boton 2 se cambia su estado
 			b2_state = true;
 		}
 		
 	}
 	
 	public void mouseReleased(MouseEvent e) { 
-		mrx = e.getX();	// guarda la posición en la que se suelta
+		mrx = e.getX();	// guarda la posicion en la que se suelta
 		mry = e.getY();
 		
 		if(b2_state == true){ // si se ha presionado y soltado encima del segundo boton termina el programa
@@ -85,7 +85,7 @@ public class Inicio   implements MouseMotionListener, MouseListener  {
 	
 	
 	
-	public boolean mouseOver(int mx, int my, int x, int y, int width, int heigth) {   // devuelve true si el ratón ha sido presionado dentro de un cuadrado 
+	public boolean mouseOver(int mx, int my, int x, int y, int width, int heigth) {   // devuelve true si el raton ha sido presionado dentro de un cuadrado 
 		
 		if(mx > x && mx < x + width) {
 			if(my > y && my < y + heigth) {
@@ -173,7 +173,7 @@ public class Inicio   implements MouseMotionListener, MouseListener  {
 				
 		
 		g.setFont(title);
-		g.drawString("MINIGAMBLE", 430, 150); //Dibuja el título
+		g.drawString("hola", 430, 150); //Dibuja el título
 		
 		
 		
