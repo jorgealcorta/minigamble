@@ -2,15 +2,19 @@ package minigamble;
 
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.InputStream;
 
 import javax.swing.ImageIcon;
 
 
 public class Inicio extends MouseAdapter{
 	
+	public Font customFont;
 	
 	private ImageIcon background;	// Fondo
 	
@@ -72,8 +76,26 @@ public class Inicio extends MouseAdapter{
 	}
 	
 	public void render(Graphics g) {
-		Font title = new Font("arial", 1 ,50);  //Fuente del título
+		
+		
+		try {
+			//InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream("superstar_memesbruh03.ttf");
+			customFont = Font.createFont(Font.TRUETYPE_FONT, new File("Fonts\\custom_font.ttf")).deriveFont(12f);
+			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+			ge.registerFont(customFont);		
+			
+			
+		}catch(Exception e){
+			
+		}
+		
+		
+		Font title = new Font("serif", 1 ,50);  //Fuente del título
 		Font fButton = new Font("arial", 1 ,30); //Fuente de los botones
+		
+		
+		
+		
 		
 		try {
 			background = new ImageIcon( Game.class.getResource("multimedia/background.png").toURI().toURL() );		//Cargo todas las imágenes como iconos
@@ -112,8 +134,12 @@ public class Inicio extends MouseAdapter{
 			g.drawString("Salir", 557, 426);
 		}
 				
+		
 		g.setFont(title);
+		g.drawString("MINIGAMBLE", 400, 100);
+		g.setFont(fButton);
 		g.drawString("MINIGAMBLE", 430, 150); //Dibuja el título
+		
 		
 		
 		//g.drawRect(500, 290, 190, 50); 		//posicion del botón 1
