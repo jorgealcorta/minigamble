@@ -10,14 +10,17 @@ public class Game extends Canvas implements Runnable{
 	
 	private static final long serialVersionUID = -5339514091919298198L;
 	Inicio inicio = new Inicio(); 				// Pantalla inicio
+	private Handler handler;
+	
 	
 	public Game() {
 		new VentanaPrincipal("Minigamble!", this);
 		this.addMouseListener(inicio); 				// añado un mouseListener a la pantalla inicio
-		
-		
-		
+				
+		handler = new Handler();
 	}
+	
+	
 	
 	//HILOS
 
@@ -86,6 +89,8 @@ public class Game extends Canvas implements Runnable{
 		Graphics g = bs.getDrawGraphics();		
 		
 		inicio.render(g); 	// pinto la pantalla inicio
+		
+		handler.render(g);
 		
 		g.dispose();
 		bs.show();
