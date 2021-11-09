@@ -14,7 +14,7 @@ import javax.swing.ImageIcon;
 
 public class Inicio extends MouseAdapter{
 	
-	public Font customFont;
+	public  static Font customFont;
 	
 	private ImageIcon background;	// Fondo
 	
@@ -59,6 +59,9 @@ public class Inicio extends MouseAdapter{
 	}	
 	
 
+	
+	
+	
 	public boolean mouseOver(int mx, int my, int x, int y, int width, int heigth) {   // devuelve true si el ratón ha sido presionado dentro de un cuadrado 
 		
 		if(mx > x && mx < x + width) {
@@ -77,24 +80,21 @@ public class Inicio extends MouseAdapter{
 	
 	public void render(Graphics g) {
 		
-		
-		try {
-			//InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream("superstar_memesbruh03.ttf");
-			customFont = Font.createFont(Font.TRUETYPE_FONT, new File("Fonts\\custom_font.ttf")).deriveFont(12f);
-			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-			ge.registerFont(customFont);		
-			
-			
-		}catch(Exception e){
-			
-		}
-		
+//		
+//		try {
+//			/*InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream("superstar_memesbruh03.ttf");*/             
+//			customFont = Font.createFont(Font.TRUETYPE_FONT, new File("superstar_memesbruh03.ttf")).deriveFont(Font.PLAIN,12);
+//			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+//			ge.registerFont(customFont);					
+//			
+//		}catch(Exception e){			
+//		}
+//		
 		
 		Font title = new Font("serif", 1 ,50);  //Fuente del título
 		Font fButton = new Font("arial", 1 ,30); //Fuente de los botones
 		
-		
-		
+				
 		
 		
 		try {
@@ -136,8 +136,6 @@ public class Inicio extends MouseAdapter{
 				
 		
 		g.setFont(title);
-		g.drawString("MINIGAMBLE", 400, 100);
-		g.setFont(fButton);
 		g.drawString("MINIGAMBLE", 430, 150); //Dibuja el título
 		
 		
