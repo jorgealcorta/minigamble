@@ -1,16 +1,15 @@
 package minigamble;
 
-import java.awt.*;
 import java.awt.event.*;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.GraphicsEnvironment;
 import java.awt.Image;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
-import java.io.InputStream;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 
 
@@ -32,8 +31,6 @@ public class Inicio   implements MouseMotionListener, MouseListener  {
 	private int moy;
 	private int mdx;
 	private int mdy;
-	private int mrx;
-	private int mry;
 	
 	
 	public void mouseDragged(MouseEvent e) {
@@ -58,22 +55,61 @@ public class Inicio   implements MouseMotionListener, MouseListener  {
 		mox = e.getX();	// guarda la posición en la que se presiona
 		moy = e.getY();
 		
+		String filePath = new File("").getAbsolutePath();				// Ruta hasta el proyecto
+		String s1_filePath = filePath.concat("/minigamble/src/minigamble/sonido/click1.wav");	//Continuación de la ruta hasta el archivo de audio 1
+		
 		if( mouseOver(mox, moy, 500, 290, 190, 50) ){	// si se presiona encima del boton 1 se cambia su estado
 			b1_state = true;
+			try {																				//Reproduce el archivo de sonido 1
+		        Clip sonido = AudioSystem.getClip();
+				AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s1_filePath));
+		        sonido.open(ais);
+		        sonido.start();
+	        }catch(Exception e2) {
+	        	System.out.println("error");
+	        }
+			
 		}
 		
 		if( mouseOver(mox, moy, 500, 390, 190, 50) ){	// si se presiona encima del boton 2 se cambia su estado
 			b2_state = true;
+			try {																				//Reproduce el archivo de sonido 1
+		        Clip sonido = AudioSystem.getClip();
+				AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s1_filePath));
+		        sonido.open(ais);
+		        sonido.start();
+	        }catch(Exception e2) {
+	        	System.out.println("error");
+	        }
 		}
 		
 	}
 	
-	public void mouseReleased(MouseEvent e) { 
-		mrx = e.getX();	// guarda la posicion en la que se suelta
-		mry = e.getY();
+	public void mouseReleased(MouseEvent e) {
+		String filePath = new File("").getAbsolutePath();										// Ruta hasta el proyecto
+		String s2_filePath = filePath.concat("/minigamble/src/minigamble/sonido/click2.wav");	//Continuación de la ruta hasta el archivo de audio 2
 		
-		if(b2_state == true){ // si se ha presionado y soltado encima del segundo boton termina el programa
+		if(b1_state == true){ // si se ha presionado y soltado encima del primero suena
+			try {																				//Reproduce el archivo de sonido 2
+		        Clip sonido = AudioSystem.getClip();
+				AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s2_filePath));
+		        sonido.open(ais);
+		        sonido.start();
+	        }catch(Exception e2) {
+	        	System.out.println("error");
+	        }
+		}
+		
+		if(b2_state == true){ // si se ha presionado y soltado encima del segundo boton termina el programa y suena
 			System.exit(1); 
+			try {																				//Reproduce el archivo de sonido 2
+		        Clip sonido = AudioSystem.getClip();
+				AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s2_filePath));
+		        sonido.open(ais);
+		        sonido.start();
+	        }catch(Exception e2) {
+	        	System.out.println("error");
+	        }
 		}
 		
 		b1_state = false;	// cambia el estado del programa a levantado
