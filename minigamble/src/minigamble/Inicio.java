@@ -155,16 +155,9 @@ public class Inicio   implements MouseMotionListener, MouseListener  {
 	
 	public void render(Graphics g) {
 		
-//		
-//		try {
-//			/*InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream("superstar_memesbruh03.ttf");*/             
-//			customFont = Font.createFont(Font.TRUETYPE_FONT, new File("superstar_memesbruh03.ttf")).deriveFont(Font.PLAIN,12);
-//			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-//			ge.registerFont(customFont);					
-//			
-//		}catch(Exception e){			
-//		}
-//		
+		
+		
+		
 		
 		Font title = new Font("serif", 1 ,50);  //Fuente del título
 		Font fButton = new Font("arial", 1 ,30); //Fuente de los botones
@@ -211,8 +204,19 @@ public class Inicio   implements MouseMotionListener, MouseListener  {
 		}
 				
 		
-		g.setFont(title);
-		g.drawString("Minigamble", 430, 150); //Dibuja el titulo
+		try {
+	         
+			Font customFont = Font.createFont(Font.TRUETYPE_FONT, Inicio.class.getResourceAsStream("fuentes/COMICATE.ttf"));
+			customFont=customFont.deriveFont(Font.PLAIN,100);
+			g.setFont(customFont);
+			g.drawString("Minigamble", 430, 150); //Dibuja el titulo con una fuente personalizada
+			
+						
+		}catch(Exception e){	
+			
+			g.setFont(title);
+			g.drawString("Minigamble", 430, 150); //Dibuja el titulo en caso de que no se encuentre la fuente
+		}
 		
 		
 		
