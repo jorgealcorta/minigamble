@@ -10,7 +10,18 @@ public class Game extends Canvas implements Runnable{
 	
 	private static final long serialVersionUID = -5339514091919298198L;
 	Inicio inicio = new Inicio(); 				// Pantalla inicio
+	Login login = new Login();
+	
 	private Handler handler;
+	
+	//Enumeracion con los distintos estados del juego.
+	public enum ESTADO{
+		Inicio,
+		Login,
+		Game
+	};
+	
+	static ESTADO estadoJuego = ESTADO.Inicio;
 	
 	
 	public Game() {
@@ -89,7 +100,12 @@ public class Game extends Canvas implements Runnable{
 		
 		Graphics g = bs.getDrawGraphics();		
 		
-		inicio.render(g); 	// pinto la pantalla inicio
+		if(estadoJuego == ESTADO.Inicio) {
+			inicio.render(g); 	// pinto la pantalla inicio
+		}else if(estadoJuego == ESTADO.Login) {
+			login.render(g);
+		}
+		
 		
 		handler.render(g);
 		

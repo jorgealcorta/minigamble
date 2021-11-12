@@ -1,6 +1,5 @@
 package minigamble;
 
-import java.awt.event.*;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -12,8 +11,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 
-
-public class Inicio   implements MouseMotionListener, MouseListener  {
+public class Login {
 	
 //	public  static Font customFont;
 	
@@ -90,9 +88,6 @@ public class Inicio   implements MouseMotionListener, MouseListener  {
 		String s2_filePath = filePath.concat("/minigamble/src/minigamble/sonido/click2.wav");	//Continuacio n de la ruta hasta el archivo de audio 2
 		
 		if(b1_state == true){ // si se ha presionado y soltado encima del primero suena
-			
-			Game.estadoJuego = Game.ESTADO.Login;
-			
 			try {																				//Reproduce el archivo de sonido 2
 		        Clip sonido = AudioSystem.getClip();
 				AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s2_filePath));
@@ -212,7 +207,7 @@ public class Inicio   implements MouseMotionListener, MouseListener  {
 				
 		
 		g.setFont(title);
-		g.drawString("Minigamble", 430, 150); //Dibuja el titulo
+		g.drawString("Login", 430, 150); //Dibuja el titulo
 		
 		
 		
@@ -224,5 +219,6 @@ public class Inicio   implements MouseMotionListener, MouseListener  {
 
 
 	
+
 
 }
