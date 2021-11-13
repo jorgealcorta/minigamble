@@ -28,6 +28,8 @@ public class Game extends Canvas implements Runnable{
 		new VentanaPrincipal("Minigamble!", this);
 		this.addMouseListener(inicio); 				// anyado un mouseListener a la pantalla inicio
 		this.addMouseMotionListener(inicio);
+		this.addMouseListener(login); 				// anyado un mouseListener a la pantalla login
+		this.addMouseMotionListener(login);
 		
 		handler = new Handler();
 	}
@@ -101,9 +103,10 @@ public class Game extends Canvas implements Runnable{
 		Graphics g = bs.getDrawGraphics();		
 		
 		if(estadoJuego == ESTADO.Inicio) {
-			inicio.render(g); 	// pinto la pantalla inicio
+			inicio.render(g);       // pinto la pantalla inicio
 		}else if(estadoJuego == ESTADO.Login) {
 			login.render(g);
+			
 		}
 		
 		
