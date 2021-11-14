@@ -77,14 +77,15 @@ public class Inicio   implements MouseMotionListener, MouseListener  {
 			}
 			
 			if( mouseOver(mox, moy, 500, 390, 190, 50) ){	// si se presiona encima del boton 2 se cambia su estado
-				b2_state = true;
 				try {																				//Reproduce el archivo de sonido 1
 			        Clip sonido = AudioSystem.getClip();
 					AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s1_filePath));
 			        sonido.open(ais);
+			        sonido.start();
 		        }catch(Exception e2) {
 		        	System.out.println("error");
 		        }
+				b2_state = true;
 			}
 		}
 	}
@@ -227,7 +228,6 @@ public class Inicio   implements MouseMotionListener, MouseListener  {
 				g.drawImage(b1IMG_false, 500, 290, null);		
 				g.drawString("Comenzar", 515, 322);		
 			}
-			
 			if(b2_state == true) {					// Dibuja el boton 2 y texto del boton presionado
 				g.drawImage(b2IMG_true, 500, 394, null);
 				g.drawString("Salir", 557, 426);
