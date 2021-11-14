@@ -65,7 +65,7 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 				text_state = 2;			// !!!! de momento cambia el estado a correcto pero hay que hacer que evalue el string y mire si es correcto o incorrecto
 			}
 			
-			if( mouseOver(mox, moy, 25, 625, 40, 30) ){	// si se presiona encima del boton 2 se cambia su estado
+			if( mouseOver(mox, moy, 25, 625, 40, 30) ){	// si se presiona encima del boton back se cambia su estado
 				bBack_state = true;
 				try {																				//Reproduce el archivo de sonido 1
 			        Clip sonido = AudioSystem.getClip();

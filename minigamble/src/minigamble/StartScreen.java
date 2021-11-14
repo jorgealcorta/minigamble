@@ -48,21 +48,21 @@ public class StartScreen implements MouseMotionListener, MouseListener{
 			mdx = e.getX();
 			mdy = e.getY();
 			
-			if( mouseOver(mdx, mdy, 500, 290, 190, 50)== false ){	// boton No Registrarse 
-				bNoReg_state = false;
-			}
-			
-					
-			if( mouseOver(mdx, mdy, 500, 190, 190, 50)== false ){	// boton Log In
+			if( mouseOver(mdx, mdy, 500, 190, 190, 50)== false ){	// boton No Registrarse 
 				bLogIn_state = false;
 			}
 			
-			if( mouseOver(mdx, mdy, 500, 290, 190, 50)== false ){	// boton Sign Up
+					
+			if( mouseOver(mdx, mdy, 500, 290, 190, 50)== false ){	// boton Log In
 				bSignUp_state = false;
 			}
 			
+			if( mouseOver(mdx, mdy, 500, 390, 190, 50)== false ){	// boton Sign Up
+				bNoReg_state = false;
+			}
+			
 
-			if( mouseOver(mdx, mdy, 25, 625, 40, 30)== false ){		// boton volver atras
+			if( mouseOver(mdx, mdy, 25, 54, 40, 30)== false ){		// boton volver atras
 				bBack_state = false;
 			}
 			
@@ -301,15 +301,15 @@ public class StartScreen implements MouseMotionListener, MouseListener{
 		}
 		
 		if(bNoReg_state == true) {					// Dibuja el boton No Reg y texto del boton presionado
-			g.drawImage(b3IMG_false, 500, 394, null);
+			g.drawImage(b3IMG_true, 500, 394, null);
 			g.drawString("Quick play", 507, 426);
 		}else {									// Dibuja el boton No Reg y texto del boton sin presionar
-			g.drawImage(b3IMG_true, 500, 390, null);
+			g.drawImage(b3IMG_false, 500, 390, null);
 			g.drawString("Quick play", 507, 422);
 		}
 		
 		if(bBack_state == true) {					// Dibuja el boton Back y texto del boton presionado
-			g.drawImage(bBackIMG_true, 25, 50, null);
+			g.drawImage(bBackIMG_true, 25, 54, null);
 		}else {									// Dibuja el boton Back y texto del boton sin presionar
 			g.drawImage(bBackIMG_false, 25, 50, null);
 		}
@@ -343,9 +343,9 @@ public class StartScreen implements MouseMotionListener, MouseListener{
 		}
 		
 		if(bBack_state == true) {					// Dibuja el boton Back y texto del boton presionado
-			g.drawImage(bBackIMG_true, 25, 628, null);
+			g.drawImage(bBackIMG_true, 25, 54, null);
 		}else {									// Dibuja el boton Back y texto del boton sin presionar
-			g.drawImage(bBackIMG_false, 25, 625, null);
+			g.drawImage(bBackIMG_false, 25, 50, null);
 		}
 		
 		
