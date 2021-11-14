@@ -23,8 +23,14 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 	private ImageIcon textCorrect;	// Imagen del texto valido
 	private ImageIcon textError;	// Imagen del texto no valido
 	private ImageIcon textWrite;	// Imagen del texto habilitado para escribir
+	private ImageIcon bBack_false;		// boton volver atras 
+	private ImageIcon bBack_true;
+	
 	private int text_state = 1;		// Estado del texto -> 1:defecto, 2:Correcto, 3:incorrecto, 0:Habilitado para escribir
 	private String usuario = "";	// String con el nombre de usuario
+	
+	private boolean bBack_state = false;
+	
 	
 	private int mox;				//Posicion en la que se presiona el raton
 	private int moy;
@@ -53,11 +59,48 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 		        }catch(Exception e2) {
 		        	System.out.println("error");
 		        }
-			}
+				}
 			
 			if( !mouseOver(mox, moy, 500, 195, 190, 45) ){	// si se presiona fuera del campo de texto
 				text_state = 2;			// !!!! de momento cambia el estado a correcto pero hay que hacer que evalue el string y mire si es correcto o incorrecto
 			}
+			
+			if( mouseOver(mox, moy, 25, 625, 40, 30) ){	// si se presiona encima del boton 2 se cambia su estado
+				bBack_state = true;
+				try {																				//Reproduce el archivo de sonido 1
+			        Clip sonido = AudioSystem.getClip();
+					AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s1_filePath));
+			        sonido.open(ais);
+			        sonido.start();
+		        }catch(Exception e2) {
+		        	System.out.println("error");
+		        }
+			
+				
+				
+			}
+		}
+	}
+	
+	
+	public void mouseReleased(MouseEvent e) {
+		if(Game.estadoJuego == Game.ESTADO.SignIn) {
+			String filePath = new File("").getAbsolutePath();										// Ruta hasta el proyecto
+			String s2_filePath = filePath.concat("/minigamble/src/minigamble/sonido/click2.wav");	//Continuacio n de la ruta hasta el archivo de audio 2
+			
+			if(bBack_state == true){																// si se ha presionado y soltado encima del segundo boton termina el programa y suena
+				try {																				//Reproduce el archivo de sonido 2
+			        Clip sonido = AudioSystem.getClip();
+					AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s2_filePath));
+			        sonido.open(ais);
+			        sonido.start();
+		        }catch(Exception e2) {
+		        	System.out.println("error");
+		        }
+				Game.estadoJuego = Game.ESTADO.Start;											//Si se presiona el boton de back se cambia el estado a Inicio
+			}
+			
+			bBack_state = false;
 		}
 	}
 	
@@ -80,8 +123,7 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 		}
 	}
 	
-	public void mouseReleased(MouseEvent e) {
-	}
+	
 	public void mouseEntered(MouseEvent e) {
 	}
 	public void mouseExited(MouseEvent e) {
@@ -127,6 +169,10 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 			textCorrect = new ImageIcon( Game.class.getResource("multimedia/greenTextPath.png").toURI().toURL() );
 			textError = new ImageIcon( Game.class.getResource("multimedia/redTextPath.png").toURI().toURL() );
 			textWrite = new ImageIcon( Game.class.getResource("multimedia/writeTextPath.png").toURI().toURL() );
+			bBack_false = new ImageIcon( Game.class.getResource("multimedia/green_back1.png").toURI().toURL() );
+			bBack_true = new ImageIcon( Game.class.getResource("multimedia/green_back2.png").toURI().toURL() );
+			
+			
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
@@ -137,6 +183,8 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 		Image textIMG_green = textCorrect.getImage();
 		Image textIMG_red = textError.getImage();
 		Image textIMG_write= textWrite.getImage();
+		Image bBackIMG_false = bBack_false.getImage();
+		Image bBackIMG_true = bBack_true.getImage();
 		
 		g.drawImage(backgroundIMG, 0, 0, null);   // Dibuja el fondo
 
@@ -154,7 +202,11 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 			g.drawImage(textIMG_write, 500, 194, null);		
 			g.drawString(usuario, 507, 227);		
 		}
-	
+		if(bBack_state == true) {					// Dibuja el boton Back y texto del boton presionado
+			g.drawImage(bBackIMG_true, 25, 628, null);
+		}else {									// Dibuja el boton Back y texto del boton sin presionar
+			g.drawImage(bBackIMG_false, 25, 625, null);
+		}
 		
 	}
 		

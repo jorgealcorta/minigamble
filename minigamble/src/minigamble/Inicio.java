@@ -106,7 +106,7 @@ public class Inicio   implements MouseMotionListener, MouseListener  {
 		        	System.out.println("error");
 		        }
 	
-				Game.estadoJuego = Game.ESTADO.Login;		// Cuando se presiona continuar pasa al estado Login
+				Game.estadoJuego = Game.ESTADO.Start;		// Cuando se presiona continuar pasa al estado Login
 				
 			}
 			

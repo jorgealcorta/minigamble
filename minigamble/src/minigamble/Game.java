@@ -10,7 +10,7 @@ public class Game extends Canvas implements Runnable{
 	
 	private static final long serialVersionUID = -5339514091919298198L;
 	Inicio inicio = new Inicio(); 				// Pantalla inicio
-	Login login = new Login();
+	StartScreen start = new StartScreen();
 	SignIn signin = new SignIn();
 	
 	private Handler handler;
@@ -18,7 +18,8 @@ public class Game extends Canvas implements Runnable{
 	//Enumeracion con los distintos estados del juego.
 	public enum ESTADO{
 		Inicio,
-		Login,
+		Start,
+		LogIn,
 		SignIn,
 		Game
 	};
@@ -30,9 +31,9 @@ public class Game extends Canvas implements Runnable{
 		new VentanaPrincipal("Minigamble!", this);
 		this.addMouseListener(inicio); 				// anyado un mouseListener a la pantalla inicio
 		this.addMouseMotionListener(inicio);
-		this.addMouseListener(login); 				// anyado un mouseListener a la pantalla login
-		this.addMouseMotionListener(login);
-		this.addMouseListener(signin); 				// anyado un mouseListener a la pantalla login
+		this.addMouseListener(start); 				// anyado un mouseListener a la pantalla start
+		this.addMouseMotionListener(start);
+		this.addMouseListener(signin); 				// anyado un mouseListener a la pantalla signin
 		this.addMouseMotionListener(signin);
 		this.addKeyListener(signin);
 		
@@ -106,19 +107,40 @@ public class Game extends Canvas implements Runnable{
 		}
 		
 		Graphics g = bs.getDrawGraphics();		
+
+
 		
-		if(estadoJuego == ESTADO.Inicio) {
-			inicio.render(g);       // pinto la pantalla inicio
-		}else if(estadoJuego == ESTADO.Login) {
-			login.render(g);
-			
-		}else if(estadoJuego == ESTADO.SignIn) {
+		switch(estadoJuego) {
+		
+		case Inicio:
+			inicio.render(g); 	
+			break;
+		case Start:
+			start.render(g);
+			break;	
+		case SignIn:
 			signin.render(g);
-		}		
-		handler.render(g);
+			break;
+		}
 		
+		handler.render(g);
 		g.dispose();
 		bs.show();
+		
+		
+		
+//		if(estadoJuego == ESTADO.Inicio) {
+//			inicio.render(g);       // pinto la pantalla inicio
+//		}else if(estadoJuego == ESTADO.Start) {
+//			login.render(g);
+//			
+//		}else if(estadoJuego == ESTADO.SignIn) {
+//			signin.render(g);
+//		}		
+//		handler.render(g);
+//		
+//		g.dispose();
+//		bs.show();
 		
 	}
 

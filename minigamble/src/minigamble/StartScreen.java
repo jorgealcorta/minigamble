@@ -13,7 +13,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 
-public class Login implements MouseMotionListener, MouseListener{
+public class StartScreen implements MouseMotionListener, MouseListener{
 	
 //	public  static Font customFont;
 	
@@ -42,7 +42,7 @@ public class Login implements MouseMotionListener, MouseListener{
 	
 	
 	public void mouseDragged(MouseEvent e) {
-		if(Game.estadoJuego == Game.ESTADO.Login) {				//si se esta en otro estado no hace nada
+		if(Game.estadoJuego == Game.ESTADO.Start) {				//si se esta en otro estado no hace nada
 		
 			mdx = e.getX();
 			mdy = e.getY();
@@ -73,7 +73,7 @@ public class Login implements MouseMotionListener, MouseListener{
 	
 	
 	public void mousePressed(MouseEvent e) {
-		if(Game.estadoJuego == Game.ESTADO.Login) {				//si se esta en otro estado no hace nada
+		if(Game.estadoJuego == Game.ESTADO.Start) {				//si se esta en otro estado no hace nada
 			
 			mox = e.getX();	// guarda la posicion en la que se presiona
 			moy = e.getY();
@@ -134,7 +134,7 @@ public class Login implements MouseMotionListener, MouseListener{
 	}
 	
 	public void mouseReleased(MouseEvent e) {
-		if(Game.estadoJuego == Game.ESTADO.Login) {
+		if(Game.estadoJuego == Game.ESTADO.Start) {
 			
 			String filePath = new File("").getAbsolutePath();										// Ruta hasta el proyecto
 			String s2_filePath = filePath.concat("/minigamble/src/minigamble/sonido/click2.wav");	//Continuacio n de la ruta hasta el archivo de audio 2
@@ -227,18 +227,9 @@ public class Login implements MouseMotionListener, MouseListener{
 	
 	public void render(Graphics g) {
 		
-//		
-//		try {
-//			/*InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream("superstar_memesbruh03.ttf");*/             
-//			customFont = Font.createFont(Font.TRUETYPE_FONT, new File("superstar_memesbruh03.ttf")).deriveFont(Font.PLAIN,12);
-//			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-//			ge.registerFont(customFont);					
-//			
-//		}catch(Exception e){			
-//		}
-//		
+
 		
-		Font title = new Font("serif", 1 ,50);  //Fuente del título
+		
 		Font fButton = new Font("arial", 1 ,30); //Fuente de los botones
 		
 				
@@ -302,10 +293,10 @@ public class Login implements MouseMotionListener, MouseListener{
 		}
 		
 		if(bNoReg_state == true) {					// Dibuja el boton No Reg y texto del boton presionado
-			g.drawImage(b3IMG_true, 500, 394, null);
+			g.drawImage(b3IMG_false, 500, 394, null);
 			g.drawString("No Reg", 545, 426);
 		}else {									// Dibuja el boton No Reg y texto del boton sin presionar
-			g.drawImage(b3IMG_false, 500, 390, null);
+			g.drawImage(b3IMG_true, 500, 390, null);
 			g.drawString("No Reg", 545, 422);
 		}
 		
@@ -316,24 +307,7 @@ public class Login implements MouseMotionListener, MouseListener{
 		}
 				
 		
-//		try {
-//	         
-//			Font customFont = Font.createFont(Font.TRUETYPE_FONT, Inicio.class.getResourceAsStream("fuentes/fuente.ttf"));
-//			customFont=customFont.deriveFont(Font.PLAIN,100);
-//			g.setFont(customFont);
-//			g.drawString("Login",480, 150); //Dibuja el titulo con una fuente personalizada
-//			
-//						
-//		}catch(Exception e){	
-//			
-//			g.setFont(title);
-//			g.drawString("Login", 430, 150); //Dibuja el titulo en caso de que no se encuentre la fuente
-//		}
-		
-		
-		//g.drawRect(25, 625, 40, 30); 		//posicion del boton BACK
-		//g.drawRect(500, 390, 190, 50); 		//posicion del boton 2
-	
+
 	}
 
 
