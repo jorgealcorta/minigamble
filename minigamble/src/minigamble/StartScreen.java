@@ -19,17 +19,18 @@ public class StartScreen implements MouseMotionListener, MouseListener{
 	
 	private ImageIcon background;	// Fondo
 	
+	private ImageIcon bNoReg_false;		// boton No Registrarse 
+	private ImageIcon bNoReg_true;
+	private boolean bNoReg_state = false;
+	
 	private ImageIcon bLogIn_false;		// boton Log In
 	private ImageIcon bLogIn_true;
 	private boolean bLogIn_state = false;
 	
-	private ImageIcon bSignIn_false;		// boton Sign In
-	private ImageIcon bSigIn_true;
-	private boolean bSignIn_state = false;
+	private ImageIcon bSignUp_false;		// boton Sign Up
+	private ImageIcon bSignUp_true;
+	private boolean bSignUp_state = false;
 	
-	private ImageIcon bNoReg_false;		// boton No Registrarse 
-	private ImageIcon bNoReg_true;
-	private boolean bNoReg_state = false;
 	
 	private ImageIcon bBack_false;		// boton volver atras 
 	private ImageIcon bBack_true;
@@ -47,19 +48,20 @@ public class StartScreen implements MouseMotionListener, MouseListener{
 			mdx = e.getX();
 			mdy = e.getY();
 			
+			if( mouseOver(mdx, mdy, 500, 290, 190, 50)== false ){	// boton No Registrarse 
+				bNoReg_state = false;
+			}
+			
 					
 			if( mouseOver(mdx, mdy, 500, 190, 190, 50)== false ){	// boton Log In
 				bLogIn_state = false;
 			}
 			
-			if( mouseOver(mdx, mdy, 500, 290, 190, 50)== false ){	// boton Sign In
-				bSignIn_state = false;
+			if( mouseOver(mdx, mdy, 500, 290, 190, 50)== false ){	// boton Sign Up
+				bSignUp_state = false;
 			}
 			
-			if( mouseOver(mdx, mdy, 500, 290, 190, 50)== false ){	// boton No Registrarse 
-				bNoReg_state = false;
-			}
-			
+
 			if( mouseOver(mdx, mdy, 25, 625, 40, 30)== false ){		// boton volver atras
 				bBack_state = false;
 			}
@@ -95,7 +97,7 @@ public class StartScreen implements MouseMotionListener, MouseListener{
 			}
 			
 			if( mouseOver(mox, moy, 500, 290, 190, 50) ){	// si se presiona encima del boton 2 se cambia su estado
-				bSignIn_state = true;
+				bSignUp_state = true;
 				try {																				//Reproduce el archivo de sonido 1
 			        Clip sonido = AudioSystem.getClip();
 					AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s1_filePath));
@@ -106,7 +108,7 @@ public class StartScreen implements MouseMotionListener, MouseListener{
 		        }
 			}
 			
-			if( mouseOver(mox, moy, 500, 390, 190, 50) ){	// si se presiona encima del boton 2 se cambia su estado
+			if( mouseOver(mox, moy, 500, 390, 190, 50) ){	// si se presiona encima del boton 3 se cambia su estado
 				bNoReg_state = true;
 				try {																				//Reproduce el archivo de sonido 1
 			        Clip sonido = AudioSystem.getClip();
@@ -118,7 +120,7 @@ public class StartScreen implements MouseMotionListener, MouseListener{
 		        }
 			}
 			
-			if( mouseOver(mox, moy, 25, 625, 40, 30) ){	// si se presiona encima del boton 2 se cambia su estado
+			if( mouseOver(mox, moy, 25, 50, 40, 30) ){	// si se presiona encima del boton back se cambia su estado
 				bBack_state = true;
 				try {																				//Reproduce el archivo de sonido 1
 			        Clip sonido = AudioSystem.getClip();
@@ -140,7 +142,7 @@ public class StartScreen implements MouseMotionListener, MouseListener{
 			String s2_filePath = filePath.concat("/minigamble/src/minigamble/sonido/click2.wav");	//Continuacio n de la ruta hasta el archivo de audio 2
 			
 			if(bLogIn_state == true){ // si se ha presionado y soltado encima del primero suena
-				try {																				//Reproduce el archivo de sonido 2
+				try {				  //Reproduce el archivo de sonido 2
 			        Clip sonido = AudioSystem.getClip();
 					AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s2_filePath));
 			        sonido.open(ais);
@@ -150,7 +152,7 @@ public class StartScreen implements MouseMotionListener, MouseListener{
 		        }
 			}
 			
-			if(bSignIn_state == true){ // si se ha presionado y soltado encima del segundo boton termina el programa y suena
+			if(bSignUp_state == true){ // si se ha presionado y soltado encima del segundo boton termina el programa y suena
 				try {																				//Reproduce el archivo de sonido 2
 			        Clip sonido = AudioSystem.getClip();
 					AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s2_filePath));
@@ -186,7 +188,7 @@ public class StartScreen implements MouseMotionListener, MouseListener{
 			}
 			
 			bLogIn_state = false;	// cambia el estado del programa a levantado
-			bSignIn_state = false;
+			bSignUp_state = false;
 			bNoReg_state = false;
 			bBack_state = false;
 		}
@@ -241,11 +243,11 @@ public class StartScreen implements MouseMotionListener, MouseListener{
 			bLogIn_false = new ImageIcon( Game.class.getResource("multimedia/yellow_button2.png").toURI().toURL() );
 			bLogIn_true = new ImageIcon( Game.class.getResource("multimedia/yellow_button3.png").toURI().toURL() );
 			
-			bSignIn_false = new ImageIcon( Game.class.getResource("multimedia/red_button2.png").toURI().toURL() );
-			bSigIn_true = new ImageIcon( Game.class.getResource("multimedia/red_button3.png").toURI().toURL() );
+			bSignUp_false = new ImageIcon( Game.class.getResource("multimedia/red_button2.png").toURI().toURL() );
+			bSignUp_true = new ImageIcon( Game.class.getResource("multimedia/red_button3.png").toURI().toURL() );
 			
-			bSignIn_false = new ImageIcon( Game.class.getResource("multimedia/red_button2.png").toURI().toURL() );
-			bSigIn_true = new ImageIcon( Game.class.getResource("multimedia/red_button3.png").toURI().toURL() );
+			bSignUp_false = new ImageIcon( Game.class.getResource("multimedia/red_button2.png").toURI().toURL() );
+			bSignUp_true = new ImageIcon( Game.class.getResource("multimedia/red_button3.png").toURI().toURL() );
 			
 			bNoReg_false = new ImageIcon( Game.class.getResource("multimedia/blue_button2.png").toURI().toURL() );
 			bNoReg_true = new ImageIcon( Game.class.getResource("multimedia/blue_button3.png").toURI().toURL() );
@@ -258,13 +260,13 @@ public class StartScreen implements MouseMotionListener, MouseListener{
 		}
 		
 		
-		Image backgroundIMG = background.getImage();	// Paso todos los iconos a imágenes
+		Image backgroundIMG = background.getImage();	// Paso todos los iconos a imagenes
 		
 		Image b1IMG_false = bLogIn_false.getImage();
 		Image b1IMG_true = bLogIn_true.getImage();
 		
-		Image b2IMG_false = bSignIn_false.getImage();
-		Image b2IMG_true = bSigIn_true.getImage();
+		Image b2IMG_false = bSignUp_false.getImage();
+		Image b2IMG_true = bSignUp_true.getImage();
 		
 		Image b3IMG_false = bNoReg_false.getImage();
 		Image b3IMG_true = bNoReg_true.getImage();
@@ -290,7 +292,7 @@ public class StartScreen implements MouseMotionListener, MouseListener{
 			g.drawString("Log In", 545, 222);		
 		}
 		
-		if(bSignIn_state == true) {					// Dibuja el boton Sign In y texto del boton presionado
+		if(bSignUp_state == true) {					// Dibuja el boton Sign In y texto del boton presionado
 			g.drawImage(b2IMG_true, 500, 294, null);
 			g.drawString("Sign In", 540, 326);
 		}else {									// Dibuja el boton Sign In y texto del boton sin presionar
@@ -307,9 +309,9 @@ public class StartScreen implements MouseMotionListener, MouseListener{
 		}
 		
 		if(bBack_state == true) {					// Dibuja el boton Back y texto del boton presionado
-			g.drawImage(bBackIMG_true, 25, 628, null);
+			g.drawImage(bBackIMG_true, 25, 50, null);
 		}else {									// Dibuja el boton Back y texto del boton sin presionar
-			g.drawImage(bBackIMG_false, 25, 625, null);
+			g.drawImage(bBackIMG_false, 25, 50, null);
 		}
 				
 	}catch(Exception e){	
@@ -324,7 +326,7 @@ public class StartScreen implements MouseMotionListener, MouseListener{
 			g.drawString("Log In", 545, 222);		
 		}
 		
-		if(bSignIn_state == true) {					// Dibuja el boton Sign In y texto del boton presionado
+		if(bSignUp_state == true) {					// Dibuja el boton Sign In y texto del boton presionado
 			g.drawImage(b2IMG_true, 500, 294, null);
 			g.drawString("Sign In", 545, 326);
 		}else {									// Dibuja el boton Sign In y texto del boton sin presionar
