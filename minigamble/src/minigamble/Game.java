@@ -6,7 +6,9 @@ import java.awt.image.BufferStrategy;
 
 
 
+
 public class Game extends Canvas implements Runnable{
+	
 	
 	private static final long serialVersionUID = -5339514091919298198L;
 	Inicio inicio = new Inicio(); 				// Pantalla inicio
@@ -145,6 +147,8 @@ public class Game extends Canvas implements Runnable{
 	}
 
 	public static void main(String[] args) {
+				
 		new Game();
 	}
+
 }
