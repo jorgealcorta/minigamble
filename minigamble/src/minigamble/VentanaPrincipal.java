@@ -12,6 +12,7 @@ public class VentanaPrincipal extends Canvas{
 	
 	private static final long serialVersionUID = 1L;
 	ImageIcon logo;	
+	final Taskbar taskbar = Taskbar.getTaskbar();
 	
 	
 	public VentanaPrincipal(String title, Game game) {
@@ -28,6 +29,15 @@ public class VentanaPrincipal extends Canvas{
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
+		
+		try {
+            //set icon for mac os (and other systems which do support this method)
+            taskbar.setIconImage(logo.getImage());
+        } catch (final UnsupportedOperationException e) {
+            System.out.println("The os does not support: 'taskbar.setIconImage'");
+        } catch (final SecurityException e) {
+            System.out.println("There was a security exception for: 'taskbar.setIconImage'");
+        }
 		
 		frame.setIconImage(logo.getImage());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Para que la X pare los hilos
