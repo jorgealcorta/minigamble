@@ -275,7 +275,47 @@ public class StartScreen implements MouseMotionListener, MouseListener{
 		g.drawImage(backgroundIMG, 0, 0, null);   // Dibuja el fondo
 		
 	
+		
+	try {
+         
+		Font customFont = Font.createFont(Font.TRUETYPE_FONT, Inicio.class.getResourceAsStream("fuentes/fuenteBot.ttf"));
+		customFont=customFont.deriveFont(Font.PLAIN,20);
+		g.setFont(customFont);
+				
+		if(bLogIn_state == true) {				// Dibuja el boton Log In y texto del botón presionado
+			g.drawImage(b1IMG_true, 500, 194, null);
+			g.drawString("Log In", 545, 226);			
+		}else {								// Dibuja el boton Log In y texto del boton sin presionar
+			g.drawImage(b1IMG_false, 500, 190, null);		
+			g.drawString("Log In", 545, 222);		
+		}
+		
+		if(bSignIn_state == true) {					// Dibuja el boton Sign In y texto del boton presionado
+			g.drawImage(b2IMG_true, 500, 294, null);
+			g.drawString("Sign In", 540, 326);
+		}else {									// Dibuja el boton Sign In y texto del boton sin presionar
+			g.drawImage(b2IMG_false, 500, 290, null);
+			g.drawString("Sign In", 540, 322);
+		}
+		
+		if(bNoReg_state == true) {					// Dibuja el boton No Reg y texto del boton presionado
+			g.drawImage(b3IMG_false, 500, 394, null);
+			g.drawString("Quick play", 507, 426);
+		}else {									// Dibuja el boton No Reg y texto del boton sin presionar
+			g.drawImage(b3IMG_true, 500, 390, null);
+			g.drawString("Quick play", 507, 422);
+		}
+		
+		if(bBack_state == true) {					// Dibuja el boton Back y texto del boton presionado
+			g.drawImage(bBackIMG_true, 25, 628, null);
+		}else {									// Dibuja el boton Back y texto del boton sin presionar
+			g.drawImage(bBackIMG_false, 25, 625, null);
+		}
+				
+	}catch(Exception e){	
+		
 		g.setFont(fButton);
+		
 		if(bLogIn_state == true) {				// Dibuja el boton Log In y texto del botón presionado
 			g.drawImage(b1IMG_true, 500, 194, null);
 			g.drawString("Log In", 545, 226);			
@@ -305,8 +345,9 @@ public class StartScreen implements MouseMotionListener, MouseListener{
 		}else {									// Dibuja el boton Back y texto del boton sin presionar
 			g.drawImage(bBackIMG_false, 25, 625, null);
 		}
-				
 		
+		
+	}
 
 	}
 

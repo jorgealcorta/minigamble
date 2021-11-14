@@ -193,21 +193,49 @@ public class Inicio   implements MouseMotionListener, MouseListener  {
 		g.drawImage(backgroundIMG, 0, 0, null);   // Dibuja el fondo
 		
 	
-		g.setFont(fButton);
-		if(b1_state == true) {				// Dibuja el boton 1 y texto del botón presionado
-			g.drawImage(b1IMG_true, 500, 294, null);
-			g.drawString("Comenzar", 515, 326);			
-		}else {								// Dibuja el boton 1 y texto del boton sin presionar
-			g.drawImage(b1IMG_false, 500, 290, null);		
-			g.drawString("Comenzar", 515, 322);		
-		}
 		
-		if(b2_state == true) {					// Dibuja el boton 2 y texto del boton presionado
-			g.drawImage(b2IMG_true, 500, 394, null);
-			g.drawString("Salir", 557, 426);
-		}else {									// Dibuja el boton 2 y texto del boton sin presionar
-			g.drawImage(b2IMG_false, 500, 390, null);
-			g.drawString("Salir", 557, 422);
+		try {
+	         
+			Font customFont = Font.createFont(Font.TRUETYPE_FONT, Inicio.class.getResourceAsStream("fuentes/fuenteBot.ttf"));
+			customFont=customFont.deriveFont(Font.PLAIN,20);
+			g.setFont(customFont);
+						
+			if(b1_state == true) {				// Dibuja el boton 1 y texto del botón presionado
+				g.drawImage(b1IMG_true, 500, 294, null);
+				g.drawString("Comenzar", 512, 326);			
+			}else {								// Dibuja el boton 1 y texto del boton sin presionar
+				g.drawImage(b1IMG_false, 500, 290, null);		
+				g.drawString("Comenzar", 512, 322);		
+			}
+			
+			if(b2_state == true) {					// Dibuja el boton 2 y texto del boton presionado
+				g.drawImage(b2IMG_true, 500, 394, null);
+				g.drawString("Salir", 550, 426);
+			}else {									// Dibuja el boton 2 y texto del boton sin presionar
+				g.drawImage(b2IMG_false, 500, 390, null);
+				g.drawString("Salir", 550, 422);
+			}
+		
+		}catch(Exception e){	
+			
+			
+			g.setFont(fButton);
+			if(b1_state == true) {				// Dibuja el boton 1 y texto del botón presionado
+				g.drawImage(b1IMG_true, 500, 294, null);
+				g.drawString("Comenzar", 515, 326);			
+			}else {								// Dibuja el boton 1 y texto del boton sin presionar
+				g.drawImage(b1IMG_false, 500, 290, null);		
+				g.drawString("Comenzar", 515, 322);		
+			}
+			
+			if(b2_state == true) {					// Dibuja el boton 2 y texto del boton presionado
+				g.drawImage(b2IMG_true, 500, 394, null);
+				g.drawString("Salir", 557, 426);
+			}else {									// Dibuja el boton 2 y texto del boton sin presionar
+				g.drawImage(b2IMG_false, 500, 390, null);
+				g.drawString("Salir", 557, 422);
+			}
+		
 		}
 				
 		
