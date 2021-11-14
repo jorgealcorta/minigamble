@@ -11,6 +11,7 @@ public class Game extends Canvas implements Runnable{
 	private static final long serialVersionUID = -5339514091919298198L;
 	Inicio inicio = new Inicio(); 				// Pantalla inicio
 	Login login = new Login();
+	SignIn signin = new SignIn();
 	
 	private Handler handler;
 	
@@ -18,6 +19,7 @@ public class Game extends Canvas implements Runnable{
 	public enum ESTADO{
 		Inicio,
 		Login,
+		SignIn,
 		Game
 	};
 	
@@ -30,6 +32,9 @@ public class Game extends Canvas implements Runnable{
 		this.addMouseMotionListener(inicio);
 		this.addMouseListener(login); 				// anyado un mouseListener a la pantalla login
 		this.addMouseMotionListener(login);
+		this.addMouseListener(signin); 				// anyado un mouseListener a la pantalla login
+		this.addMouseMotionListener(signin);
+		this.addKeyListener(signin);
 		
 		handler = new Handler();
 	}
@@ -107,9 +112,9 @@ public class Game extends Canvas implements Runnable{
 		}else if(estadoJuego == ESTADO.Login) {
 			login.render(g);
 			
-		}
-		
-		
+		}else if(estadoJuego == ESTADO.SignIn) {
+			signin.render(g);
+		}		
 		handler.render(g);
 		
 		g.dispose();

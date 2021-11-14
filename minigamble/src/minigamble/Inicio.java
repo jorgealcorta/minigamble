@@ -106,12 +106,11 @@ public class Inicio   implements MouseMotionListener, MouseListener  {
 		        	System.out.println("error");
 		        }
 	
-				Game.estadoJuego = Game.ESTADO.Login;
+				Game.estadoJuego = Game.ESTADO.Login;		// Cuando se presiona continuar pasa al estado Login
 				
 			}
 			
-			if(b2_state == true){ // si se ha presionado y soltado encima del segundo boton termina el programa y suena
-				System.exit(1); 
+			if(b2_state == true){ // si se ha presionado y soltado encima del segundo boton termina el programa y suena 
 				try {																				//Reproduce el archivo de sonido 2
 			        Clip sonido = AudioSystem.getClip();
 					AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s2_filePath));
@@ -120,6 +119,7 @@ public class Inicio   implements MouseMotionListener, MouseListener  {
 		        }catch(Exception e2) {
 		        	System.out.println("error");
 		        }
+				System.exit(1);
 			}
 			
 			b1_state = false;	// cambia el estado del programa a levantado

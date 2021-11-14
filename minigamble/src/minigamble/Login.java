@@ -159,6 +159,7 @@ public class Login implements MouseMotionListener, MouseListener{
 		        }catch(Exception e2) {
 		        	System.out.println("error");
 		        }
+				Game.estadoJuego = Game.ESTADO.SignIn;			//Si se presiona el boton de back se cambia el estado a Inicio
 			}
 			
 			if(bNoReg_state == true){ // si se ha presionado y soltado encima del segundo boton termina el programa y suena
@@ -261,9 +262,9 @@ public class Login implements MouseMotionListener, MouseListener{
 			bBack_false = new ImageIcon( Game.class.getResource("multimedia/green_back1.png").toURI().toURL() );
 			bBack_true = new ImageIcon( Game.class.getResource("multimedia/green_back2.png").toURI().toURL() );
 			
-			} catch (Exception e1) {
+		} catch (Exception e1) {
 			e1.printStackTrace();
-			}
+		}
 		
 		
 		Image backgroundIMG = background.getImage();	// Paso todos los iconos a imágenes
