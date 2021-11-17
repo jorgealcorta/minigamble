@@ -24,7 +24,7 @@ public class VentanaPrincipal extends Canvas{
 		frame.setMinimumSize(new Dimension(1200,700));
 		
 		try {
-			logo = new ImageIcon( Game.class.getResource("multimedia/chipRedWhite_border.png").toURI().toURL() );
+			logo = new ImageIcon( Game.class.getResource("multimedia/fichaFondoRecorte1.png").toURI().toURL() );
 			frame.setIconImage(logo.getImage());
 		} catch (Exception e1) {
 			e1.printStackTrace();

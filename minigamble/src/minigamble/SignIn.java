@@ -163,7 +163,7 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 		Font texto = new Font("arial", 1 ,30); //Fuente del campo de texto
 		
 		try {
-			background = new ImageIcon( Game.class.getResource("multimedia/background.png").toURI().toURL() );			//Cargo todas las imagenes como iconos
+			background = new ImageIcon( Game.class.getResource("multimedia/fondoInicioRecortado.png").toURI().toURL() );			//Cargo todas las imagenes como iconos
 			
 			text = new ImageIcon( Game.class.getResource("multimedia/greyTextPath.png").toURI().toURL() );
 			textCorrect = new ImageIcon( Game.class.getResource("multimedia/greenTextPath.png").toURI().toURL() );

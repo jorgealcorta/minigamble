@@ -174,7 +174,7 @@ public class Inicio   implements MouseMotionListener, MouseListener  {
 		
 		
 		try {
-			background = new ImageIcon( Game.class.getResource("multimedia/background.png").toURI().toURL() );		//Cargo todas las imagenes como iconos
+			background = new ImageIcon( Game.class.getResource("multimedia/fondoInicioRecortado.png").toURI().toURL() );		//Cargo todas las imagenes como iconos
 			b1_false = new ImageIcon( Game.class.getResource("multimedia/yellow_button2.png").toURI().toURL() );
 			b1_true = new ImageIcon( Game.class.getResource("multimedia/yellow_button3.png").toURI().toURL() );
 			b2_false = new ImageIcon( Game.class.getResource("multimedia/red_button2.png").toURI().toURL() );
