@@ -26,8 +26,14 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 	private ImageIcon bBack_false;		// boton volver atras 
 	private ImageIcon bBack_true;
 	
-	private int text_state = 1;		// Estado del texto -> 1:defecto, 2:Correcto, 3:incorrecto, 0:Habilitado para escribir
+	private int usuario_state = 1;		// Estado del usuario -> 1:defecto, 2:Correcto, 3:incorrecto, 0:Habilitado para escribir
+	private int contrasena_state = 1;
+	
 	private String usuario = "";	// String con el nombre de usuario
+	private String contrasena = "";
+	private String contrasena_oculta = "";
+	private String contrasena_segura = "";
+	
 	
 	private boolean bBack_state = false;
 	
@@ -50,7 +56,11 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 			String s1_filePath = filePath.concat("/minigamble/src/minigamble/sonido/click1.wav");	//Continuación de la ruta hasta el archivo de audio 1
 			
 			if( mouseOver(mox, moy, 500, 195, 190, 45) ){	// si se presiona encima del campo de texto
-				text_state = 0;								// cambia el estado a hablilitado para escribir
+				usuario_state = 0;								// cambia el estado a hablilitado para escribir
+				contrasena_state = 1;
+				contrasena = "";
+				contrasena_oculta = "";
+				
 				try {																				
 			        Clip sonido = AudioSystem.getClip();
 					AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s1_filePath));
@@ -62,8 +72,34 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 				}
 			
 			if( !mouseOver(mox, moy, 500, 195, 190, 45) ){	// si se presiona fuera del campo de texto
-				text_state = 2;			// !!!! de momento cambia el estado a correcto pero hay que hacer que evalue el string y mire si es correcto o incorrecto
+				usuario_state = 2;			// !!!! de momento cambia el estado a correcto pero hay que hacer que evalue el string y mire si es correcto o incorrecto
 			}
+			
+			
+			
+			
+			if (usuario_state == 2) {
+				if( mouseOver(mox, moy, 500, 295, 190, 45) ){	// si se presiona encima del campo de texto
+					contrasena_state = 0;								// cambia el estado a hablilitado para escribir
+					try {																				
+				        Clip sonido = AudioSystem.getClip();
+						AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s1_filePath));
+				        sonido.open(ais);
+				        sonido.start();
+			        }catch(Exception e2) {
+			        	System.out.println("error");
+			        }
+					}
+				
+				if( !mouseOver(mox, moy, 500, 295, 190, 45) ){	// si se presiona fuera del campo de texto
+					contrasena_state = 2;			// !!!! de momento cambia el estado a correcto pero hay que hacer que evalue el string y mire si es correcto o incorrecto
+					contrasena_segura = Hash.md5(contrasena);
+					System.out.println(contrasena_segura);
+				}	
+			}
+			
+			
+			
 			
 			if( mouseOver(mox, moy, 25, 625, 40, 30) ){	// si se presiona encima del boton back se cambia su estado
 				bBack_state = true;
@@ -97,6 +133,11 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 		        }catch(Exception e2) {
 		        	System.out.println("error");
 		        }
+				usuario_state = 1;
+				contrasena_state = 1;
+				contrasena = "";
+				contrasena_oculta = "";
+				usuario = "";
 				Game.estadoJuego = Game.ESTADO.Start;											//Si se presiona el boton de back se cambia el estado a Inicio
 			}
 			
@@ -106,7 +147,7 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 	
 	public void keyPressed(KeyEvent e) {
 		
-		if (Game.estadoJuego == Game.ESTADO.SignIn && text_state == 0) {	// Si el estado del texto está habilitado (0) y se está en la pantalla SignIn
+		if (Game.estadoJuego == Game.ESTADO.SignIn && usuario_state == 0) {	// Si el estado del texto está habilitado (0) y se está en la pantalla SignIn
 			if (usuario.length() <=7) {			//Tiene que ser menor o igual a 7 caracteres
 				//System.out.println(e);
 				usuario = usuario + e.getKeyChar();
@@ -117,10 +158,30 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 				usuario = usuario.substring(0, usuario.length() - 1);	// Borra el último caracter
 		    }
 			if (e.getKeyCode() == 10) {		// Tecla enter
-				text_state = 2;				// !!!! de momento cambia el estado a correcto pero hay que hacer que evalue el string y mire si es correcto o incorrecto
+				usuario_state = 2;				// !!!! de momento cambia el estado a correcto pero hay que hacer que evalue el string y mire si es correcto o incorrecto
 		    }
 			
 		}
+		
+		if (Game.estadoJuego == Game.ESTADO.SignIn && contrasena_state == 0) {	// Si el estado del texto está habilitado (0) y se está en la pantalla SignIn
+			if (contrasena.length() <=7) {			//Tiene que ser menor o igual a 7 caracteres
+				//System.out.println(e);
+				contrasena = contrasena + e.getKeyChar();
+				contrasena = contrasena.replaceAll("[^a-zA-Z0-9]", "");	// Elimina los caracteres que no sean letras o numeros
+				contrasena_oculta = contrasena.replaceAll("[!(^a-zA-Z0-9)]", "*");	// Elimina los caracteres que no sean letras o numeros
+				//System.out.println(contrasena_oculta);
+			}
+			if (contrasena != null && contrasena.length() > 0 && e.getKeyCode() == 8 ) {	// Tecla de borrar (No nulo, mayor a 0 y  el codigo de la tecla borrar)
+				contrasena = contrasena.substring(0, contrasena.length() - 1);	// Borra el último caracter
+		    }
+			if (e.getKeyCode() == 10) {		// Tecla enter
+				contrasena_state = 2;				// !!!! de momento cambia el estado a correcto pero hay que hacer que evalue el string y mire si es correcto o incorrecto
+				contrasena_segura = Hash.md5(contrasena);
+				System.out.println(contrasena_segura);
+		    }
+			
+		}
+		
 	}
 	
 	
@@ -189,19 +250,39 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 		g.drawImage(backgroundIMG, 0, 0, null);   // Dibuja el fondo
 
 		g.setFont(texto);
-		if(text_state == 1) {									// Dibuja la imagen texto por defecto y texto del string usuario
+		if(usuario_state == 1) {									// Dibuja la imagen texto por defecto y texto del string usuario
 			g.drawImage(textIMG_grey, 500, 194, null);
-			g.drawString(usuario, 507, 227);			
-		}else if(text_state == 2) {								// Dibuja la imagen texto correcto y texto del string usuario
+			g.drawString("Usuario", 507, 227);			
+		}else if(usuario_state == 2) {								// Dibuja la imagen texto correcto y texto del string usuario
 			g.drawImage(textIMG_green, 500, 194, null);		
 			g.drawString(usuario, 507, 227);		
-		}else if(text_state == 3) {								// Dibuja la imagen texto incorrecto y texto del string usuario
+		}else if(usuario_state == 3) {								// Dibuja la imagen texto incorrecto y texto del string usuario
 			g.drawImage(textIMG_red, 500, 194, null);		
 			g.drawString(usuario, 507, 227);		
 		}else {													// Dibuja la imagen texto habilitado y texto del string usuario
 			g.drawImage(textIMG_write, 500, 194, null);		
 			g.drawString(usuario, 507, 227);		
 		}
+		
+		if(usuario_state == 2) {
+			if(contrasena_state == 1) {									// Dibuja la imagen texto por defecto y texto del string usuario
+				g.drawImage(textIMG_grey, 500, 294, null);
+				g.drawString("Contraseña", 507, 327);			
+			}else if(contrasena_state == 2) {								// Dibuja la imagen texto correcto y texto del string usuario
+				g.drawImage(textIMG_green, 500, 294, null);		
+				g.drawString(contrasena_oculta, 507, 327);		
+			}else if(contrasena_state == 3) {								// Dibuja la imagen texto incorrecto y texto del string usuario
+				g.drawImage(textIMG_red, 500, 294, null);		
+				g.drawString(contrasena_oculta, 507, 327);		
+			}else {													// Dibuja la imagen texto habilitado y texto del string usuario
+				g.drawImage(textIMG_write, 500, 294, null);		
+				g.drawString(contrasena_oculta, 507, 327);		
+			}
+		}
+		
+		
+		
+		
 		if(bBack_state == true) {					// Dibuja el boton Back y texto del boton presionado
 			g.drawImage(bBackIMG_true, 25, 628, null);
 		}else {									// Dibuja el boton Back y texto del boton sin presionar
