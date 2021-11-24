@@ -252,7 +252,7 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 		g.setFont(texto);
 		if(usuario_state == 1) {									// Dibuja la imagen texto por defecto y texto del string usuario
 			g.drawImage(textIMG_grey, 500, 194, null);
-			g.drawString("Usuario", 507, 227);			
+			g.drawString("User", 507, 227);			
 		}else if(usuario_state == 2) {								// Dibuja la imagen texto correcto y texto del string usuario
 			g.drawImage(textIMG_green, 500, 194, null);		
 			g.drawString(usuario, 507, 227);		
@@ -267,7 +267,7 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 		if(usuario_state == 2) {
 			if(contrasena_state == 1) {									// Dibuja la imagen texto por defecto y texto del string usuario
 				g.drawImage(textIMG_grey, 500, 294, null);
-				g.drawString("Contraseña", 507, 327);			
+				g.drawString("Password", 507, 327);			
 			}else if(contrasena_state == 2) {								// Dibuja la imagen texto correcto y texto del string usuario
 				g.drawImage(textIMG_green, 500, 294, null);		
 				g.drawString(contrasena_oculta, 507, 327);		
