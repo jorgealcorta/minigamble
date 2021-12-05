@@ -14,6 +14,7 @@ public class Game extends Canvas implements Runnable{
 	Inicio inicio = new Inicio(); 				// Pantalla inicio
 	StartScreen start = new StartScreen();
 	SignIn signin = new SignIn();
+	Game1 game1 = new Game1(0);
 	
 	private Handler handler;
 	
@@ -128,6 +129,8 @@ public class Game extends Canvas implements Runnable{
 		case SignIn:
 			signin.render(g);
 			break;
+		case Game1:
+			game1.render(g);
 		}
 		
 		handler.render(g);

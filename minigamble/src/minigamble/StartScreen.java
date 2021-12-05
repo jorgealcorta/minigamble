@@ -173,6 +173,7 @@ public class StartScreen implements MouseMotionListener, MouseListener{
 		        }catch(Exception e2) {
 		        	System.out.println("error");
 		        }
+				Game.estadoJuego = Game.ESTADO.Game1;
 			}
 			
 			if(bBack_state == true){ // si se ha presionado y soltado encima del segundo boton termina el programa y suena
