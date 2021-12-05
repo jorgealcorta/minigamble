@@ -23,7 +23,12 @@ public class Game extends Canvas implements Runnable{
 		Start,
 		LogIn,
 		SignIn,
-		Game
+		Game1, // SIMON SAYS
+		Game2,
+		Game3,
+		Game4,
+		Game5,
+		Game6
 	};
 	
 	static ESTADO estadoJuego = ESTADO.Inicio;
