@@ -44,6 +44,8 @@ public class Game extends Canvas implements Runnable{
 		this.addMouseListener(signin); 				// anyado un mouseListener a la pantalla signin
 		this.addMouseMotionListener(signin);
 		this.addKeyListener(signin);
+		this.addMouseListener(game1); 				// anyado un mouseListener a la pantalla game1
+		this.addMouseMotionListener(game1);
 		
 		handler = new Handler();
 	}

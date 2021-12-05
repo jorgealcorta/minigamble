@@ -247,8 +247,6 @@ public class StartScreen implements MouseMotionListener, MouseListener{
 			bSignUp_false = new ImageIcon( Game.class.getResource("multimedia/red_button2.png").toURI().toURL() );
 			bSignUp_true = new ImageIcon( Game.class.getResource("multimedia/red_button3.png").toURI().toURL() );
 			
-			bSignUp_false = new ImageIcon( Game.class.getResource("multimedia/red_button2.png").toURI().toURL() );
-			bSignUp_true = new ImageIcon( Game.class.getResource("multimedia/red_button3.png").toURI().toURL() );
 			
 			bNoReg_false = new ImageIcon( Game.class.getResource("multimedia/blue_button2.png").toURI().toURL() );
 			bNoReg_true = new ImageIcon( Game.class.getResource("multimedia/blue_button3.png").toURI().toURL() );
