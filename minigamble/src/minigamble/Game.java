@@ -15,6 +15,7 @@ public class Game extends Canvas implements Runnable{
 	StartScreen start = new StartScreen();
 	SignIn signin = new SignIn();
 	Game1 game1 = new Game1(0);
+	Game2 game2 = new Game2(0);
 	
 	private Handler handler;
 	
@@ -24,8 +25,8 @@ public class Game extends Canvas implements Runnable{
 		Start,
 		LogIn,
 		SignIn,
-		Game1, // SIMON SAYS
-		Game2,
+		Game1, // PAREJAS
+		Game2, // SIMON SAYS
 		Game3,
 		Game4,
 		Game5,
@@ -46,6 +47,7 @@ public class Game extends Canvas implements Runnable{
 		this.addKeyListener(signin);
 		this.addMouseListener(game1); 				// anyado un mouseListener a la pantalla game1
 		this.addMouseMotionListener(game1);
+		this.addKeyListener(game2);
 		
 		handler = new Handler();
 	}
@@ -133,6 +135,8 @@ public class Game extends Canvas implements Runnable{
 			break;
 		case Game1:
 			game1.render(g);
+		case Game2:
+			game2.render(g);
 		}
 		
 		handler.render(g);
