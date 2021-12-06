@@ -1,12 +1,14 @@
 package minigamble;
 
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.io.File;
+import java.io.IOException;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -41,6 +43,67 @@ public class StartScreen implements MouseMotionListener, MouseListener{
 	private int mdx;
 	private int mdy;
 	
+	private Image backgroundIMG;
+	private Image b1IMG_false;
+	private Image b1IMG_true;
+	private Image b2IMG_false;
+	private Image b2IMG_true;
+	private Image b3IMG_false;
+	private Image b3IMG_true;
+	private Image bBackIMG_false;
+	private Image bBackIMG_true;
+	
+	private Font customFontBot;
+	
+	
+	public StartScreen() {
+		
+		try {
+			background = new ImageIcon( Game.class.getResource("multimedia/fondoInicioRecortado.png").toURI().toURL() );			//Cargo todas las imagenes como iconos
+			
+			bLogIn_false = new ImageIcon( Game.class.getResource("multimedia/yellow_button2.png").toURI().toURL() );
+			bLogIn_true = new ImageIcon( Game.class.getResource("multimedia/yellow_button3.png").toURI().toURL() );
+			
+			bSignUp_false = new ImageIcon( Game.class.getResource("multimedia/red_button2.png").toURI().toURL() );
+			bSignUp_true = new ImageIcon( Game.class.getResource("multimedia/red_button3.png").toURI().toURL() );
+			
+			
+			bNoReg_false = new ImageIcon( Game.class.getResource("multimedia/blue_button2.png").toURI().toURL() );
+			bNoReg_true = new ImageIcon( Game.class.getResource("multimedia/blue_button3.png").toURI().toURL() );
+			
+			bBack_false = new ImageIcon( Game.class.getResource("multimedia/green_back1.png").toURI().toURL() );
+			bBack_true = new ImageIcon( Game.class.getResource("multimedia/green_back2.png").toURI().toURL() );
+			
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		
+		
+		backgroundIMG = background.getImage();	// Paso todos los iconos a imagenes
+		
+		b1IMG_false = bLogIn_false.getImage();
+		b1IMG_true = bLogIn_true.getImage();
+		
+		b2IMG_false = bSignUp_false.getImage();
+		b2IMG_true = bSignUp_true.getImage();
+		
+		b3IMG_false = bNoReg_false.getImage();
+		b3IMG_true = bNoReg_true.getImage();
+		
+		bBackIMG_false = bBack_false.getImage();
+		bBackIMG_true = bBack_true.getImage();
+		
+		try {
+			customFontBot = Font.createFont(Font.TRUETYPE_FONT, Inicio.class.getResourceAsStream("fuentes/fuenteBot.ttf"));
+			customFontBot=customFontBot.deriveFont(Font.PLAIN,20);
+		} catch (FontFormatException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+	}
 	
 	public void mouseDragged(MouseEvent e) {
 		if(Game.estadoJuego == Game.ESTADO.Start) {				//si se esta en otro estado no hace nada
@@ -238,40 +301,7 @@ public class StartScreen implements MouseMotionListener, MouseListener{
 				
 		
 		
-		try {
-			background = new ImageIcon( Game.class.getResource("multimedia/fondoInicioRecortado.png").toURI().toURL() );			//Cargo todas las imagenes como iconos
-			
-			bLogIn_false = new ImageIcon( Game.class.getResource("multimedia/yellow_button2.png").toURI().toURL() );
-			bLogIn_true = new ImageIcon( Game.class.getResource("multimedia/yellow_button3.png").toURI().toURL() );
-			
-			bSignUp_false = new ImageIcon( Game.class.getResource("multimedia/red_button2.png").toURI().toURL() );
-			bSignUp_true = new ImageIcon( Game.class.getResource("multimedia/red_button3.png").toURI().toURL() );
-			
-			
-			bNoReg_false = new ImageIcon( Game.class.getResource("multimedia/blue_button2.png").toURI().toURL() );
-			bNoReg_true = new ImageIcon( Game.class.getResource("multimedia/blue_button3.png").toURI().toURL() );
-			
-			bBack_false = new ImageIcon( Game.class.getResource("multimedia/green_back1.png").toURI().toURL() );
-			bBack_true = new ImageIcon( Game.class.getResource("multimedia/green_back2.png").toURI().toURL() );
-			
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}
 		
-		
-		Image backgroundIMG = background.getImage();	// Paso todos los iconos a imagenes
-		
-		Image b1IMG_false = bLogIn_false.getImage();
-		Image b1IMG_true = bLogIn_true.getImage();
-		
-		Image b2IMG_false = bSignUp_false.getImage();
-		Image b2IMG_true = bSignUp_true.getImage();
-		
-		Image b3IMG_false = bNoReg_false.getImage();
-		Image b3IMG_true = bNoReg_true.getImage();
-		
-		Image bBackIMG_false = bBack_false.getImage();
-		Image bBackIMG_true = bBack_true.getImage();
 		
 		g.drawImage(backgroundIMG, 0, 0, null);   // Dibuja el fondo
 		
@@ -279,9 +309,7 @@ public class StartScreen implements MouseMotionListener, MouseListener{
 		
 	try {
          
-		Font customFont = Font.createFont(Font.TRUETYPE_FONT, Inicio.class.getResourceAsStream("fuentes/fuenteBot.ttf"));
-		customFont=customFont.deriveFont(Font.PLAIN,20);
-		g.setFont(customFont);
+		g.setFont(customFontBot);
 				
 		if(bLogIn_state == true) {				// Dibuja el boton Log In y texto del botón presionado
 			g.drawImage(b1IMG_true, 500, 194, null);

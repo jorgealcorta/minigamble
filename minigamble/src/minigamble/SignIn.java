@@ -26,6 +26,14 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 	private ImageIcon bBack_false;		// boton volver atras 
 	private ImageIcon bBack_true;
 	
+	private Image backgroundIMG;
+	private Image textIMG_grey;
+	private Image textIMG_green;
+	private Image textIMG_red;
+	private Image textIMG_write;
+	private Image bBackIMG_false;
+	private Image bBackIMG_true;
+	
 	private int usuario_state = 1;		// Estado del usuario -> 1:defecto, 2:Correcto, 3:incorrecto, 0:Habilitado para escribir
 	private int contrasena_state = 1;
 	
@@ -42,7 +50,35 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 	private int moy;
 	
 	
-
+	public SignIn() {
+		
+		try {
+			background = new ImageIcon( Game.class.getResource("multimedia/fondoInicioRecortado.png").toURI().toURL() );			//Cargo todas las imagenes como iconos
+			
+			text = new ImageIcon( Game.class.getResource("multimedia/greyTextPath.png").toURI().toURL() );
+			textCorrect = new ImageIcon( Game.class.getResource("multimedia/greenTextPath.png").toURI().toURL() );
+			textError = new ImageIcon( Game.class.getResource("multimedia/redTextPath.png").toURI().toURL() );
+			textWrite = new ImageIcon( Game.class.getResource("multimedia/writeTextPath.png").toURI().toURL() );
+			bBack_false = new ImageIcon( Game.class.getResource("multimedia/green_back1.png").toURI().toURL() );
+			bBack_true = new ImageIcon( Game.class.getResource("multimedia/green_back2.png").toURI().toURL() );
+			
+			
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		
+		backgroundIMG = background.getImage();	// Paso todos los iconos a imagenes
+		
+		textIMG_grey = text.getImage();
+		textIMG_green = textCorrect.getImage();
+		textIMG_red = textError.getImage();
+		textIMG_write= textWrite.getImage();
+		bBackIMG_false = bBack_false.getImage();
+		bBackIMG_true = bBack_true.getImage();
+		
+		
+	}
+	
 
 	public void mouseClicked(MouseEvent e) {
 	}
@@ -220,32 +256,10 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 	}
 	
 	
-		public void render(Graphics g) {
+	public void render(Graphics g) {
 		Font texto = new Font("arial", 1 ,30); //Fuente del campo de texto
 		
-		try {
-			background = new ImageIcon( Game.class.getResource("multimedia/fondoInicioRecortado.png").toURI().toURL() );			//Cargo todas las imagenes como iconos
-			
-			text = new ImageIcon( Game.class.getResource("multimedia/greyTextPath.png").toURI().toURL() );
-			textCorrect = new ImageIcon( Game.class.getResource("multimedia/greenTextPath.png").toURI().toURL() );
-			textError = new ImageIcon( Game.class.getResource("multimedia/redTextPath.png").toURI().toURL() );
-			textWrite = new ImageIcon( Game.class.getResource("multimedia/writeTextPath.png").toURI().toURL() );
-			bBack_false = new ImageIcon( Game.class.getResource("multimedia/green_back1.png").toURI().toURL() );
-			bBack_true = new ImageIcon( Game.class.getResource("multimedia/green_back2.png").toURI().toURL() );
-			
-			
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}
 		
-		Image backgroundIMG = background.getImage();	// Paso todos los iconos a imagenes
-		
-		Image textIMG_grey = text.getImage();
-		Image textIMG_green = textCorrect.getImage();
-		Image textIMG_red = textError.getImage();
-		Image textIMG_write= textWrite.getImage();
-		Image bBackIMG_false = bBack_false.getImage();
-		Image bBackIMG_true = bBack_true.getImage();
 		
 		g.drawImage(backgroundIMG, 0, 0, null);   // Dibuja el fondo
 
