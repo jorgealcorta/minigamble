@@ -9,13 +9,19 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.ImageIcon;
 
 public class Game2 implements KeyListener{
 	
-	private int start = 1;
+	private int start = 1; //1 = esperando, 2 = reproduciendo, 3 = jugando?
+	
+	private boolean coraDestacar = false;
+	private boolean diamDestacar = false;
+	private boolean picaDestacar = false;
+	private boolean trebDestacar = false;
+
 	
 	private Font customFontBot;
 	private Font customFontFin;
@@ -31,6 +37,8 @@ public class Game2 implements KeyListener{
 	private ImageIcon trebolblanco;
 	private ImageIcon trebolnegro;
 	
+	private ImageIcon crossarrow;
+	
 	private Image corazonblanco_IMG;
 	private Image corazonnegro_IMG;
 	private Image diamanteblanco_IMG;
@@ -39,6 +47,8 @@ public class Game2 implements KeyListener{
 	private Image picanegra_IMG;
 	private Image trebolblanco_IMG;
 	private Image trebolnegro_IMG;
+	
+	private Image crossarrow_IMG;
 	
 	private ArrayList<String> palos = new ArrayList<String>();
 	private ArrayList<String> palosCorrectos = new ArrayList<String>();
@@ -50,15 +60,17 @@ public Game2(int dificultad) {
 		
 		try {
 			//Cargo todas las imagenes como iconos
-			corazonblanco = new ImageIcon( Game.class.getResource("multimedia/fichassimon/corazonblanco.png").toURI().toURL() );
-			corazonnegro = new ImageIcon( Game.class.getResource("multimedia/fichassimon/corazonnegro.png").toURI().toURL() );
-			diamanteblanco = new ImageIcon( Game.class.getResource("multimedia/fichassimon/diamanteblanco.png").toURI().toURL() );
-			diamantenegro = new ImageIcon( Game.class.getResource("multimedia/fichassimon/diamantenegro.png").toURI().toURL() );
-			picablanca = new ImageIcon( Game.class.getResource("multimedia/fichassimon/picablanca.png").toURI().toURL() );
-			picanegra = new ImageIcon( Game.class.getResource("multimedia/fichassimon/picanegra.png").toURI().toURL() );
-			trebolblanco = new ImageIcon( Game.class.getResource("multimedia/fichassimon/trebolblanco.png").toURI().toURL() );
-			trebolnegro = new ImageIcon( Game.class.getResource("multimedia/fichassimon/trebolnegro.png").toURI().toURL() );
+			corazonblanco = new ImageIcon( Game.class.getResource("multimedia/fichassimonresize/corazonblanco.png").toURI().toURL() );
+			corazonnegro = new ImageIcon( Game.class.getResource("multimedia/fichassimonresize/corazonnegro.png").toURI().toURL() );
+			diamanteblanco = new ImageIcon( Game.class.getResource("multimedia/fichassimonresize/diamanteblanco.png").toURI().toURL() );
+			diamantenegro = new ImageIcon( Game.class.getResource("multimedia/fichassimonresize/diamantenegro.png").toURI().toURL() );
+			picablanca = new ImageIcon( Game.class.getResource("multimedia/fichassimonresize/picablanca.png").toURI().toURL() );
+			picanegra = new ImageIcon( Game.class.getResource("multimedia/fichassimonresize/picanegra.png").toURI().toURL() );
+			trebolblanco = new ImageIcon( Game.class.getResource("multimedia/fichassimonresize/trebolblanco.png").toURI().toURL() );
+			trebolnegro = new ImageIcon( Game.class.getResource("multimedia/fichassimonresize/trebolnegro.png").toURI().toURL() );
 			
+			crossarrow = new ImageIcon( Game.class.getResource("multimedia/crossarrow.png").toURI().toURL() );
+
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
@@ -73,6 +85,9 @@ public Game2(int dificultad) {
 		picanegra_IMG = picanegra.getImage();
 		trebolblanco_IMG = trebolblanco.getImage();
 		trebolnegro_IMG = trebolnegro.getImage();
+		
+		crossarrow_IMG = crossarrow.getImage();
+		
 		
 		//Cargamos fuentes
 		
@@ -112,6 +127,18 @@ public Game2(int dificultad) {
 				
 	}
 
+
+private void delayMS(int n) {
+	try {
+		TimeUnit.MILLISECONDS.sleep(n);
+	} catch (InterruptedException b) {
+		// TODO Auto-generated catch block
+		b.printStackTrace();
+	}
+	
+}
+
+
 @Override
 public void keyTyped(KeyEvent e) {
 	// TODO Auto-generated method stub
@@ -120,8 +147,43 @@ public void keyTyped(KeyEvent e) {
 
 @Override
 public void keyPressed(KeyEvent e) {
-	// TODO Auto-generated method stub
 	
+	int key = e.getKeyCode();
+	
+	if(key == 32 && start==1) { //reproducir secuencia
+		start = 2;
+		for(String palo : palosCorrectos) {
+			System.out.println(palo);
+			
+			if(palo == "cora") {
+				coraDestacar = true; 	
+				delayMS(500);
+				coraDestacar = false;
+				delayMS(500);
+			}
+			else if(palo == "diam") {
+				diamDestacar = true; 	
+				delayMS(500);
+				diamDestacar = false;
+				delayMS(500);			
+			}
+			else if(palo == "pica") {
+				picaDestacar = true; 	
+				delayMS(500);
+				picaDestacar = false;
+				delayMS(500);
+			}
+			else if(palo == "treb") {
+				trebDestacar = true; 	
+				delayMS(500);
+				trebDestacar = false;
+				delayMS(500);
+			}
+
+		}
+		
+		start = 1;
+	}
 }
 
 @Override
@@ -133,6 +195,50 @@ public void keyReleased(KeyEvent e) {
 public void render(Graphics g) {
 	g.setColor(Color.decode("#208b3a"));
 	g.fillRect(0, 0, 1200, 700);
+	
+	if(start == 1) {
+		g.setFont(customFontBot);
+		
+		g.drawImage(corazonblanco_IMG, 520, 90, null);
+		g.drawImage(diamanteblanco_IMG, 300, 290, null);
+		g.drawImage(picablanca_IMG, 520, 490, null);
+		g.drawImage(trebolblanco_IMG, 730, 290, null);
+		
+		g.drawImage(crossarrow_IMG, 456, 225, null);
+		
+		g.setColor(Color.BLACK);
+		g.drawString("PULSA ESPACIO PARA REPRODUCIR LA COMBINACION", 200, 60);
+	}
+	
+	if(start == 2) {
+		g.setColor(Color.BLACK);
+		if(!coraDestacar) {
+			g.drawImage(corazonblanco_IMG, 520, 90, null);
+		}else {
+			g.drawImage(corazonnegro_IMG, 520, 90, null);
+		}
+		
+		if(!diamDestacar) {
+			g.drawImage(diamanteblanco_IMG, 300, 290, null);
+		}else {
+			g.drawImage(diamantenegro_IMG, 300, 290, null);
+		}
+		
+		if(!picaDestacar) {
+			g.drawImage(picablanca_IMG, 520, 490, null);
+		}else {
+			g.drawImage(picanegra_IMG, 520, 490, null);
+		}
+		
+		if(!trebDestacar) {
+			g.drawImage(trebolblanco_IMG, 730, 290, null);
+		}else {
+			g.drawImage(trebolnegro_IMG, 730, 290, null);
+		}
+		
+		g.drawImage(crossarrow_IMG, 456, 225, null);
+
+	}
 }
 
 }
