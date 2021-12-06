@@ -55,6 +55,12 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 	private Carta c4 = new Carta("card_clubs_A", false);
 	private Carta c5 = new Carta("card_clubs_Q", false);
 	private Carta c6 = new Carta("card_clubs_K", false);
+	private Carta c7 = new Carta("card_hearts_A", false);
+	private Carta c8 = new Carta("card_hearts_Q", false);
+	private Carta c9 = new Carta("card_hearts_K", false);
+	private Carta c10 = new Carta("card_clubs_A", false);
+	private Carta c11 = new Carta("card_clubs_Q", false);
+	private Carta c12 = new Carta("card_clubs_K", false);
 	
 	private int start = 1;
 	private int click1 = -1;
@@ -75,12 +81,12 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 		allCards.add(c4);
 		allCards.add(c5);
 		allCards.add(c6);
-		allCards.add(c1);
-		allCards.add(c2);
-		allCards.add(c3);
-		allCards.add(c4);
-		allCards.add(c5);
-		allCards.add(c6);
+		allCards.add(c7);
+		allCards.add(c8);
+		allCards.add(c9);
+		allCards.add(c10);
+		allCards.add(c11);
+		allCards.add(c12);
 		
 		
 		Collections.shuffle(allCards);
@@ -194,8 +200,9 @@ public void mouseClicked(MouseEvent e) {
 						
 			if( start==3 ){				
 				
-				if(click1==-1) {																				//CLICK1
-					if(mouseOver(moy, mox, (1*(1200/5))-(140/2), (1*(700/4))-(190/2)-20, 140, 190)) {  //pos1
+				if(click1==-1) {	//CLICK1
+					System.out.println("click 1");
+					if(mouseOver(moy, mox, (1*(700/4))-(190/2)-20, (1*(1200/5))-(140/2), 190, 140)) {  //pos1
 						if(!allCards.get(0).isArriba()) {
 							allCards.get(0).setArriba(true);
 							click1=0;
@@ -203,7 +210,7 @@ public void mouseClicked(MouseEvent e) {
 							
 						}
 						
-					}else if (mouseOver(moy, mox, (2*(1200/5))-(140/2), (1*(700/4))-(190/2)-20,  140, 190)) {//pos2
+					}else if (mouseOver(moy, mox, (1*(700/4))-(190/2)-20, (2*(1200/5))-(140/2), 190,  140)) {//pos2
 						if(!allCards.get(1).isArriba()) {
 							allCards.get(1).setArriba(true);
 							click1=1;
@@ -211,7 +218,7 @@ public void mouseClicked(MouseEvent e) {
 						}
 						System.out.println("ckick1 en carta 2");
 						
-					}else if(mouseOver(moy, mox, (3*(1200/5))-(140/2), (1*(700/4))-(190/2)-20,  140, 190)) {  //pos3
+					}else if(mouseOver(moy, mox, (1*(700/4))-(190/2)-20,  (3*(1200/5))-(140/2), 190,  140)) {  //pos3
 						if(!allCards.get(2).isArriba()) {
 							allCards.get(2).setArriba(true);
 							click1=2;
@@ -219,62 +226,62 @@ public void mouseClicked(MouseEvent e) {
 						}
 											
 						
-					}else if(mouseOver(moy, mox, (4*(1200/5))-(140/2), (1*(700/4))-(190/2)-20,  140, 190)) {  //pos4
+					}else if(mouseOver(moy, mox, (1*(700/4))-(190/2)-20,  (4*(1200/5))-(140/2), 190,  140)) {  //pos4
 						if(!allCards.get(3).isArriba()) {
 							allCards.get(3).setArriba(true);
 							click1=3;
 							System.out.println("ckick1 en carta 4");
 						}
-					}else if(mouseOver(moy, mox, (1*(1200/5))-(140/2), (2*(700/4))-(190/2)-20,  140, 190)) {   //pos5
+					}else if(mouseOver(moy, mox, (2*(700/4))-(190/2), (1*(1200/5))-(140/2), 190,  140)) {   //pos5
 						if(!allCards.get(4).isArriba()) {
 							allCards.get(4).setArriba(true);
 							click1=4;
 							System.out.println("ckick1 en carta 5");
 						}						
 						
-					}else if(mouseOver(moy, mox, (2*(1200/5))-(140/2), (2*(700/4))-(190/2)-20,  140, 190)) {  //pos6
+					}else if(mouseOver(moy, mox,  (2*(700/4))-(190/2), (2*(1200/5))-(140/2), 190,  140)) {  //pos6
 						if(!allCards.get(5).isArriba()) {
 							allCards.get(5).setArriba(true);
 							click1=5;
 							System.out.println("ckick1 en carta 6");
 						}
 						
-					}else if(mouseOver(moy, mox, (3*(1200/5))-(140/2), (2*(700/4))-(190/2)-20,  140, 190)) {  //pos7
+					}else if(mouseOver(moy, mox, (2*(700/4))-(190/2),  (3*(1200/5))-(140/2), 190,  140)) {  //pos7
 						if(!allCards.get(6).isArriba()) {
 							allCards.get(6).setArriba(true);
 							click1=6;
 							System.out.println("ckick1 en carta 7");
 						}
 						
-					}else if(mouseOver(moy, mox, (4*(1200/5))-(140/2), (2*(700/4))-(190/2)-20,  140, 190)) {  //pos8
+					}else if(mouseOver(moy, mox,  (2*(700/4))-(190/2), (4*(1200/5))-(140/2), 190,  140)) {  //pos8
 						if(!allCards.get(7).isArriba()) {
 							allCards.get(7).setArriba(true);
 							click1=7;
 							System.out.println("ckick1 en carta 8");
 						}
 						
-					}else if(mouseOver(moy, mox, (1*(1200/5))-(140/2), (3*(700/4))-(190/2)-20,  140, 190)) {  //pos9
+					}else if(mouseOver(moy, mox, (3*(700/4))-(190/2)+20,  (1*(1200/5))-(140/2), 190,  140)) {  //pos9
 						if(!allCards.get(8).isArriba()) {
 							allCards.get(8).setArriba(true);
 							click1=8;
 							System.out.println("ckick1 en carta 9");
 						}
 						
-					}else if(mouseOver(moy, mox, (2*(1200/5))-(140/2), (3*(700/4))-(190/2)-20,  140, 190)) {  //pos10
+					}else if(mouseOver(moy, mox,  (3*(700/4))-(190/2)+20, (2*(1200/5))-(140/2), 190,  140)) {  //pos10
 						if(!allCards.get(9).isArriba()) {
 							allCards.get(9).setArriba(true);
 							click1=9;
 							System.out.println("ckick1 en carta 10");
 						}
 						
-					}else if(mouseOver(moy, mox, (3*(1200/5))-(140/2), (3*(700/4))-(190/2)-20, click2, click1)) {  //pos11
+					}else if(mouseOver(moy, mox,  (3*(700/4))-(190/2)+20, (3*(1200/5))-(140/2), 190,  140)) {  //pos11
 						if(!allCards.get(10).isArriba()) {
 							allCards.get(10).setArriba(true);
 							click1=10;
 							System.out.println("ckick1 en carta 11");
 						}
 						
-					}else if(mouseOver(moy, mox, (4*(1200/5))-(140/2), (3*(700/4))-(190/2)-20, click2, click1)) {  //pos12
+					}else if(mouseOver(moy, mox,(3*(700/4))-(190/2)+20,  (4*(1200/5))-(140/2), 190,  140)) {  //pos12
 						if(!allCards.get(11).isArriba()) {
 							allCards.get(11).setArriba(true);
 							click1=11;
@@ -283,7 +290,7 @@ public void mouseClicked(MouseEvent e) {
 					}
 				
 				}else {																											//CLICK2
-					if(mouseOver(moy, mox, (1*(1200/5))-(140/2), (1*(700/4))-(190/2)-20, 140, 190)) {  //pos1
+					if(mouseOver(moy, mox, (1*(700/4))-(190/2)-20, (1*(1200/5))-(140/2), 190,  140) && click1 != 0) {  //pos1
 						if(!allCards.get(0).isArriba()) {
 							allCards.get(0).setArriba(true);
 							click2=0;
@@ -291,14 +298,14 @@ public void mouseClicked(MouseEvent e) {
 						}
 												
 						
-					}else if (mouseOver(moy, mox, (2*(1200/5))-(140/2), (1*(700/4))-(190/2)-20,  140, 190)) {//pos2
+					}else if (mouseOver(moy, mox, (1*(700/4))-(190/2)-20,  (2*(1200/5))-(140/2), 190,  140) && click1 != 1) {//pos2
 						if(!allCards.get(1).isArriba()) {
 							allCards.get(1).setArriba(true);
 							click2=1;
 							System.out.println("ckick2 en carta 2");
 						}
 						
-					}else if(mouseOver(moy, mox, (3*(1200/5))-(140/2), (1*(700/4))-(190/2)-20,  140, 190)) {  //pos3
+					}else if(mouseOver(moy, mox, (1*(700/4))-(190/2)-20, (3*(1200/5))-(140/2), 190,  140) && click1 != 2) {  //pos3
 						if(!allCards.get(2).isArriba()) {
 							allCards.get(2).setArriba(true);
 							click2=2;
@@ -306,84 +313,94 @@ public void mouseClicked(MouseEvent e) {
 						}
 											
 						
-					}else if(mouseOver(moy, mox, (4*(1200/5))-(140/2), (1*(700/4))-(190/2)-20,  140, 190)) {  //pos4
+					}else if(mouseOver(moy, mox, (1*(700/4))-(190/2)-20, (4*(1200/5))-(140/2), 190,  140) && click1 != 3) {  //pos4
 						if(!allCards.get(3).isArriba()) {
 							allCards.get(3).setArriba(true);
 							click2=3;
 							System.out.println("ckick2 en carta 4");
 						}
-					}else if(mouseOver(moy, mox, (1*(1200/5))-(140/2), (2*(700/4))-(190/2)-20,  140, 190)) {   //pos5
+					}else if(mouseOver(moy, mox, (2*(700/4))-(190/2), (1*(1200/5))-(140/2), 190,  140) && click1 != 4) {   //pos5
 						if(!allCards.get(4).isArriba()) {
 							allCards.get(4).setArriba(true);
 							click2=4;
 							System.out.println("ckick2 en carta 5");
 						}						
 						
-					}else if(mouseOver(moy, mox, (2*(1200/5))-(140/2), (2*(700/4))-(190/2)-20,  140, 190)) {  //pos6
+					}else if(mouseOver(moy, mox,  (2*(700/4))-(190/2), (2*(1200/5))-(140/2), 190,  140) && click1 != 5) {  //pos6
 						if(!allCards.get(5).isArriba()) {
 							allCards.get(5).setArriba(true);
 							click2=5;
 							System.out.println("ckick2 en carta 6");
 						}
 						
-					}else if(mouseOver(moy, mox, (3*(1200/5))-(140/2), (2*(700/4))-(190/2)-20,  140, 190)) {  //pos7
+					}else if(mouseOver(moy, mox,  (2*(700/4))-(190/2), (3*(1200/5))-(140/2), 190,  140) && click1 != 6) {  //pos7
 						if(!allCards.get(6).isArriba()) {
 							allCards.get(6).setArriba(true);
 							click2=6;
 							System.out.println("ckick2 en carta 7");
 						}
 						
-					}else if(mouseOver(moy, mox, (4*(1200/5))-(140/2), (2*(700/4))-(190/2)-20,  140, 190)) {  //pos8
+					}else if(mouseOver(moy, mox, (2*(700/4))-(190/2), (4*(1200/5))-(140/2), 190,  140) && click1 != 7) {  //pos8
 						if(!allCards.get(7).isArriba()) {
 							allCards.get(7).setArriba(true);
 							click2=7;
 							System.out.println("ckick2 en carta 8");
 						}
 						
-					}else if(mouseOver(moy, mox, (1*(1200/5))-(140/2), (3*(700/4))-(190/2)-20,  140, 190)) {  //pos9
+					}else if(mouseOver(moy, mox, (3*(700/4))-(190/2)+20, (1*(1200/5))-(140/2), 190,  140) && click1 != 8) {  //pos9
 						if(!allCards.get(8).isArriba()) {
 							allCards.get(8).setArriba(true);
 							click2=8;
 							System.out.println("ckick2 en carta 9");
 						}
 						
-					}else if(mouseOver(moy, mox, (2*(1200/5))-(140/2), (3*(700/4))-(190/2)-20,  140, 190)) {  //pos10
+					}else if(mouseOver(moy, mox, (3*(700/4))-(190/2)+20, (2*(1200/5))-(140/2), 190,  140) && click1 != 9) {  //pos10
 						if(!allCards.get(9).isArriba()) {
 							allCards.get(9).setArriba(true);
 							click2=9;
 							System.out.println("ckick2 en carta 10");
 						}
 						
-					}else if(mouseOver(moy, mox, (3*(1200/5))-(140/2), (3*(700/4))-(190/2)-20, click2, click1)) {  //pos11
+					}else if(mouseOver(moy, mox,  (3*(700/4))-(190/2)+20, (3*(1200/5))-(140/2), 190,  140) && click1 != 10) {  //pos11
 						if(!allCards.get(10).isArriba()) {
 							allCards.get(10).setArriba(true);
 							click2=10;
 							System.out.println("ckick2 en carta 11");
 						}
 						
-					}else if(mouseOver(moy, mox, (4*(1200/5))-(140/2), (3*(700/4))-(190/2)-20, click2, click1)) {  //pos12
+					}else if(mouseOver(moy, mox, (3*(700/4))-(190/2)+20, (4*(1200/5))-(140/2), 190,  140) && click1 != 11) {  //pos12
 						if(!allCards.get(11).isArriba()) {
 							allCards.get(11).setArriba(true);
 							click2=11;
 							System.out.println("ckick2 en carta 12");
-						}						
-					}
-					
-					
-					                                                                                              //delay de sec
-					if(allCards.get(click1).getId()==allCards.get(click2).getId()){
-						puntTotal += puntTemp;
-						puntTemp=1000;
+						}
 						
-					}else {
-						puntTemp = (int)Math.round(0.66*puntTemp);
-						allCards.get(click1).setArriba(false);
-						allCards.get(click2).setArriba(false);
 					}
 					
-					click1=-1;
-					click2=-1;
-				}				
+					if(click2 != -1) {
+					                                                                                              //delay de sec
+						try {
+							TimeUnit.SECONDS.sleep(2);
+						} catch (InterruptedException b) {
+							// TODO Auto-generated catch block
+							b.printStackTrace();
+						}
+						
+						
+						if(allCards.get(click1).getId() == allCards.get(click2).getId()){
+							puntTotal += puntTemp;
+							puntTemp=1000;
+							
+						}else {
+							puntTemp = (int)Math.round(0.66*puntTemp);
+							allCards.get(click1).setArriba(false);
+							allCards.get(click2).setArriba(false);
+						}
+						
+						click1=-1;
+						click2=-1;
+					}
+				}
 				
 			}
 			
@@ -462,6 +479,7 @@ public void mouseClicked(MouseEvent e) {
 		g.setColor(Color.decode("#208b3a"));
 		g.fillRect(0, 0, 1200, 700);
 		
+
 		
 		
 		if(start==1) {
@@ -494,12 +512,12 @@ public void mouseClicked(MouseEvent e) {
 			g.drawImage(getImagenCarta(11), (4*(1200/5))-(140/2), (3*(700/4))-(190/2)+20, null);
 			
 			
-			try {
-				TimeUnit.SECONDS.sleep(3);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//			try {
+//				TimeUnit.SECONDS.sleep(3);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 			
 			
 			
@@ -596,6 +614,9 @@ public void mouseClicked(MouseEvent e) {
 //			g.drawImage(cardBackIMG, (3*(1200/5))-(140/2), (3*(700/4))-(190/2)+20, null);
 //			g.drawImage(cardBackIMG, (4*(1200/5))-(140/2), (3*(700/4))-(190/2)+20, null);
 			
+			g.setColor(Color.BLUE);
+			g.drawRect((1*(1200/5))-(140/2), (1*(700/4))-(190/2)-20, 140, 190);
+			g.drawRect( (2*(1200/5))-(140/2), (1*(700/4))-(190/2)-20,  140, 190);
 			
 		}
 		
