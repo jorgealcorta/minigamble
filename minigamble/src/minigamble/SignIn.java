@@ -45,6 +45,7 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 	
 	private boolean bBack_state = false;
 	
+	private Font texto;
 	
 	private int mox;				//Posicion en la que se presiona el raton
 	private int moy;
@@ -76,7 +77,7 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 		bBackIMG_false = bBack_false.getImage();
 		bBackIMG_true = bBack_true.getImage();
 		
-		
+		texto = new Font("arial", 1 ,30); //Fuente del campo de texto
 	}
 	
 
@@ -257,7 +258,7 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 	
 	
 	public void render(Graphics g) {
-		Font texto = new Font("arial", 1 ,30); //Fuente del campo de texto
+		
 		
 		
 		
