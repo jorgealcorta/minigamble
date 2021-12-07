@@ -15,7 +15,9 @@ import javax.swing.ImageIcon;
 
 public class Game2 implements KeyListener{
 	
-	private int start = 1; //1 = esperando, 2 = reproduciendo, 3 = jugando?
+	private int start = 1; //1 = esperando, 2 = reproduciendo, 3 = jugando, 4 = ganado
+	
+	private int cuentaPulsaciones = -1;
 	
 	private boolean coraDestacar = false;
 	private boolean diamDestacar = false;
@@ -113,8 +115,6 @@ public Game2(int dificultad) {
 		palos.add("pica");
 		palos.add("treb");
 		
-		System.out.println(palos);
-		
 		
 		//Creamos la combinacion correcta del simon says
 		for(int i = 0 ; i < 5; i++) {
@@ -153,7 +153,6 @@ public void keyPressed(KeyEvent e) {
 	if(key == 32 && start==1) { //reproducir secuencia
 		start = 2;
 		for(String palo : palosCorrectos) {
-			System.out.println(palo);
 			
 			if(palo == "cora") {
 				coraDestacar = true; 	
@@ -182,14 +181,77 @@ public void keyPressed(KeyEvent e) {
 
 		}
 		
-		start = 1;
+		start = 3;
+	}
+	
+	if(start == 3) {
+		
+		switch(key){
+		
+		case(37):
+			diamDestacar = true;
+			break;
+		case(38):
+			coraDestacar = true;		
+			break;
+		case(39):
+			trebDestacar = true;
+			break;
+		case(40):
+			picaDestacar = true;
+			break;
+		
+		}
+		
 	}
 }
 
 @Override
 public void keyReleased(KeyEvent e) {
-	// TODO Auto-generated method stub
+	int key = e.getKeyCode();
 	
+	if(start == 3) {
+		switch(key){
+		
+		case(37):
+			diamDestacar = false;
+			palosUsuario.add("diam");
+			cuentaPulsaciones++;
+			break;
+		case(38):
+			coraDestacar = false;
+			palosUsuario.add("cora");
+			cuentaPulsaciones++;
+			break;
+		case(39):
+			trebDestacar = false;
+			palosUsuario.add("treb");
+			cuentaPulsaciones++;
+			break;
+		case(40):
+			picaDestacar = false;
+			palosUsuario.add("pica");
+			cuentaPulsaciones++;
+			break;
+		
+		}
+		
+		System.out.println(palosUsuario);
+		
+
+		if(palosUsuario.size() > 0 && palosUsuario.get(cuentaPulsaciones) != palosCorrectos.get(cuentaPulsaciones)) {
+			System.out.println(palosUsuario);
+			palosUsuario.removeAll(palosUsuario);
+			cuentaPulsaciones = -1;
+			start = 1;
+			System.out.println("error");
+		}
+		
+		if(cuentaPulsaciones == palosCorrectos.size() - 1 && palosUsuario.get(cuentaPulsaciones) == palosCorrectos.get(cuentaPulsaciones)) {
+			start = 4;
+		}
+		
+	}	
 }
 
 public void render(Graphics g) {
@@ -210,7 +272,7 @@ public void render(Graphics g) {
 		g.drawString("PULSA ESPACIO PARA REPRODUCIR LA COMBINACION", 200, 60);
 	}
 	
-	if(start == 2) {
+	else if(start == 2) {
 		g.setColor(Color.BLACK);
 		if(!coraDestacar) {
 			g.drawImage(corazonblanco_IMG, 520, 90, null);
@@ -238,6 +300,40 @@ public void render(Graphics g) {
 		
 		g.drawImage(crossarrow_IMG, 456, 225, null);
 
+	}
+	
+	else if(start == 3) {
+		g.setColor(Color.BLACK);
+		if(!coraDestacar) {
+			g.drawImage(corazonblanco_IMG, 520, 90, null);
+		}else {
+			g.drawImage(corazonnegro_IMG, 520, 90, null);
+		}
+		
+		if(!diamDestacar) {
+			g.drawImage(diamanteblanco_IMG, 300, 290, null);
+		}else {
+			g.drawImage(diamantenegro_IMG, 300, 290, null);
+		}
+		
+		if(!picaDestacar) {
+			g.drawImage(picablanca_IMG, 520, 490, null);
+		}else {
+			g.drawImage(picanegra_IMG, 520, 490, null);
+		}
+		
+		if(!trebDestacar) {
+			g.drawImage(trebolblanco_IMG, 730, 290, null);
+		}else {
+			g.drawImage(trebolnegro_IMG, 730, 290, null);
+		}
+		
+		g.drawImage(crossarrow_IMG, 456, 225, null);
+
+	}
+	
+	else if(start == 4) {
+		g.drawString("ENHORABUENA", 100, 400);
 	}
 }
 
