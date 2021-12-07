@@ -11,12 +11,17 @@ import java.awt.image.BufferStrategy;
 public class Game extends Canvas implements Runnable{
 	
 	
+	public static Partida partida;
+	public static Game1 game1;
+	public static Game2 game2;
+	
 	private static final long serialVersionUID = -5339514091919298198L;
 	Inicio inicio = new Inicio(); 				// Pantalla inicio
 	StartScreen start = new StartScreen();
 	SignIn signin = new SignIn();
-	Game1 game1 = new Game1(0);
-	Game2 game2 = new Game2(0);
+	public static Game game;
+
+
 	
 	private Handler handler;
 	
@@ -51,6 +56,11 @@ public class Game extends Canvas implements Runnable{
 		this.addKeyListener(game2);
 		
 		handler = new Handler();
+	}
+	
+	public static void eventoRaton(){
+		
+		game.addMouseListener(game1);
 	}
 	
 	
@@ -136,6 +146,7 @@ public class Game extends Canvas implements Runnable{
 			break;
 		case Game1:
 			game1.render(g);
+			
 			break;
 		case Game2:
 			game2.render(g);
@@ -165,7 +176,7 @@ public class Game extends Canvas implements Runnable{
 
 	public static void main(String[] args) {
 				
-		new Game();
+		Game game = new Game();
 	}
 
 }

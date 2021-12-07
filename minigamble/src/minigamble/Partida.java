@@ -29,9 +29,23 @@ public class Partida {
 		minijuegos.add(ESTADO.Game5);
 		minijuegos.add(ESTADO.Game6);
 		
-		int indexAleatorio = (int) (Math.random() * 5);
+		int rand = (int) (Math.random() * 1);
+		System.out.println(rand);
 		
-		Game.estadoJuego = minijuegos.get(indexAleatorio);
+		
+		if(rand == 0) {
+			Game.game1 = new Game1(puntuacionGeneral);
+			Game.eventoRaton();
+			
+			Game.estadoJuego = minijuegos.get(rand);
+						
+		} else if( rand==1) {
+			Game.game2 = new Game2(puntuacionGeneral);
+			Game.estadoJuego = minijuegos.get(rand);
+			
+		}
+		
+		
 		
 		
 	}

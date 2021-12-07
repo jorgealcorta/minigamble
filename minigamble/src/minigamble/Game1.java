@@ -312,6 +312,8 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 	
 
 public void mouseClicked(MouseEvent e) {
+	
+		System.out.println("clicl");
 		if(Game.estadoJuego == Game.ESTADO.Game1) {				//si se esta en otro estado no hace nada
 			
 			mox = e.getX();	// guarda la posicion en la que se presiona
