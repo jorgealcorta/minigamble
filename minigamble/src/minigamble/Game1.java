@@ -23,7 +23,7 @@ import javax.swing.ImageIcon;
 public class Game1  implements MouseMotionListener, MouseListener { // Memorizar cartas
 	
 	
-	private ImageIcon background;	// Fondo
+
 	private ImageIcon card_hearts_A;
 	private ImageIcon card_hearts_Q;
 	private ImageIcon card_hearts_K;
@@ -82,6 +82,8 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 	
 	
 	public Game1(int dificultad) {
+		
+		puntTotal = dificultad;
 		
 		try {
 			//Cargo todas las imagenes como iconos
@@ -567,8 +569,9 @@ public void mouseClicked(MouseEvent e) {
 						
 						if (todasLevantadas()) {
 							delaySeg(2);
-							
 							start = 4;
+							delaySeg(1);
+							Game.partida  = new Partida( puntTotal ,0,null , null);
 							
 						}
 						

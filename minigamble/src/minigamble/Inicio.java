@@ -221,7 +221,7 @@ public class Inicio   implements MouseMotionListener, MouseListener  {
 	public void render(Graphics g) {
 		
 		Font title = new Font("serif", 1 ,50);  //Fuente del título
-		Font fButton = new Font("arial", 1 ,30); //Fuente de los botones
+//		Font fButton = new Font("arial", 1 ,30); //Fuente de los botones
 		
 		
 		

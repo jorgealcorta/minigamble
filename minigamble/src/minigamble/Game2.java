@@ -28,7 +28,6 @@ public class Game2 implements KeyListener{
 	private Font customFontBot;
 	private Font customFontFin;
 	
-	private ImageIcon background;	// Fondo
 	
 	private ImageIcon corazonblanco;
 	private ImageIcon corazonnegro;
@@ -126,6 +125,16 @@ public Game2(int dificultad) {
 		
 				
 	}
+
+private void delaySeg(int n) {
+	try {
+		TimeUnit.SECONDS.sleep(n);
+	} catch (InterruptedException b) {
+		// TODO Auto-generated catch block
+		b.printStackTrace();
+	}
+	
+}
 
 
 private void delayMS(int n) {
@@ -249,6 +258,8 @@ public void keyReleased(KeyEvent e) {
 		
 		if(cuentaPulsaciones == palosCorrectos.size() - 1 && palosUsuario.get(cuentaPulsaciones) == palosCorrectos.get(cuentaPulsaciones)) {
 			start = 4;
+			delaySeg(2);
+			Game.partida  = new Partida(0,0,null , null);
 		}
 		
 	}	
@@ -333,7 +344,9 @@ public void render(Graphics g) {
 	}
 	
 	else if(start == 4) {
-		g.drawString("ENHORABUENA", 100, 400);
+		g.setFont(customFontFin);
+		g.setColor(Color.BLACK);
+		g.drawString("ENHORABUENA", 325, 300);
 	}
 }
 

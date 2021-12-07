@@ -51,16 +51,19 @@ public class Game extends Canvas implements Runnable{
 		this.addMouseListener(signin); 				// anyado un mouseListener a la pantalla signin
 		this.addMouseMotionListener(signin);
 		this.addKeyListener(signin);
-		this.addMouseListener(game1); 				// anyado un mouseListener a la pantalla game1
-		this.addMouseMotionListener(game1);
-		this.addKeyListener(game2);
+//		this.addMouseListener(game1); 				// anyado un mouseListener a la pantalla game1
+//		this.addMouseMotionListener(game1);
+//		this.addKeyListener(game2);
 		
 		handler = new Handler();
 	}
 	
 	public static void eventoRaton(){
-		
-		game.addMouseListener(game1);
+		if (estadoJuego == ESTADO.Game1) {
+			game.addMouseListener(game1);
+		}else {
+			game.addKeyListener(game2);
+		}
 	}
 	
 	
@@ -151,6 +154,18 @@ public class Game extends Canvas implements Runnable{
 		case Game2:
 			game2.render(g);
 			break;
+		case Game3:
+			break;
+		case Game4:
+			break;
+		case Game5:
+			break;
+		case Game6:
+			break;
+		case LogIn:
+			break;
+		default:
+			break;
 		}
 		
 		handler.render(g);
@@ -176,7 +191,7 @@ public class Game extends Canvas implements Runnable{
 
 	public static void main(String[] args) {
 				
-		Game game = new Game();
+		game = new Game();
 	}
 
 }
