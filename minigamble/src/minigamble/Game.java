@@ -7,6 +7,7 @@ import java.awt.image.BufferStrategy;
 
 
 
+
 public class Game extends Canvas implements Runnable{
 	
 	
@@ -100,7 +101,7 @@ public class Game extends Canvas implements Runnable{
 			
 			if(System.currentTimeMillis() - timer > 1000) { // Escribe los FPS una vez cada segundo.
 				timer += 1000; // Si la diferencia entre el tiempo real y el timer es de mas de 1000ms, implica que ha pasado un segundo.
-				System.out.println("FPS : " + frames); // Printea los frames que se han registrado en ese segundo.
+				System.out.println("FPS : " + frames + " " + estadoJuego); // Printea los frames que se han registrado en ese segundo.
 				frames = 0; // Resetea frames.
 			}
 		}
@@ -135,8 +136,10 @@ public class Game extends Canvas implements Runnable{
 			break;
 		case Game1:
 			game1.render(g);
+			break;
 		case Game2:
 			game2.render(g);
+			break;
 		}
 		
 		handler.render(g);
