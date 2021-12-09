@@ -31,6 +31,10 @@ public class Partida {
 		
 		int rand = (int) (Math.random() * 2);
 		System.out.println(rand);
+		while(Game.estadoJuego == minijuegos.get(rand)) {
+			rand = (int) (Math.random() * 2);
+			System.out.println(rand);
+		}
 		
 		
 		if(rand == 0) {
