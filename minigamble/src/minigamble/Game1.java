@@ -34,6 +34,11 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 	private ImageIcon card_clubs_K;
 	private ImageIcon card_clubs_J;
 	private ImageIcon card_hearts_J;
+	private ImageIcon card_diamonds_A;
+	private ImageIcon card_diamonds_K;
+	private ImageIcon card_diamonds_J;
+	private ImageIcon card_diamonds_Q;
+	
 	private ImageIcon cardBack;
 	
 	private Image card_hearts_A_IMG;
@@ -44,6 +49,11 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 	private Image card_clubs_K_IMG;
 	private Image card_clubs_J_IMG;
 	private Image card_hearts_J_IMG;
+	private Image card_diamonds_A_IMG;
+	private Image card_diamonds_K_IMG;
+	private Image card_diamonds_J_IMG;
+	private Image card_diamonds_Q_IMG;
+	
 	private Image cardBackIMG;
 	private Image bStartIMG_True;
 	private Image bStartIMG_False;
@@ -57,7 +67,7 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 	private int nFil;
 	private int cartX;
 	private int cartY;
-	private int nivel = 2;
+	private int nivel = 4;
 	
 	
 	private Font customFontBot;
@@ -123,6 +133,16 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 			nFil = 4;
 			cartX = 98;
 			cartY = 133;
+		}else if(nivel == 3) {
+			nCol = 5;
+			nFil = 4;
+			cartX = 98;
+			cartY = 133;
+		}else if(nivel == 4) {
+			nCol = 6;
+			nFil = 4;
+			cartX = 98;
+			cartY = 133;
 		}
 		
 		try {
@@ -136,6 +156,10 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 			card_clubs_K = new ImageIcon( Game.class.getResource("multimedia/cartas/cardClubsK.png").toURI().toURL() );
 			card_clubs_J = new ImageIcon( Game.class.getResource("multimedia/cartas/cardClubsJ.png").toURI().toURL() );
 			card_hearts_J = new ImageIcon( Game.class.getResource("multimedia/cartas/cardHeartsJ.png").toURI().toURL() );
+			card_diamonds_A = new ImageIcon( Game.class.getResource("multimedia/cartas/cardDiamondsA.png").toURI().toURL() );
+			card_diamonds_K = new ImageIcon( Game.class.getResource("multimedia/cartas/cardDiamondsK.png").toURI().toURL() );
+			card_diamonds_J = new ImageIcon( Game.class.getResource("multimedia/cartas/cardDiamondsJ.png").toURI().toURL() );
+			card_diamonds_Q = new ImageIcon( Game.class.getResource("multimedia/cartas/cardDiamondsQ.png").toURI().toURL() );
 			
 			
 			bStart_false = new ImageIcon( Game.class.getResource("multimedia/red_button2.png").toURI().toURL() );
@@ -171,6 +195,12 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 		card_clubs_K_IMG = card_clubs_K.getImage();
 		card_clubs_J_IMG = card_clubs_J.getImage();
 		card_hearts_J_IMG = card_hearts_J.getImage();
+		card_diamonds_A_IMG = card_diamonds_A.getImage();
+		card_diamonds_K_IMG = card_diamonds_K.getImage();
+		card_diamonds_J_IMG = card_diamonds_J.getImage();
+		card_diamonds_Q_IMG = card_diamonds_Q.getImage();
+		
+		
 		cardBackIMG = cardBack.getImage();
 		
 		bStartIMG_True = bStart_true.getImage();
@@ -194,6 +224,15 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 		allCards.add(c14);
 		allCards.add(c15);
 		allCards.add(c16);
+		allCards.add(c17);
+		allCards.add(c18);
+		allCards.add(c19);
+		allCards.add(c20);
+		allCards.add(c21);
+		allCards.add(c22);
+		allCards.add(c23);
+		allCards.add(c24);
+		
 		
 		selectCards  =  allCards.subList(0, nCol*nFil);
 		
@@ -224,6 +263,14 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 			return card_hearts_J_IMG;
 		}else if(selectCards.get(index).getId() == "card_clubs_J") {
 			return card_clubs_J_IMG;
+		}else if(selectCards.get(index).getId() == "card_diamonds_A") {
+			return card_diamonds_A_IMG;
+		}else if(selectCards.get(index).getId() == "card_diamonds_K") {
+			return card_diamonds_K_IMG;
+		}else if(selectCards.get(index).getId() == "card_diamonds_J") {
+			return card_diamonds_J_IMG;
+		}else if(selectCards.get(index).getId() == "card_diamonds_Q") {
+			return card_diamonds_Q_IMG;
 		}
 		return null;
 		
@@ -298,12 +345,9 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 			mdx = e.getX();
 			mdy = e.getY();
 			
-					
 			if( mouseOver(mdx, mdy, 500, 290, 190, 50)== false && start == 1){	// caso start == 1
 				bStart_state = false;
-			}
-
-					
+			}		
 		}
 	}
 	
