@@ -12,12 +12,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
+
 
 
 public class Game1  implements MouseMotionListener, MouseListener { // Memorizar cartas
@@ -30,6 +32,8 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 	private ImageIcon card_clubs_A;
 	private ImageIcon card_clubs_Q;
 	private ImageIcon card_clubs_K;
+	private ImageIcon card_clubs_J;
+	private ImageIcon card_hearts_J;
 	private ImageIcon cardBack;
 	
 	private Image card_hearts_A_IMG;
@@ -38,6 +42,8 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 	private Image card_clubs_A_IMG;
 	private Image card_clubs_Q_IMG;
 	private Image card_clubs_K_IMG;
+	private Image card_clubs_J_IMG;
+	private Image card_hearts_J_IMG;
 	private Image cardBackIMG;
 	private Image bStartIMG_True;
 	private Image bStartIMG_False;
@@ -47,9 +53,17 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 	private ImageIcon bStart_true;
 	private boolean bStart_state = false;
 	
+	private int nCol;
+	private int nFil;
+	private int cartX;
+	private int cartY;
+	private int nivel = 2;
+	
+	
 	private Font customFontBot;
 	private Font customFontFin;
 	
+	private ArrayList<ArrayList<ArrayList<Integer>>> posCartas;
 	
 	private int mox;				//Posicion en la que se presiona el raton
 	private int moy;
@@ -58,6 +72,7 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 	
 	
 	private ArrayList<Carta> allCards = new ArrayList<Carta>();
+	private List<Carta> selectCards = new ArrayList<Carta>();
 	
 	private Carta c1 = new Carta("card_hearts_A", false);
 	private Carta c2 = new Carta("card_hearts_Q", false);
@@ -71,6 +86,19 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 	private Carta c10 = new Carta("card_clubs_A", false);
 	private Carta c11 = new Carta("card_clubs_Q", false);
 	private Carta c12 = new Carta("card_clubs_K", false);
+	private Carta c13 = new Carta("card_hearts_J", false);
+	private Carta c14 = new Carta("card_clubs_J", false);
+	private Carta c15 = new Carta("card_hearts_J", false);
+	private Carta c16 = new Carta("card_clubs_J", false);
+	private Carta c17 = new Carta("card_diamonds_A", false);
+	private Carta c18 = new Carta("card_diamonds_K", false);
+	private Carta c19 = new Carta("card_diamonds_A", false);
+	private Carta c20 = new Carta("card_diamonds_K", false);
+	private Carta c21 = new Carta("card_diamonds_J", false);
+	private Carta c22 = new Carta("card_diamonds_Q", false);
+	private Carta c23 = new Carta("card_diamonds_J", false);
+	private Carta c24 = new Carta("card_diamonds_Q", false);
+	
 	
 	private int start = 1;
 	private int click1 = -1;
@@ -85,6 +113,18 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 		
 		puntTotal = dificultad;
 		
+		if (nivel == 1) {
+			nCol = 4;
+			nFil = 3;
+			cartX = 126;
+			cartY = 171;
+		}else if(nivel == 2) {
+			nCol = 4;
+			nFil = 4;
+			cartX = 98;
+			cartY = 133;
+		}
+		
 		try {
 			//Cargo todas las imagenes como iconos
 			cardBack = new ImageIcon( Game.class.getResource("multimedia/cartas/cardBack_red5.png").toURI().toURL() );
@@ -94,6 +134,9 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 			card_clubs_A = new ImageIcon( Game.class.getResource("multimedia/cartas/cardClubsA.png").toURI().toURL() );
 			card_clubs_Q = new ImageIcon( Game.class.getResource("multimedia/cartas/cardClubsQ.png").toURI().toURL() );
 			card_clubs_K = new ImageIcon( Game.class.getResource("multimedia/cartas/cardClubsK.png").toURI().toURL() );
+			card_clubs_J = new ImageIcon( Game.class.getResource("multimedia/cartas/cardClubsJ.png").toURI().toURL() );
+			card_hearts_J = new ImageIcon( Game.class.getResource("multimedia/cartas/cardHeartsJ.png").toURI().toURL() );
+			
 			
 			bStart_false = new ImageIcon( Game.class.getResource("multimedia/red_button2.png").toURI().toURL() );
 			bStart_true = new ImageIcon( Game.class.getResource("multimedia/red_button3.png").toURI().toURL() );
@@ -126,6 +169,8 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 		card_clubs_A_IMG = card_clubs_A.getImage();
 		card_clubs_Q_IMG = card_clubs_Q.getImage();
 		card_clubs_K_IMG = card_clubs_K.getImage();
+		card_clubs_J_IMG = card_clubs_J.getImage();
+		card_hearts_J_IMG = card_hearts_J.getImage();
 		cardBackIMG = cardBack.getImage();
 		
 		bStartIMG_True = bStart_true.getImage();
@@ -145,33 +190,48 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 		allCards.add(c10);
 		allCards.add(c11);
 		allCards.add(c12);
+		allCards.add(c13);
+		allCards.add(c14);
+		allCards.add(c15);
+		allCards.add(c16);
+		
+		selectCards  =  allCards.subList(0, nCol*nFil);
 		
 		
-		Collections.shuffle(allCards);
+		Collections.shuffle(selectCards);
+		
+		for (Carta c : selectCards) {
+			System.out.println(c.getId());
+		}
 				
 	}
 	
 	public Image getImagenCarta(int index) {
 		
-		if(allCards.get(index).getId() == "card_hearts_A") {
+		if(selectCards.get(index).getId() == "card_hearts_A") {
 			return card_hearts_A_IMG;
-		}else if(allCards.get(index).getId() == "card_hearts_Q") {
+		}else if(selectCards.get(index).getId() == "card_hearts_Q") {
 			return card_hearts_Q_IMG;
-		}else if(allCards.get(index).getId() == "card_hearts_K") {
+		}else if(selectCards.get(index).getId() == "card_hearts_K") {
 			return card_hearts_K_IMG;
-		}else if(allCards.get(index).getId() == "card_clubs_A") {
+		}else if(selectCards.get(index).getId() == "card_clubs_A") {
 			return card_clubs_A_IMG;
-		}else if(allCards.get(index).getId() == "card_clubs_Q") {
+		}else if(selectCards.get(index).getId() == "card_clubs_Q") {
 			return card_clubs_Q_IMG;
-		}else{
+		}else if(selectCards.get(index).getId() == "card_clubs_K") {
 			return card_clubs_K_IMG;
+		}else if(selectCards.get(index).getId() == "card_hearts_J") {
+			return card_hearts_J_IMG;
+		}else if(selectCards.get(index).getId() == "card_clubs_J") {
+			return card_clubs_J_IMG;
 		}
+		return null;
 		
 	}
 	
 	
 	public boolean todasLevantadas() {
-		for(Carta c : allCards) {
+		for(Carta c : selectCards) {
 			if(!c.isArriba())
 				return false;
 		}
@@ -210,6 +270,26 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 			b.printStackTrace();
 		}
 		
+	}
+	
+	private ArrayList<ArrayList<ArrayList<Integer>>> generaMatriz(int ncol, int nfil, int xCarta, int yCarta) {
+		ArrayList<ArrayList<ArrayList<Integer>>> matriz = new ArrayList<ArrayList<ArrayList<Integer>>>();
+		
+		for(int i = 1; i <= nfil; i++) {
+			ArrayList<ArrayList<Integer>> filas = new ArrayList<ArrayList<Integer>>();
+			for(int j = 1; j <= ncol; j++) {
+				int posX = (j*(1200/(ncol + 1)) - (xCarta/2));
+				int posY = (i*(700/(nfil + 1)) - (yCarta/2));
+				ArrayList<Integer> posicion = new ArrayList<Integer>();
+				posicion.add(posX);
+				posicion.add(posY);
+				filas.add(posicion);
+			}
+			
+			matriz.add(filas);
+		}
+		
+		return matriz;
 	}
 	
 	public void mouseDragged(MouseEvent e) {
@@ -272,41 +352,24 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 		        }catch(Exception e2) {
 		        	System.out.println("error");
 		        }
+				
+				posCartas = generaMatriz(nCol, nFil, cartX, cartY);
+				
 				start = 3;                                            //cambia a start=2
-				allCards.get(0).setArriba(true);
-				allCards.get(1).setArriba(true);
-				allCards.get(2).setArriba(true);
-				allCards.get(3).setArriba(true);
-				allCards.get(4).setArriba(true);
-				allCards.get(5).setArriba(true);
-				allCards.get(6).setArriba(true);
-				allCards.get(7).setArriba(true);
-				allCards.get(8).setArriba(true);
-				allCards.get(9).setArriba(true);
-				allCards.get(10).setArriba(true);
-				allCards.get(11).setArriba(true);
+				
+				for (int i = 0; i < (nCol*nFil); i++) {
+					selectCards.get(i).setArriba(true);
+				}
 				
 				delaySeg(2);
 				
-				allCards.get(0).setArriba(false);
-				allCards.get(1).setArriba(false);
-				allCards.get(2).setArriba(false);
-				allCards.get(3).setArriba(false);
-				allCards.get(4).setArriba(false);
-				allCards.get(5).setArriba(false);
-				allCards.get(6).setArriba(false);
-				allCards.get(7).setArriba(false);
-				allCards.get(8).setArriba(false);
-				allCards.get(9).setArriba(false);
-				allCards.get(10).setArriba(false);
-				allCards.get(11).setArriba(false);
+				for (int i = 0; i < (nCol*nFil); i++) {
+					selectCards.get(i).setArriba(false);
+				}
 				
 			}
 			bStart_state = false;
 			}
-			
-			
-			
 		}
 		
 	}	
@@ -322,237 +385,44 @@ public void mouseClicked(MouseEvent e) {
 			moy = e.getY();
 			
 						
-			if( start==3 ){				
-				
-				if(click1==-1) {	//CLICK1
-					System.out.println("click 1");
-					if(mouseOver(moy, mox, (1*(700/4))-(190/2)-20, (1*(1200/5))-(140/2), 190, 140)) {  //pos1
-						if(!allCards.get(0).isArriba()) {
-							sonidoCarta();
-							delayMS(100);
-							allCards.get(0).setArriba(true);
-							click1=0;
-							System.out.println("ckick1 en carta 1");
-							
+			if( start==3 ){	
+				if(click1==-1) {
+					int nCarta = 0;
+					for (ArrayList<ArrayList<Integer>> filas : posCartas) {
+						for(ArrayList<Integer> columnas : filas) {
+							if(mouseOver(moy, mox, columnas.get(1), columnas.get(0), cartY, cartX)) {  //pos1
+								if(!selectCards.get(nCarta).isArriba()) {
+									sonidoCarta();
+									delayMS(100);
+									selectCards.get(nCarta).setArriba(true);
+									click1=nCarta;
+									System.out.println("ckick1 en carta " + nCarta);
+								}
+							}
+							nCarta++;
 						}
-						
-					}else if (mouseOver(moy, mox, (1*(700/4))-(190/2)-20, (2*(1200/5))-(140/2), 190,  140)) {//pos2
-						if(!allCards.get(1).isArriba()) {
-							sonidoCarta();
-							delayMS(100);
-							allCards.get(1).setArriba(true);
-							click1=1;
-							System.out.println("ckick1 en carta 2");
-						}
-						System.out.println("ckick1 en carta 2");
-						
-					}else if(mouseOver(moy, mox, (1*(700/4))-(190/2)-20,  (3*(1200/5))-(140/2), 190,  140)) {  //pos3
-						if(!allCards.get(2).isArriba()) {
-							sonidoCarta();
-							delayMS(100);
-							allCards.get(2).setArriba(true);
-							click1=2;
-							System.out.println("ckick1 en carta 3");
-						}
-											
-						
-					}else if(mouseOver(moy, mox, (1*(700/4))-(190/2)-20,  (4*(1200/5))-(140/2), 190,  140)) {  //pos4
-						if(!allCards.get(3).isArriba()) {
-							sonidoCarta();
-							delayMS(100);
-							allCards.get(3).setArriba(true);
-							click1=3;
-							System.out.println("ckick1 en carta 4");
-						}
-					}else if(mouseOver(moy, mox, (2*(700/4))-(190/2), (1*(1200/5))-(140/2), 190,  140)) {   //pos5
-						if(!allCards.get(4).isArriba()) {
-							sonidoCarta();
-							delayMS(100);
-							allCards.get(4).setArriba(true);
-							click1=4;
-							System.out.println("ckick1 en carta 5");
-						}						
-						
-					}else if(mouseOver(moy, mox,  (2*(700/4))-(190/2), (2*(1200/5))-(140/2), 190,  140)) {  //pos6
-						if(!allCards.get(5).isArriba()) {
-							sonidoCarta();
-							delayMS(100);
-							allCards.get(5).setArriba(true);
-							click1=5;
-							System.out.println("ckick1 en carta 6");
-						}
-						
-					}else if(mouseOver(moy, mox, (2*(700/4))-(190/2),  (3*(1200/5))-(140/2), 190,  140)) {  //pos7
-						if(!allCards.get(6).isArriba()) {
-							sonidoCarta();
-							delayMS(100);
-							allCards.get(6).setArriba(true);
-							click1=6;
-							System.out.println("ckick1 en carta 7");
-						}
-						
-					}else if(mouseOver(moy, mox,  (2*(700/4))-(190/2), (4*(1200/5))-(140/2), 190,  140)) {  //pos8
-						if(!allCards.get(7).isArriba()) {
-							sonidoCarta();
-							delayMS(100);
-							allCards.get(7).setArriba(true);
-							click1=7;
-							System.out.println("ckick1 en carta 8");
-						}
-						
-					}else if(mouseOver(moy, mox, (3*(700/4))-(190/2)+20,  (1*(1200/5))-(140/2), 190,  140)) {  //pos9
-						if(!allCards.get(8).isArriba()) {
-							sonidoCarta();
-							delayMS(100);
-							allCards.get(8).setArriba(true);
-							click1=8;
-							System.out.println("ckick1 en carta 9");
-						}
-						
-					}else if(mouseOver(moy, mox,  (3*(700/4))-(190/2)+20, (2*(1200/5))-(140/2), 190,  140)) {  //pos10
-						if(!allCards.get(9).isArriba()) {
-							sonidoCarta();
-							delayMS(100);
-							allCards.get(9).setArriba(true);
-							click1=9;
-							System.out.println("ckick1 en carta 10");
-						}
-						
-					}else if(mouseOver(moy, mox,  (3*(700/4))-(190/2)+20, (3*(1200/5))-(140/2), 190,  140)) {  //pos11
-						if(!allCards.get(10).isArriba()) {
-							sonidoCarta();
-							delayMS(100);
-							allCards.get(10).setArriba(true);
-							click1=10;
-							System.out.println("ckick1 en carta 11");
-						}
-						
-					}else if(mouseOver(moy, mox,(3*(700/4))-(190/2)+20,  (4*(1200/5))-(140/2), 190,  140)) {  //pos12
-						if(!allCards.get(11).isArriba()) {
-							sonidoCarta();
-							delayMS(100);
-							allCards.get(11).setArriba(true);
-							click1=11;
-							System.out.println("ckick1 en carta 12");
-						}						
 					}
-				
-				}else {																											//CLICK2
-					if(mouseOver(moy, mox, (1*(700/4))-(190/2)-20, (1*(1200/5))-(140/2), 190,  140) && click1 != 0) {  //pos1
-						if(!allCards.get(0).isArriba()) {
-							sonidoCarta();
-							delayMS(100);
-							allCards.get(0).setArriba(true);
-							click2=0;
-							System.out.println("ckick2 en carta 1");
+				}else {
+					int nCarta = 0;
+					for (ArrayList<ArrayList<Integer>> filas : posCartas) {
+						for(ArrayList<Integer> columnas : filas) {
+							if(mouseOver(moy, mox, columnas.get(1), columnas.get(0), cartY, cartX)) {  //pos1
+								if(!selectCards.get(nCarta).isArriba()) {
+									sonidoCarta();
+									delayMS(100);
+									selectCards.get(nCarta).setArriba(true);
+									click2=nCarta;
+									System.out.println("ckick1 en carta " + nCarta);
+								}
+							}
+							nCarta++;
 						}
-												
-						
-					}else if (mouseOver(moy, mox, (1*(700/4))-(190/2)-20,  (2*(1200/5))-(140/2), 190,  140) && click1 != 1) {//pos2
-						if(!allCards.get(1).isArriba()) {
-							sonidoCarta();
-							delayMS(100);
-							allCards.get(1).setArriba(true);
-							click2=1;
-							System.out.println("ckick2 en carta 2");
-						}
-						
-					}else if(mouseOver(moy, mox, (1*(700/4))-(190/2)-20, (3*(1200/5))-(140/2), 190,  140) && click1 != 2) {  //pos3
-						if(!allCards.get(2).isArriba()) {
-							sonidoCarta();
-							delayMS(100);
-							allCards.get(2).setArriba(true);
-							click2=2;
-							System.out.println("ckick2 en carta 3");
-						}
-											
-						
-					}else if(mouseOver(moy, mox, (1*(700/4))-(190/2)-20, (4*(1200/5))-(140/2), 190,  140) && click1 != 3) {  //pos4
-						if(!allCards.get(3).isArriba()) {
-							sonidoCarta();
-							delayMS(100);
-							allCards.get(3).setArriba(true);
-							click2=3;
-							System.out.println("ckick2 en carta 4");
-						}
-					}else if(mouseOver(moy, mox, (2*(700/4))-(190/2), (1*(1200/5))-(140/2), 190,  140) && click1 != 4) {   //pos5
-						if(!allCards.get(4).isArriba()) {
-							sonidoCarta();
-							delayMS(100);
-							allCards.get(4).setArriba(true);
-							click2=4;
-							System.out.println("ckick2 en carta 5");
-						}						
-						
-					}else if(mouseOver(moy, mox,  (2*(700/4))-(190/2), (2*(1200/5))-(140/2), 190,  140) && click1 != 5) {  //pos6
-						if(!allCards.get(5).isArriba()) {
-							sonidoCarta();
-							delayMS(100);
-							allCards.get(5).setArriba(true);
-							click2=5;
-							System.out.println("ckick2 en carta 6");
-						}
-						
-					}else if(mouseOver(moy, mox,  (2*(700/4))-(190/2), (3*(1200/5))-(140/2), 190,  140) && click1 != 6) {  //pos7
-						if(!allCards.get(6).isArriba()) {
-							sonidoCarta();
-							delayMS(100);
-							allCards.get(6).setArriba(true);
-							click2=6;
-							System.out.println("ckick2 en carta 7");
-						}
-						
-					}else if(mouseOver(moy, mox, (2*(700/4))-(190/2), (4*(1200/5))-(140/2), 190,  140) && click1 != 7) {  //pos8
-						if(!allCards.get(7).isArriba()) {
-							sonidoCarta();
-							delayMS(100);
-							allCards.get(7).setArriba(true);
-							click2=7;
-							System.out.println("ckick2 en carta 8");
-						}
-						
-					}else if(mouseOver(moy, mox, (3*(700/4))-(190/2)+20, (1*(1200/5))-(140/2), 190,  140) && click1 != 8) {  //pos9
-						if(!allCards.get(8).isArriba()) {
-							sonidoCarta();
-							delayMS(100);
-							allCards.get(8).setArriba(true);
-							click2=8;
-							System.out.println("ckick2 en carta 9");
-						}
-						
-					}else if(mouseOver(moy, mox, (3*(700/4))-(190/2)+20, (2*(1200/5))-(140/2), 190,  140) && click1 != 9) {  //pos10
-						if(!allCards.get(9).isArriba()) {
-							sonidoCarta();
-							delayMS(100);
-							allCards.get(9).setArriba(true);
-							click2=9;
-							System.out.println("ckick2 en carta 10");
-						}
-						
-					}else if(mouseOver(moy, mox,  (3*(700/4))-(190/2)+20, (3*(1200/5))-(140/2), 190,  140) && click1 != 10) {  //pos11
-						if(!allCards.get(10).isArriba()) {
-							sonidoCarta();
-							delayMS(100);
-							allCards.get(10).setArriba(true);
-							click2=10;
-							System.out.println("ckick2 en carta 11");
-						}
-						
-					}else if(mouseOver(moy, mox, (3*(700/4))-(190/2)+20, (4*(1200/5))-(140/2), 190,  140) && click1 != 11) {  //pos12
-						if(!allCards.get(11).isArriba()) {
-							sonidoCarta();
-							delayMS(100);
-							allCards.get(11).setArriba(true);
-							click2=11;
-							System.out.println("ckick2 en carta 12");
-						}
-						
 					}
 					
 					if(click2 != -1) {
 						
 						
-						if(allCards.get(click1).getId() == allCards.get(click2).getId()){
+						if(allCards.get(click1).getId() == selectCards.get(click2).getId()){
 							puntTotal += puntTemp;
 							puntTemp=1000;
 							
@@ -560,8 +430,8 @@ public void mouseClicked(MouseEvent e) {
 							                            //delay de sec
 							delaySeg(2);
 							puntTemp = (int)Math.round(0.66*puntTemp);
-							allCards.get(click1).setArriba(false);
-							allCards.get(click2).setArriba(false);
+							selectCards.get(click1).setArriba(false);
+							selectCards.get(click2).setArriba(false);
 						}
 						
 						click1=-1;
@@ -628,39 +498,6 @@ public void mouseClicked(MouseEvent e) {
 		}
 		
 		
-		
-//		if (start==2) {
-//			
-//			g.setColor(Color.decode("#208b3a"));
-//			g.fillRect(0, 0, 1200, 700);
-//			g.drawImage(getImagenCarta(0), (1*(1200/5))-(140/2), (1*(700/4))-(190/2)-20, null);
-//			g.drawImage(getImagenCarta(1), (2*(1200/5))-(140/2), (1*(700/4))-(190/2)-20, null);
-//			g.drawImage(getImagenCarta(2), (3*(1200/5))-(140/2), (1*(700/4))-(190/2)-20, null);
-//			g.drawImage(getImagenCarta(3), (4*(1200/5))-(140/2), (1*(700/4))-(190/2)-20, null);
-//			g.drawImage(getImagenCarta(4), (1*(1200/5))-(140/2), (2*(700/4))-(190/2), null);
-//			g.drawImage(getImagenCarta(5), (2*(1200/5))-(140/2), (2*(700/4))-(190/2), null);
-//			g.drawImage(getImagenCarta(6), (3*(1200/5))-(140/2), (2*(700/4))-(190/2), null);
-//			g.drawImage(getImagenCarta(7), (4*(1200/5))-(140/2), (2*(700/4))-(190/2), null);
-//			g.drawImage(getImagenCarta(8), (1*(1200/5))-(140/2), (3*(700/4))-(190/2)+20, null);
-//			g.drawImage(getImagenCarta(9), (2*(1200/5))-(140/2), (3*(700/4))-(190/2)+20, null);
-//			g.drawImage(getImagenCarta(10), (3*(1200/5))-(140/2), (3*(700/4))-(190/2)+20, null);
-//			g.drawImage(getImagenCarta(11), (4*(1200/5))-(140/2), (3*(700/4))-(190/2)+20, null);
-//			
-//			
-////			try {
-////				TimeUnit.SECONDS.sleep(3);
-////			} catch (InterruptedException e) {
-////				// TODO Auto-generated catch block
-////				e.printStackTrace();
-////			}
-//			
-//			
-//			
-//			System.out.println("terminacontador");
-//			start = 3;
-//			
-//		}
-		
 		if (start == 3) {
 			g.setColor(Color.decode("#208b3a"));
 			g.fillRect(0, 0, 1200, 700);
@@ -669,95 +506,22 @@ public void mouseClicked(MouseEvent e) {
 			g.setColor(Color.BLACK);
 			String strPunt = String.valueOf(puntTotal);
 			
-			
-			if(allCards.get(0).isArriba()) {															//carta1
-				g.drawImage(getImagenCarta(0), (1*(1200/5))-(140/2), (1*(700/4))-(190/2)-20, null);			
-			}else {
-				g.drawImage(cardBackIMG, (1*(1200/5))-(140/2), (1*(700/4))-(190/2)-20, null);
+			int nCarta = 0;
+			for (ArrayList<ArrayList<Integer>> filas : posCartas) {
+				for(ArrayList<Integer> columnas : filas) {
+					if(selectCards.get(nCarta).isArriba()) {
+						g.drawImage(getImagenCarta(nCarta), columnas.get(0) , columnas.get(1) ,cartX, cartY, null);
+					}else {
+						g.drawImage(cardBackIMG, columnas.get(0) , columnas.get(1) ,cartX, cartY, null);
+					}
+					nCarta++;
+					System.out.println(nCarta);
+				}
 			}
 			
-			if(allCards.get(1).isArriba()) {
-				g.drawImage(getImagenCarta(1), (2*(1200/5))-(140/2), (1*(700/4))-(190/2)-20, null);		//carta2	
-			}else {
-				g.drawImage(cardBackIMG, (2*(1200/5))-(140/2), (1*(700/4))-(190/2)-20, null);
-			}
 			
-			if(allCards.get(2).isArriba()) {
-				g.drawImage(getImagenCarta(2), (3*(1200/5))-(140/2), (1*(700/4))-(190/2)-20, null);		//carta3	
-			}else {
-				g.drawImage(cardBackIMG, (3*(1200/5))-(140/2), (1*(700/4))-(190/2)-20, null);
-			}
 			
-			if(allCards.get(3).isArriba()) {
-				g.drawImage(getImagenCarta(3), (4*(1200/5))-(140/2), (1*(700/4))-(190/2)-20, null);		//carta4	
-			}else {
-				g.drawImage(cardBackIMG, (4*(1200/5))-(140/2), (1*(700/4))-(190/2)-20, null);
-			}
-			
-			if(allCards.get(4).isArriba()) {															//carta5
-				g.drawImage(getImagenCarta(4), (1*(1200/5))-(140/2), (2*(700/4))-(190/2), null);			
-			}else {
-				g.drawImage(cardBackIMG, (1*(1200/5))-(140/2), (2*(700/4))-(190/2), null);
-			}
-			
-			if(allCards.get(5).isArriba()) {															//carta6
-				g.drawImage(getImagenCarta(5), (2*(1200/5))-(140/2), (2*(700/4))-(190/2), null);			
-			}else {
-				g.drawImage(cardBackIMG, (2*(1200/5))-(140/2), (2*(700/4))-(190/2), null);
-			}
-			
-			if(allCards.get(6).isArriba()) {															//carta7
-				g.drawImage(getImagenCarta(6), (3*(1200/5))-(140/2), (2*(700/4))-(190/2), null);			
-			}else {
-				g.drawImage(cardBackIMG, (3*(1200/5))-(140/2), (2*(700/4))-(190/2), null);
-			}
-			
-			if(allCards.get(7).isArriba()) {															//carta8
-				g.drawImage(getImagenCarta(7), (4*(1200/5))-(140/2), (2*(700/4))-(190/2), null);			
-			}else {
-				g.drawImage(cardBackIMG, (4*(1200/5))-(140/2), (2*(700/4))-(190/2), null);
-			}
-			
-			if(allCards.get(8).isArriba()) {															//carta9
-				g.drawImage(getImagenCarta(8), (1*(1200/5))-(140/2), (3*(700/4))-(190/2)+20, null);			
-			}else {
-				g.drawImage(cardBackIMG, (1*(1200/5))-(140/2), (3*(700/4))-(190/2)+20, null);
-			}
-			
-			if(allCards.get(9).isArriba()) {															//carta10
-				g.drawImage(getImagenCarta(9), (2*(1200/5))-(140/2), (3*(700/4))-(190/2)+20, null);			
-			}else {
-				g.drawImage(cardBackIMG, (2*(1200/5))-(140/2), (3*(700/4))-(190/2)+20, null);
-			}
-			
-			if(allCards.get(10).isArriba()) {															//carta11
-				g.drawImage(getImagenCarta(10), (3*(1200/5))-(140/2), (3*(700/4))-(190/2)+20, null);			
-			}else {
-				g.drawImage(cardBackIMG, (3*(1200/5))-(140/2), (3*(700/4))-(190/2)+20, null);
-			}
-			
-			if(allCards.get(11).isArriba()) {															//carta12
-				g.drawImage(getImagenCarta(11), (4*(1200/5))-(140/2), (3*(700/4))-(190/2)+20, null);			
-			}else {
-				g.drawImage(cardBackIMG, (4*(1200/5))-(140/2), (3*(700/4))-(190/2)+20, null);
-			}
 			g.drawString(strPunt, 1100, 40);
-			
-//			g.drawImage(cardBackIMG, (2*(1200/5))-(140/2), (1*(700/4))-(190/2)-20, null);
-//			g.drawImage(cardBackIMG, (3*(1200/5))-(140/2), (1*(700/4))-(190/2)-20, null);
-//			g.drawImage(cardBackIMG, (4*(1200/5))-(140/2), (1*(700/4))-(190/2)-20, null);
-//			g.drawImage(cardBackIMG, (1*(1200/5))-(140/2), (2*(700/4))-(190/2), null);
-//			g.drawImage(cardBackIMG, (2*(1200/5))-(140/2), (2*(700/4))-(190/2), null);
-//			g.drawImage(cardBackIMG, (3*(1200/5))-(140/2), (2*(700/4))-(190/2), null);
-//			g.drawImage(cardBackIMG, (4*(1200/5))-(140/2), (2*(700/4))-(190/2), null);
-//			g.drawImage(cardBackIMG, (1*(1200/5))-(140/2), (3*(700/4))-(190/2)+20, null);
-//			g.drawImage(cardBackIMG, (2*(1200/5))-(140/2), (3*(700/4))-(190/2)+20, null);
-//			g.drawImage(cardBackIMG, (3*(1200/5))-(140/2), (3*(700/4))-(190/2)+20, null);
-//			g.drawImage(cardBackIMG, (4*(1200/5))-(140/2), (3*(700/4))-(190/2)+20, null);
-			
-//			g.setColor(Color.BLUE);
-//			g.drawRect((1*(1200/5))-(140/2), (1*(700/4))-(190/2)-20, 140, 190);
-//			g.drawRect( (2*(1200/5))-(140/2), (1*(700/4))-(190/2)-20,  140, 190);
 			
 		}
 		
