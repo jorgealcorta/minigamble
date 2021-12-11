@@ -61,16 +61,16 @@ public Game2(int dificultad) {
 		
 		try {
 			//Cargo todas las imagenes como iconos
-			corazonblanco = new ImageIcon( Game.class.getResource("multimedia/fichassimonresize/corazonblanco.png").toURI().toURL() );
-			corazonnegro = new ImageIcon( Game.class.getResource("multimedia/fichassimonresize/corazonnegro.png").toURI().toURL() );
-			diamanteblanco = new ImageIcon( Game.class.getResource("multimedia/fichassimonresize/diamanteblanco.png").toURI().toURL() );
-			diamantenegro = new ImageIcon( Game.class.getResource("multimedia/fichassimonresize/diamantenegro.png").toURI().toURL() );
-			picablanca = new ImageIcon( Game.class.getResource("multimedia/fichassimonresize/picablanca.png").toURI().toURL() );
-			picanegra = new ImageIcon( Game.class.getResource("multimedia/fichassimonresize/picanegra.png").toURI().toURL() );
-			trebolblanco = new ImageIcon( Game.class.getResource("multimedia/fichassimonresize/trebolblanco.png").toURI().toURL() );
-			trebolnegro = new ImageIcon( Game.class.getResource("multimedia/fichassimonresize/trebolnegro.png").toURI().toURL() );
+			corazonblanco = new ImageIcon( Game.class.getResource("multimedia/fichassimon/corazonblanco.png").toURI().toURL() );
+			corazonnegro = new ImageIcon( Game.class.getResource("multimedia/fichassimon/corazonnegro.png").toURI().toURL() );
+			diamanteblanco = new ImageIcon( Game.class.getResource("multimedia/fichassimon/diamanteblanco.png").toURI().toURL() );
+			diamantenegro = new ImageIcon( Game.class.getResource("multimedia/fichassimon/diamantenegro.png").toURI().toURL() );
+			picablanca = new ImageIcon( Game.class.getResource("multimedia/fichassimon/picablanca.png").toURI().toURL() );
+			picanegra = new ImageIcon( Game.class.getResource("multimedia/fichassimon/picanegra.png").toURI().toURL() );
+			trebolblanco = new ImageIcon( Game.class.getResource("multimedia/fichassimon/trebolblanco.png").toURI().toURL() );
+			trebolnegro = new ImageIcon( Game.class.getResource("multimedia/fichassimon/trebolnegro.png").toURI().toURL() );
 			
-			crossarrow = new ImageIcon( Game.class.getResource("multimedia/crossarrow.png").toURI().toURL() );
+			crossarrow = new ImageIcon( Game.class.getResource("multimedia/crossarrowpixel.png").toURI().toURL() );
 
 		} catch (Exception e1) {
 			e1.printStackTrace();
@@ -272,12 +272,12 @@ public void render(Graphics g) {
 	if(start == 1) {
 		g.setFont(customFontBot);
 		
-		g.drawImage(corazonblanco_IMG, 520, 90, null);
-		g.drawImage(diamanteblanco_IMG, 300, 290, null);
-		g.drawImage(picablanca_IMG, 520, 490, null);
-		g.drawImage(trebolblanco_IMG, 730, 290, null);
+		g.drawImage(corazonblanco_IMG, 520, 125, null);
+		g.drawImage(diamanteblanco_IMG, 350	, 290, null);
+		g.drawImage(picablanca_IMG, 520, 450, null);
+		g.drawImage(trebolblanco_IMG, 690, 290, null);
 		
-		g.drawImage(crossarrow_IMG, 456, 225, null);
+		g.drawImage(crossarrow_IMG, 520, 285, null);
 		
 		g.setColor(Color.BLACK);
 		g.drawString("PULSA ESPACIO PARA REPRODUCIR LA COMBINACION", 200, 60);
@@ -286,60 +286,60 @@ public void render(Graphics g) {
 	else if(start == 2) {
 		g.setColor(Color.BLACK);
 		if(!coraDestacar) {
-			g.drawImage(corazonblanco_IMG, 520, 90, null);
+			g.drawImage(corazonblanco_IMG, 520, 125, null);
 		}else {
-			g.drawImage(corazonnegro_IMG, 520, 90, null);
+			g.drawImage(corazonnegro_IMG, 520, 125, null);
 		}
 		
 		if(!diamDestacar) {
-			g.drawImage(diamanteblanco_IMG, 300, 290, null);
+			g.drawImage(diamanteblanco_IMG, 350, 290, null);
 		}else {
-			g.drawImage(diamantenegro_IMG, 300, 290, null);
+			g.drawImage(diamantenegro_IMG, 350, 290, null);
 		}
 		
 		if(!picaDestacar) {
-			g.drawImage(picablanca_IMG, 520, 490, null);
+			g.drawImage(picablanca_IMG, 520, 450, null);
 		}else {
-			g.drawImage(picanegra_IMG, 520, 490, null);
+			g.drawImage(picanegra_IMG, 520, 450, null);
 		}
 		
 		if(!trebDestacar) {
-			g.drawImage(trebolblanco_IMG, 730, 290, null);
+			g.drawImage(trebolblanco_IMG, 690, 290, null);
 		}else {
-			g.drawImage(trebolnegro_IMG, 730, 290, null);
+			g.drawImage(trebolnegro_IMG, 690, 290, null);
 		}
 		
-		g.drawImage(crossarrow_IMG, 456, 225, null);
+		g.drawImage(crossarrow_IMG, 520, 285, null);
 
 	}
 	
 	else if(start == 3) {
 		g.setColor(Color.BLACK);
 		if(!coraDestacar) {
-			g.drawImage(corazonblanco_IMG, 520, 90, null);
+			g.drawImage(corazonblanco_IMG, 520, 125, null);
 		}else {
-			g.drawImage(corazonnegro_IMG, 520, 90, null);
+			g.drawImage(corazonnegro_IMG, 520, 125, null);
 		}
 		
 		if(!diamDestacar) {
-			g.drawImage(diamanteblanco_IMG, 300, 290, null);
+			g.drawImage(diamanteblanco_IMG, 350, 290, null);
 		}else {
-			g.drawImage(diamantenegro_IMG, 300, 290, null);
+			g.drawImage(diamantenegro_IMG, 350, 290, null);
 		}
 		
 		if(!picaDestacar) {
-			g.drawImage(picablanca_IMG, 520, 490, null);
+			g.drawImage(picablanca_IMG, 520, 450, null);
 		}else {
-			g.drawImage(picanegra_IMG, 520, 490, null);
+			g.drawImage(picanegra_IMG, 520, 450, null);
 		}
 		
 		if(!trebDestacar) {
-			g.drawImage(trebolblanco_IMG, 730, 290, null);
+			g.drawImage(trebolblanco_IMG, 690, 290, null);
 		}else {
-			g.drawImage(trebolnegro_IMG, 730, 290, null);
+			g.drawImage(trebolnegro_IMG, 690, 290, null);
 		}
 		
-		g.drawImage(crossarrow_IMG, 456, 225, null);
+		g.drawImage(crossarrow_IMG, 520, 285, null);
 
 	}
 	
