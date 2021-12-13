@@ -160,6 +160,7 @@ public class Game extends Canvas implements Runnable{
 			game2.render(g);
 			break;
 		case Game3:
+			game3.render(g);
 			break;
 		case Game4:
 			break;

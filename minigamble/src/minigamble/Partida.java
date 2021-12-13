@@ -36,8 +36,7 @@ public class Partida {
 			System.out.println(rand);
 		}
 		
-		rand=3;
-		
+		rand=2;
 		
 		if(rand == 0) {
 			Game.game1 = new Game1(puntuacionGeneral);

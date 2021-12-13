@@ -26,7 +26,8 @@ public class Game3 implements MouseListener {
 	
 	private Font customFontBot;
 	
-	
+	private int mox;				//Posicion en la que se presiona el raton
+	private int moy;
 	
 	
 	
@@ -104,6 +105,31 @@ public class Game3 implements MouseListener {
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
+		if(Game.estadoJuego == Game.ESTADO.Game3) {
+			
+			String filePath = new File("").getAbsolutePath();										// Ruta hasta el proyecto
+			String s2_filePath = filePath.concat("/minigamble/src/minigamble/sonido/click2.wav");	//Continuacio n de la ruta hasta el archivo de audio 2
+		
+			if (start == 1) {                                          // caso start == 1
+				if(bStart_state == true){ 
+					try {																				
+				        Clip sonido = AudioSystem.getClip();
+						AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s2_filePath));
+				        sonido.open(ais);
+				        sonido.start();
+			        }catch(Exception e2) {
+			        	System.out.println("error");
+			        }
+				}
+			bStart_state = false;
+			start = 2;
+			
+			}
+			
+			
+			
+			
+		}
 	}
 	
 	
