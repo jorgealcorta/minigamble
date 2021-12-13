@@ -165,27 +165,27 @@ public void keyPressed(KeyEvent e) {
 			
 			if(palo == "cora") {
 				coraDestacar = true; 	
-				delayMS(500);
+				delayMS(250);
 				coraDestacar = false;
-				delayMS(500);
+				delayMS(250);
 			}
 			else if(palo == "diam") {
 				diamDestacar = true; 	
-				delayMS(500);
+				delayMS(250);
 				diamDestacar = false;
-				delayMS(500);			
+				delayMS(250);			
 			}
 			else if(palo == "pica") {
 				picaDestacar = true; 	
-				delayMS(500);
+				delayMS(250);
 				picaDestacar = false;
-				delayMS(500);
+				delayMS(250);
 			}
 			else if(palo == "treb") {
 				trebDestacar = true; 	
-				delayMS(500);
+				delayMS(250);
 				trebDestacar = false;
-				delayMS(500);
+				delayMS(250);
 			}
 
 		}
