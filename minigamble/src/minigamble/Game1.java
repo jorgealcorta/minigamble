@@ -342,13 +342,25 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 	
 	public void mouseDragged(MouseEvent e) {
 		if(Game.estadoJuego == Game.ESTADO.Game1 ) {				
-		
 			mdx = e.getX();
 			mdy = e.getY();
-			System.out.println("prueba");
-			if( mouseOver(mdx, mdy, 500, 290, 190, 50)== false){	// caso start == 1
+			
+			if( mouseOver(mdx, mdy, 500, 290, 190, 50)== false && start == 1){	// caso start == 1
 				bStart_state = false;
-			}		
+			}
+			
+			if(start == 3) {
+				int nCarta = 0;
+				for (ArrayList<ArrayList<Integer>> filas : posCartas) {
+					for(ArrayList<Integer> columnas : filas) {
+						if(mouseOver(mdy, mdx, columnas.get(1), columnas.get(0), cartY, cartX) == false) {  //pos1
+								selectCards.get(nCarta).setPresionada(false);
+						}
+						System.out.println(nCarta);
+						nCarta++;
+					}
+				}
+			}
 		}
 	}
 	
@@ -385,7 +397,6 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 									selectCards.get(nCarta).setPresionada(true);
 								}
 							}
-							System.out.println(nCarta);
 							nCarta++;
 						}
 					}
@@ -444,7 +455,6 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 								System.out.println("ckick1 en carta " + nCarta);
 							}
 							
-							System.out.println(nCarta);
 							nCarta++;
 						}
 					}
@@ -460,7 +470,7 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 									click2=nCarta;
 									System.out.println("ckick1 en carta " + nCarta);
 								}
-								System.out.println(nCarta);
+								
 								nCarta++;
 							}
 						}
@@ -497,7 +507,6 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 				}
 			}
 		}	
-	
 	
 
 	public void mouseClicked(MouseEvent e) {

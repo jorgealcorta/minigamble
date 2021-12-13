@@ -37,6 +37,7 @@ public class Partida {
 		}
 		
 		rand=2;
+
 		
 		if(rand == 0) {
 			Game.game1 = new Game1(puntuacionGeneral);
