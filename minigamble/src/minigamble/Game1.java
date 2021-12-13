@@ -22,6 +22,7 @@ import javax.swing.ImageIcon;
 
 
 
+
 public class Game1  implements MouseMotionListener, MouseListener { // Memorizar cartas
 	
 	
@@ -67,7 +68,7 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 	private int nFil;
 	private int cartX;
 	private int cartY;
-	private int nivel = 4;
+	private int nivel = 1;
 	
 	
 	private Font customFontBot;
@@ -84,30 +85,30 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 	private ArrayList<Carta> allCards = new ArrayList<Carta>();
 	private List<Carta> selectCards = new ArrayList<Carta>();
 	
-	private Carta c1 = new Carta("card_hearts_A", false);
-	private Carta c2 = new Carta("card_hearts_Q", false);
-	private Carta c3 = new Carta("card_hearts_K", false);
-	private Carta c4 = new Carta("card_clubs_A", false);
-	private Carta c5 = new Carta("card_clubs_Q", false);
-	private Carta c6 = new Carta("card_clubs_K", false);
-	private Carta c7 = new Carta("card_hearts_A", false);
-	private Carta c8 = new Carta("card_hearts_Q", false);
-	private Carta c9 = new Carta("card_hearts_K", false);
-	private Carta c10 = new Carta("card_clubs_A", false);
-	private Carta c11 = new Carta("card_clubs_Q", false);
-	private Carta c12 = new Carta("card_clubs_K", false);
-	private Carta c13 = new Carta("card_hearts_J", false);
-	private Carta c14 = new Carta("card_clubs_J", false);
-	private Carta c15 = new Carta("card_hearts_J", false);
-	private Carta c16 = new Carta("card_clubs_J", false);
-	private Carta c17 = new Carta("card_diamonds_A", false);
-	private Carta c18 = new Carta("card_diamonds_K", false);
-	private Carta c19 = new Carta("card_diamonds_A", false);
-	private Carta c20 = new Carta("card_diamonds_K", false);
-	private Carta c21 = new Carta("card_diamonds_J", false);
-	private Carta c22 = new Carta("card_diamonds_Q", false);
-	private Carta c23 = new Carta("card_diamonds_J", false);
-	private Carta c24 = new Carta("card_diamonds_Q", false);
+	private Carta c1 = new Carta("card_hearts_A", false, false);
+	private Carta c2 = new Carta("card_hearts_Q", false, false);
+	private Carta c3 = new Carta("card_hearts_K", false, false);
+	private Carta c4 = new Carta("card_clubs_A", false, false);
+	private Carta c5 = new Carta("card_clubs_Q", false, false);
+	private Carta c6 = new Carta("card_clubs_K", false, false);
+	private Carta c7 = new Carta("card_hearts_A", false, false);
+	private Carta c8 = new Carta("card_hearts_Q", false, false);
+	private Carta c9 = new Carta("card_hearts_K", false, false);
+	private Carta c10 = new Carta("card_clubs_A", false, false);
+	private Carta c11 = new Carta("card_clubs_Q", false, false);
+	private Carta c12 = new Carta("card_clubs_K", false, false);
+	private Carta c13 = new Carta("card_hearts_J", false, false);
+	private Carta c14 = new Carta("card_clubs_J", false, false);
+	private Carta c15 = new Carta("card_hearts_J", false, false);
+	private Carta c16 = new Carta("card_clubs_J", false, false);
+	private Carta c17 = new Carta("card_diamonds_A", false, false);
+	private Carta c18 = new Carta("card_diamonds_K", false, false);
+	private Carta c19 = new Carta("card_diamonds_A", false, false);
+	private Carta c20 = new Carta("card_diamonds_K", false, false);
+	private Carta c21 = new Carta("card_diamonds_J", false, false);
+	private Carta c22 = new Carta("card_diamonds_Q", false, false);
+	private Carta c23 = new Carta("card_diamonds_J", false, false);
+	private Carta c24 = new Carta("card_diamonds_Q", false, false);
 	
 	
 	private int start = 1;
@@ -344,8 +345,8 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 		
 			mdx = e.getX();
 			mdy = e.getY();
-			
-			if( mouseOver(mdx, mdy, 500, 290, 190, 50)== false && start == 1){	// caso start == 1
+			System.out.println("prueba");
+			if( mouseOver(mdx, mdy, 500, 290, 190, 50)== false){	// caso start == 1
 				bStart_state = false;
 			}		
 		}
@@ -373,8 +374,23 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 			        sonido.start();
 		        }catch(Exception e2) {
 		        	System.out.println("error");
-		        }}	
+		        }}
 			
+				if (start == 3) {
+					int nCarta = 0;
+					for (ArrayList<ArrayList<Integer>> filas : posCartas) {
+						for(ArrayList<Integer> columnas : filas) {
+							if(mouseOver(moy, mox, columnas.get(1), columnas.get(0), cartY, cartX)) {  //pos1
+								if(!selectCards.get(nCarta).isArriba()) {
+									selectCards.get(nCarta).setPresionada(true);
+								}
+							}
+							System.out.println(nCarta);
+							nCarta++;
+						}
+					}
+					
+				}
 			}
 		}
 			
@@ -387,116 +403,104 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 			
 			
 			if (start == 1) {                                          // caso start == 1
-			if(bStart_state == true){ 
-				try {																				
-			        Clip sonido = AudioSystem.getClip();
-					AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s2_filePath));
-			        sonido.open(ais);
-			        sonido.start();
-		        }catch(Exception e2) {
-		        	System.out.println("error");
-		        }
-				
-				posCartas = generaMatriz(nCol, nFil, cartX, cartY);
-				
-				start = 3;                                            //cambia a start=2
-				
-				for (int i = 0; i < (nCol*nFil); i++) {
-					selectCards.get(i).setArriba(true);
+				if(bStart_state == true){ 
+					try {																				
+				        Clip sonido = AudioSystem.getClip();
+						AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s2_filePath));
+				        sonido.open(ais);
+				        sonido.start();
+			        }catch(Exception e2) {
+			        	System.out.println("error");
+			        }
+					
+					posCartas = generaMatriz(nCol, nFil, cartX, cartY);
+					
+					start = 3;                                            //cambia a start=2
+					
+					for (int i = 0; i < (nCol*nFil); i++) {
+						selectCards.get(i).setArriba(true);
+					}
+					
+					delaySeg(2);
+					
+					for (int i = 0; i < (nCol*nFil); i++) {
+						selectCards.get(i).setArriba(false);
+					}
+					
 				}
-				
-				delaySeg(2);
-				
-				for (int i = 0; i < (nCol*nFil); i++) {
-					selectCards.get(i).setArriba(false);
-				}
-				
-			}
 			bStart_state = false;
 			}
-		}
-		
-	}	
-	
-	
-
-public void mouseClicked(MouseEvent e) {
-	
-		System.out.println("clicl");
-		if(Game.estadoJuego == Game.ESTADO.Game1) {				//si se esta en otro estado no hace nada
-			
-			mox = e.getX();	// guarda la posicion en la que se presiona
-			moy = e.getY();
-			
-						
-			if( start==3 ){	
+			if(start == 3) {
 				if(click1==-1) {
 					int nCarta = 0;
 					for (ArrayList<ArrayList<Integer>> filas : posCartas) {
 						for(ArrayList<Integer> columnas : filas) {
-							if(mouseOver(moy, mox, columnas.get(1), columnas.get(0), cartY, cartX)) {  //pos1
-								if(!selectCards.get(nCarta).isArriba()) {
-									sonidoCarta();
-									delayMS(100);
-									selectCards.get(nCarta).setArriba(true);
-									click1=nCarta;
-									System.out.println("ckick1 en carta " + nCarta);
-								}
+							if(selectCards.get(nCarta).isPresionada()) {
+								selectCards.get(nCarta).setPresionada(false);
+								sonidoCarta();
+								delayMS(100);
+								selectCards.get(nCarta).setArriba(true);
+								click1=nCarta;
+								System.out.println("ckick1 en carta " + nCarta);
 							}
+							
+							System.out.println(nCarta);
 							nCarta++;
 						}
 					}
-				}else {
-					int nCarta = 0;
-					for (ArrayList<ArrayList<Integer>> filas : posCartas) {
-						for(ArrayList<Integer> columnas : filas) {
-							if(mouseOver(moy, mox, columnas.get(1), columnas.get(0), cartY, cartX)) {  //pos1
-								if(!selectCards.get(nCarta).isArriba()) {
+					}else {
+						int nCarta = 0;
+						for (ArrayList<ArrayList<Integer>> filas : posCartas) {
+							for(ArrayList<Integer> columnas : filas) {
+								if(selectCards.get(nCarta).isPresionada()) { 
+									selectCards.get(nCarta).setPresionada(false);
 									sonidoCarta();
 									delayMS(100);
 									selectCards.get(nCarta).setArriba(true);
 									click2=nCarta;
 									System.out.println("ckick1 en carta " + nCarta);
 								}
+								System.out.println(nCarta);
+								nCarta++;
 							}
-							nCarta++;
+						}
+						
+						
+						if(click2 != -1) {
+							
+							
+							if(allCards.get(click1).getId() == selectCards.get(click2).getId()){
+								puntTotal += puntTemp;
+								puntTemp=1000;
+								
+							}else {
+								                            //delay de sec
+								delaySeg(2);
+								puntTemp = (int)Math.round(0.66*puntTemp);
+								selectCards.get(click1).setArriba(false);
+								selectCards.get(click2).setArriba(false);
+							}
+							
+							click1=-1;
+							click2=-1;
+							
+							if (todasLevantadas()) {
+								delaySeg(2);
+								start = 4;
+								delaySeg(1);
+								Game.partida  = new Partida( puntTotal ,0,null , null);
+								
+							}
+							
 						}
 					}
-					
-					if(click2 != -1) {
-						
-						
-						if(allCards.get(click1).getId() == selectCards.get(click2).getId()){
-							puntTotal += puntTemp;
-							puntTemp=1000;
-							
-						}else {
-							                            //delay de sec
-							delaySeg(2);
-							puntTemp = (int)Math.round(0.66*puntTemp);
-							selectCards.get(click1).setArriba(false);
-							selectCards.get(click2).setArriba(false);
-						}
-						
-						click1=-1;
-						click2=-1;
-						
-						if (todasLevantadas()) {
-							delaySeg(2);
-							start = 4;
-							delaySeg(1);
-							Game.partida  = new Partida( puntTotal ,0,null , null);
-							
-						}
-						
-					}
-					
 				}
-				
 			}
-			
-		}
-		
+		}	
+	
+	
+
+	public void mouseClicked(MouseEvent e) {
 	}
 
 	public void mouseEntered(MouseEvent e) {		
@@ -559,7 +563,6 @@ public void mouseClicked(MouseEvent e) {
 						g.drawImage(cardBackIMG, columnas.get(0) , columnas.get(1) ,cartX, cartY, null);
 					}
 					nCarta++;
-					System.out.println(nCarta);
 				}
 			}
 			
