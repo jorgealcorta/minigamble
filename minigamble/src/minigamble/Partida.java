@@ -36,6 +36,8 @@ public class Partida {
 			System.out.println(rand);
 		}
 		
+		rand=3;
+		
 		
 		if(rand == 0) {
 			Game.game1 = new Game1(puntuacionGeneral);
@@ -44,6 +46,11 @@ public class Partida {
 						
 		} else if( rand==1) {
 			Game.game2 = new Game2(puntuacionGeneral);
+			Game.estadoJuego = minijuegos.get(rand);
+			Game.eventoRaton();
+			
+		} else if( rand==2) {
+			Game.game3 = new Game3(puntuacionGeneral);
 			Game.estadoJuego = minijuegos.get(rand);
 			Game.eventoRaton();
 			
