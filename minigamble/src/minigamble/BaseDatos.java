@@ -67,7 +67,7 @@ public class BaseDatos {
 		}
 	}
 	
-	public static ArrayList<String> getNombres() {
+	public static boolean existeNombre(String n) {
 	
 		try (Statement statement = conexion.createStatement()) {
 			ArrayList<String> ret = new ArrayList<>();
@@ -79,11 +79,17 @@ public class BaseDatos {
 				ret.add( nombre);
 			}
 			
-			return ret;
+			for(String nombre : ret) {
+				if(nombre.equals(n)) {
+					return true;
+				}
+			}
+			
+			return false;
 			
 		} catch (Exception e) {
 			logger.log( Level.SEVERE, "Excepción", e );
-			return null;
+			return true;
 		}
 	}
 	

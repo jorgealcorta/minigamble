@@ -191,13 +191,13 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 				usuario = usuario + e.getKeyChar();
 				usuario = usuario.replaceAll("[^a-zA-Z0-9]", "");	// Elimina los caracteres que no sean letras o numeros
 				//System.out.println(usuario);
-				System.out.println(existeNombre(usuario));
+				System.out.println(BaseDatos.existeNombre(usuario));
 			}
 			if (usuario != null && usuario.length() > 0 && e.getKeyCode() == 8 ) {	// Tecla de borrar (No nulo, mayor a 0 y  el codigo de la tecla borrar)
 				usuario = usuario.substring(0, usuario.length() - 1);	// Borra el último caracter
 		    }
 			if (e.getKeyCode() == 10) {		// Tecla enter
-				if(usuario.length()>1 || existeNombre(usuario) == true) {
+				if(usuario.length()>1 && BaseDatos.existeNombre(usuario) == false) {
 					usuario_state = 2;				// !!!! de momento cambia el estado a correcto pero hay que hacer que evalue el string y mire si es correcto o incorrecto
 				}else {
 					usuario_state = 3;
@@ -228,16 +228,7 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 		
 	}
 	
-	public boolean existeNombre(String n) {
-		ArrayList<String> arrNombres = BaseDatos.getNombres();
-		for(String nombre : arrNombres) {
-			System.out.println(nombre);
-			if(nombre == n) {
-				return true;
-			}
-		}
-		return false;
-	}
+
 	
 	
 	public void mouseEntered(MouseEvent e) {
