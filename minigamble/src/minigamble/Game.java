@@ -15,6 +15,7 @@ public class Game extends Canvas implements Runnable{
 	public static Game1 game1;
 	public static Game2 game2;
 	public static Game3 game3;
+	public static Game4 game4;
 	
 	private static final long serialVersionUID = -5339514091919298198L;
 	Inicio inicio = new Inicio(); 				// Pantalla inicio
@@ -34,7 +35,7 @@ public class Game extends Canvas implements Runnable{
 		SignIn,
 		Game1, // PAREJAS
 		Game2, // SIMON SAYS
-		Game3,
+		Game3, // LABERINTO
 		Game4,
 		Game5,
 		Game6
@@ -66,8 +67,10 @@ public class Game extends Canvas implements Runnable{
 			
 		}else if (estadoJuego == ESTADO.Game2){
 			game.addKeyListener(game2);
-		}else {
+		}else if(estadoJuego == ESTADO.Game3) {
 			game.addMouseListener(game3);
+		}else if(estadoJuego == ESTADO.Game4) {
+			game.addMouseListener(game4);
 		}
 	}
 	
