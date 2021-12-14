@@ -110,7 +110,11 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 				}
 			
 			if( !mouseOver(mox, moy, 500, 195, 190, 45) ){	// si se presiona fuera del campo de texto
-				usuario_state = 2;			// !!!! de momento cambia el estado a correcto pero hay que hacer que evalue el string y mire si es correcto o incorrecto
+				if(usuario.length()>1 && BaseDatos.existeNombre(usuario) == false) {
+					usuario_state = 2;				// !!!! de momento cambia el estado a correcto pero hay que hacer que evalue el string y mire si es correcto o incorrecto
+				}else {
+					usuario_state = 3;
+				}			
 			}
 			
 			
@@ -130,9 +134,14 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 					}
 				
 				if( !mouseOver(mox, moy, 500, 295, 190, 45) ){	// si se presiona fuera del campo de texto
-					contrasena_state = 2;			// !!!! de momento cambia el estado a correcto pero hay que hacer que evalue el string y mire si es correcto o incorrecto
-					contrasena_segura = Hash.md5(contrasena);
-					System.out.println(contrasena_segura);
+					if(usuario.length()>1 && BaseDatos.existeNombre(usuario) == false) {
+						contrasena_state = 2;			// !!!! de momento cambia el estado a correcto pero hay que hacer que evalue el string y mire si es correcto o incorrecto
+						contrasena_segura = Hash.md5(contrasena);
+						System.out.println(contrasena_segura);
+						BaseDatos.insertarJugador(usuario, contrasena_segura);
+					}else {
+						contrasena_state = 3;
+					}
 				}	
 			}
 			
@@ -191,14 +200,13 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 				usuario = usuario + e.getKeyChar();
 				usuario = usuario.replaceAll("[^a-zA-Z0-9]", "");	// Elimina los caracteres que no sean letras o numeros
 				//System.out.println(usuario);
-				System.out.println(BaseDatos.existeNombre(usuario));
 			}
 			if (usuario != null && usuario.length() > 0 && e.getKeyCode() == 8 ) {	// Tecla de borrar (No nulo, mayor a 0 y  el codigo de la tecla borrar)
 				usuario = usuario.substring(0, usuario.length() - 1);	// Borra el último caracter
 		    }
 			if (e.getKeyCode() == 10) {		// Tecla enter
 				if(usuario.length()>1 && BaseDatos.existeNombre(usuario) == false) {
-					usuario_state = 2;				// !!!! de momento cambia el estado a correcto pero hay que hacer que evalue el string y mire si es correcto o incorrecto
+					usuario_state = 2;				
 				}else {
 					usuario_state = 3;
 				}
@@ -218,10 +226,14 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 				contrasena = contrasena.substring(0, contrasena.length() - 1);	// Borra el último caracter
 		    }
 			if (e.getKeyCode() == 10) {		// Tecla enter
-				contrasena_state = 2;				// !!!! de momento cambia el estado a correcto pero hay que hacer que evalue el string y mire si es correcto o incorrecto
-				contrasena_segura = Hash.md5(contrasena);
-				System.out.println(contrasena_segura);
-				BaseDatos.insertarJugador(usuario, contrasena_segura);
+				if(contrasena.length() >= 5) {
+					contrasena_state = 2;				
+					contrasena_segura = Hash.md5(contrasena);
+//					System.out.println(contrasena_segura);
+					BaseDatos.insertarJugador(usuario, contrasena_segura);
+				}else {
+					contrasena_state = 3;
+				}
 		    }
 			
 		}
