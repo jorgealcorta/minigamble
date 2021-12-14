@@ -1,24 +1,36 @@
 package minigamble;
 
+import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Robot;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Random;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 
-public class Game3 implements MouseListener {
+public class Game3 implements MouseListener , MouseMotionListener {
 
+	private Image lab1Img;
+	private ImageIcon lab1Icon;
+	
+	private Image lab2Img;
+	private ImageIcon lab2Icon;
+	
 	private Image bStartIMG_True;
 	private Image bStartIMG_False;
+	
 	
 	private ImageIcon bStart_false;		// boton Start
 	private ImageIcon bStart_true;
@@ -26,12 +38,19 @@ public class Game3 implements MouseListener {
 	
 	private Font customFontBot;
 	
+	
 	private int mox;				//Posicion en la que se presiona el raton
 	private int moy;
+	private int mdx;
+	private int mdy;
 	
 	
+	private ArrayList <Laberinto> allLabs = new ArrayList<Laberinto>();
+	private Laberinto thisLab;
 	
 	private int start = 1;
+	
+	Robot robot;
 	
 	public Game3(int dificultad) {
 	
@@ -39,6 +58,10 @@ public class Game3 implements MouseListener {
 		
 		bStart_false = new ImageIcon( Game.class.getResource("multimedia/red_button2.png").toURI().toURL() );
 		bStart_true = new ImageIcon( Game.class.getResource("multimedia/red_button3.png").toURI().toURL() );
+		
+		lab1Icon = new ImageIcon( Game.class.getResource("multimedia/laberintoPrueba.png").toURI().toURL() );
+		lab2Icon = new ImageIcon( Game.class.getResource("multimedia/laberintoPrueba2.png").toURI().toURL() );
+		
 		
 		} catch (Exception e1) {
 			e1.printStackTrace();
@@ -57,6 +80,36 @@ public class Game3 implements MouseListener {
 		bStartIMG_True = bStart_true.getImage();
 		bStartIMG_False = bStart_false.getImage();
 		
+		
+		lab1Img = lab1Icon.getImage();
+		lab2Img = lab2Icon.getImage();
+		
+		Laberinto lab1 = new Laberinto(lab1Img, 001 );
+		Laberinto lab2 = new Laberinto(lab1Img, 002 );
+
+		
+		allLabs.add(lab1);
+		allLabs.add(lab2);
+		
+		thisLab = getRandom(allLabs);		
+		
+		try {
+			robot = new Robot();
+		} catch (AWTException e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
+	
+	
+
+		
+	
+	public  Laberinto getRandom( ArrayList<Laberinto> array) {
+	    int rnd = new Random().nextInt(array.size());
+	    return array.get(rnd);
 	}
 	
 	
@@ -73,7 +126,6 @@ public class Game3 implements MouseListener {
 		}}
 	
 	
-
 	@Override
 	public void mousePressed(MouseEvent e) {
 		
@@ -101,8 +153,6 @@ public class Game3 implements MouseListener {
 		}
 	}
 
-
-
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		if(Game.estadoJuego == Game.ESTADO.Game3) {
@@ -122,7 +172,12 @@ public class Game3 implements MouseListener {
 			        }
 				}
 			bStart_state = false;
+			robot.mouseMove(100, 100);
 			start = 2;
+			
+			
+			getRandLab();
+			
 			
 			}
 			
@@ -131,7 +186,6 @@ public class Game3 implements MouseListener {
 			
 		}
 	}
-	
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -145,7 +199,32 @@ public class Game3 implements MouseListener {
 	public void mouseExited(MouseEvent e) {
 	}
 
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		if(Game.estadoJuego == Game.ESTADO.Game3 ) {
+			if(start==2) {
+				mdx = e.getX();
+				mdy = e.getY();
+				
+				if(Color.BLACK != robot.getPixelColor(mdx, mdy)) {
+					robot.mouseMove(600, 500);
+					
+				}
+							
+			}
+		}
+			
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+
+	}
 	
+	public void getRandLab() {
+		
+		
+	}
 	
 	public void render(Graphics g) {
 		
@@ -164,8 +243,29 @@ public class Game3 implements MouseListener {
 				g.drawString("Start", 547, 322);
 			}
 		}
+		
+		if (start==2) {
+			
+			g.drawImage(thisLab.getImage() ,0, 0, null);
+			
+			
+		}
 	
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

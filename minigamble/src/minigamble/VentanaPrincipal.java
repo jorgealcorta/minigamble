@@ -2,6 +2,7 @@ package minigamble;
 
 
 import java.awt.*;
+import java.io.File;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -22,6 +23,13 @@ public class VentanaPrincipal extends Canvas{
 		frame.setPreferredSize(new Dimension(1200,700));
 		frame.setMaximumSize(new Dimension(1200,700));
 		frame.setMinimumSize(new Dimension(1200,700));
+		
+		if (new File("minigamble.db").exists()) {
+			// Poner el parámetro a true si se quiere reiniciar la base de datos
+			BaseDatos.abrirConexion( "minigamble.db", false );  // Abrir base de datos existente
+		} else {
+			BaseDatos.abrirConexion( "minigamble.db", true );  // Crear base de datos con datos iniciales
+		}
 		
 		try {
 			logo = new ImageIcon( Game.class.getResource("multimedia/fichaFondoRecorte1.png").toURI().toURL() );
