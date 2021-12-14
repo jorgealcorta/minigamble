@@ -22,7 +22,7 @@ public class VentanaPrincipal extends Canvas{
 		frame.setPreferredSize(new Dimension(1200,700));
 		frame.setMaximumSize(new Dimension(1200,700));
 		frame.setMinimumSize(new Dimension(1200,700));
-		
+		BaseDatos.abrirConexion( "minigamble.db", true );
 		try {
 			logo = new ImageIcon( Game.class.getResource("multimedia/fichaFondoRecorte1.png").toURI().toURL() );
 			frame.setIconImage(logo.getImage());
