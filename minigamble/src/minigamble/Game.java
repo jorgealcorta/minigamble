@@ -36,7 +36,7 @@ public class Game extends Canvas implements Runnable{
 		Game1, // PAREJAS
 		Game2, // SIMON SAYS
 		Game3, // LABERINTO
-		Game4,
+		Game4, // DIANAS
 		Game5,
 		Game6
 	};

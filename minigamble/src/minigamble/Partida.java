@@ -36,7 +36,7 @@ public class Partida {
 			System.out.println(rand);
 		}
 		
-		rand=2;
+		rand=3; //PARA HACER PRUEBAS, LUEGO BORRARRRRRRRRRRRRRRRRRRRRRRRR
 
 		
 		if(rand == 0) {
@@ -44,16 +44,20 @@ public class Partida {
 			Game.estadoJuego = minijuegos.get(rand);
 			Game.eventoRaton();
 						
-		} else if( rand==1) {
+		} else if(rand==1) {
 			Game.game2 = new Game2(puntuacionGeneral);
 			Game.estadoJuego = minijuegos.get(rand);
 			Game.eventoRaton();
 			
-		} else if( rand==2) {
+		} else if(rand==2) {
 			Game.game3 = new Game3(puntuacionGeneral);
 			Game.estadoJuego = minijuegos.get(rand);
 			Game.eventoRaton();
 			
+		} else if(rand==3) {
+			Game.game4 = new Game4(puntuacionGeneral);
+			Game.estadoJuego = minijuegos.get(rand);
+			Game.eventoRaton();
 		}
 		
 		

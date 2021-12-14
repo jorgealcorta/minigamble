@@ -136,9 +136,9 @@ public class Game4  implements MouseMotionListener, MouseListener{ //Dianas
 		
 		//g.drawImage(Image img, int x, int y, int width, int height, ImageObserver observer);
 		
-		for(Diana d : dianasActivas) {
-			g.drawImage(diana_IMG, d.getX(), d.getY(), (int)d.getSize(), (int)d.getSize(), null);
-		}
+//		for(Diana d : dianasActivas) {
+//			g.drawImage(diana_IMG, d.getX(), d.getY(), (int)d.getSize(), (int)d.getSize(), null);
+//		}
 		g.drawImage(diana_IMG, 200, 200, 128, 128, null);		
 		g.drawImage(mira_IMG, mox-16, moy-16, 32, 32, null);
 	}
