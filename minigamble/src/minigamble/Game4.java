@@ -5,15 +5,22 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
+
 
 //Voy a hacer un arraylist que guarde todas las coordenadas (arraylist de 2) de todas las dianas.
 //Si al hacer click el arraylist de las coordenadas concuerda con alguna que esté en el rango de las dianas
@@ -22,7 +29,17 @@ import javax.swing.ImageIcon;
 //diana nueva no se puede dibujar dentro de diana existente.
 
 
-public class Game4  implements MouseMotionListener, MouseListener{ //Dianas
+public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
+	
+	private Image bStartIMG_True;
+	private Image bStartIMG_False;
+	
+	
+	private ImageIcon bStart_false;		// boton Start
+	private ImageIcon bStart_true;
+	private boolean bStart_state = false;
+	
+	private int start = 1; //1=START, 2= JUEGO
 	
 	private Font customFontBot;
 	private Font customFontFin;
@@ -36,16 +53,31 @@ public class Game4  implements MouseMotionListener, MouseListener{ //Dianas
 	private Image dianaRota_IMG;
 	private Image mira_IMG;
 	
-	private int start = 1;
-	
+	private ArrayList<Diana> dianasCreadas = new ArrayList<Diana>();
 	private ArrayList<Diana> dianasActivas = new ArrayList<Diana>();
-	
+	private ArrayList<Diana> dianasRotas = new ArrayList<Diana>();
+
 	private int mox;				//Posicion en la que se presiona el raton
 	private int moy;
 	private int mdx;
 	private int mdy;
 	
 	public Game4(int dificultad){
+		
+		try {
+			//Cargo todas las imagenes como iconos
+			
+			bStart_false = new ImageIcon( Game.class.getResource("multimedia/red_button2.png").toURI().toURL() );
+			bStart_true = new ImageIcon( Game.class.getResource("multimedia/red_button3.png").toURI().toURL() );
+			
+			diana = new ImageIcon(Game.class.getResource("multimedia/dianas/diana.png").toURI().toURL() );
+			dianaRota = new ImageIcon(Game.class.getResource("multimedia/dianas/dianaRota.png").toURI().toURL() );
+			
+			mira = new ImageIcon(Game.class.getResource("multimedia/mira.png").toURI().toURL() );
+			
+		}catch(Exception e1) {
+			e1.printStackTrace();
+		}
 		
 		try {
 			customFontBot = Font.createFont(Font.TRUETYPE_FONT, Inicio.class.getResourceAsStream("fuentes/fuenteBot.ttf"));
@@ -58,23 +90,15 @@ public class Game4  implements MouseMotionListener, MouseListener{ //Dianas
 		
 		try {   
 			customFontFin = Font.createFont(Font.TRUETYPE_FONT, Inicio.class.getResourceAsStream("fuentes/fuente.ttf"));
-			customFontFin = customFontFin.deriveFont(Font.PLAIN,100);				
+			customFontFin = customFontFin.deriveFont(Font.PLAIN,100);
 		}catch(Exception e){	
 			System.out.println("Problema con la fuente Minigamble");
 		}
 		
-		try {
-			//Cargo todas las imagenes como iconos
-			diana = new ImageIcon(Game.class.getResource("multimedia/dianas/diana.png").toURI().toURL() );
-			dianaRota = new ImageIcon(Game.class.getResource("multimedia/dianas/dianaRota.png").toURI().toURL() );
-			
-			mira = new ImageIcon(Game.class.getResource("multimedia/mira.png").toURI().toURL() );
-			
-		}catch(Exception e1) {
-			e1.printStackTrace();
-		}
-		
 		//Paso todos los iconos a imágenes
+		
+		bStartIMG_True = bStart_true.getImage();
+		bStartIMG_False = bStart_false.getImage();
 		
 		diana_IMG = diana.getImage();
 		dianaRota_IMG = dianaRota.getImage();
@@ -82,11 +106,22 @@ public class Game4  implements MouseMotionListener, MouseListener{ //Dianas
 		mira_IMG = mira.getImage();
 		
 		//Ir creando dianas
+		//xmin=0
+		//xmax=1200-size
+		//ymin=0
+		//ymax=660-size
+		//sizemin=200
+		//sizemax=300
+		//meter x y restringidas para que no se solapen?
 		
-		while(start == 1) {
-			dianasActivas.add(new Diana(300, 300, 300));
+		for(int i=0; i<5; i++) {
+			//Min + (int)(Math.random() * ((Max - Min) + 1))
+			//Diana dRandom = new Diana(30 + (int)(Math.random() * ((1170) + 1)), 30 + (int)(Math.random() * ((670) + 1)), 20 + (int)(Math.random() * ((50) + 1)));
+			int rSize = (int)(Math.random() * 300) + 50;
+			Diana dRandom = new Diana((int)(Math.random() * (1200 - rSize + 1)), (int)(Math.random() * (660-rSize + 1)), rSize, false);
+			dianasCreadas.add(dRandom);
 		}
-		
+				
 	}
 	
 	private void delayMS(int n) {
@@ -99,28 +134,110 @@ public class Game4  implements MouseMotionListener, MouseListener{ //Dianas
 		
 	}
 
+	
+	public void runThreadActivas(){
+		ThreadDianasActivas da = new ThreadDianasActivas(dianasCreadas, dianasActivas);
+		Thread hda = new Thread(da);
+		hda.start();
+	}
+	
+	public boolean mouseOver(int mx, int my, int x, int y, int width, int heigth) {   // devuelve true si el raton ha sido presionado dentro de un cuadrado 
+		
+		if(mx > x && mx < x + width) {
+			if(my > y && my < y + heigth) {
+				return true;			
+			}else {
+				return false;
+			}
+		}else {
+			return false;
+		}}
+
 	@Override
-	public void mouseClicked(MouseEvent e) {		
+	public void mouseClicked(MouseEvent e) {
+		
+		if(start == 2) {
+			for(Diana d : dianasActivas) {
+				if(e.getX() >= d.getX() && e.getX() <= d.getX() + d.getSize() && e.getY() >= d.getY() && e.getY() <= d.getY() + d.getSize()) {
+					System.out.println("acierto");
+					d.setRota(true);
+					dianasRotas.add(d);
+					//dianasActivas.remove(d);
+				}else{
+					System.out.println("miss");
+				}
+			}
+		}
 	}
 
 	@Override
-	public void mousePressed(MouseEvent e) {		
+	public void mousePressed(MouseEvent e) {
+		
+		if(Game.estadoJuego==Game.ESTADO.Game4) {
+			mox = e.getX();	// guarda la posicion en la que se presiona
+			moy = e.getY();
+			
+			String filePath = new File("").getAbsolutePath();				// Ruta hasta el proyecto
+			String s1_filePath = filePath.concat("/minigamble/src/minigamble/sonido/click1.wav");	//ContinuaciÃ³n de la ruta hasta el archivo de audio 1
+			
+			
+			
+			if( mouseOver(mox, moy, 500, 290, 190, 50) && start == 1 ){	             // Caso start == 1
+				bStart_state = true;
+				try {																				
+			        Clip sonido = AudioSystem.getClip();
+					AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s1_filePath));
+			        sonido.open(ais);
+			        sonido.start();
+		        }catch(Exception e2) {
+		        	System.out.println("error");
+		        }}	
+			
+			
+		}
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
+		if(Game.estadoJuego == Game.ESTADO.Game4) {
+			
+			String filePath = new File("").getAbsolutePath();										// Ruta hasta el proyecto
+			String s2_filePath = filePath.concat("/minigamble/src/minigamble/sonido/click2.wav");	//Continuacion de la ruta hasta el archivo de audio 2
+		
+			if (start == 1) {// caso start == 1
+				if(bStart_state == true){ 
+					try {																				
+				        Clip sonido = AudioSystem.getClip();
+						AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s2_filePath));
+				        sonido.open(ais);
+				        sonido.start();
+			        }catch(Exception e2) {
+			        	System.out.println("error");
+			        }
+				}
+			bStart_state = false;
+			start = 2;
+			System.out.println(dianasCreadas);
+			runThreadActivas();
+
+			}
+			
+		}
+		
 	}
 
 	@Override
-	public void mouseEntered(MouseEvent e) {		
+	public void mouseEntered(MouseEvent e) {
 	}
 
 	@Override
-	public void mouseExited(MouseEvent e) {		
+	public void mouseExited(MouseEvent e) {
 	}
 
 	@Override
-	public void mouseDragged(MouseEvent e) {		
+	public void mouseDragged(MouseEvent e) {
+		mox = e.getX();	// guarda la posicion en la esta el raton
+		moy = e.getY();
 	}
 
 	@Override
@@ -134,15 +251,34 @@ public class Game4  implements MouseMotionListener, MouseListener{ //Dianas
 		g.setColor(Color.decode("#208b3a"));
 		g.fillRect(0, 0, 1200, 700);
 		
-		//g.drawImage(Image img, int x, int y, int width, int height, ImageObserver observer);
+		if(start==1) {
+			g.setFont(customFontBot);
+			g.setColor(Color.BLACK);
+			if(bStart_state == true) {					                   //caso start = 1
+				g.drawImage(bStartIMG_True, 500, 294, null);
+				g.drawString("Start", 540, 326);
+			}else{
+				g.drawImage(bStartIMG_False, 500, 290, null);
+				g.drawString("Start", 547, 322);
+			}
+		}
 		
-//		for(Diana d : dianasActivas) {
-//			g.drawImage(diana_IMG, d.getX(), d.getY(), (int)d.getSize(), (int)d.getSize(), null);
-//		}
-		g.drawImage(diana_IMG, 200, 200, 128, 128, null);		
-		g.drawImage(mira_IMG, mox-16, moy-16, 32, 32, null);
+		if(start == 2) {
+			
+			//g.drawImage(Image img, int x, int y, int width, int height, ImageObserver observer);
+			
+			for(Diana d : dianasActivas) {
+				if(!dianasRotas.contains(d)) {
+					g.drawImage(diana_IMG, d.getX(), d.getY(), (int)d.getSize(), (int)d.getSize(), null);
+				}else {
+					g.drawImage(dianaRota_IMG, d.getX(), d.getY(), (int)d.getSize(), (int)d.getSize(), null);
+				}
+			}
+			
+			g.drawImage(mira_IMG, mox-16, moy-16, 32, 32, null);
+			
+		}
+
 	}
-	
-	
 
 }

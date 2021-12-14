@@ -71,6 +71,7 @@ public class Game extends Canvas implements Runnable{
 			game.addMouseListener(game3);
 		}else if(estadoJuego == ESTADO.Game4) {
 			game.addMouseListener(game4);
+			game.addMouseMotionListener(game4);
 		}
 	}
 	
@@ -166,6 +167,7 @@ public class Game extends Canvas implements Runnable{
 			game3.render(g);
 			break;
 		case Game4:
+			game4.render(g);
 			break;
 		case Game5:
 			break;
