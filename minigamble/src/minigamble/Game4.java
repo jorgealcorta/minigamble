@@ -55,7 +55,7 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 	
 	private ArrayList<Diana> dianasCreadas = new ArrayList<Diana>();
 	private ArrayList<Diana> dianasActivas = new ArrayList<Diana>();
-	private ArrayList<Diana> dianasRotas = new ArrayList<Diana>();
+	private ArrayList<Diana> dianasRotas = new ArrayList<Diana>(); // Contiene todas las dianas que ya se han disparado, y ha pasado el tiempo para que desaparezcan mediante el hilo.
 
 	private int mox;				//Posicion en la que se presiona el raton
 	private int moy;
@@ -156,18 +156,6 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		
-		if(start == 2) {
-			for(Diana d : dianasActivas) {
-				if(e.getX() >= d.getX() && e.getX() <= d.getX() + d.getSize() && e.getY() >= d.getY() && e.getY() <= d.getY() + d.getSize()) {
-					System.out.println("acierto");
-					d.setRota(true);
-					dianasRotas.add(d);
-					//dianasActivas.remove(d);
-				}else{
-					System.out.println("miss");
-				}
-			}
-		}
 	}
 
 	@Override
@@ -179,6 +167,7 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 			
 			String filePath = new File("").getAbsolutePath();				// Ruta hasta el proyecto
 			String s1_filePath = filePath.concat("/minigamble/src/minigamble/sonido/click1.wav");	//Continuación de la ruta hasta el archivo de audio 1
+//			String escopeta_filePath = filePath.concat()
 			
 			
 			
@@ -191,7 +180,31 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 			        sonido.start();
 		        }catch(Exception e2) {
 		        	System.out.println("error");
-		        }}	
+		        }}
+			
+			if(start == 2) {
+				for(Diana d : dianasActivas) {
+					if(e.getX() >= d.getX() && e.getX() <= d.getX() + d.getSize() && e.getY() >= d.getY() && e.getY() <= d.getY() + d.getSize() && !d.isRota()) {
+						System.out.println("acierto");
+						d.setRota(true);
+						
+						ThreadBorrarDiana bd = new ThreadBorrarDiana(d, dianasActivas, dianasRotas);
+						Thread hbd = new Thread(bd);
+						hbd.start();
+						
+						try {																				
+					        Clip sonido = AudioSystem.getClip();
+							AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s1_filePath));
+					        sonido.open(ais);
+					        sonido.start();
+				        }catch(Exception e2) {
+				        	System.out.println("error");
+				        }
+					}else{
+						System.out.println("miss");
+					}
+				}
+			}
 			
 			
 		}
@@ -236,13 +249,13 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		mox = e.getX();	// guarda la posicion en la esta el raton
+		mox = e.getX();	// guarda la posicion en la que esta el raton
 		moy = e.getY();
 	}
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		mox = e.getX();	// guarda la posicion en la esta el raton
+		mox = e.getX();	// guarda la posicion en la que esta el raton
 		moy = e.getY();
 	}
 	
@@ -268,13 +281,14 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 			//g.drawImage(Image img, int x, int y, int width, int height, ImageObserver observer);
 			
 			for(Diana d : dianasActivas) {
-				if(!dianasRotas.contains(d)) {
+				if(!d.isRota()) {
 					g.drawImage(diana_IMG, d.getX(), d.getY(), (int)d.getSize(), (int)d.getSize(), null);
-				}else {
+				}else if(d.isRota() && !dianasRotas.contains(d)){
 					g.drawImage(dianaRota_IMG, d.getX(), d.getY(), (int)d.getSize(), (int)d.getSize(), null);
+				}else{
 				}
 			}
-			
+
 			g.drawImage(mira_IMG, mox-16, moy-16, 32, 32, null);
 			
 		}
