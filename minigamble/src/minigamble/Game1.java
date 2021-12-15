@@ -368,8 +368,7 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 		}
 	}
 	
-	
-	
+		
 	public void mousePressed(MouseEvent e) {
 		if(Game.estadoJuego == Game.ESTADO.Game1) {				//si se esta en otro estado no hace nada
 			

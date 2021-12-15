@@ -47,6 +47,12 @@ public class Game3 implements MouseListener , MouseMotionListener {
 	private int mdy;
 	
 	
+	private int startX;
+	private int startY;
+	
+	private Color pathColor;
+	
+	
 	private ArrayList <Laberinto> allLabs = new ArrayList<Laberinto>();
 	private Laberinto thisLab;
 	
@@ -165,6 +171,7 @@ public class Game3 implements MouseListener , MouseMotionListener {
 			String s2_filePath = filePath.concat("/minigamble/src/minigamble/sonido/click2.wav");	//Continuacio n de la ruta hasta el archivo de audio 2
 		
 			if (start == 1) {                                          // caso start == 1
+				
 				if(bStart_state == true){ 
 					try {																				
 				        Clip sonido = AudioSystem.getClip();
@@ -174,19 +181,23 @@ public class Game3 implements MouseListener , MouseMotionListener {
 			        }catch(Exception e2) {
 			        	System.out.println("error");
 			        }
+					
+					
+				if( mouseOver(mox, moy, 575, 290, 50, 50)){	
+					
+					startX = e.getXOnScreen();
+					startY = e.getYOnScreen();
+					robot.mouseMove(startX+500, startY+290);
+					
+					start=2;
+					
+					pathColor=robot.getPixelColor(startX+500, startY+290);
+					
 				}
-			bStart_state = false;
-			
-
-			
-			
-			robot.mouseMove(100,100);
-			start = 2;
-			
-			
-			getRandLab();
-			
-			
+				
+				bStart_state = false;
+				}
+							
 			}
 			
 			
@@ -211,11 +222,12 @@ public class Game3 implements MouseListener , MouseMotionListener {
 	public void mouseMoved(MouseEvent e) {
 		if(Game.estadoJuego == Game.ESTADO.Game3 ) {
 			if(start==2) {
-				mdx = e.getX();
-				mdy = e.getY();
+				mdx = e.getXOnScreen();
+				mdy = e.getYOnScreen();
 				
-				if(Color.BLACK != robot.getPixelColor(mdx, mdy)) {
-					robot.mouseMove(600, 500);
+				if(pathColor != robot.getPixelColor(mdx, mdy)) {
+					
+					robot.mouseMove(startX, startY);
 					
 				}
 							
@@ -226,13 +238,22 @@ public class Game3 implements MouseListener , MouseMotionListener {
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-
+		if(Game.estadoJuego == Game.ESTADO.Game3 ) {
+			if(start==1) {
+				
+			
+			
+			mdx = e.getX();
+			mdy = e.getY();
+			
+			if( mouseOver(mdx, mdy, 575, 290, 50, 50)== false && start == 1){	// caso start == 1
+				bStart_state = false;
+			}
+			
+			}
+		}
 	}
 	
-	public void getRandLab() {
-		
-		
-	}
 	
 	public void render(Graphics g) {
 		
@@ -244,39 +265,21 @@ public class Game3 implements MouseListener , MouseMotionListener {
 			g.setFont(customFontBot);
 			g.setColor(Color.BLACK);
 			if(bStart_state == true) {					                   //caso start = 1
-				g.drawImage(bStartIMG_True, 500, 294, null);
-				g.drawString("Start", 540, 326);
+				g.drawImage(bStartIMG_True, 575, 294, 50 , 50 ,   null);
+				//g.drawString("Start", 540, 326);
 			}else {									
-				g.drawImage(bStartIMG_False, 500, 290, null);
-				g.drawString("Start", 547, 322);
+				g.drawImage(bStartIMG_False, 575, 290, 50 , 50,  null);
+				//g.drawString("Start", 547, 322);
 			}
 			
-			double point = Game.ventana.getHeight();
-			System.out.println(point);
+			
 		}
 		
-		if (start==2) {
-			
+		if (start==2) {			
 			g.drawImage(thisLab.getImage() ,0, 0, null);
-			
-			
 		}
 	
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

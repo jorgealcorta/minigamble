@@ -76,6 +76,7 @@ public class Game extends Canvas implements Runnable{
 			game.addKeyListener(game2);
 		}else if(estadoJuego == ESTADO.Game3) {
 			game.addMouseListener(game3);
+			game.addMouseMotionListener(game3);
 		}else if(estadoJuego == ESTADO.Game4) {
 			game.addMouseListener(game4);
 			game.addMouseMotionListener(game4);
