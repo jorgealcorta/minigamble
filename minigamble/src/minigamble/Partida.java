@@ -14,7 +14,7 @@ public class Partida {
 	public static ArrayList<Minijuego> minisJugados = new ArrayList<Minijuego>();
 		
 	
-	public Partida(int puntuacion, int vidasRestadas, String idUsuario, Minijuego miniJugado) { //meter arraylist como atributo
+	public Partida(int puntuacion, int vidasRestadas, String idUsuario, Minijuego miniJugado, String jugador, int idPartida) { //meter arraylist como atributo
 		
 		minisJugados.add(miniJugado);
 		puntuacionGeneral += puntuacion;
@@ -36,11 +36,13 @@ public class Partida {
 			System.out.println(rand);
 		}
 		
+
 		rand=2 ; //PARA HACER PRUEBAS, LUEGO BORRARRRRRRRRRRRRRRRRRRRRRRRR
+
 
 		
 		if(rand == 0) {
-			Game.game1 = new Game1(puntuacionGeneral);
+			Game.game1 = new Game1(puntuacionGeneral, jugador, idPartida);
 			Game.estadoJuego = minijuegos.get(rand);
 			Game.eventoRaton();
 						
