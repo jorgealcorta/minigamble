@@ -17,6 +17,8 @@ public class Game extends Canvas implements Runnable{
 	public static Game3 game3;
 	public static Game4 game4;
 	
+	public static VentanaPrincipal ventana;
+	
 	private static final long serialVersionUID = -5339514091919298198L;
 	Inicio inicio = new Inicio(); 				// Pantalla inicio
 	StartScreen start = new StartScreen();
@@ -45,7 +47,7 @@ public class Game extends Canvas implements Runnable{
 	
 	
 	public Game() {
-		new VentanaPrincipal("Minigamble!", this);
+		ventana = new VentanaPrincipal("Minigamble!", this) ;
 		this.addMouseListener(inicio); 				// anyado un mouseListener a la pantalla inicio
 		this.addMouseMotionListener(inicio);
 		this.addMouseListener(start); 				// anyado un mouseListener a la pantalla start
@@ -124,6 +126,8 @@ public class Game extends Canvas implements Runnable{
 			if(System.currentTimeMillis() - timer > 1000) { // Escribe los FPS una vez cada segundo.
 				timer += 1000; // Si la diferencia entre el tiempo real y el timer es de mas de 1000ms, implica que ha pasado un segundo.
 				System.out.println("FPS : " + frames + " " + estadoJuego); // Printea los frames que se han registrado en ese segundo.
+				System.out.println(Game.ventana.getLocation().getX());
+				
 				frames = 0; // Resetea frames.
 			}
 		}

@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Point;
 import java.awt.Robot;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -14,6 +15,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Vector;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -54,6 +56,7 @@ public class Game3 implements MouseListener , MouseMotionListener {
 	
 	public Game3(int dificultad) {
 	
+
 		try {
 		
 		bStart_false = new ImageIcon( Game.class.getResource("multimedia/red_button2.png").toURI().toURL() );
@@ -102,12 +105,10 @@ public class Game3 implements MouseListener , MouseMotionListener {
 		
 	}
 	
-	
-	
+		  
 
-		
 	
-	public  Laberinto getRandom( ArrayList<Laberinto> array) {
+	public Laberinto getRandom( ArrayList<Laberinto> array) {
 	    int rnd = new Random().nextInt(array.size());
 	    return array.get(rnd);
 	}
@@ -132,6 +133,9 @@ public class Game3 implements MouseListener , MouseMotionListener {
 		if(Game.estadoJuego==Game.ESTADO.Game3) {
 			mox = e.getX();	// guarda la posicion en la que se presiona
 			moy = e.getY();
+			
+//			System.out.println(Game.this.getX());
+//			System.out.println(Game.this.getY());
 			
 			String filePath = new File("").getAbsolutePath();				// Ruta hasta el proyecto
 			String s1_filePath = filePath.concat("/minigamble/src/minigamble/sonido/click1.wav");	//Continuación de la ruta hasta el archivo de audio 1
@@ -172,7 +176,12 @@ public class Game3 implements MouseListener , MouseMotionListener {
 			        }
 				}
 			bStart_state = false;
-			robot.mouseMove(100, 100);
+			
+			double point = Game.ventana.getLocation().getX();
+			System.out.println(point);
+			
+			
+			robot.mouseMove(100,100);
 			start = 2;
 			
 			
@@ -242,6 +251,8 @@ public class Game3 implements MouseListener , MouseMotionListener {
 				g.drawImage(bStartIMG_False, 500, 290, null);
 				g.drawString("Start", 547, 322);
 			}
+			
+
 		}
 		
 		if (start==2) {
