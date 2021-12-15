@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Vector;
+import java.util.concurrent.TimeUnit;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -120,6 +121,16 @@ public class Game3 implements MouseListener , MouseMotionListener {
 	}
 	
 	
+	private void delayMS(int n) {
+		try {
+			TimeUnit.MILLISECONDS.sleep(n);
+		} catch (InterruptedException b) {
+			// TODO Auto-generated catch block
+			b.printStackTrace();
+		}
+		
+	}
+	
 	public boolean mouseOver(int mx, int my, int x, int y, int width, int heigth) {   // devuelve true si el raton ha sido presionado dentro de un cuadrado 
 		
 		if(mx > x && mx < x + width) {
@@ -185,13 +196,16 @@ public class Game3 implements MouseListener , MouseMotionListener {
 					
 				if( mouseOver(mox, moy, 575, 290, 50, 50)){	
 					
-					startX = e.getXOnScreen();
-					startY = e.getYOnScreen();
-					robot.mouseMove(startX+500, startY+290);
+					startX = e.getXOnScreen()+500;
+					startY = e.getYOnScreen()+290;
+					robot.mouseMove(e.getXOnScreen()+500, e.getYOnScreen()+290);
 					
 					start=2;
 					
-					pathColor=robot.getPixelColor(startX+500, startY+290);
+					pathColor=robot.getPixelColor(startX, startY);
+					
+				
+					
 					
 				}
 				
@@ -225,10 +239,17 @@ public class Game3 implements MouseListener , MouseMotionListener {
 				mdx = e.getXOnScreen();
 				mdy = e.getYOnScreen();
 				
-				if(pathColor != robot.getPixelColor(mdx, mdy)) {
+				if(pathColor.getRGB() != robot.getPixelColor(mdx, mdy).getRGB()) {
+					
+					System.out.println("not in your color");                                                      //--------------------------quitar jst4tests
+					System.out.println("your psition now; x: " +e.getXOnScreen()+" y: "+e.getYOnScreen());
+					System.out.println("color now is"+ robot.getPixelColor(e.getXOnScreen(), e.getYOnScreen()));	
+					System.out.println("Sx: "+startX+ ", Sy:"+startY);
+					System.out.println("Your color is"+ pathColor);
+					
 					
 					robot.mouseMove(startX, startY);
-					
+
 				}
 							
 			}
@@ -276,7 +297,9 @@ public class Game3 implements MouseListener , MouseMotionListener {
 		}
 		
 		if (start==2) {			
-			g.drawImage(thisLab.getImage() ,0, 0, null);
+			g.drawImage(thisLab.getImage() ,0, 0,1190,665,  null);
+			
+			
 		}
 	
 	}
