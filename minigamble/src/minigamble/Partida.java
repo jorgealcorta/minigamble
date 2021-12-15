@@ -36,7 +36,7 @@ public class Partida {
 			System.out.println(rand);
 		}
 		
-		rand=3 ; //PARA HACER PRUEBAS, LUEGO BORRARRRRRRRRRRRRRRRRRRRRRRRR
+		rand=2 ; //PARA HACER PRUEBAS, LUEGO BORRARRRRRRRRRRRRRRRRRRRRRRRR
 
 		
 		if(rand == 0) {

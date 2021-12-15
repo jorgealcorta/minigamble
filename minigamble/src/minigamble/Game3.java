@@ -177,8 +177,7 @@ public class Game3 implements MouseListener , MouseMotionListener {
 				}
 			bStart_state = false;
 			
-			double point = Game.ventana.getLocation().getX();
-			System.out.println(point);
+
 			
 			
 			robot.mouseMove(100,100);
@@ -252,7 +251,8 @@ public class Game3 implements MouseListener , MouseMotionListener {
 				g.drawString("Start", 547, 322);
 			}
 			
-
+			double point = Game.ventana.getHeight();
+			System.out.println(point);
 		}
 		
 		if (start==2) {
