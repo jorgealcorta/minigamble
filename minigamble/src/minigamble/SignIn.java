@@ -245,6 +245,7 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 				//System.out.println(e);
 				usuario = usuario + e.getKeyChar();
 				usuario = usuario.replaceAll("[^a-zA-Z0-9]", "");	// Elimina los caracteres que no sean letras o numeros
+				usuario = usuario.toLowerCase();
 				//System.out.println(usuario);
 			}
 			if (usuario != null && usuario.length() > 0 && e.getKeyCode() == 8 ) {	// Tecla de borrar (No nulo, mayor a 0 y  el codigo de la tecla borrar)

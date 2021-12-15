@@ -1,6 +1,7 @@
 package minigamble;
 
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
@@ -9,6 +10,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.io.File;
+import java.io.IOException;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -40,6 +42,9 @@ public class LogIn implements MouseMotionListener, MouseListener, KeyListener{
 	
 	private Image bStartIMG_false;
 	private Image bStartIMG_true;
+	
+	private Font customFontBot;
+
 	
 	private int usuario_state = 1;		// Estado del usuario -> 1:defecto, 2:Correcto, 3:incorrecto, 0:Habilitado para escribir
 	private int contrasena_state = 1;
@@ -94,6 +99,14 @@ public class LogIn implements MouseMotionListener, MouseListener, KeyListener{
 		bStartIMG_true = bStart_true.getImage();
 		
 		texto = new Font("arial", 1 ,30); //Fuente del campo de texto
+		
+		try {
+			customFontBot = Font.createFont(Font.TRUETYPE_FONT, Inicio.class.getResourceAsStream("fuentes/fuenteBot.ttf"));
+			customFontBot=customFontBot.deriveFont(Font.PLAIN,20);
+		} catch (FontFormatException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 
@@ -249,6 +262,7 @@ public class LogIn implements MouseMotionListener, MouseListener, KeyListener{
 				//System.out.println(e);
 				usuario = usuario + e.getKeyChar();
 				usuario = usuario.replaceAll("[^a-zA-Z0-9]", "");	// Elimina los caracteres que no sean letras o numeros
+				usuario = usuario.toLowerCase();
 				//System.out.println(usuario);
 			}
 			if (usuario != null && usuario.length() > 0 && e.getKeyCode() == 8 ) {	// Tecla de borrar (No nulo, mayor a 0 y  el codigo de la tecla borrar)
@@ -344,33 +358,34 @@ public class LogIn implements MouseMotionListener, MouseListener, KeyListener{
 		g.drawImage(backgroundIMG, 0, 0, null);   // Dibuja el fondo
 
 		g.setFont(texto);
+		g.setFont(customFontBot);
 		if(usuario_state == 1) {									// Dibuja la imagen texto por defecto y texto del string usuario
 			g.drawImage(textIMG_grey, 500, 194, null);
-			g.drawString("User", 507, 227);			
+			g.drawString("User", 554, 227);			
 		}else if(usuario_state == 2) {								// Dibuja la imagen texto correcto y texto del string usuario
 			g.drawImage(textIMG_green, 500, 194, null);		
-			g.drawString(usuario, 507, 227);		
+			g.drawString(usuario, 517, 227);		
 		}else if(usuario_state == 3) {								// Dibuja la imagen texto incorrecto y texto del string usuario
 			g.drawImage(textIMG_red, 500, 194, null);		
-			g.drawString(usuario, 507, 227);		
+			g.drawString(usuario, 517, 227);		
 		}else {													// Dibuja la imagen texto habilitado y texto del string usuario
 			g.drawImage(textIMG_write, 500, 194, null);		
-			g.drawString(usuario, 507, 227);		
+			g.drawString(usuario, 517, 227);		
 		}
 		
 		if(usuario_state == 2) {
 			if(contrasena_state == 1) {									// Dibuja la imagen texto por defecto y texto del string usuario
 				g.drawImage(textIMG_grey, 500, 294, null);
-				g.drawString("Password", 507, 327);			
+				g.drawString("Password", 510, 327);			
 			}else if(contrasena_state == 2) {								// Dibuja la imagen texto correcto y texto del string usuario
 				g.drawImage(textIMG_green, 500, 294, null);		
-				g.drawString(contrasena_oculta, 507, 327);		
+				g.drawString(contrasena_oculta, 515, 327);		
 			}else if(contrasena_state == 3) {								// Dibuja la imagen texto incorrecto y texto del string usuario
 				g.drawImage(textIMG_red, 500, 294, null);		
-				g.drawString(contrasena_oculta, 507, 327);		
+				g.drawString(contrasena_oculta, 515, 327);		
 			}else {													// Dibuja la imagen texto habilitado y texto del string usuario
 				g.drawImage(textIMG_write, 500, 294, null);		
-				g.drawString(contrasena_oculta, 507, 327);		
+				g.drawString(contrasena_oculta, 515, 327);		
 			}
 		}
 		
