@@ -274,6 +274,7 @@ public class LogIn implements MouseMotionListener, MouseListener, KeyListener{
 			}
 			if (contrasena != null && contrasena.length() > 0 && e.getKeyCode() == 8 ) {	// Tecla de borrar (No nulo, mayor a 0 y  el codigo de la tecla borrar)
 				contrasena = contrasena.substring(0, contrasena.length() - 1);	// Borra el último caracter
+				contrasena_oculta = contrasena.replaceAll("[!(^a-zA-Z0-9)]", "*");	// Elimina los caracteres que no sean letras o numeros
 		    }
 			if (e.getKeyCode() == 10) {		// Tecla enter
 				if(contrasena.length() >= 5) {
