@@ -213,10 +213,11 @@ public class StartScreen implements MouseMotionListener, MouseListener{
 		        }catch(Exception e2) {
 		        	System.out.println("error");
 		        }
+				Game.estadoJuego = Game.ESTADO.LogIn;
 			}
 			
 			if(bSignUp_state == true){ // si se ha presionado y soltado encima del segundo boton termina el programa y suena
-				Game.estadoJuego = Game.ESTADO.SignIn;			//Si se presiona el boton de back se cambia el estado a Inicio
+										//Si se presiona el boton de back se cambia el estado a Inicio
 				try {																				//Reproduce el archivo de sonido 2
 			        Clip sonido = AudioSystem.getClip();
 					AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s2_filePath));
@@ -225,6 +226,7 @@ public class StartScreen implements MouseMotionListener, MouseListener{
 		        }catch(Exception e2) {
 		        	System.out.println("error");
 		        }
+				Game.estadoJuego = Game.ESTADO.SignIn;	
 				
 			}
 			

@@ -15,7 +15,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 
-public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
+public class LogIn implements MouseMotionListener, MouseListener, KeyListener{
 	
 	private ImageIcon background;	// Fondo
 	
@@ -61,7 +61,7 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 	private int mdx;
 	private int mdy;
 	
-	public SignIn() {
+	public LogIn() {
 		
 		try {
 			background = new ImageIcon( Game.class.getResource("multimedia/fondoInicioRecortado.png").toURI().toURL() );			//Cargo todas las imagenes como iconos
@@ -101,7 +101,7 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 	}
 	
 	public void mousePressed(MouseEvent e) {
-		if(Game.estadoJuego == Game.ESTADO.SignIn) {
+		if(Game.estadoJuego == Game.ESTADO.LogIn) {
 			mox = e.getX();	// guarda la posicion en la que se presiona
 			moy = e.getY();
 			
@@ -136,10 +136,10 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 		        }catch(Exception e2) {
 		        	System.out.println("error");
 		        }
-				}
+			}
 			
 			if( !mouseOver(mox, moy, 500, 195, 190, 45) ){	// si se presiona fuera del campo de texto
-				if(usuario.length()>1 && BaseDatos.existeNombre(usuario) == false) {
+				if(usuario.length()>1 && BaseDatos.existeNombre(usuario) == true) {
 					usuario_state = 2;				// !!!! de momento cambia el estado a correcto pero hay que hacer que evalue el string y mire si es correcto o incorrecto
 				}else {
 					usuario_state = 3;
@@ -163,9 +163,13 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 					}
 				
 				if( !mouseOver(mox, moy, 500, 295, 190, 45) ){	// si se presiona fuera del campo de texto
-					if(contrasena.length()>=5 && BaseDatos.existeNombre(usuario) == false) {
-						contrasena_state = 2;			// !!!! de momento cambia el estado a correcto pero hay que hacer que evalue el string y mire si es correcto o incorrecto
+					if(usuario.length()>1 && BaseDatos.existeNombre(usuario) == true) {		
 						contrasena_segura = Hash.md5(contrasena);
+						if(BaseDatos.comparaContrasena(usuario, contrasena_segura)){
+							contrasena_state = 2;	
+						}else {
+							contrasena_state = 3;	
+						}
 						System.out.println(contrasena_segura);
 					}else {
 						contrasena_state = 3;
@@ -195,7 +199,7 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 	
 	
 	public void mouseReleased(MouseEvent e) {
-		if(Game.estadoJuego == Game.ESTADO.SignIn) {
+		if(Game.estadoJuego == Game.ESTADO.LogIn) {
 			String filePath = new File("").getAbsolutePath();										// Ruta hasta el proyecto
 			String s2_filePath = filePath.concat("/minigamble/src/minigamble/sonido/click2.wav");	//Continuacio n de la ruta hasta el archivo de audio 2
 			
@@ -240,7 +244,7 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 	
 	public void keyPressed(KeyEvent e) {
 		
-		if (Game.estadoJuego == Game.ESTADO.SignIn && usuario_state == 0) {	// Si el estado del texto está habilitado (0) y se está en la pantalla SignIn
+		if (Game.estadoJuego == Game.ESTADO.LogIn && usuario_state == 0) {	// Si el estado del texto está habilitado (0) y se está en la pantalla LogIn
 			if (usuario.length() <=7) {			//Tiene que ser menor o igual a 7 caracteres
 				//System.out.println(e);
 				usuario = usuario + e.getKeyChar();
@@ -251,7 +255,7 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 				usuario = usuario.substring(0, usuario.length() - 1);	// Borra el último caracter
 		    }
 			if (e.getKeyCode() == 10) {		// Tecla enter
-				if(usuario.length()>1 && BaseDatos.existeNombre(usuario) == false) {
+				if(usuario.length()>1 && BaseDatos.existeNombre(usuario) == true) {
 					usuario_state = 2;				
 				}else {
 					usuario_state = 3;
@@ -260,7 +264,7 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 			
 		}
 		
-		if (Game.estadoJuego == Game.ESTADO.SignIn && contrasena_state == 0) {	// Si el estado del texto está habilitado (0) y se está en la pantalla SignIn
+		if (Game.estadoJuego == Game.ESTADO.LogIn && contrasena_state == 0) {	// Si el estado del texto está habilitado (0) y se está en la pantalla LogIn
 			if (contrasena.length() <=7) {			//Tiene que ser menor o igual a 7 caracteres
 				//System.out.println(e);
 				contrasena = contrasena + e.getKeyChar();
@@ -273,9 +277,12 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 		    }
 			if (e.getKeyCode() == 10) {		// Tecla enter
 				if(contrasena.length() >= 5) {
-					contrasena_state = 2;				
 					contrasena_segura = Hash.md5(contrasena);
-//					System.out.println(contrasena_segura);
+					if(BaseDatos.comparaContrasena(usuario, contrasena_segura)) {
+						contrasena_state = 2;	
+					}else {
+						contrasena_state = 3;
+					}
 				}else {
 					contrasena_state = 3;
 				}

@@ -27,6 +27,7 @@ public class BaseDatos {
 			conexion = DriverManager.getConnection("jdbc:sqlite:" + nombreBD );
 			if (reiniciaBD) {
 				Statement statement = conexion.createStatement();
+				
 				String sent = "DROP TABLE IF EXISTS jugador";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
@@ -121,19 +122,52 @@ public class BaseDatos {
 				String nombre = rs.getString("nombre");
 				ret.add( nombre);
 			}
-			
 			for(String nombre : ret) {
 				if(nombre.equals(n)) {
 					return true;
 				}
 			}
-			
 			return false;
-			
 		} catch (Exception e) {
 			logger.log( Level.SEVERE, "Excepción", e );
 			return true;
 		}
 	}
+	
+	public static boolean comparaContrasena(String n, String p) {
+		
+		try (Statement statement = conexion.createStatement()) {
+			ArrayList<ArrayList<String>> ret = new ArrayList<>();
+			String sent = "select * from jugador;";
+			logger.log( Level.INFO, "Statement: " + sent );
+			ResultSet rs = statement.executeQuery( sent );
+			while( rs.next() ) { // Leer el resultset
+				ArrayList<String> j = new ArrayList<String>();
+				String nombre = rs.getString("nombre");
+				String contrasena = rs.getString("password");
+				j.add(nombre);
+				j.add(contrasena);
+//				System.out.println(nombre);
+//				System.out.println(contrasena);
+				ret.add(j);
+			}
+			for(ArrayList<String> jugador : ret) {
+				if(jugador.get(0).equals(n)) {
+					if(jugador.get(1).equals(p)) {
+						return true;
+					}
+					return false;
+				}
+			}
+			return false;
+		} catch (Exception e) {
+			logger.log( Level.SEVERE, "Excepción", e );
+			return true;
+		}
+	}
+	
+	
+	
+	
 	
 }

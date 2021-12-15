@@ -23,6 +23,7 @@ public class Game extends Canvas implements Runnable{
 	Inicio inicio = new Inicio(); 				// Pantalla inicio
 	StartScreen start = new StartScreen();
 	SignIn signin = new SignIn();
+	LogIn login = new LogIn();
 	public static Game game;
 
 
@@ -55,6 +56,10 @@ public class Game extends Canvas implements Runnable{
 		this.addMouseListener(signin); 				// anyado un mouseListener a la pantalla signin
 		this.addMouseMotionListener(signin);
 		this.addKeyListener(signin);
+		this.addMouseListener(login); 				
+		this.addMouseMotionListener(login);
+		this.addKeyListener(login);
+		
 //		this.addMouseListener(game1); 				// anyado un mouseListener a la pantalla game1
 //		this.addMouseMotionListener(game1);
 //		this.addKeyListener(game2);
@@ -160,7 +165,6 @@ public class Game extends Canvas implements Runnable{
 			break;
 		case Game1:
 			game1.render(g);
-			
 			break;
 		case Game2:
 			game2.render(g);
@@ -176,6 +180,7 @@ public class Game extends Canvas implements Runnable{
 		case Game6:
 			break;
 		case LogIn:
+			login.render(g);
 			break;
 		default:
 			break;
