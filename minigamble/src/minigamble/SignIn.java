@@ -26,6 +26,10 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 	private ImageIcon bBack_false;		// boton volver atras 
 	private ImageIcon bBack_true;
 	
+	private ImageIcon bStart_false;
+	private ImageIcon bStart_true;
+	
+	
 	private Image backgroundIMG;
 	private Image textIMG_grey;
 	private Image textIMG_green;
@@ -34,8 +38,13 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 	private Image bBackIMG_false;
 	private Image bBackIMG_true;
 	
+	private Image bStartIMG_false;
+	private Image bStartIMG_true;
+	
 	private int usuario_state = 1;		// Estado del usuario -> 1:defecto, 2:Correcto, 3:incorrecto, 0:Habilitado para escribir
 	private int contrasena_state = 1;
+	
+	private boolean bstart_state = false;
 	
 	private String usuario = "";	// String con el nombre de usuario
 	private String contrasena = "";
@@ -49,7 +58,8 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 	
 	private int mox;				//Posicion en la que se presiona el raton
 	private int moy;
-	
+	private int mdx;
+	private int mdy;
 	
 	public SignIn() {
 		
@@ -62,6 +72,9 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 			textWrite = new ImageIcon( Game.class.getResource("multimedia/writeTextPath.png").toURI().toURL() );
 			bBack_false = new ImageIcon( Game.class.getResource("multimedia/green_back1.png").toURI().toURL() );
 			bBack_true = new ImageIcon( Game.class.getResource("multimedia/green_back2.png").toURI().toURL() );
+			
+			bStart_false = new ImageIcon( Game.class.getResource("multimedia/blue_button2.png").toURI().toURL() );
+			bStart_true = new ImageIcon( Game.class.getResource("multimedia/blue_button3.png").toURI().toURL() );
 			
 			
 		} catch (Exception e1) {
@@ -77,6 +90,9 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 		bBackIMG_false = bBack_false.getImage();
 		bBackIMG_true = bBack_true.getImage();
 		
+		bStartIMG_false = bStart_false.getImage();
+		bStartIMG_true = bStart_true.getImage();
+		
 		texto = new Font("arial", 1 ,30); //Fuente del campo de texto
 	}
 	
@@ -91,6 +107,20 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 			
 			String filePath = new File("").getAbsolutePath();				// Ruta hasta el proyecto
 			String s1_filePath = filePath.concat("/minigamble/src/minigamble/sonido/click1.wav");	//Continuación de la ruta hasta el archivo de audio 1
+			
+			
+			if( mouseOver(mox, moy, 500, 390, 190, 50)  && usuario_state == 2 && contrasena_state == 2 ){	// si se presiona encima del boton start se cambia su estado
+				bstart_state = true;
+				try {																				//Reproduce el archivo de sonido 1
+			        Clip sonido = AudioSystem.getClip();
+					AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s1_filePath));
+			        sonido.open(ais);
+			        sonido.start();
+		        }catch(Exception e2) {
+		        	System.out.println("error");
+		        }
+				
+			}
 			
 			if( mouseOver(mox, moy, 500, 195, 190, 45) ){	// si se presiona encima del campo de texto
 				usuario_state = 0;								// cambia el estado a hablilitado para escribir
@@ -137,7 +167,6 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 						contrasena_state = 2;			// !!!! de momento cambia el estado a correcto pero hay que hacer que evalue el string y mire si es correcto o incorrecto
 						contrasena_segura = Hash.md5(contrasena);
 						System.out.println(contrasena_segura);
-						BaseDatos.insertarJugador(usuario, contrasena_segura);
 					}else {
 						contrasena_state = 3;
 					}
@@ -169,6 +198,24 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 		if(Game.estadoJuego == Game.ESTADO.SignIn) {
 			String filePath = new File("").getAbsolutePath();										// Ruta hasta el proyecto
 			String s2_filePath = filePath.concat("/minigamble/src/minigamble/sonido/click2.wav");	//Continuacio n de la ruta hasta el archivo de audio 2
+			
+			if(bstart_state == true){ // si se ha presionado y soltado encima del primero suena
+				try {				  //Reproduce el archivo de sonido 2
+			        Clip sonido = AudioSystem.getClip();
+					AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s2_filePath));
+			        sonido.open(ais);
+			        sonido.start();
+		        }catch(Exception e2) {
+		        	System.out.println("error");
+		        }
+				
+				BaseDatos.insertarJugador(usuario, contrasena_segura);
+				int idPart = BaseDatos.insertarPartida(usuario);
+				Game.partida  = new Partida(0,0,null , null, usuario, idPart);
+				
+			}
+			
+			
 			
 			if(bBack_state == true){																// si se ha presionado y soltado encima del segundo boton termina el programa y suena
 				try {																				//Reproduce el archivo de sonido 2
@@ -229,7 +276,6 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 					contrasena_state = 2;				
 					contrasena_segura = Hash.md5(contrasena);
 //					System.out.println(contrasena_segura);
-					BaseDatos.insertarJugador(usuario, contrasena_segura);
 				}else {
 					contrasena_state = 3;
 				}
@@ -247,6 +293,11 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 	public void mouseExited(MouseEvent e) {
 	}
 	public void mouseDragged(MouseEvent e) {
+		mdx = e.getX();
+		mdy = e.getY();
+		if( mouseOver(mdx, mdy, 500, 390, 190, 50)== false ){	// boton No Registrarse 
+			bstart_state = false;
+		}
 	}
 	public void mouseMoved(MouseEvent e) {
 	}
@@ -315,6 +366,17 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 			}
 		}
 		
+		if(usuario_state == 2 && contrasena_state == 2) {
+			if(bstart_state == true) {				// Dibuja el boton Log In y texto del botón presionado
+				g.drawImage(bStartIMG_true, 500, 394, null);
+				g.drawString("Start", 555, 426);			
+			}else {								// Dibuja el boton Log In y texto del boton sin presionar
+				g.drawImage(bStartIMG_false, 500, 390, null);		
+				g.drawString("Start", 555, 422);		
+			}
+			
+			
+		}
 		
 		
 		

@@ -237,7 +237,9 @@ public class StartScreen implements MouseMotionListener, MouseListener{
 		        }catch(Exception e2) {
 		        	System.out.println("error");
 		        }
-				Game.partida  = new Partida(0,0,null , null);
+				
+				int idPart = BaseDatos.insertarPartida(null);
+				Game.partida  = new Partida(0,0,null , null, null, idPart);
 				
 			}
 			

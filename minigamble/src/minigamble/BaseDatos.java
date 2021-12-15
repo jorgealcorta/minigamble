@@ -33,6 +33,20 @@ public class BaseDatos {
 				sent = "CREATE TABLE jugador (nombre varchar(8) PRIMARY KEY, password varchar(33));";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
+				
+				sent = "DROP TABLE IF EXISTS partida";
+				logger.log( Level.INFO, "Statement: " + sent );
+				statement.executeUpdate( sent );
+				sent = "CREATE TABLE partida (id INTEGER PRIMARY KEY AUTOINCREMENT ,nombre varchar(8));";
+				logger.log( Level.INFO, "Statement: " + sent );
+				statement.executeUpdate( sent );
+				
+				sent = "DROP TABLE IF EXISTS game1";
+				logger.log( Level.INFO, "Statement: " + sent );
+				statement.executeUpdate( sent );
+				sent = "CREATE TABLE game1 (id INTEGER PRIMARY KEY AUTOINCREMENT ,idPartida int, puntuacion int);";
+				logger.log( Level.INFO, "Statement: " + sent );
+				statement.executeUpdate( sent );
 			}
 			return true;
 		} catch(Exception e) {
@@ -60,6 +74,35 @@ public class BaseDatos {
 			if (insertados!=1) return false;  // Error en inserción
 			// Búsqueda de la fila insertada - para ello hay que recuperar la clave autogenerada. Hay varias maneras, vemos dos diferentes:
 			// Se hace utilizando método del propio objeto statement
+			return true;
+		} catch (Exception e) {
+			logger.log( Level.SEVERE, "Excepción", e );
+			return false;
+		}
+	}
+	
+	public static int insertarPartida( String jugador) {
+		try (Statement statement = conexion.createStatement()) {
+			String sent = "insert into partida (nombre) values ('" + jugador + "');";
+			logger.log( Level.INFO, "Statement: " + sent );
+			int insertados = statement.executeUpdate( sent );
+			if (insertados!=1) return -1;  // Error en inserción
+			ResultSet rrss = statement.getGeneratedKeys();  // Genera un resultset ficticio con las claves generadas del último comando
+			rrss.next();  // Avanza a la única fila 
+			int pk = rrss.getInt( 1 );  // Coge la única columna (la primary key autogenerada)
+			return(pk);
+		} catch (Exception e) {
+			logger.log( Level.SEVERE, "Excepción", e );
+			return -1;
+		}
+	}
+	
+	public static boolean insertarGame1( int idPartida, int puntuacion) {
+		try (Statement statement = conexion.createStatement()) {
+			String sent = "insert into game1 (idPartida, puntuacion) values (" + idPartida + ", " + puntuacion + ");";
+			logger.log( Level.INFO, "Statement: " + sent );
+			int insertados = statement.executeUpdate( sent );
+			if (insertados!=1) return false;  // Error en inserción
 			return true;
 		} catch (Exception e) {
 			logger.log( Level.SEVERE, "Excepción", e );

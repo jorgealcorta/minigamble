@@ -116,13 +116,17 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 	private int click2 = -1;
 	private int puntTotal = 0;
 	private int puntTemp = 1000;
+	private String jugador;
+	private int idPartida;
 	
 
 	
 	
-	public Game1(int dificultad) {
+	public Game1(int dificultad, String nombreJugador, int idPart) {
 		
 		puntTotal = dificultad;
+		jugador = nombreJugador;
+		idPartida = idPart;
 		
 		if (nivel == 1) {
 			nCol = 4;
@@ -498,7 +502,8 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 								delaySeg(2);
 								start = 4;
 								delaySeg(1);
-								Game.partida  = new Partida( puntTotal ,0,null , null);
+								BaseDatos.insertarGame1(idPartida, puntTotal);
+								Game.partida  = new Partida( puntTotal ,0,null , null, jugador, idPartida);
 								
 							}
 							
