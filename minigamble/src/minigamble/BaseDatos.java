@@ -14,11 +14,7 @@ public class BaseDatos {
 	private static Connection conexion;
 	private static Logger logger = Logger.getLogger( "BaseDatos" );
 	
-	/** Abre conexión con la base de datos
-	 * @param nombreBD	Nombre del fichero de base de datos
-	 * @param reiniciaBD	true si se quiere reiniciar la base de datos (se borran sus contenidos si los tuviera y se crean datos por defecto)
-	 * @return	true si la conexión ha sido correcta, false en caso contrario
-	 */
+
 	public static boolean abrirConexion( String nombreBD, boolean reiniciaBD ) {
 		try {
 			logger.log( Level.INFO, "Carga de librería org.sqlite.JDBC" );
@@ -38,14 +34,14 @@ public class BaseDatos {
 				sent = "DROP TABLE IF EXISTS partida";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
-				sent = "CREATE TABLE partida (id INTEGER PRIMARY KEY AUTOINCREMENT ,nombre varchar(8));";
+				sent = "CREATE TABLE partida (id INTEGER PRIMARY KEY AUTOINCREMENT, fecha bigint, nombre varchar(8));";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
 				
 				sent = "DROP TABLE IF EXISTS game1";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
-				sent = "CREATE TABLE game1 (id INTEGER PRIMARY KEY AUTOINCREMENT ,idPartida int, puntuacion int);";
+				sent = "CREATE TABLE game1 (id INTEGER PRIMARY KEY AUTOINCREMENT ,idPartida int, puntuacion int, fallos int, primera_carta varchar(20), tiempo_primera_carta bigint, tiempo_total bigint);";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
 			}
@@ -84,7 +80,7 @@ public class BaseDatos {
 	
 	public static int insertarPartida( String jugador) {
 		try (Statement statement = conexion.createStatement()) {
-			String sent = "insert into partida (nombre) values ('" + jugador + "');";
+			String sent = "insert into partida (nombre, fecha) values ('" + jugador + "', " + System.currentTimeMillis() +");";
 			logger.log( Level.INFO, "Statement: " + sent );
 			int insertados = statement.executeUpdate( sent );
 			if (insertados!=1) return -1;  // Error en inserción
@@ -98,9 +94,9 @@ public class BaseDatos {
 		}
 	}
 	
-	public static boolean insertarGame1( int idPartida, int puntuacion) {
+	public static boolean insertarGame1( int idPartida, int puntuacion, int fallos, String primeraCarta, long tiempoPrimCar, long tiempoTot) {
 		try (Statement statement = conexion.createStatement()) {
-			String sent = "insert into game1 (idPartida, puntuacion) values (" + idPartida + ", " + puntuacion + ");";
+			String sent = "insert into game1 (idPartida, puntuacion, fallos, primera_carta, tiempo_primera_carta, tiempo_total ) values (" + idPartida + ", " + puntuacion + ", "+ fallos + ", '"+ primeraCarta +"', " + tiempoPrimCar + ", " + tiempoTot + " );";											
 			logger.log( Level.INFO, "Statement: " + sent );
 			int insertados = statement.executeUpdate( sent );
 			if (insertados!=1) return false;  // Error en inserción

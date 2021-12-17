@@ -37,8 +37,7 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 	private ImageIcon card_hearts_J;
 	private ImageIcon card_diamonds_A;
 	private ImageIcon card_diamonds_K;
-	private ImageIcon card_diamonds_J;
-	private ImageIcon card_diamonds_Q;
+
 	
 	private ImageIcon cardBack;
 	
@@ -52,8 +51,7 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 	private Image card_hearts_J_IMG;
 	private Image card_diamonds_A_IMG;
 	private Image card_diamonds_K_IMG;
-	private Image card_diamonds_J_IMG;
-	private Image card_diamonds_Q_IMG;
+
 	
 	private Image cardBackIMG;
 	private Image bStartIMG_True;
@@ -69,7 +67,7 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 	private int cartX;
 	private int cartY;
 	private int nivel = 1;
-	
+	private int fallos = 0;
 	
 	private Font customFontBot;
 	private Font customFontFin;
@@ -88,12 +86,12 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 	private Carta c1 = new Carta("card_hearts_A", false, false);
 	private Carta c2 = new Carta("card_hearts_Q", false, false);
 	private Carta c3 = new Carta("card_hearts_K", false, false);
-	private Carta c4 = new Carta("card_clubs_A", false, false);
-	private Carta c5 = new Carta("card_clubs_Q", false, false);
-	private Carta c6 = new Carta("card_clubs_K", false, false);
-	private Carta c7 = new Carta("card_hearts_A", false, false);
-	private Carta c8 = new Carta("card_hearts_Q", false, false);
-	private Carta c9 = new Carta("card_hearts_K", false, false);
+	private Carta c4 = new Carta("card_hearts_A", false, false);
+	private Carta c5 = new Carta("card_hearts_Q", false, false);
+	private Carta c6 = new Carta("card_hearts_K", false, false);
+	private Carta c7 = new Carta("card_clubs_A", false, false);
+	private Carta c8 = new Carta("card_clubs_Q", false, false);
+	private Carta c9 = new Carta("card_clubs_K", false, false);
 	private Carta c10 = new Carta("card_clubs_A", false, false);
 	private Carta c11 = new Carta("card_clubs_Q", false, false);
 	private Carta c12 = new Carta("card_clubs_K", false, false);
@@ -105,19 +103,19 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 	private Carta c18 = new Carta("card_diamonds_K", false, false);
 	private Carta c19 = new Carta("card_diamonds_A", false, false);
 	private Carta c20 = new Carta("card_diamonds_K", false, false);
-	private Carta c21 = new Carta("card_diamonds_J", false, false);
-	private Carta c22 = new Carta("card_diamonds_Q", false, false);
-	private Carta c23 = new Carta("card_diamonds_J", false, false);
-	private Carta c24 = new Carta("card_diamonds_Q", false, false);
-	
 	
 	private int start = 1;
 	private int click1 = -1;
 	private int click2 = -1;
 	private int puntTotal = 0;
+	private int puntIni = 0;
 	private int puntTemp = 1000;
 	private String jugador;
 	private int idPartida;
+	private String primeraCarta = "";
+	private long tiempoComienzo = System.currentTimeMillis();
+	private long tiempoTotal;
+	private long tiempoPrimeraCarta;
 	
 
 	
@@ -125,26 +123,28 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 	public Game1(int dificultad, String nombreJugador, int idPart) {
 		
 		puntTotal = dificultad;
+		puntIni = dificultad;
 		jugador = nombreJugador;
 		idPartida = idPart;
 		
+		
 		if (nivel == 1) {
-			nCol = 4;
-			nFil = 3;
-			cartX = 126;
-			cartY = 171;
+			nCol = 3;
+			nFil = 2;
+			cartX = 140;//126
+			cartY = 190;//171
 		}else if(nivel == 2) {
-			nCol = 4;
+			nCol = 3;
 			nFil = 4;
 			cartX = 98;
 			cartY = 133;
 		}else if(nivel == 3) {
-			nCol = 5;
+			nCol = 4;
 			nFil = 4;
 			cartX = 98;
 			cartY = 133;
 		}else if(nivel == 4) {
-			nCol = 6;
+			nCol = 5;
 			nFil = 4;
 			cartX = 98;
 			cartY = 133;
@@ -163,8 +163,6 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 			card_hearts_J = new ImageIcon( Game.class.getResource("multimedia/cartas/cardHeartsJ.png").toURI().toURL() );
 			card_diamonds_A = new ImageIcon( Game.class.getResource("multimedia/cartas/cardDiamondsA.png").toURI().toURL() );
 			card_diamonds_K = new ImageIcon( Game.class.getResource("multimedia/cartas/cardDiamondsK.png").toURI().toURL() );
-			card_diamonds_J = new ImageIcon( Game.class.getResource("multimedia/cartas/cardDiamondsJ.png").toURI().toURL() );
-			card_diamonds_Q = new ImageIcon( Game.class.getResource("multimedia/cartas/cardDiamondsQ.png").toURI().toURL() );
 			
 			
 			bStart_false = new ImageIcon( Game.class.getResource("multimedia/red_button2.png").toURI().toURL() );
@@ -202,8 +200,6 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 		card_hearts_J_IMG = card_hearts_J.getImage();
 		card_diamonds_A_IMG = card_diamonds_A.getImage();
 		card_diamonds_K_IMG = card_diamonds_K.getImage();
-		card_diamonds_J_IMG = card_diamonds_J.getImage();
-		card_diamonds_Q_IMG = card_diamonds_Q.getImage();
 		
 		
 		cardBackIMG = cardBack.getImage();
@@ -233,10 +229,6 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 		allCards.add(c18);
 		allCards.add(c19);
 		allCards.add(c20);
-		allCards.add(c21);
-		allCards.add(c22);
-		allCards.add(c23);
-		allCards.add(c24);
 		
 		
 		selectCards  =  allCards.subList(0, nCol*nFil);
@@ -272,10 +264,6 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 			return card_diamonds_A_IMG;
 		}else if(selectCards.get(index).getId() == "card_diamonds_K") {
 			return card_diamonds_K_IMG;
-		}else if(selectCards.get(index).getId() == "card_diamonds_J") {
-			return card_diamonds_J_IMG;
-		}else if(selectCards.get(index).getId() == "card_diamonds_Q") {
-			return card_diamonds_Q_IMG;
 		}
 		return null;
 		
@@ -450,6 +438,10 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 					for (ArrayList<ArrayList<Integer>> filas : posCartas) {
 						for(ArrayList<Integer> columnas : filas) {
 							if(selectCards.get(nCarta).isPresionada()) {
+								if(primeraCarta.equals("")) {
+									primeraCarta = selectCards.get(nCarta).getId();
+									tiempoPrimeraCarta = System.currentTimeMillis() - tiempoComienzo;
+								}
 								selectCards.get(nCarta).setPresionada(false);
 								sonidoCarta();
 								delayMS(100);
@@ -492,16 +484,18 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 								puntTemp = (int)Math.round(0.66*puntTemp);
 								selectCards.get(click1).setArriba(false);
 								selectCards.get(click2).setArriba(false);
+								fallos = fallos + 1;
 							}
 							
 							click1=-1;
 							click2=-1;
 							
 							if (todasLevantadas()) {
+								tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
 								delaySeg(2);
 								start = 4;
 								delaySeg(1);
-								BaseDatos.insertarGame1(idPartida, puntTotal);
+								BaseDatos.insertarGame1(idPartida, puntTotal - puntIni, fallos, primeraCarta, tiempoPrimeraCarta, tiempoTotal);
 								Game.partida  = new Partida( puntTotal ,0,null , null, jugador, idPartida);
 								
 							}
