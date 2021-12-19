@@ -29,6 +29,9 @@ import javax.swing.ImageIcon;
 //diana nueva no se puede dibujar dentro de diana existente.
 
 
+//Crear un unico hilo que gestiona todas las dianas, cada diana tiene un timestamp de cuando se ha disparado. Momento creaciom, momento disparo, momento quitar, recorrer todas las dianas y jugar con los timestamps??
+
+
 public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 	
 	private Image bStartIMG_True;

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class ThreadBorrarDiana extends Thread{
 	
 	Diana rota;
-	ArrayList<Diana> activas;
+	ArrayList<Diana> activas; //sustituir arraylist pro vector, vector esta sincronizad, hasta que un hilo no acaba su ejecucion con ella, el otro hilo no empieza, consistencia sincrona
 	ArrayList<Diana> rotas;
 		
 	ThreadBorrarDiana(Diana rota, ArrayList<Diana> activas, ArrayList<Diana> rotas){

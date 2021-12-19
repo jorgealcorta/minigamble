@@ -196,9 +196,14 @@ public class Game3 implements MouseListener , MouseMotionListener {
 					
 				if( mouseOver(mox, moy, 575, 290, 50, 50)){	
 					
-					startX = e.getXOnScreen()+500;
-					startY = e.getYOnScreen()+290;
-					robot.mouseMove(e.getXOnScreen()+500, e.getYOnScreen()+290);
+//					startX = e.getXOnScreen()+500;
+//					startY = e.getYOnScreen()+290;
+					
+					startX= Game.ventana.frame.getLocationOnScreen().x+900;
+					startY= Game.ventana.frame.getLocationOnScreen().y+400;
+					
+					
+					robot.mouseMove(startX, startY);
 					
 					start=2;
 					

@@ -2,6 +2,8 @@ package minigamble;
 
 
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.io.File;
 
 import javax.swing.ImageIcon;
@@ -15,10 +17,11 @@ public class VentanaPrincipal extends Canvas{
 	ImageIcon logo;	
 	final Taskbar taskbar = Taskbar.getTaskbar();
 	
+	public JFrame frame;
 	
 	public VentanaPrincipal(String title, Game game) {
 		
-		JFrame frame = new JFrame(title);
+		frame = new JFrame(title);
 		
 		frame.setPreferredSize(new Dimension(1200,700));
 		frame.setMaximumSize(new Dimension(1200,700));
@@ -56,6 +59,14 @@ public class VentanaPrincipal extends Canvas{
 		
 		game.start();
 		
+		game.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) { //se lanza cuando el raton entra en el espacio principal del jframe
+				
+				System.out.println("Entrando");
+			}
+			
+		});
 	}
 
 };
