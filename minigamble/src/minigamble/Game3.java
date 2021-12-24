@@ -81,9 +81,8 @@ public class Game3 implements MouseListener , MouseMotionListener {
 		bStart_false = new ImageIcon( Game.class.getResource("multimedia/red_button2.png").toURI().toURL() );
 		bStart_true = new ImageIcon( Game.class.getResource("multimedia/red_button3.png").toURI().toURL() );
 		
-		lab1Icon = new ImageIcon( Game.class.getResource("multimedia/laberintoPrueba.png").toURI().toURL() );
-		lab2Icon = new ImageIcon( Game.class.getResource("multimedia/laberintoPrueba2.png").toURI().toURL() );
-		endingIcon = new ImageIcon( Game.class.getResource("multimedia/endLabirynth.png").toURI().toURL() );
+		lab1Icon = new ImageIcon( Game.class.getResource("multimedia/laberintos/lab1.png").toURI().toURL() );
+		endingIcon = new ImageIcon( Game.class.getResource("multimedia/laberintos/endlab1.png").toURI().toURL() );
 		
 		} catch (Exception e1) {
 			e1.printStackTrace();
@@ -109,16 +108,13 @@ public class Game3 implements MouseListener , MouseMotionListener {
 		
 		
 		lab1Img = lab1Icon.getImage();
-		lab2Img = lab2Icon.getImage();
 		endingImg = endingIcon.getImage();
 		
 		
 		Laberinto lab1 = new Laberinto(lab1Img, 001 );
-		Laberinto lab2 = new Laberinto(lab2Img, 002 );
-
-		
+			
 		allLabs.add(lab1);
-		allLabs.add(lab2);
+		
 		
 		thisLab = getRandom(allLabs);		
 		
@@ -134,7 +130,7 @@ public class Game3 implements MouseListener , MouseMotionListener {
 	
 	public Laberinto getRandom( ArrayList<Laberinto> array) {
 	    int rnd = new Random().nextInt(array.size());
-	    return array.get(1);
+	    return array.get(rnd);
 	}
 	
 	
@@ -303,7 +299,7 @@ public class Game3 implements MouseListener , MouseMotionListener {
 		if(start==1) {
 			g.setFont(customFontBot);
 			g.setColor(Color.BLACK);
-			if(bStart_state == true) {					                   //caso start = 1
+			if(bStart_state == true) {					                  
 				g.drawImage(bStartIMG_True, 500, 294, null);
 				g.drawString("Start", 540, 326);
 			}else {									
@@ -315,7 +311,7 @@ public class Game3 implements MouseListener , MouseMotionListener {
 		
 		if (start==2) {			
 			g.drawImage(thisLab.getImage() ,0, 0,1190,665,  null);
-			g.drawRect(40, 40, 160, 130);
+			g.drawRect(40, 40, 160, 130);                                   //borrar una vez calibrado
 		}
 		
 		if(start ==3) {
