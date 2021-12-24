@@ -34,6 +34,10 @@ public class Game3 implements MouseListener , MouseMotionListener {
 	
 	private Image lab2Img;
 	private ImageIcon lab2Icon;
+	
+	private Image lab3Img;
+	private ImageIcon lab3Icon;
+	
 	private Image endingImg;
 	private ImageIcon endingIcon;
 	
@@ -82,6 +86,8 @@ public class Game3 implements MouseListener , MouseMotionListener {
 		bStart_true = new ImageIcon( Game.class.getResource("multimedia/red_button3.png").toURI().toURL() );
 		
 		lab1Icon = new ImageIcon( Game.class.getResource("multimedia/laberintos/lab1.png").toURI().toURL() );
+		lab2Icon = new ImageIcon( Game.class.getResource("multimedia/laberintos/lab2.png").toURI().toURL() );
+		lab3Icon = new ImageIcon( Game.class.getResource("multimedia/laberintos/lab3.png").toURI().toURL() );
 		endingIcon = new ImageIcon( Game.class.getResource("multimedia/laberintos/endlab1.png").toURI().toURL() );
 		
 		} catch (Exception e1) {
@@ -108,13 +114,19 @@ public class Game3 implements MouseListener , MouseMotionListener {
 		
 		
 		lab1Img = lab1Icon.getImage();
+		lab2Img = lab2Icon.getImage();
+		lab3Img = lab3Icon.getImage();
+		
 		endingImg = endingIcon.getImage();
 		
 		
 		Laberinto lab1 = new Laberinto(lab1Img, 001 );
-			
+		Laberinto lab2 = new Laberinto(lab2Img, 002 );
+		Laberinto lab3 = new Laberinto(lab2Img, 003 );		
+				
 		allLabs.add(lab1);
-		
+		allLabs.add(lab2);
+		allLabs.add(lab3);
 		
 		thisLab = getRandom(allLabs);		
 		
@@ -133,7 +145,6 @@ public class Game3 implements MouseListener , MouseMotionListener {
 	    return array.get(rnd);
 	}
 	
-	
 	public boolean mouseOver(int mx, int my, int x, int y, int width, int heigth) {   // devuelve true si el raton ha sido presionado dentro de un cuadrado 
 		
 		if(mx > x && mx < x + width) {
@@ -145,7 +156,6 @@ public class Game3 implements MouseListener , MouseMotionListener {
 		}else {
 			return false;
 		}}
-	
 	
 	@Override
 	public void mousePressed(MouseEvent e) {
@@ -174,7 +184,6 @@ public class Game3 implements MouseListener , MouseMotionListener {
 			
 		}
 	}
-
 	
 	@Override
 	public void mouseReleased(MouseEvent e) {
@@ -235,7 +244,6 @@ public class Game3 implements MouseListener , MouseMotionListener {
 		}
 		
 	}
-
 	
 	@Override
 	public void mouseExited(MouseEvent e) {
@@ -263,15 +271,13 @@ public class Game3 implements MouseListener , MouseMotionListener {
 				
 				if(robot.getPixelColor(Mox, Moy).getRGB() != pathColor.getRGB()) {
 					robot.mouseMove(startX, startY);					
-				} else if ( mouseOver(mox, moy, 40, 40, 200, 200)) {
+				} else if ( mouseOver(mox, moy, 41, 43, 178, 88)) {
 					start = 3;	
 				} 
 			}				
 			}
 		}
 			
-	
-
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		if(Game.estadoJuego == Game.ESTADO.Game3 ) {
@@ -311,14 +317,14 @@ public class Game3 implements MouseListener , MouseMotionListener {
 		
 		if (start==2) {			
 			g.drawImage(thisLab.getImage() ,0, 0,1190,665,  null);
-			g.drawRect(40, 40, 160, 130);                                   //borrar una vez calibrado
 		}
 		
 		if(start ==3) {
 			g.drawImage(thisLab.getImage() ,0, 0,1190,665,  null);
-			g.drawImage(endingImg, 40, 40, 160, 130, null);
+			g.drawImage(endingImg, 100, 45, 80, 80, null);
 			g.setFont(customFontFin);
-			g.drawString("Congrats, you passed!!", 200, 326);
+			g.setColor(Color.BLACK);
+			g.drawString("Congrats, you passed!!", 160, 326);
 			
 		}
 	
