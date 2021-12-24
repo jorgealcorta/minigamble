@@ -11,6 +11,8 @@ import java.awt.Robot;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -23,6 +25,8 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 
+import minigamble.Game.ESTADO;
+
 public class Game3 implements MouseListener , MouseMotionListener {
 
 	private Image lab1Img;
@@ -30,6 +34,8 @@ public class Game3 implements MouseListener , MouseMotionListener {
 	
 	private Image lab2Img;
 	private ImageIcon lab2Icon;
+	private Image endingImg;
+	private ImageIcon endingIcon;
 	
 	private Image bStartIMG_True;
 	private Image bStartIMG_False;
@@ -40,8 +46,10 @@ public class Game3 implements MouseListener , MouseMotionListener {
 	private boolean bStart_state = false;
 	
 	private Font customFontBot;
+	private Font customFontFin;
 	
-	
+	private int Mox;
+	private int Moy;
 	private int mox;				//Posicion en la que se presiona el raton
 	private int moy;
 	private int mdx;
@@ -53,9 +61,13 @@ public class Game3 implements MouseListener , MouseMotionListener {
 	
 	private Color pathColor;
 	
+	private int rNow;
+	private int gNow;
+	private int bNow;
 	
 	private ArrayList <Laberinto> allLabs = new ArrayList<Laberinto>();
 	private Laberinto thisLab;
+	
 	
 	private int start = 1;
 	
@@ -71,7 +83,7 @@ public class Game3 implements MouseListener , MouseMotionListener {
 		
 		lab1Icon = new ImageIcon( Game.class.getResource("multimedia/laberintoPrueba.png").toURI().toURL() );
 		lab2Icon = new ImageIcon( Game.class.getResource("multimedia/laberintoPrueba2.png").toURI().toURL() );
-		
+		endingIcon = new ImageIcon( Game.class.getResource("multimedia/endLabirynth.png").toURI().toURL() );
 		
 		} catch (Exception e1) {
 			e1.printStackTrace();
@@ -81,11 +93,16 @@ public class Game3 implements MouseListener , MouseMotionListener {
 			customFontBot = Font.createFont(Font.TRUETYPE_FONT, Inicio.class.getResourceAsStream("fuentes/fuenteBot.ttf"));
 			customFontBot=customFontBot.deriveFont(Font.PLAIN,20);
 		} catch (FontFormatException | IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("Error con la fuente Boton");
 		}
 		
+		try {   
+			customFontFin = Font.createFont(Font.TRUETYPE_FONT, Inicio.class.getResourceAsStream("fuentes/fuente.ttf"));
+			customFontFin = customFontFin.deriveFont(Font.PLAIN,100);				
+		}catch(Exception e){	
+			System.out.println("Problema con la fuente Minigamble");
+		}
 		
 		bStartIMG_True = bStart_true.getImage();
 		bStartIMG_False = bStart_false.getImage();
@@ -93,9 +110,11 @@ public class Game3 implements MouseListener , MouseMotionListener {
 		
 		lab1Img = lab1Icon.getImage();
 		lab2Img = lab2Icon.getImage();
+		endingImg = endingIcon.getImage();
+		
 		
 		Laberinto lab1 = new Laberinto(lab1Img, 001 );
-		Laberinto lab2 = new Laberinto(lab1Img, 002 );
+		Laberinto lab2 = new Laberinto(lab2Img, 002 );
 
 		
 		allLabs.add(lab1);
@@ -112,24 +131,12 @@ public class Game3 implements MouseListener , MouseMotionListener {
 		
 	}
 	
-		  
-
 	
 	public Laberinto getRandom( ArrayList<Laberinto> array) {
 	    int rnd = new Random().nextInt(array.size());
-	    return array.get(rnd);
+	    return array.get(1);
 	}
 	
-	
-	private void delayMS(int n) {
-		try {
-			TimeUnit.MILLISECONDS.sleep(n);
-		} catch (InterruptedException b) {
-			// TODO Auto-generated catch block
-			b.printStackTrace();
-		}
-		
-	}
 	
 	public boolean mouseOver(int mx, int my, int x, int y, int width, int heigth) {   // devuelve true si el raton ha sido presionado dentro de un cuadrado 
 		
@@ -151,15 +158,13 @@ public class Game3 implements MouseListener , MouseMotionListener {
 			mox = e.getX();	// guarda la posicion en la que se presiona
 			moy = e.getY();
 			
-//			System.out.println(Game.this.getX());
-//			System.out.println(Game.this.getY());
 			
-			String filePath = new File("").getAbsolutePath();				// Ruta hasta el proyecto
-			String s1_filePath = filePath.concat("/minigamble/src/minigamble/sonido/click1.wav");	//Continuación de la ruta hasta el archivo de audio 1
+			String filePath = new File("").getAbsolutePath();				
+			String s1_filePath = filePath.concat("/minigamble/src/minigamble/sonido/click1.wav");	
 			
 			
 			
-			if( mouseOver(mox, moy, 500, 290, 190, 50) && start == 1 ){	             // Caso start == 1
+			if( mouseOver(mox, moy, 500, 290, 190, 50) && start == 1 ){	             
 				bStart_state = true;
 				try {																				
 			        Clip sonido = AudioSystem.getClip();
@@ -174,6 +179,7 @@ public class Game3 implements MouseListener , MouseMotionListener {
 		}
 	}
 
+	
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		if(Game.estadoJuego == Game.ESTADO.Game3) {
@@ -194,34 +200,24 @@ public class Game3 implements MouseListener , MouseMotionListener {
 			        }
 					
 					
-				if( mouseOver(mox, moy, 575, 290, 50, 50)){	
+				if( mouseOver(mox, moy, 500, 290, 190, 50)){	
 					
-//					startX = e.getXOnScreen()+500;
-//					startY = e.getYOnScreen()+290;
+
 					
-					startX= Game.ventana.frame.getLocationOnScreen().x+900;
-					startY= Game.ventana.frame.getLocationOnScreen().y+400;
-					
+					startX= Game.ventana.frame.getLocationOnScreen().x+1100;
+					startY= Game.ventana.frame.getLocationOnScreen().y+600;
 					
 					robot.mouseMove(startX, startY);
 					
 					start=2;
-					
-					pathColor=robot.getPixelColor(startX, startY);
-					
-				
-					
-					
+															
 				}
 				
 				bStart_state = false;
 				}
 							
 			}
-			
-			
-			
-			
+								
 		}
 	}
 	
@@ -231,8 +227,20 @@ public class Game3 implements MouseListener , MouseMotionListener {
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
+		if(Game.estadoJuego == ESTADO.Game3) {
+			
+			if(start==2) {
+			
+				startX= Game.ventana.frame.getLocationOnScreen().x+1100;
+				startY= Game.ventana.frame.getLocationOnScreen().y+600;
+				
+				robot.mouseMove(startX, startY);
+			}
+		}
+		
 	}
 
+	
 	@Override
 	public void mouseExited(MouseEvent e) {
 	}
@@ -241,38 +249,42 @@ public class Game3 implements MouseListener , MouseMotionListener {
 	public void mouseMoved(MouseEvent e) {
 		if(Game.estadoJuego == Game.ESTADO.Game3 ) {
 			if(start==2) {
-				mdx = e.getXOnScreen();
-				mdy = e.getYOnScreen();
+					
+				Mox = e.getXOnScreen();	
+				Moy = e.getYOnScreen();
+				mox = e.getX();
+				moy = e.getY();
 				
-				if(pathColor.getRGB() != robot.getPixelColor(mdx, mdy).getRGB()) {
-					
-					System.out.println("not in your color");                                                      //--------------------------quitar jst4tests
-					System.out.println("your psition now; x: " +e.getXOnScreen()+" y: "+e.getYOnScreen());
-					System.out.println("color now is"+ robot.getPixelColor(e.getXOnScreen(), e.getYOnScreen()));	
-					System.out.println("Sx: "+startX+ ", Sy:"+startY);
-					System.out.println("Your color is"+ pathColor);
-					
-					
-					robot.mouseMove(startX, startY);
-
+				
+				if(pathColor == null ) {
+					pathColor = robot.getPixelColor(startX, startY);
 				}
 							
+				rNow = robot.getPixelColor(Mox, Moy).getRed();
+				bNow = robot.getPixelColor(Mox, Moy).getBlue();
+				gNow = robot.getPixelColor(Mox, Moy).getGreen();
+
+				
+				if(robot.getPixelColor(Mox, Moy).getRGB() != pathColor.getRGB()) {
+					robot.mouseMove(startX, startY);					
+				} else if ( mouseOver(mox, moy, 40, 40, 200, 200)) {
+					start = 3;	
+				} 
+			}				
 			}
 		}
 			
-	}
+	
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
 		if(Game.estadoJuego == Game.ESTADO.Game3 ) {
-			if(start==1) {
-				
-			
+			if(start==1) {			
 			
 			mdx = e.getX();
 			mdy = e.getY();
 			
-			if( mouseOver(mdx, mdy, 575, 290, 50, 50)== false && start == 1){	// caso start == 1
+			if( mouseOver(mdx, mdy, 500, 290, 190, 50)== false && start == 1){	// caso start == 1
 				bStart_state = false;
 			}
 			
@@ -281,40 +293,41 @@ public class Game3 implements MouseListener , MouseMotionListener {
 	}
 	
 	
+	
+	
 	public void render(Graphics g) {
 		
 		g.setColor(Color.decode("#208b3a"));
 		g.fillRect(0, 0, 1200, 700);
 		
-		if ( start==1) {
-			
+		if(start==1) {
 			g.setFont(customFontBot);
 			g.setColor(Color.BLACK);
 			if(bStart_state == true) {					                   //caso start = 1
-				g.drawImage(bStartIMG_True, 575, 294, 50 , 50 ,   null);
-				//g.drawString("Start", 540, 326);
+				g.drawImage(bStartIMG_True, 500, 294, null);
+				g.drawString("Start", 540, 326);
 			}else {									
-				g.drawImage(bStartIMG_False, 575, 290, 50 , 50,  null);
-				//g.drawString("Start", 547, 322);
+				g.drawImage(bStartIMG_False, 500, 290, null);
+				g.drawString("Start", 547, 322);
 			}
-			
-			
 		}
+		
 		
 		if (start==2) {			
 			g.drawImage(thisLab.getImage() ,0, 0,1190,665,  null);
-			
+			g.drawRect(40, 40, 160, 130);
+		}
+		
+		if(start ==3) {
+			g.drawImage(thisLab.getImage() ,0, 0,1190,665,  null);
+			g.drawImage(endingImg, 40, 40, 160, 130, null);
+			g.setFont(customFontFin);
+			g.drawString("Congrats, you passed!!", 200, 326);
 			
 		}
 	
 	}
 
-
-
-
-
-	
-		
 		
 	
 }

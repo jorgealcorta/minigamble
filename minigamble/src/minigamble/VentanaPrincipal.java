@@ -59,14 +59,6 @@ public class VentanaPrincipal extends Canvas{
 		
 		game.start();
 		
-		game.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) { //se lanza cuando el raton entra en el espacio principal del jframe
-				
-				System.out.println("Entrando");
-			}
-			
-		});
 	}
 
 };
