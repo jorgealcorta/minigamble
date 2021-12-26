@@ -23,6 +23,9 @@ import javax.swing.ImageIcon;
 
 
 
+/**
+ * Clase encargada del juego 1 (Memory de cartas)
+ */
 public class Game1  implements MouseMotionListener, MouseListener { // Memorizar cartas
 	
 	
@@ -120,6 +123,12 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 
 	
 	
+	/**
+	 * Constructor del juego 1
+	 * @param dificultad Dificultad del juego 1 según la cual aparecerán más o menos cartas
+	 * @param nombreJugador	nombre del jugador (se usa para la base de datos)
+	 * @param idPart identificador de la partida (se usa para la base de datos)
+	 */
 	public Game1(int dificultad, String nombreJugador, int idPart) {
 		
 		puntTotal = dificultad;
@@ -242,6 +251,11 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 				
 	}
 	
+	/**
+	 * Obtener imagen de una Carta segun su posición en el array de cartas seleccionadas
+	 * @param index posición de la carta en el array de cartas
+	 * @return Devuelve la imagen de la carta.
+	 */
 	public Image getImagenCarta(int index) {
 		
 		if(selectCards.get(index).getId() == "card_hearts_A") {
@@ -270,6 +284,10 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 	}
 	
 	
+	/**
+	 * Comprueba si todas las cartas están levantadas
+	 * @return Devuelve True si lo están y False si no
+	 */
 	public boolean todasLevantadas() {
 		for(Carta c : selectCards) {
 			if(!c.isArriba())
@@ -278,6 +296,9 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 		return true;
 	}
 	
+	/**
+	 * Reproduce el sonido de dar la vuelta a la carta
+	 */
 	private void sonidoCarta() {
 		String filePath = new File("").getAbsolutePath();				// Ruta hasta el proyecto
 		String s1_filePath = filePath.concat("/minigamble/src/minigamble/sonido/levantar_carta.wav");	//Continuación de la ruta hasta el archivo de audio 1
@@ -292,6 +313,10 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 		
 	}
 	
+	/**
+	 * Realiza un delay en Segundos
+	 * @param n numero de segundos que se quiere hacer el delay
+	 */
 	private void delaySeg(int n) {
 		try {
 			TimeUnit.SECONDS.sleep(n);
@@ -302,6 +327,10 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 		
 	}
 	
+	/**
+	 * Realiza un delay en Milisegundo
+	 * @param n numero de Milisegundo que se quiere hacer el delay
+	 */
 	private void delayMS(int n) {
 		try {
 			TimeUnit.MILLISECONDS.sleep(n);
@@ -312,6 +341,14 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 		
 	}
 	
+	/**
+	 * Genera una matriz encargada de la distribución de las cartas
+	 * @param ncol Número de columnas de la matriz
+	 * @param nfil Número de filas de la matriz
+	 * @param xCarta Anchura de la carta
+	 * @param yCarta Altura de la carta
+	 * @return Devuelve la matriz con las posiciones en las que deben colocarse las cartas
+	 */
 	private ArrayList<ArrayList<ArrayList<Integer>>> generaMatriz(int ncol, int nfil, int xCarta, int yCarta) {
 		ArrayList<ArrayList<ArrayList<Integer>>> matriz = new ArrayList<ArrayList<ArrayList<Integer>>>();
 		
@@ -519,7 +556,16 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 	public void mouseMoved(MouseEvent e) {			
 	}
 	
-	
+	/**	Evalua si el ratón está sobre una región
+	 * @param mx posición X del ratón
+	 * @param my posición Y del ratón
+	 * @param x	posición X en la que comienza la región
+	 * @param y	posición Y en la que comienza la región
+	 * @param width	anchura de la región
+	 * @param heigth altura de la región
+	 * @return True si el ratón está sobre esa región y False si no lo está
+	 * 
+	 */
 	public boolean mouseOver(int mx, int my, int x, int y, int width, int heigth) {   // devuelve true si el raton ha sido presionado dentro de un cuadrado 
 		
 		if(mx > x && mx < x + width) {
@@ -532,6 +578,10 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 			return false;
 		}}
 	
+	
+	/** Hace el render de los elementos
+	 * @param g recibe Grephics de Game
+	 */
 	public void render(Graphics g) {
 	
 		g.setColor(Color.decode("#208b3a"));
