@@ -15,6 +15,14 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 
+
+/** 
+ * Ventana con cuatros botones: 
+ * <h2>SignIn</h2>
+ * <h2>LogIn</h2>
+ * <h2>Quick play</h2>
+ * <h2>Back</h2>
+ */
 public class StartScreen implements MouseMotionListener, MouseListener{
 	
 //	public  static Font customFont;
@@ -56,6 +64,9 @@ public class StartScreen implements MouseMotionListener, MouseListener{
 	private Font customFontBot;
 	
 	
+	/**
+	 *  Constructor de StartScreen
+	 */
 	public StartScreen() {
 		
 		try {
@@ -267,7 +278,16 @@ public class StartScreen implements MouseMotionListener, MouseListener{
 	
 	
 	
-	
+	/**	Evalua si el ratón está sobre una región
+	 * @param mx posición X del ratón
+	 * @param my posición Y del ratón
+	 * @param x	posición X en la que comienza la región
+	 * @param y	posición Y en la que comienza la región
+	 * @param width	anchura de la región
+	 * @param heigth altura de la región
+	 * @return True si el ratón está sobre esa región y False si no lo está
+	 * 
+	 */
 	public boolean mouseOver(int mx, int my, int x, int y, int width, int heigth) {   // devuelve true si el raton ha sido presionado dentro de un cuadrado 
 		
 		if(mx > x && mx < x + width) {
@@ -297,22 +317,15 @@ public class StartScreen implements MouseMotionListener, MouseListener{
 
 	
 	
+	/** Hace el render de los elementos
+	 * @param g recibe Grephics de Game
+	 */
 	public void render(Graphics g) {
 		
-
-		
-		
 		Font fButton = new Font("arial", 1 ,30); //Fuente de los botones
-		
-				
-		
-		
-		
-		
+
 		g.drawImage(backgroundIMG, 0, 0, null);   // Dibuja el fondo
-		
 	
-		
 	try {
          
 		g.setFont(customFontBot);
