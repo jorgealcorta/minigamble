@@ -17,14 +17,15 @@ public class Game2 implements KeyListener{
 	
 	private int start = 1; //1 = esperando, 2 = reproduciendo, 3 = jugando, 4 = ganado
 	
+	// Contador de flechas pulsadas por el usuario durante el periodo de juego.
 	private int cuentaPulsaciones = -1;
 	
+	// Booleanos utilizados en render para elegir si dibujar las fichas transparentes o rellenas.
 	private boolean coraDestacar = false;
 	private boolean diamDestacar = false;
 	private boolean picaDestacar = false;
 	private boolean trebDestacar = false;
 
-	
 	private Font customFontBot;
 	private Font customFontFin;
 	
@@ -51,8 +52,13 @@ public class Game2 implements KeyListener{
 	
 	private Image crossarrow_IMG;
 	
+	// ArrayList empleado para almacenar los cuatro posibles palos.
 	private ArrayList<String> palos = new ArrayList<String>();
+	
+	// ArrayList empleado para almacenar la combinacion de palos generada aleatoriamente.
 	private ArrayList<String> palosCorrectos = new ArrayList<String>();
+	
+	// ArrayList empleado para almacenar la combinacion de palos introducida por el usuario, se reinicia en cada intento.
 	private ArrayList<String> palosUsuario = new ArrayList<String>();
 
 
@@ -126,6 +132,10 @@ public class Game2 implements KeyListener{
 					
 		}
 
+	/**
+	 * Realiza un delay en Segundos
+	 * @param n numero de segundos que se quiere hacer el delay
+	 */
 	private void delaySeg(int n) {
 		try {
 			TimeUnit.SECONDS.sleep(n);
@@ -136,7 +146,10 @@ public class Game2 implements KeyListener{
 		
 	}
 	
-	
+	/**
+	 * Realiza un delay en Milisegundo
+	 * @param n numero de Milisegundo que se quiere hacer el delay
+	 */
 	private void delayMS(int n) {
 		try {
 			TimeUnit.MILLISECONDS.sleep(n);
@@ -159,6 +172,12 @@ public class Game2 implements KeyListener{
 		
 		int key = e.getKeyCode();
 		
+		/* 
+		 * Si se ha pulsado el espacio cuando el juego está en start=1, se inicia un for que recorre
+		 * la lista de palos correctos, cambiando el booleano de destacar del palo que corresponda,
+		 * durante un pequeño tiempo:
+		 */
+		 
 		if(key == 32 && start==1) { //reproducir secuencia
 			start = 2;
 			for(String palo : palosCorrectos) {
@@ -193,6 +212,12 @@ public class Game2 implements KeyListener{
 			start = 3;
 		}
 		
+		/*
+		 * Si el juego esta en start=3, se reaccionara ante el input de las cuatro flechas del teclado, cada cual
+		 * corresponde a uno de los palos disponibles. En el keyPressed unicamente se gestionara el booleano
+		 * de destacar, y mas adelante, en el keyPressed, se gestionara la pulsacion del palo.
+		 */
+		
 		if(start == 3) {
 			
 			switch(key){
@@ -219,6 +244,11 @@ public class Game2 implements KeyListener{
 	public void keyReleased(KeyEvent e) {
 		int key = e.getKeyCode();
 		
+		/*
+		 * Si start=3 y se suelta una de las cuatro flechas, el booleano de esa flecha se pondra en false, dejando de destacarlo,
+		 * a continuacion se agregara el palo correspondiente a la flecha pulsada al ArrayList del input y aumentara el
+		 * contador de inputs.
+		 */
 		if(start == 3) {
 			switch(key){
 			
@@ -247,7 +277,12 @@ public class Game2 implements KeyListener{
 			
 			System.out.println(palosUsuario);
 			
-	
+			/*
+			 * En el caso de que el palo introducido por el usuario no coincida con el correspondiente a su posicion
+			 * en el ArrayList correcto, el usuario habra cometido un fallo. Mientras este trozo de codigo no se ejecute,
+			 * el usuario estará haciendolo bien.
+			 */
+			
 			if(palosUsuario.size() > 0 && palosUsuario.get(cuentaPulsaciones) != palosCorrectos.get(cuentaPulsaciones)) {
 				System.out.println(palosUsuario);
 				palosUsuario.removeAll(palosUsuario);
@@ -255,6 +290,11 @@ public class Game2 implements KeyListener{
 				start = 1;
 				System.out.println("error");
 			}
+			
+			/*
+			 * En el caso de que el usuario haya introducido tantas pulsaciones como palos hay en el ArrayList correcto,
+			 * el usuario habra introducido la combinacion correctamente sin que el bloque de encima lo haya interrumpido.
+			 */
 			
 			if(cuentaPulsaciones == palosCorrectos.size() - 1 && palosUsuario.get(cuentaPulsaciones) == palosCorrectos.get(cuentaPulsaciones)) {
 				start = 4;
@@ -265,9 +305,17 @@ public class Game2 implements KeyListener{
 		}	
 	}
 	
+	/** Hace el render de los elementos
+	 * @param g recibe Graphics de Game
+	 */
 	public void render(Graphics g) {
 		g.setColor(Color.decode("#208b3a"));
 		g.fillRect(0, 0, 1200, 700);
+		
+		/*
+		 * Si el juego esta en start=1, se dibujan todas las fichas transparentes y se muestra un texto que muestra al usuario
+		 * que pulse la barra espaciadora para reproducir la combinacion correcta. 
+		 */
 		
 		if(start == 1) {
 			g.setFont(customFontBot);
@@ -282,6 +330,12 @@ public class Game2 implements KeyListener{
 			g.setColor(Color.BLACK);
 			g.drawString("PULSA ESPACIO PARA REPRODUCIR LA COMBINACION", 200, 60);
 		}
+		
+		/*
+		 * Si el juego esta en start=2, se dibujan todas las fichas, transparentes o destacadas, dependiendo del booleano destacar
+		 * de cada ficha, ya que es en start=2 donde el bucle for este recorriendo la combinacion correcta y destacando los
+		 * palos correspondientes.
+		 */
 		
 		else if(start == 2) {
 			g.setColor(Color.BLACK);
@@ -312,6 +366,11 @@ public class Game2 implements KeyListener{
 			g.drawImage(crossarrow_IMG, 520, 285, null);
 	
 		}
+		
+		/*
+		 * Si el juego esta en start=3, el programa esta recibiendo el input. Queremos que la ficha se dibuje transparente en todo
+		 * momento, y que cuando el usuario tenga la tecla correspondiente pulsada, la ficha se destaque.
+		 */
 		
 		else if(start == 3) {
 			g.setColor(Color.BLACK);
