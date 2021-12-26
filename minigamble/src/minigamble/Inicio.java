@@ -15,6 +15,9 @@ import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 
 
+/** 
+ * Primera ventana en la que están los botones Empezar y Salir
+ */
 public class Inicio   implements MouseMotionListener, MouseListener  {
 	
 //	public  static Font customFont;
@@ -44,6 +47,9 @@ public class Inicio   implements MouseMotionListener, MouseListener  {
 	private int mdy;
 	
 	
+	/**
+	 * Constructor de la primera ventana
+	 */
 	public Inicio() {
 		
 		try {
@@ -84,9 +90,6 @@ public class Inicio   implements MouseMotionListener, MouseListener  {
 		
 		
 	}
-	
-	
-	
 	
 	
 	
@@ -189,7 +192,17 @@ public class Inicio   implements MouseMotionListener, MouseListener  {
 	
 	
 	
-	public boolean mouseOver(int mx, int my, int x, int y, int width, int heigth) {   // devuelve true si el raton ha sido presionado dentro de un cuadrado 
+	/**	Evalua si el ratón está sobre una región
+	 * @param mx posición X del ratón
+	 * @param my posición Y del ratón
+	 * @param x	posición X en la que comienza la región
+	 * @param y	posición Y en la que comienza la región
+	 * @param width	anchura de la región
+	 * @param heigth altura de la región
+	 * @return True si el ratón está sobre esa región y False si no lo está
+	 * 
+	 */
+	public boolean mouseOver(int mx, int my, int x, int y, int width, int heigth) {  
 		
 		if(mx > x && mx < x + width) {
 			if(my > y && my < y + heigth) {
@@ -218,6 +231,9 @@ public class Inicio   implements MouseMotionListener, MouseListener  {
 
 	
 	
+	/** Hace el render de los elementos
+	 * @param g recibe Grephics de Game
+	 */
 	public void render(Graphics g) {
 		
 		Font title = new Font("serif", 1 ,50);  //Fuente del título
@@ -283,10 +299,6 @@ public class Inicio   implements MouseMotionListener, MouseListener  {
 			g.drawString("Minigamble", 430, 150); //Dibuja el titulo en caso de que no se encuentre la fuente
 		}
 		
-		
-		
-		//g.drawRect(500, 290, 190, 50); 		//posicion del boton 1
-		//g.drawRect(500, 390, 190, 50); 		//posicion del boton 2
 	
 	}
 
