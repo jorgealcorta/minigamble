@@ -73,7 +73,7 @@ public class BaseDatos {
 	
 	/**	Inserta un Jugador en la base de datos previamente abierta con {@link #abrirConexion(String, boolean)}
 	 * @param nombre Nombre del jugador que se quiere insertar
-	 * @param password Contraseña del jugador cifrada mediante {@link minigamble.Hash#getHash(String, String)}
+	 * @param password Contraseña del jugador cifrada mediante {@link minigamble.Hash#md5(String)}
 	 * @return Devuelve True si se inserta correctamente
 	 */
 	public static boolean insertarJugador( String nombre, String password) {

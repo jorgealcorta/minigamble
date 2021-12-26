@@ -1,11 +1,18 @@
 package minigamble;
 
 public class Hash {
+
 	
-	public static String getHash(String txt, String hashType) {
+	
+    /**
+     * Método que de un String devuelve otro String encriptado mediante el algoritmo MD5
+     * @param txt Strig que se quiere encriptar
+     * @return String encriptado
+     */
+    public static String md5(String txt) {
         try {
             java.security.MessageDigest md = java.security.MessageDigest
-                    .getInstance(hashType);
+                    .getInstance("MD5");
             byte[] array = md.digest(txt.getBytes());
             StringBuffer sb = new StringBuffer();
             for (int i = 0; i < array.length; ++i) {
@@ -17,15 +24,9 @@ public class Hash {
             System.out.println(e.getMessage());
         }
         return null;
+        
+        
+        
     }
- 
-    /* Retorna un hash MD5 a partir de un texto */
-    public static String md5(String txt) {
-        return Hash.getHash(txt, "MD5");
-    }
- 
-    /* Retorna un hash SHA1 a partir de un texto */
-    public static String sha1(String txt) {
-        return Hash.getHash(txt, "SHA1");
-    }
+
 }
