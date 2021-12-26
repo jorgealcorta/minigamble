@@ -239,7 +239,7 @@ public class LogIn implements MouseMotionListener, MouseListener, KeyListener{
 				
 				BaseDatos.insertarJugador(usuario, contrasena_segura);
 				int idPart = BaseDatos.insertarPartida(usuario);
-				Game.partida  = new Partida(0,0,null , null, usuario, idPart);
+				Game.partida  = new Partida(0,0, null, usuario, idPart);
 				
 			}
 			

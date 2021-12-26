@@ -533,7 +533,7 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 								start = 4;
 								delaySeg(1);
 								BaseDatos.insertarGame1(idPartida, puntTotal - puntIni, fallos, primeraCarta, tiempoPrimeraCarta, tiempoTotal);
-								Game.partida  = new Partida( puntTotal ,0,null , null, jugador, idPartida);
+								Game.partida  = new Partida( puntTotal ,0, null, jugador, idPartida);
 								
 							}
 							

@@ -15,6 +15,13 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 
+/** 
+ * Ventana encargada de empezar el juego con jugadores nuevos: 
+ * <h2>Textfield para nombre no registrado</h2>
+ * <h2>Textfield para contraseña</h2>
+ * <h2>Botón para comenzar si usuario y contraseña son correctos</h2>
+ * <h2>Botón para volver atrás</h2>
+ */
 public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 	
 	private ImageIcon background;	// Fondo
@@ -61,6 +68,9 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 	private int mdx;
 	private int mdy;
 	
+	/**
+	 * Constructor de SignIn
+	 */
 	public SignIn() {
 		
 		try {
@@ -211,7 +221,7 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 				
 				BaseDatos.insertarJugador(usuario, contrasena_segura);
 				int idPart = BaseDatos.insertarPartida(usuario);
-				Game.partida  = new Partida(0,0,null , null, usuario, idPart);
+				Game.partida  = new Partida(0,0, null, usuario, idPart);
 				
 			}
 			
@@ -314,7 +324,16 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 	
 	
 	
-	
+	/**	Evalua si el ratón está sobre una región
+	 * @param mx posición X del ratón
+	 * @param my posición Y del ratón
+	 * @param x	posición X en la que comienza la región
+	 * @param y	posición Y en la que comienza la región
+	 * @param width	anchura de la región
+	 * @param heigth altura de la región
+	 * @return True si el ratón está sobre esa región y False si no lo está
+	 * 
+	 */
 	public boolean mouseOver(int mx, int my, int x, int y, int width, int heigth) {   // devuelve true si el raton ha sido presionado dentro de un cuadrado 
 		
 		if(mx > x && mx < x + width) {
@@ -329,7 +348,9 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 		}
 	}
 	
-	
+	/** Hace el render de los elementos
+	 * @param g recibe Grephics de Game
+	 */
 	public void render(Graphics g) {
 		
 		

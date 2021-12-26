@@ -259,7 +259,7 @@ public class Game2 implements KeyListener{
 			if(cuentaPulsaciones == palosCorrectos.size() - 1 && palosUsuario.get(cuentaPulsaciones) == palosCorrectos.get(cuentaPulsaciones)) {
 				start = 4;
 				delaySeg(2);
-				Game.partida  = new Partida(0,0,null , null, null, 0);
+				Game.partida  = new Partida(0,0, null, null, 0);
 			}
 			
 		}	

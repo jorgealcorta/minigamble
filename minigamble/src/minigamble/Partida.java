@@ -6,6 +6,9 @@ import java.lang.Math;
 
 import minigamble.Game.ESTADO;
 
+/**
+ * Clase encargada de generar una nueva partida
+ */
 public class Partida {
 	
 	public static int puntuacionGeneral = 0;
@@ -14,7 +17,15 @@ public class Partida {
 	public static ArrayList<Minijuego> minisJugados = new ArrayList<Minijuego>();
 		
 	
-	public Partida(int puntuacion, int vidasRestadas, String idUsuario, Minijuego miniJugado, String jugador, int idPartida) { //meter arraylist como atributo
+	/**
+	 * Constructor de Partida
+	 * @param puntuacion Puntuación de la partida
+	 * @param vidasRestadas Vidas que se restan  ¿¿¿???
+	 * @param miniJugado Juego al que se está jugando
+	 * @param jugador Nombre del jugador
+	 * @param idPartida ID de la partida que se está jugando
+	 */
+	public Partida(int puntuacion, int vidasRestadas, Minijuego miniJugado, String jugador, int idPartida) { //meter arraylist como atributo
 		
 		minisJugados.add(miniJugado);
 		puntuacionGeneral += puntuacion;
