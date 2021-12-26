@@ -129,6 +129,7 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 	 * @param nombreJugador	nombre del jugador (se usa para la base de datos)
 	 * @param idPart identificador de la partida (se usa para la base de datos)
 	 */
+	
 	public Game1(int dificultad, String nombreJugador, int idPart) {
 		
 		puntTotal = dificultad;
@@ -256,6 +257,7 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 	 * @param index posición de la carta en el array de cartas
 	 * @return Devuelve la imagen de la carta.
 	 */
+	
 	public Image getImagenCarta(int index) {
 		
 		if(selectCards.get(index).getId() == "card_hearts_A") {
@@ -553,7 +555,7 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 	public void mouseExited(MouseEvent e) {		
 	}
 	
-	public void mouseMoved(MouseEvent e) {			
+   	public void mouseMoved(MouseEvent e) {			
 	}
 	
 	/**	Evalua si el ratón está sobre una región
@@ -564,8 +566,8 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 	 * @param width	anchura de la región
 	 * @param heigth altura de la región
 	 * @return True si el ratón está sobre esa región y False si no lo está
-	 * 
 	 */
+	
 	public boolean mouseOver(int mx, int my, int x, int y, int width, int heigth) {   // devuelve true si el raton ha sido presionado dentro de un cuadrado 
 		
 		if(mx > x && mx < x + width) {

@@ -27,8 +27,19 @@ import javax.swing.ImageIcon;
 
 import minigamble.Game.ESTADO;
 
+
+
+
+/**
+ * Clase encargada del juego 3 (laberinto)
+ */
+
 public class Game3 implements MouseListener , MouseMotionListener {
 
+	private int dificultad;
+	private String jugador;
+	private int idPartida;
+	
 	private Image lab1Img;
 	private ImageIcon lab1Icon;
 	
@@ -65,21 +76,34 @@ public class Game3 implements MouseListener , MouseMotionListener {
 	
 	private Color pathColor;
 	
-	private int rNow;
-	private int gNow;
-	private int bNow;
-	
 	private ArrayList <Laberinto> allLabs = new ArrayList<Laberinto>();
 	private Laberinto thisLab;
 	
-	
+	private long tiempoComienzo = System.currentTimeMillis();
+	private long tiempoTotal;
 	private int start = 1;
+	private int numFallos = 0;
+	private int puntTotal;
+	private int puntLocal = 1000;
 	
 	Robot robot;
 	
-	public Game3(int dificultad) {
 	
-
+	
+	/**
+	 * Constructor del juego 3
+	 * @param dificultad Dificultad del juego 3 segun la cual se elegira un laberinto mas o menos dificil.
+	 * @param nombreJugador	nombre del jugador (se usa para la base de datos)
+	 * @param idPart identificador de la partida (se usa para la base de datos)
+	 */
+	
+	public Game3(int dificultad, String nombreJugador, int idPart) {
+	
+		puntTotal = dificultad;				
+		jugador = nombreJugador;
+		idPartida = idPart;
+		
+		
 		try {
 		
 		bStart_false = new ImageIcon( Game.class.getResource("multimedia/red_button2.png").toURI().toURL() );
@@ -140,10 +164,35 @@ public class Game3 implements MouseListener , MouseMotionListener {
 	}
 	
 	
-	public Laberinto getRandom( ArrayList<Laberinto> array) {
+	/**
+	 * Realiza un delay en Segundos
+	 * @param n numero de segundos que se quiere hacer el delay
+	 */
+	
+	private void delaySeg(int n) {
+		try {
+			TimeUnit.SECONDS.sleep(n);
+		} catch (InterruptedException b) {
+			// TODO Auto-generated catch block
+			b.printStackTrace();
+		}
+		
+	}
+	
+	public Laberinto getRandom( ArrayList<Laberinto> array ) {
 	    int rnd = new Random().nextInt(array.size());
 	    return array.get(rnd);
 	}
+	
+	/**	Evalua si el raton está sobre una region
+	 * @param mx posicion X del raton
+	 * @param my posicion Y del raton
+	 * @param x	posicion X en la que comienza la region
+	 * @param y	posicion Y en la que comienza la region
+	 * @param width	anchura de la region
+	 * @param heigth altura de la region
+	 * @return True si el raton esta sobre esa region y False si no lo esta. 
+	 */
 	
 	public boolean mouseOver(int mx, int my, int x, int y, int width, int heigth) {   // devuelve true si el raton ha sido presionado dentro de un cuadrado 
 		
@@ -264,15 +313,22 @@ public class Game3 implements MouseListener , MouseMotionListener {
 					pathColor = robot.getPixelColor(startX, startY);
 				}
 							
-				rNow = robot.getPixelColor(Mox, Moy).getRed();
-				bNow = robot.getPixelColor(Mox, Moy).getBlue();
-				gNow = robot.getPixelColor(Mox, Moy).getGreen();
-
-				
+							
 				if(robot.getPixelColor(Mox, Moy).getRGB() != pathColor.getRGB()) {
-					robot.mouseMove(startX, startY);					
+					robot.mouseMove(startX, startY);	
+					numFallos = numFallos +1;
+					puntLocal = (int)Math.round( puntLocal * 0.66);
+					
+					
 				} else if ( mouseOver(mox, moy, 41, 43, 178, 88)) {
-					start = 3;	
+					tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
+					delaySeg(2);
+					start = 3;
+					delaySeg(1);
+					BaseDatos.insertarGame3(idPartida, puntTotal + puntLocal, numFallos, tiempoTotal);
+					Game.partida  = new Partida( puntTotal ,0, null, jugador, idPartida);
+					
+					
 				} 
 			}				
 			}
@@ -317,6 +373,8 @@ public class Game3 implements MouseListener , MouseMotionListener {
 		
 		if (start==2) {			
 			g.drawImage(thisLab.getImage() ,0, 0,1190,665,  null);
+			g.drawString(String.valueOf(puntLocal + puntTotal), 30, 1000);			
+			
 		}
 		
 		if(start ==3) {

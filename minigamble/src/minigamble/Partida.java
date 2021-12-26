@@ -40,15 +40,15 @@ public class Partida {
 		minijuegos.add(ESTADO.Game5);
 		minijuegos.add(ESTADO.Game6);
 		
-		int rand = (int) (Math.random() * 2);
+		int rand = (int) (Math.random() * 3);
 		System.out.println(rand);
 		while(Game.estadoJuego == minijuegos.get(rand)) {
-			rand = (int) (Math.random() * 2);
+			rand = (int) (Math.random() * 3);
 			System.out.println(rand);
 		}
 		
 
-		rand=1 ; //PARA HACER PRUEBAS, LUEGO BORRARRRRRRRRRRRRRRRRRRRRRRRR
+		//rand=2 ; //PARA HACER PRUEBAS, LUEGO BORRARRRRRRRRRRRRRRRRRRRRRRRR
 
 
 		
@@ -63,7 +63,7 @@ public class Partida {
 			Game.eventoRaton();
 			
 		} else if(rand==2) {
-			Game.game3 = new Game3(puntuacionGeneral);
+			Game.game3 = new Game3(puntuacionGeneral, jugador, idPartida);
 			Game.estadoJuego = minijuegos.get(rand);
 			Game.eventoRaton();
 			
