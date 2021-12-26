@@ -152,7 +152,7 @@ public class Game3 implements MouseListener , MouseMotionListener {
 		allLabs.add(lab2);
 		allLabs.add(lab3);
 		
-		thisLab = getRandom(allLabs);		
+		thisLab = getRandom(allLabs, dificultad);		
 		
 		try {
 			robot = new Robot();
@@ -179,12 +179,21 @@ public class Game3 implements MouseListener , MouseMotionListener {
 		
 	}
 	
-	public Laberinto getRandom( ArrayList<Laberinto> array ) {
+	
+	
+	
+	/**
+	 * Elige un laberinto en funcion de la dificultad que reciba
+	 * @param array Arraylist con todos los laberintos disponibles
+	 * @return el laberinto elegido
+	 */
+	
+	public Laberinto getRandom( ArrayList<Laberinto> array, int dificultad) {
 	    int rnd = new Random().nextInt(array.size());
 	    return array.get(rnd);
 	}
 	
-	/**	Evalua si el raton está sobre una region
+	/**	Evalua si el raton esta sobre una region
 	 * @param mx posicion X del raton
 	 * @param my posicion Y del raton
 	 * @param x	posicion X en la que comienza la region
@@ -324,7 +333,7 @@ public class Game3 implements MouseListener , MouseMotionListener {
 					start = 3;
 					tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
 					delaySeg(2);
-					BaseDatos.insertarGame3(idPartida, puntLocal, numFallos, tiempoTotal);
+					BaseDatos.insertarGame3(idPartida, puntLocal, numFallos, tiempoTotal, thisLab.getId());
 					Game.partida  = new Partida( puntTotal ,0, null, jugador, idPartida);
 					
 					
