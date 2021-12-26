@@ -51,6 +51,14 @@ public class BaseDatos {
 				sent = "CREATE TABLE game1 (id INTEGER PRIMARY KEY AUTOINCREMENT ,idPartida int, puntuacion int, fallos int, primera_carta varchar(20), tiempo_primera_carta bigint, tiempo_total bigint);";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
+			
+				sent = "DROP TABLE IF EXISTS game3";
+				logger.log( Level.INFO, "Statement: " + sent );
+				statement.executeUpdate( sent );
+				sent = "CREATE TABLE game3 (id INTEGER PRIMARY KEY AUTOINCREMENT ,idPartida int, puntuacion int, fallos int, tiempo_total bigint);";
+				logger.log( Level.INFO, "Statement: " + sent );
+				statement.executeUpdate( sent );
+			
 			}
 			return true;
 		} catch(Exception e) {
@@ -133,17 +141,15 @@ public class BaseDatos {
 	
 	/** Inserta una Game1 en la base de datos previamente abierta con {@link #abrirConexion(String, boolean)}
 	 * @param idPartida ID de la partida que se está jugando
-	 * @param puntuacion Puntuacion obtenida en Game1
+	 * @param puntuacion Puntuacion obtenida en Game3
 	 * @param fallos Numero de fallos cometidos
-	 * @param primeraCarta Primera carta levantada
-	 * @param tiempoPrimCar Tiempo hasta levantar la primera carta
 	 * @param tiempoTot Tiempo total en terminar el juego
 	 * @return devuelve True si se hace correctamente
 	 */
 	
 	public static boolean insertarGame3( int idPartida, int puntuacion, int fallos, long tiempoTot) {
 		try (Statement statement = conexion.createStatement()) {
-			String sent = "insert into game1 (idPartida, puntuacion, fallos, primera_carta, tiempo_primera_carta, tiempo_total ) values (" + idPartida + ", " + puntuacion + ", "+ fallos + ", '"+ primeraCarta +"', " + tiempoPrimCar + ", " + tiempoTot + " );";											
+			String sent = "insert into game3 (idPartida, puntuacion, fallos, tiempo_total ) values (" + idPartida + ", " + puntuacion + ", "+ fallos + ", " + tiempoTot + " );";											
 			logger.log( Level.INFO, "Statement: " + sent );
 			int insertados = statement.executeUpdate( sent );
 			if (insertados!=1) return false;  // Error en inserción

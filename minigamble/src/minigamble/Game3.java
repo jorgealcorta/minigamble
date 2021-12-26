@@ -321,11 +321,10 @@ public class Game3 implements MouseListener , MouseMotionListener {
 					
 					
 				} else if ( mouseOver(mox, moy, 41, 43, 178, 88)) {
+					start = 3;
 					tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
 					delaySeg(2);
-					start = 3;
-					delaySeg(1);
-					BaseDatos.insertarGame3(idPartida, puntTotal + puntLocal, numFallos, tiempoTotal);
+					BaseDatos.insertarGame3(idPartida, puntLocal, numFallos, tiempoTotal);
 					Game.partida  = new Partida( puntTotal ,0, null, jugador, idPartida);
 					
 					
@@ -350,9 +349,6 @@ public class Game3 implements MouseListener , MouseMotionListener {
 		}
 	}
 	
-	
-	
-	
 	public void render(Graphics g) {
 		
 		g.setColor(Color.decode("#208b3a"));
@@ -373,7 +369,8 @@ public class Game3 implements MouseListener , MouseMotionListener {
 		
 		if (start==2) {			
 			g.drawImage(thisLab.getImage() ,0, 0,1190,665,  null);
-			g.drawString(String.valueOf(puntLocal + puntTotal), 30, 1000);			
+			g.setFont(customFontBot);
+			g.drawString(String.valueOf(puntLocal + puntTotal), 1100, 40);			
 			
 		}
 		
