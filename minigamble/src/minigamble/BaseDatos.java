@@ -9,12 +9,19 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Clase encargada de la gestión de la base de datos de los juegos y usuarios
+ */
 public class BaseDatos {
 
 	private static Connection conexion;
 	private static Logger logger = Logger.getLogger( "BaseDatos" );
 	
-
+	/** Abre conexión con la base de datos
+	 * @param nombreBD	Nombre del fichero de base de datos (minigamble)
+	 * @param reiniciaBD	true si se quiere reiniciar la base de datos solo se borran los datos almazenados
+	 * @return	true si la conexión ha sido correcta, false en caso contrario
+	 */
 	public static boolean abrirConexion( String nombreBD, boolean reiniciaBD ) {
 		try {
 			logger.log( Level.INFO, "Carga de librería org.sqlite.JDBC" );
@@ -52,7 +59,7 @@ public class BaseDatos {
 		}
 	}	
 	
-	/** Cierra la conexión abierta de base de datos ({@link #abrirConexion(String)})
+	/** Cierra la conexión abierta de base de datos ({@link #abrirConexion(String, boolean)})
 	 */
 	public static void cerrarConexion() {
 		try {
@@ -63,14 +70,18 @@ public class BaseDatos {
 		}
 	}
 	
+	
+	/**	Inserta un Jugador en la base de datos previamente abierta con {@link #abrirConexion(String, boolean)}
+	 * @param nombre Nombre del jugador que se quiere insertar
+	 * @param password Contraseña del jugador cifrada mediante {@link minigamble.Hash#getHash(String, String)}
+	 * @return Devuelve True si se inserta correctamente
+	 */
 	public static boolean insertarJugador( String nombre, String password) {
 		try (Statement statement = conexion.createStatement()) {
 			String sent = "insert into jugador (nombre, password) values ('" + nombre + "','" + password + "');";
 			logger.log( Level.INFO, "Statement: " + sent );
 			int insertados = statement.executeUpdate( sent );
-			if (insertados!=1) return false;  // Error en inserción
-			// Búsqueda de la fila insertada - para ello hay que recuperar la clave autogenerada. Hay varias maneras, vemos dos diferentes:
-			// Se hace utilizando método del propio objeto statement
+			if (insertados!=1) return false;
 			return true;
 		} catch (Exception e) {
 			logger.log( Level.SEVERE, "Excepción", e );
@@ -78,15 +89,19 @@ public class BaseDatos {
 		}
 	}
 	
+	/** Inserta una Partida en la base de datos previamente abierta con {@link #abrirConexion(String, boolean)}
+	 * @param jugador Nombre del jugador que juega la partida
+	 * @return Devuelve True si se inserta correctamente
+	 */
 	public static int insertarPartida( String jugador) {
 		try (Statement statement = conexion.createStatement()) {
 			String sent = "insert into partida (nombre, fecha) values ('" + jugador + "', " + System.currentTimeMillis() +");";
 			logger.log( Level.INFO, "Statement: " + sent );
 			int insertados = statement.executeUpdate( sent );
-			if (insertados!=1) return -1;  // Error en inserción
-			ResultSet rrss = statement.getGeneratedKeys();  // Genera un resultset ficticio con las claves generadas del último comando
-			rrss.next();  // Avanza a la única fila 
-			int pk = rrss.getInt( 1 );  // Coge la única columna (la primary key autogenerada)
+			if (insertados!=1) return -1;
+			ResultSet rrss = statement.getGeneratedKeys();
+			rrss.next();
+			int pk = rrss.getInt( 1 );
 			return(pk);
 		} catch (Exception e) {
 			logger.log( Level.SEVERE, "Excepción", e );
@@ -94,6 +109,15 @@ public class BaseDatos {
 		}
 	}
 	
+	/** Inserta una Game1 en la base de datos previamente abierta con {@link #abrirConexion(String, boolean)}
+	 * @param idPartida ID de la partida que se está jugando
+	 * @param puntuacion Puntuacion obtenida en Game1
+	 * @param fallos Numero de fallos cometidos
+	 * @param primeraCarta Primera carta levantada
+	 * @param tiempoPrimCar Tiempo hasta levantar la primera carta
+	 * @param tiempoTot Tiempo total en terminar el juego
+	 * @return devuelve True si se hace correctamente
+	 */
 	public static boolean insertarGame1( int idPartida, int puntuacion, int fallos, String primeraCarta, long tiempoPrimCar, long tiempoTot) {
 		try (Statement statement = conexion.createStatement()) {
 			String sent = "insert into game1 (idPartida, puntuacion, fallos, primera_carta, tiempo_primera_carta, tiempo_total ) values (" + idPartida + ", " + puntuacion + ", "+ fallos + ", '"+ primeraCarta +"', " + tiempoPrimCar + ", " + tiempoTot + " );";											
@@ -107,6 +131,10 @@ public class BaseDatos {
 		}
 	}
 	
+	/** Comprueba si existe el nombre de un jugador en la base de datos
+	 * @param n Nombre del jugador a encontrar
+	 * @return Devuelve True si se encuentra y False si no
+	 */
 	public static boolean existeNombre(String n) {
 	
 		try (Statement statement = conexion.createStatement()) {
@@ -130,6 +158,11 @@ public class BaseDatos {
 		}
 	}
 	
+	/** Comprueba que dos contraseñas sean iguales para un jugador
+	 * @param n Nombre del jugador 
+	 * @param p Contraseña introducida (la que se va a comparar con la almacenada)
+	 * @return True si son iguales y False si no lo son
+	 */
 	public static boolean comparaContrasena(String n, String p) {
 		
 		try (Statement statement = conexion.createStatement()) {
@@ -143,8 +176,6 @@ public class BaseDatos {
 				String contrasena = rs.getString("password");
 				j.add(nombre);
 				j.add(contrasena);
-//				System.out.println(nombre);
-//				System.out.println(contrasena);
 				ret.add(j);
 			}
 			for(ArrayList<String> jugador : ret) {
