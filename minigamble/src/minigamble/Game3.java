@@ -49,8 +49,11 @@ public class Game3 implements MouseListener , MouseMotionListener {
 	private Image lab3Img;
 	private ImageIcon lab3Icon;
 	
-	private Image endingImg;
-	private ImageIcon endingIcon;
+	private Image endingImg1;
+	private ImageIcon endingIcon1;
+	
+	private Image endingImg2;
+	private ImageIcon endingIcon2;
 	
 	private Image bStartIMG_True;
 	private Image bStartIMG_False;
@@ -112,7 +115,8 @@ public class Game3 implements MouseListener , MouseMotionListener {
 		lab1Icon = new ImageIcon( Game.class.getResource("multimedia/laberintos/lab1.png").toURI().toURL() );
 		lab2Icon = new ImageIcon( Game.class.getResource("multimedia/laberintos/lab2.png").toURI().toURL() );
 		lab3Icon = new ImageIcon( Game.class.getResource("multimedia/laberintos/lab3.png").toURI().toURL() );
-		endingIcon = new ImageIcon( Game.class.getResource("multimedia/laberintos/endlab1.png").toURI().toURL() );
+		endingIcon1 = new ImageIcon( Game.class.getResource("multimedia/laberintos/endlab1.png").toURI().toURL() );
+		endingIcon2 = new ImageIcon( Game.class.getResource("multimedia/laberintos/endlab2.png").toURI().toURL() );
 		
 		} catch (Exception e1) {
 			e1.printStackTrace();
@@ -141,12 +145,12 @@ public class Game3 implements MouseListener , MouseMotionListener {
 		lab2Img = lab2Icon.getImage();
 		lab3Img = lab3Icon.getImage();
 		
-		endingImg = endingIcon.getImage();
-		
+		endingImg1 = endingIcon1.getImage();
+		endingImg2 = endingIcon2.getImage();
 		
 		Laberinto lab1 = new Laberinto(lab1Img, 001 );
 		Laberinto lab2 = new Laberinto(lab2Img, 002 );
-		Laberinto lab3 = new Laberinto(lab2Img, 003 );		
+		Laberinto lab3 = new Laberinto(lab3Img, 003 );		
 				
 		allLabs.add(lab1);
 		allLabs.add(lab2);
@@ -175,8 +179,7 @@ public class Game3 implements MouseListener , MouseMotionListener {
 		} catch (InterruptedException b) {
 			// TODO Auto-generated catch block
 			b.printStackTrace();
-		}
-		
+		}		
 	}
 	
 	
@@ -334,8 +337,12 @@ public class Game3 implements MouseListener , MouseMotionListener {
 					tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
 					delaySeg(2);
 					BaseDatos.insertarGame3(idPartida, puntLocal, numFallos, tiempoTotal, thisLab.getId());
-					Game.partida  = new Partida( puntTotal ,0, null, jugador, idPartida);
 					
+					if(numFallos>3) {
+						Game.partida  = new Partida( puntLocal ,1 , null, jugador, idPartida);
+					} else {
+						Game.partida  = new Partida( puntLocal ,0 , null, jugador, idPartida);
+					}
 					
 				} 
 			}				
@@ -378,17 +385,27 @@ public class Game3 implements MouseListener , MouseMotionListener {
 		
 		if (start==2) {			
 			g.drawImage(thisLab.getImage() ,0, 0,1190,665,  null);
+			customFontBot=customFontBot.deriveFont(Font.PLAIN,15);
 			g.setFont(customFontBot);
-			g.drawString(String.valueOf(puntLocal + puntTotal), 1100, 40);			
-			
+			g.setColor(Color.BLACK);
+			g.drawString("Points to obtain ( " + String.valueOf(puntLocal + puntTotal) +" )", 870, 40);						
+			g.drawString("Number of mistakes ( "+String.valueOf(numFallos)+" )", 845, 20);			
+
 		}
 		
 		if(start ==3) {
 			g.drawImage(thisLab.getImage() ,0, 0,1190,665,  null);
-			g.drawImage(endingImg, 100, 45, 80, 80, null);
+			
 			g.setFont(customFontFin);
 			g.setColor(Color.BLACK);
-			g.drawString("Congrats, you passed!!", 160, 326);
+			if(numFallos<3) {
+				g.drawString("Congrats, you passed!!", 160, 326);
+				g.drawImage(endingImg1, 100, 45, 80, 80, null);
+			} else {
+				g.drawString("Sorry.. too many mistakes", 160, 326);
+				g.drawImage(endingImg2, 100, 45, 80, 80, null);
+			}
+			
 			
 		}
 	

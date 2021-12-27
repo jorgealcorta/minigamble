@@ -27,9 +27,13 @@ public class Partida {
 	 */
 	public Partida(int puntuacion, int vidasRestadas, Minijuego miniJugado, String jugador, int idPartida) { //meter arraylist como atributo
 		
+		System.out.println("puntuacion:" +puntuacionGeneral);
+		System.out.println("vidas;"+vidas); 
+		
 		minisJugados.add(miniJugado);
 		puntuacionGeneral += puntuacion;
 		vidas -= vidasRestadas; //OJO, ESTA RESTANDO
+		System.out.println(vidas);
 		
 		ArrayList<ESTADO> minijuegos = new ArrayList<ESTADO>();
 
@@ -41,7 +45,7 @@ public class Partida {
 		minijuegos.add(ESTADO.Game6);
 		
 		int rand = (int) (Math.random() * 3);
-		System.out.println(rand);
+		
 		while(Game.estadoJuego == minijuegos.get(rand)) {
 			rand = (int) (Math.random() * 3);
 			System.out.println(rand);
@@ -50,30 +54,30 @@ public class Partida {
 
 		rand=2 ; //PARA HACER PRUEBAS, LUEGO BORRARRRRRRRRRRRRRRRRRRRRRRRR
 
-
-		
-		if(rand == 0) {
-			Game.game1 = new Game1(puntuacionGeneral, jugador, idPartida);
-			Game.estadoJuego = minijuegos.get(rand);
-			Game.eventoRaton();
-						
-		} else if(rand==1) {
-			Game.game2 = new Game2(puntuacionGeneral);
-			Game.estadoJuego = minijuegos.get(rand);
-			Game.eventoRaton();
-			
-		} else if(rand==2) {
-			Game.game3 = new Game3(puntuacionGeneral, jugador, idPartida);
-			Game.estadoJuego = minijuegos.get(rand);
-			Game.eventoRaton();
-			
-		} else if(rand==3) {
-			Game.game4 = new Game4(puntuacionGeneral);
-			Game.estadoJuego = minijuegos.get(rand);
-			Game.eventoRaton();
+		if(vidas<1 ) {
+			Game.estadoJuego= ESTADO.Start;
+		}else {				
+			if(rand == 0) {
+				Game.game1 = new Game1(puntuacionGeneral, jugador, idPartida);
+				Game.estadoJuego = minijuegos.get(rand);
+				Game.eventoRaton();
+							
+			} else if(rand==1) {
+				Game.game2 = new Game2(puntuacionGeneral);
+				Game.estadoJuego = minijuegos.get(rand);
+				Game.eventoRaton();
+				
+			} else if(rand==2) {
+				Game.game3 = new Game3(puntuacionGeneral, jugador, idPartida);
+				Game.estadoJuego = minijuegos.get(rand);
+				Game.eventoRaton();
+				
+			} else if(rand==3) {
+				Game.game4 = new Game4(puntuacionGeneral);
+				Game.estadoJuego = minijuegos.get(rand);
+				Game.eventoRaton();
+			}
 		}
-		
-		
 		
 		
 	}
