@@ -22,16 +22,6 @@ import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 
 
-//Voy a hacer un arraylist que guarde todas las coordenadas (arraylist de 2) de todas las dianas.
-//Si al hacer click el arraylist de las coordenadas concuerda con alguna que esté en el rango de las dianas
-//(es decir, centro +- radio, se suman los //puntos de haber roto una diana, se borran las coordenadas 
-//del arraylist de coordenadas activas, y se dibuja dianaRota durante unos milisegundos. Tener cuidado,
-//diana nueva no se puede dibujar dentro de diana existente.
-
-
-//Crear un unico hilo que gestiona todas las dianas, cada diana tiene un timestamp de cuando se ha disparado. Momento creaciom, momento disparo, momento quitar, recorrer todas las dianas y jugar con los timestamps??
-
-
 public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 	
 	private Image bStartIMG_True;
@@ -56,10 +46,15 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 	private Image dianaRota_IMG;
 	private Image mira_IMG;
 	
+	// ArrayList que almacena las dianas generadas aleatoriamente.
 	private ArrayList<Diana> dianasCreadas = new ArrayList<Diana>();
+	
+	// ArrayList que almacena las dianas que se encuentran en pantalla.
 	private ArrayList<Diana> dianasActivas = new ArrayList<Diana>();
-	private ArrayList<Diana> dianasRotas = new ArrayList<Diana>(); // Contiene todas las dianas que ya se han disparado, y ha pasado el tiempo para que desaparezcan mediante el hilo.
-
+	
+	// ArrayList que almacena todas las dianas que ya se han disparado, y ha pasado el tiempo para que desaparezcan mediante el hilo.
+	private ArrayList<Diana> dianasRotas = new ArrayList<Diana>();
+	
 	private int mox;				//Posicion en la que se presiona el raton
 	private int moy;
 	private int mdx;
@@ -68,6 +63,7 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 	public Game4(int dificultad){
 		
 		try {
+			
 			//Cargo todas las imagenes como iconos
 			
 			bStart_false = new ImageIcon( Game.class.getResource("multimedia/red_button2.png").toURI().toURL() );
@@ -81,6 +77,8 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 		}catch(Exception e1) {
 			e1.printStackTrace();
 		}
+		
+		// Cargar fuentes
 		
 		try {
 			customFontBot = Font.createFont(Font.TRUETYPE_FONT, Inicio.class.getResourceAsStream("fuentes/fuenteBot.ttf"));
@@ -117,9 +115,12 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 		//sizemax=300
 		//meter x y restringidas para que no se solapen?
 		
+		/*
+		 * Se crean dianas aleatoriamente, primero se genera el size de la diana, y segun ese tamanyo se estableceran los
+		 * limites para las coordenadas x e y de la diana, con el fin de que no se salgan de la ventana en ningun momento.
+		 */
+		
 		for(int i=0; i<5; i++) {
-			//Min + (int)(Math.random() * ((Max - Min) + 1))
-			//Diana dRandom = new Diana(30 + (int)(Math.random() * ((1170) + 1)), 30 + (int)(Math.random() * ((670) + 1)), 20 + (int)(Math.random() * ((50) + 1)));
 			int rSize = (int)(Math.random() * 300) + 50;
 			Diana dRandom = new Diana((int)(Math.random() * (1200 - rSize + 1)), (int)(Math.random() * (660-rSize + 1)), rSize, false);
 			dianasCreadas.add(dRandom);
@@ -127,24 +128,30 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 				
 	}
 	
-	private void delayMS(int n) {
-		try {
-			TimeUnit.MILLISECONDS.sleep(n);
-		} catch (InterruptedException b) {
-			// TODO Auto-generated catch block
-			b.printStackTrace();
-		}
-		
-	}
 
+		
 	
+	// Metodo para lanzar el hilo que se encarga de insertar, con un delay, las dianas creadas aleatoriamente,
+	// al ArrayList de las dianas activas que se dibujaran.
+
 	public void runThreadActivas(){
 		ThreadDianasActivas da = new ThreadDianasActivas(dianasCreadas, dianasActivas);
 		Thread hda = new Thread(da);
 		hda.start();
 	}
 	
-	public boolean mouseOver(int mx, int my, int x, int y, int width, int heigth) {   // devuelve true si el raton ha sido presionado dentro de un cuadrado 
+	/**	Evalua si el raton esta sobre una region
+	 * @param mx posicion X del raton
+	 * @param my posicion Y del raton
+	 * @param x	posicion X en la que comienza la region
+	 * @param y	posicion Y en la que comienza la region
+	 * @param width	anchura de la region
+	 * @param heigth altura de la region
+	 * @return true si el raton esta sobre esa region y dalse si no lo esta
+	 * 
+	 */
+	
+	public boolean mouseOver(int mx, int my, int x, int y, int width, int heigth) {
 		
 		if(mx > x && mx < x + width) {
 			if(my > y && my < y + heigth) {
@@ -165,16 +172,21 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 	public void mousePressed(MouseEvent e) {
 		
 		if(Game.estadoJuego==Game.ESTADO.Game4) {
-			mox = e.getX();	// guarda la posicion en la que se presiona
+			// Guardamos la posicion en la que se pulsa el raton.
+			mox = e.getX();
 			moy = e.getY();
 			
+			//Reproducir sonido
 			String filePath = new File("").getAbsolutePath();				// Ruta hasta el proyecto
-			String s1_filePath = filePath.concat("/minigamble/src/minigamble/sonido/click1.wav");	//ContinuaciÃ³n de la ruta hasta el archivo de audio 1
+			String s1_filePath = filePath.concat("/minigamble/src/minigamble/sonido/click1.wav");	//Continuacion de la ruta hasta el archivo de audio 1
 //			String escopeta_filePath = filePath.concat()
 			
 			
+			/*
+			 * Secuencia de boton Start 
+			 */
 			
-			if( mouseOver(mox, moy, 500, 290, 190, 50) && start == 1 ){	             // Caso start == 1
+			if( mouseOver(mox, moy, 500, 290, 190, 50) && start == 1 ){
 				bStart_state = true;
 				try {																				
 			        Clip sonido = AudioSystem.getClip();
@@ -184,6 +196,11 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 		        }catch(Exception e2) {
 		        	System.out.println("error");
 		        }}
+			
+			/*
+			 * Si el juego esta en start=2, verifica si el click esta sobre alguna de las dianas.
+			 * Si lo esta, pone el atributo rota de la diana a true, y lanza el hilo de borrar diana con la(s) diana(s) acertada(s).
+			 */
 			
 			if(start == 2) {
 				for(Diana d : dianasActivas) {
@@ -216,6 +233,8 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		if(Game.estadoJuego == Game.ESTADO.Game4) {
+			
+			//BOTON START
 			
 			String filePath = new File("").getAbsolutePath();										// Ruta hasta el proyecto
 			String s2_filePath = filePath.concat("/minigamble/src/minigamble/sonido/click2.wav");	//Continuacion de la ruta hasta el archivo de audio 2
@@ -267,6 +286,8 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 		g.setColor(Color.decode("#208b3a"));
 		g.fillRect(0, 0, 1200, 700);
 		
+		//Pantalla de boton START
+		
 		if(start==1) {
 			g.setFont(customFontBot);
 			g.setColor(Color.BLACK);
@@ -283,6 +304,8 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 			
 			//g.drawImage(Image img, int x, int y, int width, int height, ImageObserver observer);
 			
+			// Cada frame se dibujan todas las dianas en dianasActivas, comprobando el booleano rota para decidir si dibujar la diana
+			// entera o rota
 			for(Diana d : dianasActivas) {
 				if(!d.isRota()) {
 					g.drawImage(diana_IMG, d.getX(), d.getY(), (int)d.getSize(), (int)d.getSize(), null);
@@ -291,7 +314,8 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 				}else{
 				}
 			}
-
+			
+			//En cada frame se dibuja el punto de mira encima del raton
 			g.drawImage(mira_IMG, mox-16, moy-16, 32, 32, null);
 			
 		}

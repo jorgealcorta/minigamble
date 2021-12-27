@@ -7,6 +7,12 @@ public class Diana {
 	int size; //Escala
 	boolean rota = false;
 	
+	/**Constructor de Diana
+	 * @param x coordenada x en la que se localizara la diana
+	 * @param y coordenada y en la que se localizara la diana
+	 * @param size tamanyo con el que se dibujara la diana
+	 * @param rota booleano que definira si la diana esta rota o no
+	 */
 	public Diana(int x, int y, int size, boolean rota) {
 		super();
 		this.x = x;
