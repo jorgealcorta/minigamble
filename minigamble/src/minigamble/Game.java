@@ -16,6 +16,7 @@ public class Game extends Canvas implements Runnable{
 	public static Game2 game2;
 	public static Game3 game3;
 	public static Game4 game4;
+	public static Game5 game5;
 	
 	public static VentanaPrincipal ventana;
 	
@@ -27,8 +28,7 @@ public class Game extends Canvas implements Runnable{
 	public static Game game;
 
 
-	
-	private Handler handler;
+
 	
 	//Enumeracion con los distintos estados del juego.
 	public enum ESTADO{
@@ -40,7 +40,7 @@ public class Game extends Canvas implements Runnable{
 		Game2, // SIMON SAYS
 		Game3, // LABERINTO
 		Game4, // DIANAS
-		Game5,
+		Game5, // TRAGAPERRAS
 		Game6
 	};
 	
@@ -64,7 +64,7 @@ public class Game extends Canvas implements Runnable{
 //		this.addMouseMotionListener(game1);
 //		this.addKeyListener(game2);
 		
-		handler = new Handler();
+
 	}
 	
 	public static void eventoRaton(){
@@ -80,6 +80,8 @@ public class Game extends Canvas implements Runnable{
 		}else if(estadoJuego == ESTADO.Game4) {
 			game.addMouseListener(game4);
 			game.addMouseMotionListener(game4);
+		}else if(estadoJuego == ESTADO.Game5) {
+			
 		}
 	}
 	
@@ -177,6 +179,7 @@ public class Game extends Canvas implements Runnable{
 			game4.render(g);
 			break;
 		case Game5:
+			game5.render(g);
 			break;
 		case Game6:
 			break;
@@ -187,7 +190,7 @@ public class Game extends Canvas implements Runnable{
 			break;
 		}
 		
-		handler.render(g);
+
 		g.dispose();
 		bs.show();
 		
