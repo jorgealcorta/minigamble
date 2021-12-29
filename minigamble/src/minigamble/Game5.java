@@ -48,6 +48,10 @@ public class Game5 implements Runnable , KeyListener{
 	private int start=0;
 	private int count=0;
 	
+	private int chos1;
+	private int chos2;
+	private int chos3;
+	
 	public Game5(int dificultad, String nombreJugador, int idPart) {
 		
 		PuntTotal = dificultad;
@@ -200,6 +204,30 @@ public class Game5 implements Runnable , KeyListener{
 					sym5.setMoving(false);
 					sym6.setMoving(false);
 					
+					if(150 <= sym1.getYpos() && sym1.getYpos()<350) {
+						chos1=sym1.getImage();
+					}else {
+						chos1=sym2.getImage();
+					}
+					
+					if(150 <= sym3.getYpos() && sym3.getYpos()<350) {
+						chos2=sym3.getImage();
+					}else {
+						chos2=sym4.getImage();
+					}
+					
+					if(150 <= sym5.getYpos() && sym5.getYpos()<350) {
+						chos3=sym5.getImage();
+					}else {
+						chos3=sym6.getImage();
+					}
+					
+					
+					if(chos1==chos2 && chos2==chos3) {
+						start=2;						
+					} else {
+						start=3;
+					}
 					
 				}
 			}
