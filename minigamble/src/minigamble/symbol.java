@@ -9,7 +9,7 @@ import javax.swing.ImageIcon;
 
 public class symbol  {
 	
-	private Image imageS1;
+	private Image image;
 	
 	private int xpos;
 	private int ypos;
@@ -19,7 +19,8 @@ public class symbol  {
 			
 		xpos=550;
 		ypos=250;
-		moving=false;
+		image = Game5.getRandom();
+		moving=true;
 		
 	}
 	
@@ -39,34 +40,29 @@ public class symbol  {
 	public void setYpos(int ypos) {
 		this.ypos = ypos;
 	}
-	
-	
+
 	public Image getImageS1() {
-		return imageS1;
+		return image;
 	}
 
-	public void setImageS1(Image imageS1) {
-		this.imageS1 = imageS1;
+	public void setImageS1(Image image) {
+		this.image = image;
 	}
 
-	
-	
 	public boolean isMoving() {
 		return moving;
 	}
 
-
 	public void setMoving(boolean moving) {
 		this.moving = moving;
 	}
-
 
 	public void move(int numPix) {
 		
 		if(this.moving) {
 			if(this.ypos+numPix > 450) {
 				this.ypos = this.ypos+numPix-400;
-				this.imageS1 = Game5.getRandom();
+				this.image = Game5.getRandom();
 				
 			}else {
 				this.ypos = this.ypos+numPix;

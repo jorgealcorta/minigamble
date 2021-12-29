@@ -32,7 +32,10 @@ public class Game5 implements Runnable {
 	
 	private symbol sym1;
 	private symbol sym2;
-	
+	private symbol sym3;
+	private symbol sym4;
+	private symbol sym5;
+	private symbol sym6;
 	 
 	public Game5(int dificultad, String nombreJugador, int idPart) {
 		
@@ -68,10 +71,21 @@ public class Game5 implements Runnable {
 		
 		sym1 = new symbol();
 		sym2 = new symbol();
-		sym1.setImageS1(getRandom());
-		sym2.setImageS1(getRandom());
+		sym1.setXpos(200);
+		sym2.setXpos(200);
 		sym2.setYpos(sym1.getYpos()-200);
 		
+		sym3 = new symbol();
+		sym4 = new symbol();
+		sym3.setXpos(500);
+		sym4.setXpos(500);
+		sym4.setYpos(sym1.getYpos()-200);
+		
+		sym5 = new symbol();
+		sym6 = new symbol();
+		sym5.setXpos(800);
+		sym6.setXpos(800);
+		sym6.setYpos(sym1.getYpos()-200);
 		
 		Thread t = new Thread(this);       
         t.start();
@@ -92,8 +106,12 @@ public class Game5 implements Runnable {
 			{e.printStackTrace();}
 			
 							
-				sym1.move(2);
-				sym2.move(2);
+				sym1.move(20);
+				sym2.move(20);
+				sym3.move(20);
+				sym4.move(20);
+				sym5.move(20);
+				sym6.move(20);
 				
 				
 			}			
@@ -104,11 +122,17 @@ public class Game5 implements Runnable {
 		
 		g.setColor(Color.decode("#208b3a"));
 		g.fillRect(0, 0, 1200, 700);
-		g.setColor(Color.RED);
-		g.drawRect(550 ,50, 200, 600);
-		g.drawRect(550, 250, 200, 200);
+				
+		
 		g.drawImage(sym1.getImageS1(), sym1.getXpos(), sym1.getYpos(), null);
 		g.drawImage(sym2.getImageS1(), sym2.getXpos(), sym2.getYpos(), null);
+		
+		g.drawImage(sym3.getImageS1(), sym3.getXpos(), sym3.getYpos(), null);
+		g.drawImage(sym4.getImageS1(), sym4.getXpos(), sym4.getYpos(), null);
+		
+		g.drawImage(sym5.getImageS1(), sym5.getXpos(), sym5.getYpos(), null);
+		g.drawImage(sym6.getImageS1(), sym6.getXpos(), sym6.getYpos(), null);
+		
 		g.setColor(Color.decode("#208b3a"));
 		g.fillRect(0, 0, 1200, 250);
 		g.fillRect(0, 450, 1200, 250);
