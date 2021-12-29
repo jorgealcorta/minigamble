@@ -52,7 +52,7 @@ public class Partida {
 		}
 		
 
-		rand=4 ; //PARA HACER PRUEBAS, LUEGO BORRARRRRRRRRRRRRRRRRRRRRRRRR
+		rand=3 ; //PARA HACER PRUEBAS, LUEGO BORRARRRRRRRRRRRRRRRRRRRRRRRR
 
 		if(vidas<1 ) {
 			Game.estadoJuego= ESTADO.Start;

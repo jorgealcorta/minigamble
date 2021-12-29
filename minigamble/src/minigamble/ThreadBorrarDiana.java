@@ -1,19 +1,19 @@
 package minigamble;
 
-import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ThreadBorrarDiana extends Thread{
 	
 	Diana rota;
-	ArrayList<Diana> activas; //sustituir arraylist pro vector, vector esta sincronizad, hasta que un hilo no acaba su ejecucion con ella, el otro hilo no empieza, consistencia sincrona
-	ArrayList<Diana> rotas;
+	CopyOnWriteArrayList<Diana> activas; //sustituir arraylist pro vector, vector esta sincronizad, hasta que un hilo no acaba su ejecucion con ella, el otro hilo no empieza, consistencia sincrona
+	CopyOnWriteArrayList<Diana> rotas;
 		
 	/**
 	 * @param rota objeto de la clase diana, introducida en Game4
 	 * @param activas ArrayList de dianas activas en pantalla
 	 * @param rotas ArrayList de dianas rotas
 	 */
-	ThreadBorrarDiana(Diana rota, ArrayList<Diana> activas, ArrayList<Diana> rotas){
+	ThreadBorrarDiana(Diana rota, CopyOnWriteArrayList<Diana> activas, CopyOnWriteArrayList<Diana> rotas){
 		this.rota = rota;
 		this.activas = activas;
 		this.rotas = rotas;
