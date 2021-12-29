@@ -14,6 +14,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Vector;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.TimeUnit;
 
 import javax.sound.sampled.AudioInputStream;
@@ -46,14 +48,14 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 	private Image dianaRota_IMG;
 	private Image mira_IMG;
 	
-	// ArrayList que almacena las dianas generadas aleatoriamente.
-	private ArrayList<Diana> dianasCreadas = new ArrayList<Diana>();
+	// Vector que almacena las dianas generadas aleatoriamente.
+	private CopyOnWriteArrayList<Diana> dianasCreadas = new CopyOnWriteArrayList<Diana>();
 	
-	// ArrayList que almacena las dianas que se encuentran en pantalla.
-	private ArrayList<Diana> dianasActivas = new ArrayList<Diana>();
+	// Vector que almacena las dianas que se encuentran en pantalla.
+	private CopyOnWriteArrayList<Diana> dianasActivas = new CopyOnWriteArrayList<Diana>();
 	
-	// ArrayList que almacena todas las dianas que ya se han disparado, y ha pasado el tiempo para que desaparezcan mediante el hilo.
-	private ArrayList<Diana> dianasRotas = new ArrayList<Diana>();
+	// Vector que almacena todas las dianas que ya se han disparado, y ha pasado el tiempo para que desaparezcan mediante el hilo.
+	private CopyOnWriteArrayList<Diana> dianasRotas = new CopyOnWriteArrayList<Diana>();
 	
 	private int mox;				//Posicion en la que se presiona el raton
 	private int moy;
@@ -132,7 +134,7 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 		
 	
 	// Metodo para lanzar el hilo que se encarga de insertar, con un delay, las dianas creadas aleatoriamente,
-	// al ArrayList de las dianas activas que se dibujaran.
+	// al Vector de las dianas activas que se dibujaran.
 
 	public void runThreadActivas(){
 		ThreadDianasActivas da = new ThreadDianasActivas(dianasCreadas, dianasActivas);
