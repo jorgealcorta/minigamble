@@ -18,7 +18,9 @@ public class symbol  {
 	public symbol() {
 			
 		xpos=550;
-		ypos=0;
+		ypos=250;
+		
+		
 		
 	}
 	
@@ -48,6 +50,16 @@ public class symbol  {
 		this.imageS1 = imageS1;
 	}
 
+	public void move(int numPix) {
+		if(this.ypos+numPix > 450) {
+			this.ypos = this.ypos+numPix-400;
+			this.imageS1 = Game5.getRandom();
+			
+		}
+			this.ypos = this.ypos+numPix;
+		
+		
+	}
 
 
 }

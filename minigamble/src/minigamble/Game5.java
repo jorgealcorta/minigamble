@@ -24,7 +24,7 @@ public class Game5 implements Runnable {
 	private ImageIcon iconS4;
 	private Image imageS4;
 	
-	private ArrayList<Image> symbols = new ArrayList<Image>();
+	private static ArrayList<Image> symbols = new ArrayList<Image>();
 	
 	private int PuntTotal;
 	private int idPartida;
@@ -67,27 +67,33 @@ public class Game5 implements Runnable {
 		
 		
 		sym1 = new symbol();
-		sym1.setImageS1(getRandom(symbols));
+		sym2 = new symbol();
+		sym1.setImageS1(getRandom());
+		sym2.setImageS1(getRandom());
+		sym2.setYpos(sym1.getYpos()-200);
+		
 		
 		Thread t = new Thread(this);       
         t.start();
 		
 	}
 	
-	public Image getRandom( ArrayList<Image> symbols) {
+	public static Image getRandom() {
 	    int rnd = new Random().nextInt(symbols.size());
 	    return symbols.get(rnd);
 	}
 	
 	@Override
 	public void run() {
-		while(true) {
-				
-				try {Thread.sleep(10);} 
-				catch (InterruptedException e) 
-				{e.printStackTrace();}
-				
-				sym1.setYpos(sym1.getYpos()+2);
+		while(true) {			
+			
+			try {Thread.sleep(10);} 
+			catch (InterruptedException e) 
+			{e.printStackTrace();}
+			
+							
+				sym1.move(2);
+				sym2.move(2);
 				
 				
 			}			
@@ -99,11 +105,13 @@ public class Game5 implements Runnable {
 		g.setColor(Color.decode("#208b3a"));
 		g.fillRect(0, 0, 1200, 700);
 		g.setColor(Color.RED);
-		g.drawRect(550 ,100, 200, 400);
+		g.drawRect(550 ,50, 200, 600);
+		g.drawRect(550, 250, 200, 200);
 		g.drawImage(sym1.getImageS1(), sym1.getXpos(), sym1.getYpos(), null);
-		
-		
-		
+		g.drawImage(sym2.getImageS1(), sym2.getXpos(), sym2.getYpos(), null);
+		g.setColor(Color.decode("#208b3a"));
+		g.fillRect(0, 0, 1200, 250);
+		g.fillRect(0, 450, 1200, 250);
 		
 	}
 
