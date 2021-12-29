@@ -4,12 +4,13 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.util.Random;
 
 import javax.swing.ImageIcon;
 
 public class symbol  {
 	
-	private Image image;
+	private int image;
 	
 	private int xpos;
 	private int ypos;
@@ -18,9 +19,9 @@ public class symbol  {
 	public symbol() {
 			
 		xpos=550;
-		ypos=250;
-		image = Game5.getRandom();
-		moving=true;
+		ypos=50;
+		image = getRandom();
+		moving=false;
 		
 	}
 	
@@ -41,11 +42,11 @@ public class symbol  {
 		this.ypos = ypos;
 	}
 
-	public Image getImageS1() {
+	public int getImage() {
 		return image;
 	}
 
-	public void setImageS1(Image image) {
+	public void setImage(int image) {
 		this.image = image;
 	}
 
@@ -62,13 +63,17 @@ public class symbol  {
 		if(this.moving) {
 			if(this.ypos+numPix > 450) {
 				this.ypos = this.ypos+numPix-400;
-				this.image = Game5.getRandom();
+				this.image = getRandom();
 				
 			}else {
 				this.ypos = this.ypos+numPix;
 			}
 		}
 	}
-
+	
+	public static int getRandom() {
+	    int rnd = new Random().nextInt(Game5.symbols.size());
+	    return rnd;
+	}
 
 }
