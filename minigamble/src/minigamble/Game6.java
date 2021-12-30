@@ -107,8 +107,7 @@ try {
 		flechaizqtrans_IMG = flechaizqtrans.getImage();
 		
 		// Crear ArrayList de flechas aleatorias
-		
-		for(int i = 0; i<5; i++) {
+		for(int i = 0; i<999; i++) {
 			String dirRandom = dirPosibles[new Random().nextInt(dirPosibles.length)];
 			Flecha f = new Flecha(dirRandom);
 			flechasCreadas.add(f);
@@ -142,6 +141,23 @@ try {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
+		int key = e.getKeyCode();
+		System.out.println(key);
+//		izq 37
+//		arr 38
+//		abj 40
+//		dch 39
+		for(Flecha f : flechasActivas) {
+			//Damos margen de acierto con 64 pixeles de fallo arriba y abajo
+			if(((key == 37 && f.getDir() == "izq") ||
+				(key == 38 && f.getDir() == "arr") ||
+				(key == 40 && f.getDir() == "abj") ||
+				(key == 39 && f.getDir() == "dch")) && 
+				f.getY()>386 && f.getY()<514) {
+					flechasActivas.remove(f);
+					System.out.println("acierto");
+			}
+		}
 		
 	}
 
@@ -162,13 +178,13 @@ try {
 		g.drawImage(flechadchtrans_IMG, 850, 450, 128, 128, null);
 		
 		for(Flecha f : flechasActivas) {
-			if(f.getDir() == "izq") {
+			if(f.getDir() == "izq" && f.getY()<700) {
 				g.drawImage(flechaizq_IMG, 250, f.getY(), 128, 128, null);
-			}else if (f.getDir() == "arr") {
+			}else if (f.getDir() == "arr" && f.getY()<700) {
 				g.drawImage(flechaarr_IMG, 450, f.getY(), 128, 128, null);
-			}else if (f.getDir() == "abj") {
+			}else if (f.getDir() == "abj" && f.getY()<700) {
 				g.drawImage(flechaabj_IMG, 650, f.getY(), 128, 128, null);
-			}else if (f.getDir() == "dch") {
+			}else if (f.getDir() == "dch" && f.getY()<700) {
 				g.drawImage(flechadch_IMG, 850, f.getY(), 128, 128, null);
 
 			}

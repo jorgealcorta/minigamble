@@ -1,8 +1,8 @@
 package minigamble;
 
 public class Flecha {
-	int y = -128;
-	String dir;
+	private int y = -128;
+	private String dir;
 	
 	public Flecha(String dir) {
 		this.y = -128;
@@ -16,18 +16,17 @@ public class Flecha {
 	public void setY(int y) {
 		this.y = y;
 	}
+	
 
-	@Override
-	public String toString() {
-		return "Flecha [y=" + y + ", dir=" + dir + "]";
+	public String getDir() {
+		return dir;
 	}
+	
+	//METODO MOVE
 	
 	public void move(int n) {
 		this.setY(this.getY() + n);
 	}
 
-	public String getDir() {
-		return dir;
-	}
 
 }

@@ -1,5 +1,6 @@
 package minigamble;
 
+import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ThreadFlechasActivas extends Thread{
