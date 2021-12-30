@@ -61,8 +61,8 @@ public class symbol  {
 	public void move(int numPix) {
 		
 		if(this.moving) {
-			if(this.ypos+numPix > 450) {
-				this.ypos = this.ypos+numPix-400;
+			if(this.ypos+numPix > 550) {
+				this.ypos = this.ypos+numPix-600;
 				this.image = getRandom();
 				
 			}else {

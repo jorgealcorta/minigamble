@@ -12,6 +12,7 @@ import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.ImageIcon;
 
@@ -32,6 +33,9 @@ public class Game5 implements Runnable , KeyListener{
 	private ImageIcon iconS4;
 	private Image imageS4;
 	
+	private ImageIcon arrowIc;
+	private Image arrowIm;
+	
 	public static ArrayList<Image> symbols = new ArrayList<Image>();
 	
 	private int PuntTotal;
@@ -44,6 +48,9 @@ public class Game5 implements Runnable , KeyListener{
 	private symbol sym4;
 	private symbol sym5;
 	private symbol sym6;
+	private symbol sym7;
+	private symbol sym8;
+	private symbol sym9;
 	 
 	private int start=0;
 	private int count=0;
@@ -73,6 +80,8 @@ public class Game5 implements Runnable , KeyListener{
 			iconS3= new ImageIcon( Game.class.getResource("multimedia/simbolos/sevenS.png").toURI().toURL() );
 			iconS4= new ImageIcon( Game.class.getResource("multimedia/simbolos/grapeS.png").toURI().toURL() );
 		
+			arrowIc= new ImageIcon( Game.class.getResource("multimedia/simbolos/arrow.png").toURI().toURL() );
+			
 		} catch (MalformedURLException | URISyntaxException e) {
 				e.printStackTrace();
 		}
@@ -81,6 +90,7 @@ public class Game5 implements Runnable , KeyListener{
 		imageS2 = iconS2.getImage();
 		imageS3 = iconS3.getImage();
 		imageS4 = iconS4.getImage();
+		arrowIm = arrowIc.getImage();
 		
 		symbols.add(imageS1);
 		symbols.add(imageS2);
@@ -91,21 +101,30 @@ public class Game5 implements Runnable , KeyListener{
 		
 		sym1 = new symbol();
 		sym2 = new symbol();
+		sym3 = new symbol();
 		sym1.setXpos(200);
 		sym2.setXpos(200);
+		sym3.setXpos(200);
 		sym2.setYpos(sym1.getYpos()-200);
+		sym3.setYpos(sym2.getYpos()-200);
 		
-		sym3 = new symbol();
 		sym4 = new symbol();
-		sym3.setXpos(500);
-		sym4.setXpos(500);
-		sym4.setYpos(sym1.getYpos()-200);
-		
 		sym5 = new symbol();
 		sym6 = new symbol();
-		sym5.setXpos(800);
-		sym6.setXpos(800);
-		sym6.setYpos(sym1.getYpos()-200);
+		sym4.setXpos(500);
+		sym5.setXpos(500);
+		sym6.setXpos(500);
+		sym5.setYpos(sym4.getYpos()-200);
+		sym6.setYpos(sym5.getYpos()-200);
+		
+		sym7 = new symbol();
+		sym8 = new symbol();
+		sym9 = new symbol();
+		sym7.setXpos(800);
+		sym8.setXpos(800);
+		sym9.setXpos(800);
+		sym8.setYpos(sym7.getYpos()-200);
+		sym9.setYpos(sym8.getYpos()-200);
 		
 		Thread t = new Thread(this);       
         t.start();
@@ -119,56 +138,20 @@ public class Game5 implements Runnable , KeyListener{
 			
 			try {Thread.sleep(10);} 
 			catch (InterruptedException e) 
-			{e.printStackTrace();}
-										
-				sym1.move(20);
-				sym2.move(20);
-				sym3.move(20);
-				sym4.move(20);
-				sym5.move(20);
-				sym6.move(20);
-				}			
+			{e.printStackTrace();}										
+				sym1.move(5);
+				sym2.move(5);
+				sym3.move(5);
+				sym4.move(5);
+				sym5.move(5);
+				sym6.move(5);
+				sym7.move(5);
+				sym8.move(5);
+				sym9.move(5);
+			}			
 	}
 	
-	
-	public void render(Graphics g) {
-		
-		if(start==0) {
-			
-			g.setColor(Color.decode("#208b3a"));
-			g.fillRect(0, 0, 1200, 700);
-			g.setColor(Color.WHITE);
-			g.fillRect(200, 250, 200, 200);
-			g.fillRect(500, 250, 200, 200);
-			g.fillRect(800, 250, 200, 200);
-			g.setFont(customFontBot);
-			g.drawString("Press space to play", 250, 180);
-			
-			
-		} else if (start==1) {
-			g.setColor(Color.decode("#208b3a"));
-			g.fillRect(0, 0, 1200, 700);
-			g.setColor(Color.WHITE);
-			g.fillRect(200, 250, 200, 200);
-			g.fillRect(500, 250, 200, 200);
-			g.fillRect(800, 250, 200, 200);
-			g.setFont(customFontBot);		
-			g.drawString("Press space to stop", 250, 180);
-			
-			g.drawImage(symbols.get(sym1.getImage()), sym1.getXpos(), sym1.getYpos(), null);
-			g.drawImage(symbols.get(sym2.getImage()), sym2.getXpos(), sym2.getYpos(), null);
-			
-			g.drawImage(symbols.get(sym3.getImage()), sym3.getXpos(), sym3.getYpos(), null);
-			g.drawImage(symbols.get(sym4.getImage()), sym4.getXpos(), sym4.getYpos(), null);
-			
-			g.drawImage(symbols.get(sym5.getImage()), sym5.getXpos(), sym5.getYpos(), null);
-			g.drawImage(symbols.get(sym6.getImage()), sym6.getXpos(), sym6.getYpos(), null);
-			
-			g.setColor(Color.decode("#208b3a"));
-			g.fillRect(0, 0, 1200, 250);
-			g.fillRect(0, 450, 1200, 250);
-		}
-	}
+
 
 	@Override
 	public void keyTyped(KeyEvent e) {}
@@ -187,7 +170,9 @@ public class Game5 implements Runnable , KeyListener{
 				sym4.setMoving(true);
 				sym5.setMoving(true);
 				sym6.setMoving(true);
-
+				sym7.setMoving(true);
+				sym8.setMoving(true);
+				sym9.setMoving(true);
 			}
 		} else if(start==1) {
 			if(e.getKeyCode()==32) {
@@ -195,40 +180,66 @@ public class Game5 implements Runnable , KeyListener{
 					count++;
 					sym1.setMoving(false);
 					sym2.setMoving(false);
+					sym3.setMoving(false);
 				}else if(count==1) {
 					count++;
-					sym3.setMoving(false);
 					sym4.setMoving(false);
-				}else if(count==2) {
-					count++;
 					sym5.setMoving(false);
 					sym6.setMoving(false);
+				}else if(count==2) {	
+					{
+					count++;
+					sym7.setMoving(false);
+					sym8.setMoving(false);
+					sym9.setMoving(false);
 					
 					if(150 <= sym1.getYpos() && sym1.getYpos()<350) {
 						chos1=sym1.getImage();
-					}else {
+					}else if(150 <= sym2.getYpos() && sym2.getYpos()<350) {
 						chos1=sym2.getImage();
+					} else {
+						chos1=sym3.getImage();
 					}
+					System.out.println(chos1);
 					
-					if(150 <= sym3.getYpos() && sym3.getYpos()<350) {
-						chos2=sym3.getImage();
-					}else {
+					if(150 <= sym4.getYpos() && sym4.getYpos()<350) {
 						chos2=sym4.getImage();
+					}else if(150 <= sym5.getYpos() && sym5.getYpos()<350) {
+						chos2=sym5.getImage();
+					} else {
+						chos2=sym6.getImage();
 					}
+					System.out.println(chos2);
 					
-					if(150 <= sym5.getYpos() && sym5.getYpos()<350) {
-						chos3=sym5.getImage();
-					}else {
-						chos3=sym6.getImage();
+					if(150 <= sym7.getYpos() && sym7.getYpos()<350) {
+						chos3=sym7.getImage();
+					}else if(150 <= sym8.getYpos() && sym8.getYpos()<350) {
+						chos3=sym8.getImage();
+					} else {
+						chos3=sym8.getImage();
 					}
-					
+					System.out.println(chos3);
+
 					
 					if(chos1==chos2 && chos2==chos3) {
-						start=2;						
+						start=2;
+												
 					} else {
-						start=3;
+						count = 0;
+						delayMS(600);
+						sym1.setMoving(true);
+						sym2.setMoving(true);
+						sym3.setMoving(true);
+						sym4.setMoving(true);
+						sym5.setMoving(true);
+						sym6.setMoving(true);
+						sym7.setMoving(true);
+						sym8.setMoving(true);
+						sym9.setMoving(true);
+						start=1;
 					}
 					
+					}
 				}
 			}
 			
@@ -236,9 +247,65 @@ public class Game5 implements Runnable , KeyListener{
 		
 	}
 
+	private void delayMS(int n) {
+		try {
+			TimeUnit.MILLISECONDS.sleep(n);
+		} catch (InterruptedException b) {
+			// TODO Auto-generated catch block
+			b.printStackTrace();
+		}
+		
+	}
 	
+	
+	public void render(Graphics g) {
+		
+		if(start==0) {
+			
+			g.setColor(Color.decode("#208b3a"));
+			g.fillRect(0, 0, 1200, 700);
+			g.setColor(Color.WHITE);
+			g.fillRect(200, 200, 200, 300);
+			g.fillRect(500, 200, 200, 300);
+			g.fillRect(800, 200, 200, 300);
+			g.setFont(customFontBot);
+			g.drawString("Press space to play", 250, 100);
+			g.drawImage(arrowIm, 140, 300, 80, 80, null);
+			g.drawImage(arrowIm, 1060, 300, -80, 80, null);
+			
+		} else if (start==1) {
+			g.setColor(Color.decode("#208b3a"));
+			g.fillRect(0, 0, 1200, 700);
+			g.setColor(Color.WHITE);
+			g.fillRect(200, 150, 200, 400);
+			g.fillRect(500, 150, 200, 400);
+			g.fillRect(800, 150, 200, 400);
+			
+			
+			g.drawImage(symbols.get(sym1.getImage()), sym1.getXpos(), sym1.getYpos(), null);
+			g.drawImage(symbols.get(sym2.getImage()), sym2.getXpos(), sym2.getYpos(), null);
+			g.drawImage(symbols.get(sym3.getImage()), sym3.getXpos(), sym3.getYpos(), null);
+			
+			g.drawImage(symbols.get(sym4.getImage()), sym4.getXpos(), sym4.getYpos(), null);
+			g.drawImage(symbols.get(sym5.getImage()), sym5.getXpos(), sym5.getYpos(), null);
+			g.drawImage(symbols.get(sym6.getImage()), sym6.getXpos(), sym6.getYpos(), null);
+			
+			g.drawImage(symbols.get(sym7.getImage()), sym7.getXpos(), sym7.getYpos(), null);
+			g.drawImage(symbols.get(sym8.getImage()), sym8.getXpos(), sym8.getYpos(), null);
+			g.drawImage(symbols.get(sym9.getImage()), sym9.getXpos(), sym9.getYpos(), null);
+			
+			g.setColor(Color.decode("#208b3a"));
+			g.fillRect(0, 0, 1200, 200);
+			g.fillRect(0, 500, 1200, 200);
+			g.setColor(Color.WHITE);
+			g.setFont(customFontBot);		
+			g.drawString("Press space to stop", 250, 100);
+			g.drawImage(arrowIm, 140, 300, 80, 80, null);
+			g.drawImage(arrowIm, 1060, 300, -80, 80, null);
+		
+		} 
+	}
 
-	
-	
+		
 	
 }
