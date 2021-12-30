@@ -137,7 +137,7 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 	// Metodo para lanzar el hilo que se encarga de insertar, con un delay, las dianas creadas aleatoriamente,
 	// al CopyOnWriteArrayList de las dianas activas que se dibujaran.
 
-	public void runThreadActivas(){
+	public void runThreadDianasActivas(){
 		ThreadDianasActivas da = new ThreadDianasActivas(dianasCreadas, dianasActivas);
 		Thread hda = new Thread(da);
 		hda.start();
@@ -256,7 +256,7 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 			bStart_state = false;
 			start = 2;
 			System.out.println(dianasCreadas);
-			runThreadActivas();
+			runThreadDianasActivas();
 
 			}
 			

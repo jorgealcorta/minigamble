@@ -8,21 +8,13 @@ import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
+import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.ImageIcon;
 
-public class Game6 implements KeyListener{
-	
-	private Image bStartIMG_True;
-	private Image bStartIMG_False;
-	
-	
-	private ImageIcon bStart_false;		// boton Start
-	private ImageIcon bStart_true;
-	private boolean bStart_state = false;
-	
+public class Game6 implements KeyListener{	
 	
 	private int start = 1;
 	
@@ -54,18 +46,18 @@ public class Game6 implements KeyListener{
 	private Image flechaizq_IMG;
 	private Image flechaizqtrans_IMG;
 	
+	private String dirPosibles[] = {"izq", "arr", "abj", "dch"};
 	
 	private CopyOnWriteArrayList<Flecha> flechasCreadas = new CopyOnWriteArrayList<Flecha>();
+	private CopyOnWriteArrayList<Flecha> flechasActivas = new CopyOnWriteArrayList<Flecha>();
+
 	
 	public Game6(int dificultad) {
 		
 try {
 			
 			//Cargo todas las imagenes como iconos
-			
-			bStart_false = new ImageIcon( Game.class.getResource("multimedia/red_button2.png").toURI().toURL() );
-			bStart_true = new ImageIcon( Game.class.getResource("multimedia/red_button3.png").toURI().toURL() );
-			
+						
 			flechaabj = new ImageIcon(Game.class.getResource("multimedia/flechas/flechaabj.png").toURI().toURL() );
 			flechaabjtrans = new ImageIcon(Game.class.getResource("multimedia/flechas/flechaabjtrans.png").toURI().toURL() );
 
@@ -102,9 +94,6 @@ try {
 			System.out.println("Problema con la fuente Minigamble");
 		}
 		
-		bStartIMG_True = bStart_true.getImage();
-		bStartIMG_False = bStart_false.getImage();
-		
 		flechaabj_IMG = flechaabj.getImage();
 		flechaabjtrans_IMG = flechaabjtrans.getImage();
 		
@@ -115,8 +104,34 @@ try {
 		flechadchtrans_IMG = flechadchtrans.getImage();		
 		
 		flechaizq_IMG = flechaizq.getImage();
-		flechaizqtrans_IMG = flechaizqtrans.getImage();		
+		flechaizqtrans_IMG = flechaizqtrans.getImage();
+		
+		// Crear ArrayList de flechas aleatorias
+		
+		for(int i = 0; i<5; i++) {
+			String dirRandom = dirPosibles[new Random().nextInt(dirPosibles.length)];
+			Flecha f = new Flecha(dirRandom);
+			flechasCreadas.add(f);
+		}
+		
+		System.out.println(flechasCreadas);
+		
+		runThreadFlechasActivas();
+		runThreadFlechasMain();
 	}
+	
+	public void runThreadFlechasActivas() {
+		ThreadFlechasActivas fa = new ThreadFlechasActivas(flechasCreadas, flechasActivas);
+		Thread hfa = new Thread(fa);
+		hfa.start();
+	}
+	
+	public void runThreadFlechasMain() {
+		ThreadFlechasMain fm = new ThreadFlechasMain(flechasActivas);
+		Thread hfm = new Thread(fm);
+		hfm.start();
+	}
+
 
 	@Override
 	public void keyTyped(KeyEvent e) {
@@ -137,7 +152,27 @@ try {
 	}
 	
 	public void render(Graphics g) {
+		
 		g.setColor(Color.decode("#208b3a"));
 		g.fillRect(0, 0, 1200, 700);
+		
+		g.drawImage(flechaizqtrans_IMG, 250, 450, 128, 128, null);
+		g.drawImage(flechaarrtrans_IMG, 450, 450, 128, 128, null);
+		g.drawImage(flechaabjtrans_IMG, 650, 450, 128, 128, null);
+		g.drawImage(flechadchtrans_IMG, 850, 450, 128, 128, null);
+		
+		for(Flecha f : flechasActivas) {
+			if(f.getDir() == "izq") {
+				g.drawImage(flechaizq_IMG, 250, f.getY(), 128, 128, null);
+			}else if (f.getDir() == "arr") {
+				g.drawImage(flechaarr_IMG, 450, f.getY(), 128, 128, null);
+			}else if (f.getDir() == "abj") {
+				g.drawImage(flechaabj_IMG, 650, f.getY(), 128, 128, null);
+			}else if (f.getDir() == "dch") {
+				g.drawImage(flechadch_IMG, 850, f.getY(), 128, 128, null);
+
+			}
+		}
+
 	}
 }
