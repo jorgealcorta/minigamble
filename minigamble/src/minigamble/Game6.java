@@ -107,7 +107,7 @@ try {
 		flechaizqtrans_IMG = flechaizqtrans.getImage();
 		
 		// Crear ArrayList de flechas aleatorias
-		for(int i = 0; i<999; i++) {
+		for(int i = 0; i<10; i++) {
 			String dirRandom = dirPosibles[new Random().nextInt(dirPosibles.length)];
 			Flecha f = new Flecha(dirRandom);
 			flechasCreadas.add(f);
@@ -155,7 +155,6 @@ try {
 				(key == 39 && f.getDir() == "dch")) && 
 				f.getY()>386 && f.getY()<514) {
 					flechasActivas.remove(f);
-					System.out.println("acierto");
 			}
 		}
 		
