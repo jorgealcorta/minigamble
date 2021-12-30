@@ -46,15 +46,16 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 	
 	private Image diana_IMG;
 	private Image dianaRota_IMG;
+	
 	private Image mira_IMG;
 	
-	// Vector que almacena las dianas generadas aleatoriamente.
+	// CopyOnWriteArrayList que almacena las dianas generadas aleatoriamente.
 	private CopyOnWriteArrayList<Diana> dianasCreadas = new CopyOnWriteArrayList<Diana>();
 	
-	// Vector que almacena las dianas que se encuentran en pantalla.
+	// CopyOnWriteArrayList que almacena las dianas que se encuentran en pantalla.
 	private CopyOnWriteArrayList<Diana> dianasActivas = new CopyOnWriteArrayList<Diana>();
 	
-	// Vector que almacena todas las dianas que ya se han disparado, y ha pasado el tiempo para que desaparezcan mediante el hilo.
+	// CopyOnWriteArrayList que almacena todas las dianas que ya se han disparado, y ha pasado el tiempo para que desaparezcan mediante el hilo.
 	private CopyOnWriteArrayList<Diana> dianasRotas = new CopyOnWriteArrayList<Diana>();
 	
 	private int mox;				//Posicion en la que se presiona el raton
@@ -134,7 +135,7 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 		
 	
 	// Metodo para lanzar el hilo que se encarga de insertar, con un delay, las dianas creadas aleatoriamente,
-	// al Vector de las dianas activas que se dibujaran.
+	// al CopyOnWriteArrayList de las dianas activas que se dibujaran.
 
 	public void runThreadActivas(){
 		ThreadDianasActivas da = new ThreadDianasActivas(dianasCreadas, dianasActivas);

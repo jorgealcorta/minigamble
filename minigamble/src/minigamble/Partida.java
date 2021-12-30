@@ -52,7 +52,7 @@ public class Partida {
 		}
 		
 
-		rand=4 ; //PARA HACER PRUEBAS, LUEGO BORRARRRRRRRRRRRRRRRRRRRRRRRR
+		rand=5 ; //PARA HACER PRUEBAS, LUEGO BORRARRRRRRRRRRRRRRRRRRRRRRRR
 
 		if(vidas<1 ) {
 			Game.estadoJuego= ESTADO.Start;
@@ -78,6 +78,10 @@ public class Partida {
 				Game.eventoRaton();
 			} else if(rand==4) {
 				Game.game5 = new Game5(puntuacionGeneral, jugador, idPartida);
+				Game.estadoJuego = minijuegos.get(rand);
+				Game.eventoRaton();
+			} else if(rand==5) {
+				Game.game6 = new Game6(puntuacionGeneral);
 				Game.estadoJuego = minijuegos.get(rand);
 				Game.eventoRaton();
 			}

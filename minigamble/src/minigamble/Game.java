@@ -17,6 +17,7 @@ public class Game extends Canvas implements Runnable{
 	public static Game3 game3;
 	public static Game4 game4;
 	public static Game5 game5;
+	public static Game6 game6;
 	
 	public static VentanaPrincipal ventana;
 	
@@ -41,7 +42,7 @@ public class Game extends Canvas implements Runnable{
 		Game3, // LABERINTO
 		Game4, // DIANAS
 		Game5, // TRAGAPERRAS
-		Game6
+		Game6  // FLECHAS CAYENDO
 	};
 	
 	static ESTADO estadoJuego = ESTADO.Inicio;
@@ -82,6 +83,8 @@ public class Game extends Canvas implements Runnable{
 			game.addMouseMotionListener(game4);
 		}else if(estadoJuego == ESTADO.Game5) {
 			game.addKeyListener(game5);
+		}else if(estadoJuego == ESTADO.Game6) {
+			game.addKeyListener(game6);
 		}
 	}
 	
@@ -182,6 +185,7 @@ public class Game extends Canvas implements Runnable{
 			game5.render(g);
 			break;
 		case Game6:
+			game6.render(g);
 			break;
 		case LogIn:
 			login.render(g);
