@@ -193,7 +193,8 @@ public class Game3 implements MouseListener , MouseMotionListener {
 	
 	public Laberinto getRandom( ArrayList<Laberinto> array, int dificultad) {
 	    int rnd = new Random().nextInt(array.size());
-	    return array.get(rnd);
+	   // return array.get(rnd);
+	    return array.get(1);
 	}
 	
 	/**	Evalua si el raton esta sobre una region
