@@ -75,10 +75,10 @@ public class Game5 implements Runnable , KeyListener{
 		
 		try {
 			
-			iconS1= new ImageIcon( Game.class.getResource("multimedia/simbolos/heartS.png").toURI().toURL() );
-			iconS2= new ImageIcon( Game.class.getResource("multimedia/simbolos/lemonS.png").toURI().toURL() );
-			iconS3= new ImageIcon( Game.class.getResource("multimedia/simbolos/sevenS.png").toURI().toURL() );
-			iconS4= new ImageIcon( Game.class.getResource("multimedia/simbolos/grapeS.png").toURI().toURL() );
+			iconS1= new ImageIcon( Game.class.getResource("multimedia/simbolos/heartS2.png").toURI().toURL() );
+			iconS2= new ImageIcon( Game.class.getResource("multimedia/simbolos/lemonS2.png").toURI().toURL() );
+			iconS3= new ImageIcon( Game.class.getResource("multimedia/simbolos/sevenS2.png").toURI().toURL() );
+			iconS4= new ImageIcon( Game.class.getResource("multimedia/simbolos/grapeS2.png").toURI().toURL() );
 		
 			arrowIc= new ImageIcon( Game.class.getResource("multimedia/simbolos/arrow.png").toURI().toURL() );
 			
