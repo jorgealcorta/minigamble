@@ -199,20 +199,6 @@ public class Game extends Canvas implements Runnable{
 		bs.show();
 		
 		
-		
-//		if(estadoJuego == ESTADO.Inicio) {
-//			inicio.render(g);       // pinto la pantalla inicio
-//		}else if(estadoJuego == ESTADO.Start) {
-//			login.render(g);
-//			
-//		}else if(estadoJuego == ESTADO.SignIn) {
-//			signin.render(g);
-//		}		
-//		handler.render(g);
-//		
-//		g.dispose();
-//		bs.show();
-		
 	}
 
 	public static void main(String[] args) {
