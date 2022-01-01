@@ -54,6 +54,8 @@ public class Game5 implements Runnable , KeyListener{
 	 
 	private int start=0;
 	private int count=0;
+	private int fallos=0;
+	private String elegido;
 	
 	private int chos1;
 	private int chos2;
@@ -181,17 +183,6 @@ public class Game5 implements Runnable , KeyListener{
 					sym1.setMoving(false);
 					sym2.setMoving(false);
 					sym3.setMoving(false);
-				}else if(count==1) {
-					count++;
-					sym4.setMoving(false);
-					sym5.setMoving(false);
-					sym6.setMoving(false);
-				}else if(count==2) {	
-					{
-					count++;
-					sym7.setMoving(false);
-					sym8.setMoving(false);
-					sym9.setMoving(false);
 					
 					if(150 <= sym1.getYpos() && sym1.getYpos()<350) {
 						chos1=sym1.getImage();
@@ -202,6 +193,23 @@ public class Game5 implements Runnable , KeyListener{
 					}
 					System.out.println(chos1);
 					
+					if(chos1 == 0) {
+						elegido="heart";							
+					} else if (chos1 == 1) {
+						elegido="lemon";
+					} else if (chos1 == 2) {
+						elegido="seven";
+					} else if (chos1 == 3) {
+						elegido="grape";
+					} 
+					
+				}else if(count==1) {
+					count++;
+					sym4.setMoving(false);
+					sym5.setMoving(false);
+					sym6.setMoving(false);
+					
+
 					if(150 <= sym4.getYpos() && sym4.getYpos()<350) {
 						chos2=sym4.getImage();
 					}else if(150 <= sym5.getYpos() && sym5.getYpos()<350) {
@@ -211,32 +219,32 @@ public class Game5 implements Runnable , KeyListener{
 					}
 					System.out.println(chos2);
 					
+				}else if(count==2) {	
+					{
+					count++;
+					sym7.setMoving(false);
+					sym8.setMoving(false);
+					sym9.setMoving(false);
+										
 					if(150 <= sym7.getYpos() && sym7.getYpos()<350) {
 						chos3=sym7.getImage();
 					}else if(150 <= sym8.getYpos() && sym8.getYpos()<350) {
 						chos3=sym8.getImage();
 					} else {
-						chos3=sym8.getImage();
+						chos3=sym9.getImage();
 					}
 					System.out.println(chos3);
 
 					
 					if(chos1==chos2 && chos2==chos3) {
-						start=2;
-												
+						start=3;
+						BaseDatos.insertarGame5(idPartida, 1000, 1, elegido);	
+						Game.partida  = new Partida( 1000 ,0 , null, jugador, idPartida);
 					} else {
-						count = 0;
-						delayMS(600);
-						sym1.setMoving(true);
-						sym2.setMoving(true);
-						sym3.setMoving(true);
-						sym4.setMoving(true);
-						sym5.setMoving(true);
-						sym6.setMoving(true);
-						sym7.setMoving(true);
-						sym8.setMoving(true);
-						sym9.setMoving(true);
-						start=1;
+						start=2;
+						BaseDatos.insertarGame5(idPartida, 0, 0, elegido);
+						Game.partida  = new Partida( 0 ,1 , null, jugador, idPartida);
+						
 					}
 					
 					}
@@ -303,7 +311,23 @@ public class Game5 implements Runnable , KeyListener{
 			g.drawImage(arrowIm, 140, 300, 80, 80, null);
 			g.drawImage(arrowIm, 1060, 300, -80, 80, null);
 		
-		} 
+		} else if(start==2) {
+			
+			delayMS(200);
+			customFontBot=customFontBot.deriveFont(Font.PLAIN,50);
+			g.setFont(customFontBot);
+			g.setColor(Color.BLACK);
+			g.drawString("Sorry too bad (", 100, 300);
+			
+		} else if(start == 3) {
+			
+			delayMS(200);
+			customFontBot=customFontBot.deriveFont(Font.PLAIN,50);
+			g.setFont(customFontBot);
+			g.setColor(Color.BLACK);
+			g.drawString("YAY, YOU WON!!", 5+0, 300);
+			
+		}
 	}
 
 		

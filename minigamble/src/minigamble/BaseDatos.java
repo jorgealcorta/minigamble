@@ -59,6 +59,13 @@ public class BaseDatos {
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
 			
+				sent = "DROP TABLE IF EXISTS game5";
+				logger.log( Level.INFO, "Statement: " + sent );
+				statement.executeUpdate( sent );
+				sent = "CREATE TABLE game5 (id INTEGER PRIMARY KEY AUTOINCREMENT ,idPartida int, puntuacion int, premio int, symbol varchar(10));";
+				logger.log( Level.INFO, "Statement: " + sent );
+				statement.executeUpdate( sent );
+				
 			}
 			return true;
 		} catch(Exception e) {
@@ -139,8 +146,8 @@ public class BaseDatos {
 		}
 	}
 	
-	/** Inserta una Game1 en la base de datos previamente abierta con {@link #abrirConexion(String, boolean)}
-	 * @param idPartida ID de la partida que se está jugando
+	/** Inserta una Game3 en la base de datos previamente abierta con {@link #abrirConexion(String, boolean)}
+	 * @param idPartida ID de la partida que se esta jugando
 	 * @param puntuacion Puntuacion obtenida en Game3
 	 * @param fallos Numero de fallos cometidos
 	 * @param tiempoTot Tiempo total en terminar el juego
@@ -160,6 +167,26 @@ public class BaseDatos {
 		}
 	}
 	
+	/** Inserta una Game5 en la base de datos previamente abierta con {@link #abrirConexion(String, boolean)}
+	 * @param idPartida ID de la partida que se esta jugando
+	 * @param puntuacion Puntuacion obtenida en Game5
+	 * @param premio Adquiere valor 1 si ha conseguido hacer 3 en linea, 0 en caso de que no
+	 * @param symbol String que indica qu� simbolo ha elegido el primero.
+	 * @return devuelve True si se hace correctamente
+	 */
+	
+	public static boolean insertarGame5( int idPartida, int puntuacion, int premio, String symbol) {
+		try (Statement statement = conexion.createStatement()) {
+			String sent = "insert into game5 (idPartida, puntuacion, premio, symbol ) values (" + idPartida + ", " + puntuacion + ", " + premio + " , " + symbol + " );";											
+			logger.log( Level.INFO, "Statement: " + sent );
+			int insertados = statement.executeUpdate( sent );
+			if (insertados!=1) return false;  // Error en inserción
+			return true;
+		} catch (Exception e) {
+			logger.log( Level.SEVERE, "Excepción", e );
+			return false;
+		}
+	}
 	
 	/** Comprueba si existe el nombre de un jugador en la base de datos
 	 * @param n Nombre del jugador a encontrar

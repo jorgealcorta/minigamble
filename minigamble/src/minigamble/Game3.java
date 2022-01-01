@@ -84,10 +84,10 @@ public class Game3 implements MouseListener , MouseMotionListener {
 	
 	private long tiempoComienzo = System.currentTimeMillis();
 	private long tiempoTotal;
-	private int start = 1;
-	private int numFallos = 0;
+	private int start;
+	private int numFallos;
 	private int puntTotal;
-	private int puntLocal = 1000;
+	private int puntLocal;
 	
 	Robot robot;
 	
@@ -101,11 +101,15 @@ public class Game3 implements MouseListener , MouseMotionListener {
 	 */
 	
 	public Game3(int dificultad, String nombreJugador, int idPart) {
+		
 	
 		puntTotal = dificultad;				
 		jugador = nombreJugador;
 		idPartida = idPart;
 		
+		puntLocal = 1000;
+		numFallos = 0;
+		start = 1;
 		
 		try {
 		
@@ -168,22 +172,7 @@ public class Game3 implements MouseListener , MouseMotionListener {
 	}
 	
 	
-	/**
-	 * Realiza un delay en Segundos
-	 * @param n numero de segundos que se quiere hacer el delay
-	 */
-	
-	private void delaySeg(int n) {
-		try {
-			TimeUnit.SECONDS.sleep(n);
-		} catch (InterruptedException b) {
-			// TODO Auto-generated catch block
-			b.printStackTrace();
-		}		
-	}
-	
-	
-	
+
 	
 	/**
 	 * Elige un laberinto en funcion de la dificultad que reciba
@@ -194,7 +183,7 @@ public class Game3 implements MouseListener , MouseMotionListener {
 	public Laberinto getRandom( ArrayList<Laberinto> array, int dificultad) {
 	    int rnd = new Random().nextInt(array.size());
 	   // return array.get(rnd);
-	    return array.get(1);
+	    return array.get(0);
 	}
 	
 	/**	Evalua si el raton esta sobre una region
@@ -331,12 +320,13 @@ public class Game3 implements MouseListener , MouseMotionListener {
 					robot.mouseMove(startX, startY);	
 					numFallos = numFallos +1;
 					puntLocal = (int)Math.round( puntLocal * 0.66);
+					delayMS(20);
 					
 					
 				} else if ( mouseOver(mox, moy, 41, 43, 178, 88)) {
 					start = 3;
 					tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
-					delaySeg(2);
+					delayMS(2000);
 					BaseDatos.insertarGame3(idPartida, puntLocal, numFallos, tiempoTotal, thisLab.getId());
 					
 					if(numFallos>3) {
@@ -366,6 +356,16 @@ public class Game3 implements MouseListener , MouseMotionListener {
 		}
 	}
 	
+	private void delayMS(int n) {
+		try {
+			TimeUnit.MILLISECONDS.sleep(n);
+		} catch (InterruptedException b) {
+			// TODO Auto-generated catch block
+			b.printStackTrace();
+		}
+		
+	}
+	
 	public void render(Graphics g) {
 		
 		g.setColor(Color.decode("#208b3a"));
@@ -389,7 +389,7 @@ public class Game3 implements MouseListener , MouseMotionListener {
 			customFontBot=customFontBot.deriveFont(Font.PLAIN,15);
 			g.setFont(customFontBot);
 			g.setColor(Color.BLACK);
-			g.drawString("Points to obtain ( " + String.valueOf(puntLocal + puntTotal) +" )", 870, 40);						
+			g.drawString("Points to obtain ( " + String.valueOf(puntLocal) +" )", 870, 40);						
 			g.drawString("Number of mistakes ( "+String.valueOf(numFallos)+" )", 845, 20);			
 
 		}
@@ -413,5 +413,4 @@ public class Game3 implements MouseListener , MouseMotionListener {
 	}
 
 		
-	
 }
