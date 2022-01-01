@@ -536,7 +536,7 @@ public class Game1  implements MouseMotionListener, MouseListener {
 		}
 		
 		if(start == 4) {
-			customFontG1 = media.customFontBot.deriveFont(Font.PLAIN,100);
+			customFontG1 = media.customFontBot.deriveFont(Font.PLAIN,70);
 			g.setFont(customFontG1);
 			g.setColor(Color.BLACK);
 			g.drawString("ENHORABUENA", 325, 300);
