@@ -168,8 +168,7 @@ public class Game6 implements KeyListener{
 	
 	public void render(Graphics g) {
 		
-		g.setColor(Color.decode("#208b3a"));
-		g.fillRect(0, 0, 1200, 700);
+		g.drawImage(media.tapeteImg, 0, 0, 1184, 663, null);
 		
 		g.drawImage(flechaizqtrans_IMG, 250, 450, 128, 128, null);
 		g.drawImage(flechaarrtrans_IMG, 450, 450, 128, 128, null);

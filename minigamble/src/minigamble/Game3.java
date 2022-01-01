@@ -299,8 +299,7 @@ public class Game3 implements MouseListener , MouseMotionListener {
 	
 	public void render(Graphics g) {
 		
-		g.setColor(Color.decode("#208b3a"));
-		g.fillRect(0, 0, 1200, 700);
+		g.drawImage(media.tapeteImg, 0, 0, 1184, 663, null);
 		
 		if(start==1) {
 			g.setFont(media.customFontBot);

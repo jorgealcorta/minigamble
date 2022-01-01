@@ -73,7 +73,7 @@ public class symbol  {
 	
 	public static int getRandom() {
 	    int rnd = new Random().nextInt(Game5.symbols.size());
-	    return 0;
+	    return rnd;
 	}
 
 }

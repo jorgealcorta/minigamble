@@ -286,8 +286,7 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 	
 	public void render(Graphics g) {
 		
-		g.setColor(Color.decode("#208b3a"));
-		g.fillRect(0, 0, 1200, 700);
+		g.drawImage(media.tapeteImg, 0, 0, 1184, 663, null);
 		
 		//Pantalla de boton START
 		

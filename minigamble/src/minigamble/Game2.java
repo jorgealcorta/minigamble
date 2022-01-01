@@ -309,8 +309,7 @@ public class Game2 implements KeyListener{
 	 * @param g recibe Graphics de Game
 	 */
 	public void render(Graphics g) {
-		g.setColor(Color.decode("#208b3a"));
-		g.fillRect(0, 0, 1200, 700);
+		g.drawImage(media.tapeteImg, 0, 0, 1184, 663, null);
 		
 		/*
 		 * Si el juego esta en start=1, se dibujan todas las fichas transparentes y se muestra un texto que muestra al usuario

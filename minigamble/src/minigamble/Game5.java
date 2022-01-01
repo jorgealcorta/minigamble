@@ -226,8 +226,7 @@ public class Game5 implements Runnable , KeyListener{
 		
 		if(start==0) {
 			
-			g.setColor(Color.decode("#208b3a"));
-			g.fillRect(0, 0, 1200, 700);
+			g.drawImage(media.tapeteImg, 0, 0, 1184, 663, null);
 			g.setColor(Color.WHITE);
 			g.fillRect(200, 200, 200, 300);
 			g.fillRect(500, 200, 200, 300);
@@ -237,9 +236,9 @@ public class Game5 implements Runnable , KeyListener{
 			g.drawImage(media.arrowIm, 140, 300, 80, 80, null);
 			g.drawImage(media.arrowIm, 1060, 300, -80, 80, null);
 			
+			
 		} else if (start==1) {
-			g.setColor(Color.decode("#208b3a"));
-			g.fillRect(0, 0, 1200, 700);
+			g.drawImage(media.tapeteImg, 0, 0, 1184, 663, null);
 			g.setColor(Color.WHITE);
 			g.fillRect(200, 150, 200, 400);
 			g.fillRect(500, 150, 200, 400);
@@ -259,8 +258,8 @@ public class Game5 implements Runnable , KeyListener{
 			g.drawImage(symbols.get(sym9.getImage()), sym9.getXpos(), sym9.getYpos(), null);
 			
 			g.setColor(Color.decode("#208b3a"));
-			g.fillRect(0, 0, 1200, 200);
-			g.fillRect(0, 500, 1200, 200);
+			g.drawImage(media.tapeteSupImg, 0, 0, 1184, 200, null);
+			g.drawImage(media.tapeteInfImg, 0, 500, 1184, 163, null);
 			g.setColor(Color.WHITE);
 			g.setFont(media.customFontBot);		
 			g.drawString("Press space to stop", 250, 100);

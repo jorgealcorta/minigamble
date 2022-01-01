@@ -22,6 +22,8 @@ public class media {
 	
 	public static Font customFontBot;
 	
+	public static Image tapeteImg;	
+	public static ImageIcon tapeteIcn;
 	
 	//game1
 	
@@ -83,7 +85,11 @@ public class media {
 	public static ImageIcon arrowIc;
 	public static Image arrowIm;
 	
+	public static Image tapeteSupImg;	
+	public static ImageIcon tapeteSupIcn;
 	
+	public static Image tapeteInfImg;	
+	public static ImageIcon tapeteInfIcn;
 	
 	public media() {
 		
@@ -91,7 +97,7 @@ public class media {
 			
 			bStart_false = new ImageIcon( Game.class.getResource("multimedia/red_button2.png").toURI().toURL() );
 			bStart_true = new ImageIcon( Game.class.getResource("multimedia/red_button3.png").toURI().toURL() );	
-		
+			tapeteIcn = new ImageIcon( Game.class.getResource("multimedia/tapete.png").toURI().toURL() );
 			
 			//game1
 			
@@ -122,7 +128,9 @@ public class media {
 			iconS4= new ImageIcon( Game.class.getResource("multimedia/simbolos/grapeS2.png").toURI().toURL() );		
 			
 			arrowIc= new ImageIcon( Game.class.getResource("multimedia/simbolos/arrow.png").toURI().toURL() );
-		
+			tapeteSupIcn = new ImageIcon( Game.class.getResource("multimedia/tapeteSuperior.png").toURI().toURL() );
+			tapeteInfIcn = new ImageIcon( Game.class.getResource("multimedia/tapeteInferior.png").toURI().toURL() );
+			
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
@@ -131,6 +139,8 @@ public class media {
 		
 		bStartIMG_True = bStart_true.getImage();
 		bStartIMG_False = bStart_false.getImage();	
+		tapeteImg = tapeteIcn.getImage();
+				
 		
 		
 		//game1
@@ -163,7 +173,8 @@ public class media {
 		imageS4 = iconS4.getImage();
 		
 		arrowIm = arrowIc.getImage();
-		
+		tapeteSupImg = tapeteSupIcn.getImage();		
+		tapeteInfImg = tapeteInfIcn.getImage();	
 		
 		//fuente estandar botones
 		try {

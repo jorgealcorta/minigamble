@@ -73,6 +73,7 @@ public class Game1  implements MouseMotionListener, MouseListener {
 	private int click1 = -1;
 	private int click2 = -1;
 	private int puntTotal = 0;
+	private int puntLocal =0;
 	private int puntIni = 0;
 	private int puntTemp = 1000;
 	private String jugador;
@@ -418,7 +419,7 @@ public class Game1  implements MouseMotionListener, MouseListener {
 							
 							
 							if(allCards.get(click1).getId() == selectCards.get(click2).getId()){
-								puntTotal += puntTemp;
+								puntLocal += puntTemp;
 								puntTemp=1000;
 								
 							}else {
@@ -438,8 +439,8 @@ public class Game1  implements MouseMotionListener, MouseListener {
 								delaySeg(2);
 								start = 4;
 								delaySeg(1);
-								BaseDatos.insertarGame1(idPartida, puntTotal - puntIni, fallos, primeraCarta, tiempoPrimeraCarta, tiempoTotal);
-								Game.partida  = new Partida( puntTotal ,0, null, jugador, idPartida);
+								BaseDatos.insertarGame1(idPartida, puntLocal, fallos, primeraCarta, tiempoPrimeraCarta, tiempoTotal);
+								Game.partida  = new Partida( puntTotal + puntLocal ,0, null, jugador, idPartida);
 								
 							}
 							
@@ -490,16 +491,12 @@ public class Game1  implements MouseMotionListener, MouseListener {
 	 */
 	public void render(Graphics g) {
 	
-		g.setColor(Color.decode("#208b3a"));
-		g.fillRect(0, 0, 1200, 700);
-		
-
-		
+		g.drawImage(media.tapeteImg, 0, 0, 1184, 663, null);
 		
 		if(start==1) {
 			g.setFont(media.customFontBot);
 			g.setColor(Color.BLACK);
-			if(bStart_state == true) {					                   //caso start = 1
+			if(bStart_state == true) {					                  
 				g.drawImage(media.bStartIMG_True, 500, 294, null);
 				g.drawString("Start", 540, 326);
 			}else {									
@@ -510,12 +507,11 @@ public class Game1  implements MouseMotionListener, MouseListener {
 		
 		
 		if (start == 3) {
-			g.setColor(Color.decode("#208b3a"));
-			g.fillRect(0, 0, 1200, 700);
 			
+			g.drawImage(media.tapeteImg, 0, 0, 1184, 663, null);			
 			g.setFont(media.customFontBot);
 			g.setColor(Color.BLACK);
-			String strPunt = String.valueOf(puntTotal);
+			String strPunt = String.valueOf(puntLocal);
 			
 			int nCarta = 0;
 			for (ArrayList<ArrayList<Integer>> filas : posCartas) {
@@ -531,7 +527,7 @@ public class Game1  implements MouseMotionListener, MouseListener {
 			
 			
 			
-			g.drawString(strPunt, 1100, 40);
+			g.drawString(strPunt, 1020, 60);
 			
 		}
 		
@@ -539,9 +535,9 @@ public class Game1  implements MouseMotionListener, MouseListener {
 			customFontG1 = media.customFontBot.deriveFont(Font.PLAIN,70);
 			g.setFont(customFontG1);
 			g.setColor(Color.BLACK);
-			g.drawString("ENHORABUENA", 325, 300);
+			g.drawString("ENHORABUENA", 220, 300);
 			g.setFont(media.customFontBot);
-			String strPunt = String.valueOf(puntTotal);
+			String strPunt = String.valueOf(puntLocal);
 			g.drawString(strPunt, 570, 400);
 		}
 	}	
