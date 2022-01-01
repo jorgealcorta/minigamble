@@ -21,59 +21,29 @@ import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 
 
-
-
 /**
  * Clase encargada del juego 1 (Memory de cartas)
  */
-public class Game1  implements MouseMotionListener, MouseListener { // Memorizar cartas
-	
-	
 
-	private ImageIcon card_hearts_A;
-	private ImageIcon card_hearts_Q;
-	private ImageIcon card_hearts_K;
-	private ImageIcon card_clubs_A;
-	private ImageIcon card_clubs_Q;
-	private ImageIcon card_clubs_K;
-	private ImageIcon card_clubs_J;
-	private ImageIcon card_hearts_J;
-	private ImageIcon card_diamonds_A;
-	private ImageIcon card_diamonds_K;
+public class Game1  implements MouseMotionListener, MouseListener { 
 	
-	private ImageIcon cardBack;
-	
-	private Image card_hearts_A_IMG;
-	private Image card_hearts_Q_IMG;
-	private Image card_hearts_K_IMG;
-	private Image card_clubs_A_IMG;
-	private Image card_clubs_Q_IMG;
-	private Image card_clubs_K_IMG;
-	private Image card_clubs_J_IMG;
-	private Image card_hearts_J_IMG;
-	private Image card_diamonds_A_IMG;
-	private Image card_diamonds_K_IMG;
-	
-	private Image cardBackIMG;
-	
-	private boolean bStart_state = false;
+	private int mox;				
+	private int moy;
+	private int mdx;
+	private int mdy;	
 	
 	private int nCol;
 	private int nFil;
 	private int cartX;
 	private int cartY;
-	private int nivel = 1;
-	private int fallos = 0;
 	
 	private Font customFontG1;
 	
 	private ArrayList<ArrayList<ArrayList<Integer>>> posCartas;
 	
-	private int mox;				//Posicion en la que se presiona el raton
-	private int moy;
-	private int mdx;
-	private int mdy;
-	
+	private boolean bStart_state = false;
+	private int nivel = 1;
+	private int fallos = 0;
 	
 	private ArrayList<Carta> allCards = new ArrayList<Carta>();
 	private List<Carta> selectCards = new ArrayList<Carta>();

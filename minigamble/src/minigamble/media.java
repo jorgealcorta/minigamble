@@ -3,8 +3,12 @@ package minigamble;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Image;
+import java.io.File;
 import java.io.IOException;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 
 public class media {
@@ -63,6 +67,24 @@ public class media {
 	public static  ImageIcon endingIcon2;
 	
 	
+	//game5
+	public static ImageIcon iconS1;
+	public static Image imageS1;
+	
+	public static ImageIcon iconS2;
+	public static Image imageS2;
+
+	public static ImageIcon iconS3;
+	public static Image imageS3;
+
+	public static ImageIcon iconS4;
+	public static Image imageS4;
+	
+	public static ImageIcon arrowIc;
+	public static Image arrowIm;
+	
+	
+	
 	public media() {
 		
 		try {
@@ -92,7 +114,14 @@ public class media {
 			endingIcon1 = new ImageIcon( Game.class.getResource("multimedia/laberintos/endlab1.png").toURI().toURL() );
 			endingIcon2 = new ImageIcon( Game.class.getResource("multimedia/laberintos/endlab2.png").toURI().toURL() );
 			
-				
+			//game5
+			
+			iconS1= new ImageIcon( Game.class.getResource("multimedia/simbolos/heartS2.png").toURI().toURL() );
+			iconS2= new ImageIcon( Game.class.getResource("multimedia/simbolos/lemonS2.png").toURI().toURL() );
+			iconS3= new ImageIcon( Game.class.getResource("multimedia/simbolos/sevenS2.png").toURI().toURL() );
+			iconS4= new ImageIcon( Game.class.getResource("multimedia/simbolos/grapeS2.png").toURI().toURL() );		
+			
+			arrowIc= new ImageIcon( Game.class.getResource("multimedia/simbolos/arrow.png").toURI().toURL() );
 		
 		} catch (Exception e1) {
 			e1.printStackTrace();
@@ -127,6 +156,16 @@ public class media {
 		endingImg2 = endingIcon2.getImage();
 		
 		
+		//game5
+		imageS1 = iconS1.getImage();
+		imageS2 = iconS2.getImage();
+		imageS3 = iconS3.getImage();
+		imageS4 = iconS4.getImage();
+		
+		arrowIm = arrowIc.getImage();
+		
+		
+		//fuente estandar botones
 		try {
 			customFontBot = Font.createFont(Font.TRUETYPE_FONT, Inicio.class.getResourceAsStream("fuentes/fuenteBot.ttf"));
 			customFontBot=customFontBot.deriveFont(Font.PLAIN,20);
@@ -134,6 +173,10 @@ public class media {
 			e.printStackTrace();
 			System.out.println("Error con la fuente Boton");
 		}
+		
+		
+
+		
 		
 	}
 

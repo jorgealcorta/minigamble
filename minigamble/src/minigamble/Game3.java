@@ -43,7 +43,7 @@ public class Game3 implements MouseListener , MouseMotionListener {
 	
 	private int Mox;
 	private int Moy;
-	private int mox;				//Posicion en la que se presiona el raton
+	private int mox;				
 	private int moy;
 	private int mdx;
 	private int mdy;
@@ -66,8 +66,7 @@ public class Game3 implements MouseListener , MouseMotionListener {
 	
 	Robot robot;
 	
-	
-	
+		
 	/**
 	 * Constructor del juego 3
 	 * @param dificultad Dificultad del juego 3 segun la cual se elegira un laberinto mas o menos dificil.
@@ -105,10 +104,7 @@ public class Game3 implements MouseListener , MouseMotionListener {
 		
 		
 	}
-	
-	
-
-	
+		
 	/**
 	 * Elige un laberinto en funcion de la dificultad que reciba
 	 * @param array Arraylist con todos los laberintos disponibles
@@ -118,7 +114,7 @@ public class Game3 implements MouseListener , MouseMotionListener {
 	public Laberinto getRandom( ArrayList<Laberinto> array, int dificultad) {
 	    int rnd = new Random().nextInt(array.size());
 	   // return array.get(rnd);
-	    return array.get(0);
+	    return array.get(rnd);
 	}
 	
 	/**	Evalua si el raton esta sobre una region
@@ -347,5 +343,4 @@ public class Game3 implements MouseListener , MouseMotionListener {
 	
 	}
 
-		
 }

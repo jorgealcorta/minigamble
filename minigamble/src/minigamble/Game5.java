@@ -19,22 +19,7 @@ import javax.swing.ImageIcon;
 public class Game5 implements Runnable , KeyListener{
  
 	
-	private Font customFontBot;
-	
-	private ImageIcon iconS1;
-	private Image imageS1;
-	
-	private ImageIcon iconS2;
-	private Image imageS2;
-
-	private ImageIcon iconS3;
-	private Image imageS3;
-
-	private ImageIcon iconS4;
-	private Image imageS4;
-	
-	private ImageIcon arrowIc;
-	private Image arrowIm;
+	private Font customFontG5;
 	
 	public static ArrayList<Image> symbols = new ArrayList<Image>();
 	
@@ -67,40 +52,11 @@ public class Game5 implements Runnable , KeyListener{
 		idPartida = idPart;
 		jugador = nombreJugador;
 		
-		try {
-			customFontBot = Font.createFont(Font.TRUETYPE_FONT, Inicio.class.getResourceAsStream("fuentes/fuenteBot.ttf"));
-			customFontBot=customFontBot.deriveFont(Font.PLAIN,40);
-		} catch (FontFormatException | IOException e) {
-			e.printStackTrace();
-			System.out.println("Error con la fuente Boton");
-		}
-		
-		try {
-			
-			iconS1= new ImageIcon( Game.class.getResource("multimedia/simbolos/heartS2.png").toURI().toURL() );
-			iconS2= new ImageIcon( Game.class.getResource("multimedia/simbolos/lemonS2.png").toURI().toURL() );
-			iconS3= new ImageIcon( Game.class.getResource("multimedia/simbolos/sevenS2.png").toURI().toURL() );
-			iconS4= new ImageIcon( Game.class.getResource("multimedia/simbolos/grapeS2.png").toURI().toURL() );
-		
-			arrowIc= new ImageIcon( Game.class.getResource("multimedia/simbolos/arrow.png").toURI().toURL() );
-			
-		} catch (MalformedURLException | URISyntaxException e) {
-				e.printStackTrace();
-		}
-		
-		imageS1 = iconS1.getImage();
-		imageS2 = iconS2.getImage();
-		imageS3 = iconS3.getImage();
-		imageS4 = iconS4.getImage();
-		arrowIm = arrowIc.getImage();
-		
-		symbols.add(imageS1);
-		symbols.add(imageS2);
-		symbols.add(imageS3);
-		symbols.add(imageS4);
-		
-		
-		
+		symbols.add(media.imageS1);
+		symbols.add(media.imageS2);
+		symbols.add(media.imageS3);
+		symbols.add(media.imageS4);
+				
 		sym1 = new symbol();
 		sym2 = new symbol();
 		sym3 = new symbol();
@@ -276,10 +232,10 @@ public class Game5 implements Runnable , KeyListener{
 			g.fillRect(200, 200, 200, 300);
 			g.fillRect(500, 200, 200, 300);
 			g.fillRect(800, 200, 200, 300);
-			g.setFont(customFontBot);
+			g.setFont(media.customFontBot);
 			g.drawString("Press space to play", 250, 100);
-			g.drawImage(arrowIm, 140, 300, 80, 80, null);
-			g.drawImage(arrowIm, 1060, 300, -80, 80, null);
+			g.drawImage(media.arrowIm, 140, 300, 80, 80, null);
+			g.drawImage(media.arrowIm, 1060, 300, -80, 80, null);
 			
 		} else if (start==1) {
 			g.setColor(Color.decode("#208b3a"));
@@ -306,24 +262,24 @@ public class Game5 implements Runnable , KeyListener{
 			g.fillRect(0, 0, 1200, 200);
 			g.fillRect(0, 500, 1200, 200);
 			g.setColor(Color.WHITE);
-			g.setFont(customFontBot);		
+			g.setFont(media.customFontBot);		
 			g.drawString("Press space to stop", 250, 100);
-			g.drawImage(arrowIm, 140, 300, 80, 80, null);
-			g.drawImage(arrowIm, 1060, 300, -80, 80, null);
+			g.drawImage(media.arrowIm, 140, 300, 80, 80, null);
+			g.drawImage(media.arrowIm, 1060, 300, -80, 80, null);
 		
 		} else if(start==2) {
 			
 			delayMS(200);
-			customFontBot=customFontBot.deriveFont(Font.PLAIN,50);
-			g.setFont(customFontBot);
+			customFontG5=media.customFontBot.deriveFont(Font.PLAIN,50);
+			g.setFont(customFontG5);
 			g.setColor(Color.BLACK);
 			g.drawString("Sorry too bad (", 100, 300);
 			
 		} else if(start == 3) {
 			
 			delayMS(200);
-			customFontBot=customFontBot.deriveFont(Font.PLAIN,50);
-			g.setFont(customFontBot);
+			customFontG5=media.customFontBot.deriveFont(Font.PLAIN,50);
+			g.setFont(customFontG5);
 			g.setColor(Color.BLACK);
 			g.drawString("YAY, YOU WON!!", 5+0, 300);
 			
