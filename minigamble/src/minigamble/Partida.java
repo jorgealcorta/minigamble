@@ -43,6 +43,7 @@ public class Partida {
 		minijuegos.add(ESTADO.Game4);
 		minijuegos.add(ESTADO.Game5);
 		minijuegos.add(ESTADO.Game6);
+		minijuegos.add(ESTADO.PantallaIntermedia);
 		
 		int rand = (int) (Math.random() * 3);
 		
@@ -53,7 +54,7 @@ public class Partida {
 		
 
 
-		rand=0 ; //PARA HACER PRUEBAS, LUEGO BORRARRRRRRRRRRRRRRRRRRRRRRRR
+		rand=5 ; //PARA HACER PRUEBAS, LUEGO BORRARRRRRRRRRRRRRRRRRRRRRRRR
 
 
 		if(vidas<1 ) {
@@ -78,12 +79,19 @@ public class Partida {
 				Game.game4 = new Game4(puntuacionGeneral);
 				Game.estadoJuego = minijuegos.get(rand);
 				Game.eventoRaton();
+				
 			} else if(rand==4) {
 				Game.game5 = new Game5(puntuacionGeneral, jugador, idPartida);
 				Game.estadoJuego = minijuegos.get(rand);
 				Game.eventoRaton();
+				
 			} else if(rand==5) {
 				Game.game6 = new Game6(puntuacionGeneral);
+				Game.estadoJuego = minijuegos.get(rand);
+				Game.eventoRaton();
+				
+			} else if(rand==6) {
+				Game.pantallaIntermedia = new PantallaIntermedia(1200, 1, 7);
 				Game.estadoJuego = minijuegos.get(rand);
 				Game.eventoRaton();
 			}

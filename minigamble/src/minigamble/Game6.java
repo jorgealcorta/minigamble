@@ -54,7 +54,7 @@ public class Game6 implements KeyListener{
 	
 	public Game6(int dificultad) {
 		
-try {
+		try {
 			
 			//Cargo todas las imagenes como iconos
 						
