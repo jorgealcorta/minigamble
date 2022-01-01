@@ -40,7 +40,6 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 	private ImageIcon card_hearts_J;
 	private ImageIcon card_diamonds_A;
 	private ImageIcon card_diamonds_K;
-
 	
 	private ImageIcon cardBack;
 	
@@ -54,15 +53,9 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 	private Image card_hearts_J_IMG;
 	private Image card_diamonds_A_IMG;
 	private Image card_diamonds_K_IMG;
-
 	
 	private Image cardBackIMG;
-	private Image bStartIMG_True;
-	private Image bStartIMG_False;
-
 	
-	private ImageIcon bStart_false;		// boton Start
-	private ImageIcon bStart_true;
 	private boolean bStart_state = false;
 	
 	private int nCol;
@@ -72,8 +65,7 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 	private int nivel = 1;
 	private int fallos = 0;
 	
-	private Font customFontBot;
-	private Font customFontFin;
+	private Font customFontG1;
 	
 	private ArrayList<ArrayList<ArrayList<Integer>>> posCartas;
 	
@@ -160,65 +152,7 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 			cartY = 133;
 		}
 		
-		try {
-			//Cargo todas las imagenes como iconos
-			cardBack = new ImageIcon( Game.class.getResource("multimedia/cartas/cardBack_red5.png").toURI().toURL() );
-			card_hearts_A = new ImageIcon( Game.class.getResource("multimedia/cartas/cardHeartsA.png").toURI().toURL() );
-			card_hearts_Q = new ImageIcon( Game.class.getResource("multimedia/cartas/cardHeartsQ.png").toURI().toURL() );
-			card_hearts_K = new ImageIcon( Game.class.getResource("multimedia/cartas/cardHeartsK.png").toURI().toURL() );
-			card_clubs_A = new ImageIcon( Game.class.getResource("multimedia/cartas/cardClubsA.png").toURI().toURL() );
-			card_clubs_Q = new ImageIcon( Game.class.getResource("multimedia/cartas/cardClubsQ.png").toURI().toURL() );
-			card_clubs_K = new ImageIcon( Game.class.getResource("multimedia/cartas/cardClubsK.png").toURI().toURL() );
-			card_clubs_J = new ImageIcon( Game.class.getResource("multimedia/cartas/cardClubsJ.png").toURI().toURL() );
-			card_hearts_J = new ImageIcon( Game.class.getResource("multimedia/cartas/cardHeartsJ.png").toURI().toURL() );
-			card_diamonds_A = new ImageIcon( Game.class.getResource("multimedia/cartas/cardDiamondsA.png").toURI().toURL() );
-			card_diamonds_K = new ImageIcon( Game.class.getResource("multimedia/cartas/cardDiamondsK.png").toURI().toURL() );
 			
-			
-			bStart_false = new ImageIcon( Game.class.getResource("multimedia/red_button2.png").toURI().toURL() );
-			bStart_true = new ImageIcon( Game.class.getResource("multimedia/red_button3.png").toURI().toURL() );
-			
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}
-		
-		try {
-			customFontBot = Font.createFont(Font.TRUETYPE_FONT, Inicio.class.getResourceAsStream("fuentes/fuenteBot.ttf"));
-			customFontBot=customFontBot.deriveFont(Font.PLAIN,20);
-		} catch (FontFormatException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("Error con la fuente Boton");
-		}
-		
-		try {   
-			customFontFin = Font.createFont(Font.TRUETYPE_FONT, Inicio.class.getResourceAsStream("fuentes/fuente.ttf"));
-			customFontFin = customFontFin.deriveFont(Font.PLAIN,100);				
-		}catch(Exception e){	
-			System.out.println("Problema con la fuente Minigamble");
-		}
-		
-		
-		// Paso todos los iconos a imagenes
-		card_hearts_A_IMG = card_hearts_A.getImage();
-		card_hearts_Q_IMG = card_hearts_Q.getImage();
-		card_hearts_K_IMG = card_hearts_K.getImage();
-		card_clubs_A_IMG = card_clubs_A.getImage();
-		card_clubs_Q_IMG = card_clubs_Q.getImage();
-		card_clubs_K_IMG = card_clubs_K.getImage();
-		card_clubs_J_IMG = card_clubs_J.getImage();
-		card_hearts_J_IMG = card_hearts_J.getImage();
-		card_diamonds_A_IMG = card_diamonds_A.getImage();
-		card_diamonds_K_IMG = card_diamonds_K.getImage();
-		
-		
-		cardBackIMG = cardBack.getImage();
-		
-		bStartIMG_True = bStart_true.getImage();
-		bStartIMG_False = bStart_false.getImage();
-		
-		
-		
 		allCards.add(c1);
 		allCards.add(c2);
 		allCards.add(c3);
@@ -261,25 +195,25 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 	public Image getImagenCarta(int index) {
 		
 		if(selectCards.get(index).getId() == "card_hearts_A") {
-			return card_hearts_A_IMG;
+			return media.card_hearts_A_IMG;
 		}else if(selectCards.get(index).getId() == "card_hearts_Q") {
-			return card_hearts_Q_IMG;
+			return media.card_hearts_Q_IMG;
 		}else if(selectCards.get(index).getId() == "card_hearts_K") {
-			return card_hearts_K_IMG;
+			return media.card_hearts_K_IMG;
 		}else if(selectCards.get(index).getId() == "card_clubs_A") {
-			return card_clubs_A_IMG;
+			return media.card_clubs_A_IMG;
 		}else if(selectCards.get(index).getId() == "card_clubs_Q") {
-			return card_clubs_Q_IMG;
+			return media.card_clubs_Q_IMG;
 		}else if(selectCards.get(index).getId() == "card_clubs_K") {
-			return card_clubs_K_IMG;
+			return media.card_clubs_K_IMG;
 		}else if(selectCards.get(index).getId() == "card_hearts_J") {
-			return card_hearts_J_IMG;
+			return media.card_hearts_J_IMG;
 		}else if(selectCards.get(index).getId() == "card_clubs_J") {
-			return card_clubs_J_IMG;
+			return media.card_clubs_J_IMG;
 		}else if(selectCards.get(index).getId() == "card_diamonds_A") {
-			return card_diamonds_A_IMG;
+			return media.card_diamonds_A_IMG;
 		}else if(selectCards.get(index).getId() == "card_diamonds_K") {
-			return card_diamonds_K_IMG;
+			return media.card_diamonds_K_IMG;
 		}
 		return null;
 		
@@ -593,13 +527,13 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 		
 		
 		if(start==1) {
-			g.setFont(customFontBot);
+			g.setFont(media.customFontBot);
 			g.setColor(Color.BLACK);
 			if(bStart_state == true) {					                   //caso start = 1
-				g.drawImage(bStartIMG_True, 500, 294, null);
+				g.drawImage(media.bStartIMG_True, 500, 294, null);
 				g.drawString("Start", 540, 326);
 			}else {									
-				g.drawImage(bStartIMG_False, 500, 290, null);
+				g.drawImage(media.bStartIMG_False, 500, 290, null);
 				g.drawString("Start", 547, 322);
 			}
 		}
@@ -609,7 +543,7 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 			g.setColor(Color.decode("#208b3a"));
 			g.fillRect(0, 0, 1200, 700);
 			
-			g.setFont(customFontBot);
+			g.setFont(media.customFontBot);
 			g.setColor(Color.BLACK);
 			String strPunt = String.valueOf(puntTotal);
 			
@@ -619,7 +553,7 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 					if(selectCards.get(nCarta).isArriba()) {
 						g.drawImage(getImagenCarta(nCarta), columnas.get(0) , columnas.get(1) ,cartX, cartY, null);
 					}else {
-						g.drawImage(cardBackIMG, columnas.get(0) , columnas.get(1) ,cartX, cartY, null);
+						g.drawImage(media.cardBackIMG, columnas.get(0) , columnas.get(1) ,cartX, cartY, null);
 					}
 					nCarta++;
 				}
@@ -632,10 +566,11 @@ public class Game1  implements MouseMotionListener, MouseListener { // Memorizar
 		}
 		
 		if(start == 4) {
-			g.setFont(customFontFin);
+			customFontG1 = media.customFontBot.deriveFont(Font.PLAIN,100);
+			g.setFont(customFontG1);
 			g.setColor(Color.BLACK);
 			g.drawString("ENHORABUENA", 325, 300);
-			g.setFont(customFontBot);
+			g.setFont(media.customFontBot);
 			String strPunt = String.valueOf(puntTotal);
 			g.drawString(strPunt, 570, 400);
 		}
