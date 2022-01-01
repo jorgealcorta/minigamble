@@ -27,9 +27,6 @@ import javax.swing.ImageIcon;
 
 import minigamble.Game.ESTADO;
 
-
-
-
 /**
  * Clase encargada del juego 3 (laberinto)
  */
@@ -39,32 +36,10 @@ public class Game3 implements MouseListener , MouseMotionListener {
 	private int dificultad;
 	private String jugador;
 	private int idPartida;
-	
-	private Image lab1Img;
-	private ImageIcon lab1Icon;
-	
-	private Image lab2Img;
-	private ImageIcon lab2Icon;
-	
-	private Image lab3Img;
-	private ImageIcon lab3Icon;
-	
-	private Image endingImg1;
-	private ImageIcon endingIcon1;
-	
-	private Image endingImg2;
-	private ImageIcon endingIcon2;
-	
-	private Image bStartIMG_True;
-	private Image bStartIMG_False;
-	
-	
-	private ImageIcon bStart_false;		// boton Start
-	private ImageIcon bStart_true;
+		
 	private boolean bStart_state = false;
 	
-	private Font customFontBot;
-	private Font customFontFin;
+	private Font customFontG3;
 	
 	private int Mox;
 	private int Moy;
@@ -110,51 +85,11 @@ public class Game3 implements MouseListener , MouseMotionListener {
 		puntLocal = 1000;
 		numFallos = 0;
 		start = 1;
-		
-		try {
-		
-		bStart_false = new ImageIcon( Game.class.getResource("multimedia/red_button2.png").toURI().toURL() );
-		bStart_true = new ImageIcon( Game.class.getResource("multimedia/red_button3.png").toURI().toURL() );
-		
-		lab1Icon = new ImageIcon( Game.class.getResource("multimedia/laberintos/lab1.png").toURI().toURL() );
-		lab2Icon = new ImageIcon( Game.class.getResource("multimedia/laberintos/lab2.png").toURI().toURL() );
-		lab3Icon = new ImageIcon( Game.class.getResource("multimedia/laberintos/lab3.png").toURI().toURL() );
-		endingIcon1 = new ImageIcon( Game.class.getResource("multimedia/laberintos/endlab1.png").toURI().toURL() );
-		endingIcon2 = new ImageIcon( Game.class.getResource("multimedia/laberintos/endlab2.png").toURI().toURL() );
-		
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}
-		
-		try {
-			customFontBot = Font.createFont(Font.TRUETYPE_FONT, Inicio.class.getResourceAsStream("fuentes/fuenteBot.ttf"));
-			customFontBot=customFontBot.deriveFont(Font.PLAIN,20);
-		} catch (FontFormatException | IOException e) {
-			e.printStackTrace();
-			System.out.println("Error con la fuente Boton");
-		}
-		
-		try {   
-			customFontFin = Font.createFont(Font.TRUETYPE_FONT, Inicio.class.getResourceAsStream("fuentes/fuente.ttf"));
-			customFontFin = customFontFin.deriveFont(Font.PLAIN,100);				
-		}catch(Exception e){	
-			System.out.println("Problema con la fuente Minigamble");
-		}
-		
-		bStartIMG_True = bStart_true.getImage();
-		bStartIMG_False = bStart_false.getImage();
-		
-		
-		lab1Img = lab1Icon.getImage();
-		lab2Img = lab2Icon.getImage();
-		lab3Img = lab3Icon.getImage();
-		
-		endingImg1 = endingIcon1.getImage();
-		endingImg2 = endingIcon2.getImage();
-		
-		Laberinto lab1 = new Laberinto(lab1Img, 001 );
-		Laberinto lab2 = new Laberinto(lab2Img, 002 );
-		Laberinto lab3 = new Laberinto(lab3Img, 003 );		
+			
+				
+		Laberinto lab1 = new Laberinto(media.lab1Img, 001 );
+		Laberinto lab2 = new Laberinto(media.lab3Img, 002 );
+		Laberinto lab3 = new Laberinto(media.lab2Img, 003 );		
 				
 		allLabs.add(lab1);
 		allLabs.add(lab2);
@@ -372,13 +307,13 @@ public class Game3 implements MouseListener , MouseMotionListener {
 		g.fillRect(0, 0, 1200, 700);
 		
 		if(start==1) {
-			g.setFont(customFontBot);
+			g.setFont(media.customFontBot);
 			g.setColor(Color.BLACK);
 			if(bStart_state == true) {					                  
-				g.drawImage(bStartIMG_True, 500, 294, null);
+				g.drawImage(media.bStartIMG_True, 500, 294, null);
 				g.drawString("Start", 540, 326);
 			}else {									
-				g.drawImage(bStartIMG_False, 500, 290, null);
+				g.drawImage(media.bStartIMG_False, 500, 290, null);
 				g.drawString("Start", 547, 322);
 			}
 		}
@@ -386,8 +321,8 @@ public class Game3 implements MouseListener , MouseMotionListener {
 		
 		if (start==2) {			
 			g.drawImage(thisLab.getImage() ,0, 0,1190,665,  null);
-			customFontBot=customFontBot.deriveFont(Font.PLAIN,15);
-			g.setFont(customFontBot);
+			customFontG3=media.customFontBot.deriveFont(Font.PLAIN,15);
+			g.setFont(customFontG3);
 			g.setColor(Color.BLACK);
 			g.drawString("Points to obtain ( " + String.valueOf(puntLocal) +" )", 870, 40);						
 			g.drawString("Number of mistakes ( "+String.valueOf(numFallos)+" )", 845, 20);			
@@ -396,15 +331,15 @@ public class Game3 implements MouseListener , MouseMotionListener {
 		
 		if(start ==3) {
 			g.drawImage(thisLab.getImage() ,0, 0,1190,665,  null);
-			
-			g.setFont(customFontFin);
+			customFontG3=media.customFontBot.deriveFont(Font.PLAIN,50);
+			g.setFont(customFontG3);
 			g.setColor(Color.BLACK);
 			if(numFallos<3) {
-				g.drawString("Congrats, you passed!!", 160, 326);
-				g.drawImage(endingImg1, 100, 45, 80, 80, null);
+				g.drawString("Congrats you passed", 160, 326);
+				g.drawImage(media.endingImg1, 100, 45, 80, 80, null);
 			} else {
 				g.drawString("Sorry.. too many mistakes", 160, 326);
-				g.drawImage(endingImg2, 100, 45, 80, 80, null);
+				g.drawImage(media.endingImg2, 100, 45, 80, 80, null);
 			}
 			
 			

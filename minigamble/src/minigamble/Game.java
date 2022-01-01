@@ -18,6 +18,7 @@ public class Game extends Canvas implements Runnable{
 	public static Game4 game4;
 	public static Game5 game5;
 	public static Game6 game6;
+	public static media media;
 	
 	public static VentanaPrincipal ventana;
 	
@@ -49,6 +50,8 @@ public class Game extends Canvas implements Runnable{
 	
 	
 	public Game() {
+		
+		media = new media();
 		ventana = new VentanaPrincipal("Minigamble!", this) ;
 		this.addMouseListener(inicio); 				// anyado un mouseListener a la pantalla inicio
 		this.addMouseMotionListener(inicio);
