@@ -77,6 +77,15 @@ public class BaseDatos {
 						statement.executeUpdate( sent );
 					}
 					scanner.close();
+					scanner = new Scanner( BaseDatos.class.getResourceAsStream("inicio/partida_inic.txt") );
+					while (scanner.hasNextLine()) {
+						String linea = scanner.nextLine();
+						String[] datos = linea.split( "\t" );
+						sent = "insert into partida (id, fecha, nombre) values (" + datos[0] + ", " + datos[1] + ", '" + datos[2] + "' );";
+						logger.log( Level.INFO, "Statement: " + sent );
+						statement.executeUpdate( sent );
+					}
+					scanner.close();
 					scanner = new Scanner( BaseDatos.class.getResourceAsStream("inicio/jugadores_inic.txt") );
 					while (scanner.hasNextLine()) {
 						String linea = scanner.nextLine();
