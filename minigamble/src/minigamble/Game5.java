@@ -257,7 +257,6 @@ public class Game5 implements Runnable , KeyListener{
 			g.drawImage(symbols.get(sym8.getImage()), sym8.getXpos(), sym8.getYpos(), null);
 			g.drawImage(symbols.get(sym9.getImage()), sym9.getXpos(), sym9.getYpos(), null);
 			
-			g.setColor(Color.decode("#208b3a"));
 			g.drawImage(media.tapeteSupImg, 0, 0, 1184, 200, null);
 			g.drawImage(media.tapeteInfImg, 0, 500, 1184, 163, null);
 			g.setColor(Color.WHITE);

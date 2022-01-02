@@ -90,7 +90,12 @@ public class Partida {
 				Game.estadoJuego = minijuegos.get(rand);
 				Game.eventoRaton();
 				
-			} else if(rand==6) {
+			}  else if(rand==6) {
+				Game.game7 = new Game7(puntuacionGeneral, jugador, idPartida);
+				Game.estadoJuego = minijuegos.get(rand);
+				Game.eventoRaton();
+				
+			} else if(rand==7) {
 				Game.pantallaIntermedia = new PantallaIntermedia(1200, 1, 7);
 				Game.estadoJuego = minijuegos.get(rand);
 				Game.eventoRaton();

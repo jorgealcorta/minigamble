@@ -18,6 +18,7 @@ public class Game extends Canvas implements Runnable{
 	public static Game4 game4;
 	public static Game5 game5;
 	public static Game6 game6;
+	public static Game7 game7;
 	public static PantallaIntermedia pantallaIntermedia;
 	
 	public static media media;
@@ -46,6 +47,7 @@ public class Game extends Canvas implements Runnable{
 		Game4, // DIANAS
 		Game5, // TRAGAPERRAS
 		Game6,  // FLECHAS CAYENDO
+		Game7,
 		PantallaIntermedia
 	};
 	
@@ -91,6 +93,8 @@ public class Game extends Canvas implements Runnable{
 			game.addKeyListener(game5);
 		}else if(estadoJuego == ESTADO.Game6) {
 			game.addKeyListener(game6);
+		}else if(estadoJuego == ESTADO.Game7) {
+			game.addMouseListener(game7);
 		}else if(estadoJuego == ESTADO.PantallaIntermedia) {
 			game.addKeyListener(pantallaIntermedia);
 		}
@@ -194,6 +198,9 @@ public class Game extends Canvas implements Runnable{
 			break;
 		case Game6:
 			game6.render(g);
+			break;
+		case Game7:
+			game7.render(g);
 			break;
 		case PantallaIntermedia:
 			pantallaIntermedia.render(g);
