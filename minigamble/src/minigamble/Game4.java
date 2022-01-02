@@ -45,7 +45,18 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 	private int mdx;
 	private int mdy;
 	
-	public Game4(int dificultad){
+	private int puntos;
+	private int idPartida;
+	private String jugador;
+	private int fallos;
+	private long tiempoIni = System.currentTimeMillis();
+	
+	public Game4(int puntuacion, String nombreJugador, int idPart){
+		
+		puntos = puntuacion;
+		idPartida = idPart;
+		jugador = nombreJugador;
+		
 		
 		//Ir creando dianas
 		//xmin=0
