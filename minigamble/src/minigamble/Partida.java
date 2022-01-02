@@ -66,7 +66,7 @@ public class Partida {
 				Game.eventoRaton();
 							
 			} else if(rand==1) {
-				Game.game2 = new Game2(puntuacionGeneral);
+				Game.game2 = new Game2(puntuacionGeneral, jugador, idPartida);
 				Game.estadoJuego = minijuegos.get(rand);
 				Game.eventoRaton();
 				

@@ -52,6 +52,13 @@ public class BaseDatos {
 				sent = "CREATE TABLE game1 (id INTEGER PRIMARY KEY AUTOINCREMENT ,idPartida int, puntuacion int, fallos int, primera_carta varchar(20), tiempo_primera_carta bigint, tiempo_total bigint);";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
+				
+				sent = "DROP TABLE IF EXISTS game2";
+				logger.log( Level.INFO, "Statement: " + sent );
+				statement.executeUpdate( sent );
+				sent = "CREATE TABLE game2 (id INTEGER PRIMARY KEY AUTOINCREMENT ,idPartida int, puntuacion int, fallos int, tiempo_total bigint);";
+				logger.log( Level.INFO, "Statement: " + sent );
+				statement.executeUpdate(sent);
 			
 				sent = "DROP TABLE IF EXISTS game3";
 				logger.log( Level.INFO, "Statement: " + sent );
@@ -59,6 +66,7 @@ public class BaseDatos {
 				sent = "CREATE TABLE game3 (id INTEGER PRIMARY KEY AUTOINCREMENT ,idPartida int, puntuacion int, fallos int, tiempo_total bigint, laberinto int);";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
+				
 			
 				sent = "DROP TABLE IF EXISTS game5";
 				logger.log( Level.INFO, "Statement: " + sent );
@@ -169,6 +177,19 @@ public class BaseDatos {
 	public static boolean insertarGame1( int idPartida, int puntuacion, int fallos, String primeraCarta, long tiempoPrimCar, long tiempoTot) {
 		try (Statement statement = conexion.createStatement()) {
 			String sent = "insert into game1 (idPartida, puntuacion, fallos, primera_carta, tiempo_primera_carta, tiempo_total ) values (" + idPartida + ", " + puntuacion + ", "+ fallos + ", '"+ primeraCarta +"', " + tiempoPrimCar + ", " + tiempoTot + " );";											
+			logger.log( Level.INFO, "Statement: " + sent );
+			int insertados = statement.executeUpdate( sent );
+			if (insertados!=1) return false;  // Error en inserción
+			return true;
+		} catch (Exception e) {
+			logger.log( Level.SEVERE, "Excepción", e );
+			return false;
+		}
+	}
+	
+	public static boolean insertarGame2( int idPartida, int puntuacion, int fallos, long tiempoTot) {
+		try (Statement statement = conexion.createStatement()) {
+			String sent = "insert into game2 (idPartida, puntuacion, fallos, tiempo_total ) values (" + idPartida + ", " + puntuacion + ", "+ fallos + ", " + tiempoTot + " );";											
 			logger.log( Level.INFO, "Statement: " + sent );
 			int insertados = statement.executeUpdate( sent );
 			if (insertados!=1) return false;  // Error en inserción

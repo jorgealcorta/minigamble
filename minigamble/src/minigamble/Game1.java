@@ -88,15 +88,15 @@ public class Game1  implements MouseMotionListener, MouseListener {
 	
 	/**
 	 * Constructor del juego 1
-	 * @param dificultad Dificultad del juego 1 según la cual aparecerán más o menos cartas
+	 * @param puntuacion Puntuacion del juego 1 según la cual aparecerán más o menos cartas
 	 * @param nombreJugador	nombre del jugador (se usa para la base de datos)
 	 * @param idPart identificador de la partida (se usa para la base de datos)
 	 */
 	
-	public Game1(int dificultad, String nombreJugador, int idPart) {
+	public Game1(int puntuacion, String nombreJugador, int idPart) {
 		
-		puntTotal = dificultad;
-		puntIni = dificultad;
+		puntTotal = puntuacion;
+		puntIni = puntuacion;
 		jugador = nombreJugador;
 		idPartida = idPart;
 		

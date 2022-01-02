@@ -35,9 +35,17 @@ public class Game2 implements KeyListener{
 	// ArrayList empleado para almacenar la combinacion de palos introducida por el usuario, se reinicia en cada intento.
 	private ArrayList<String> palosUsuario = new ArrayList<String>();
 
-
+	private int puntos;
+	private int idPartida;
+	private String jugador;
+	private int fallos;
+	private long tiempoIni = System.currentTimeMillis();
 	
-	public Game2(int dificultad) {
+	public Game2(int puntuacion, String nombreJugador, int idPart) {
+			
+			puntos = puntuacion;
+			idPartida = idPart;
+			jugador = nombreJugador;
 			
 			//Creamos el array de los cuatro palos
 			palos.add("cora");
@@ -100,9 +108,9 @@ public class Game2 implements KeyListener{
 		int key = e.getKeyCode();
 		
 		/* 
-		 * Si se ha pulsado el espacio cuando el juego está en start=1, se inicia un for que recorre
+		 * Si se ha pulsado el espacio cuando el juego estï¿½ en start=1, se inicia un for que recorre
 		 * la lista de palos correctos, cambiando el booleano de destacar del palo que corresponda,
-		 * durante un pequeño tiempo:
+		 * durante un pequeï¿½o tiempo:
 		 */
 		 
 		if(key == 32 && start==1) { //reproducir secuencia
@@ -207,7 +215,7 @@ public class Game2 implements KeyListener{
 			/*
 			 * En el caso de que el palo introducido por el usuario no coincida con el correspondiente a su posicion
 			 * en el ArrayList correcto, el usuario habra cometido un fallo. Mientras este trozo de codigo no se ejecute,
-			 * el usuario estará haciendolo bien.
+			 * el usuario estarï¿½ haciendolo bien.
 			 */
 			
 			if(palosUsuario.size() > 0 && palosUsuario.get(cuentaPulsaciones) != palosCorrectos.get(cuentaPulsaciones)) {
@@ -226,7 +234,9 @@ public class Game2 implements KeyListener{
 			if(cuentaPulsaciones == palosCorrectos.size() - 1 && palosUsuario.get(cuentaPulsaciones) == palosCorrectos.get(cuentaPulsaciones)) {
 				start = 4;
 				delaySeg(2);
-				Game.partida  = new Partida(0,0, null, null, 0);
+				long tiempofin = System.currentTimeMillis() - tiempoIni;
+				BaseDatos.insertarGame2(idPartida, puntos, fallos, tiempofin);
+				Game.partida  = new Partida(puntos, 0, null, jugador, idPartida);
 			}
 			
 		}	
