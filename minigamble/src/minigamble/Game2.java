@@ -17,6 +17,9 @@ public class Game2 implements KeyListener{
 	
 	private int start = 1; //1 = esperando, 2 = reproduciendo, 3 = jugando, 4 = ganado
 	
+	// Contador de vidas perdidas
+	private int vidasRestadas = 0;
+	
 	// Contador de flechas pulsadas por el usuario durante el periodo de juego.
 	private int cuentaPulsaciones = -1;
 	
@@ -35,7 +38,8 @@ public class Game2 implements KeyListener{
 	// ArrayList empleado para almacenar la combinacion de palos introducida por el usuario, se reinicia en cada intento.
 	private ArrayList<String> palosUsuario = new ArrayList<String>();
 
-	private int puntos;
+	private int puntTotal;
+	private int puntLocal = 500;
 	private int idPartida;
 	private String jugador;
 	private int fallos;
@@ -43,7 +47,8 @@ public class Game2 implements KeyListener{
 	
 	public Game2(int puntuacion, String nombreJugador, int idPart) {
 			
-			puntos = puntuacion;
+			puntTotal = puntuacion;
+			puntLocal = 500;
 			idPartida = idPart;
 			jugador = nombreJugador;
 			
@@ -223,6 +228,8 @@ public class Game2 implements KeyListener{
 				palosUsuario.removeAll(palosUsuario);
 				cuentaPulsaciones = -1;
 				start = 1;
+				puntLocal -= 500;
+				vidasRestadas++;
 				System.out.println("error");
 			}
 			
@@ -235,8 +242,8 @@ public class Game2 implements KeyListener{
 				start = 4;
 				delaySeg(2);
 				long tiempofin = System.currentTimeMillis() - tiempoIni;
-				BaseDatos.insertarGame2(idPartida, puntos, fallos, tiempofin);
-				Game.partida  = new Partida(puntos, 0, null, jugador, idPartida);
+				BaseDatos.insertarGame2(idPartida, puntTotal, fallos, tiempofin);
+				Game.partida  = new Partida(puntTotal, vidasRestadas, null, jugador, idPartida);
 			}
 			
 		}	
@@ -245,6 +252,7 @@ public class Game2 implements KeyListener{
 	/** Hace el render de los elementos
 	 * @param g recibe Graphics de Game
 	 */
+	
 	public void render(Graphics g) {
 		g.drawImage(media.tapeteImg, 0, 0, 1184, 663, null);
 		

@@ -46,16 +46,23 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 	private int mdy;
 	
 	private int puntos;
+	private int puntSumados;
+	private int puntLocal = 0;
 	private int idPartida;
 	private String jugador;
 	private int fallos;
-	private long tiempoIni = System.currentTimeMillis();
+	private long tiempoComienzo = System.currentTimeMillis();
+	private long tiempoTotal;
+	private int vidasRestadas = 0;
+
 	
 	public Game4(int puntuacion, String nombreJugador, int idPart){
 		
 		puntos = puntuacion;
 		idPartida = idPart;
 		jugador = nombreJugador;
+		
+		puntLocal = 0;
 		
 		
 		//Ir creando dianas
@@ -77,6 +84,8 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 			Diana dRandom = new Diana((int)(Math.random() * (1200 - rSize + 1)), (int)(Math.random() * (660-rSize + 1)), rSize, false);
 			dianasCreadas.add(dRandom);
 		}
+		
+		puntSumados = (int)(500 / (dianasCreadas.size()));
 				
 	}
 	
@@ -90,6 +99,34 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 		ThreadDianasActivas da = new ThreadDianasActivas(dianasCreadas, dianasActivas);
 		Thread hda = new Thread(da);
 		hda.start();
+	}
+	
+	/**
+	 * Realiza un delay en Segundos
+	 * @param n numero de segundos que se quiere hacer el delay
+	 */
+	private void delaySeg(int n) {
+		try {
+			TimeUnit.SECONDS.sleep(n);
+		} catch (InterruptedException b) {
+			// TODO Auto-generated catch block
+			b.printStackTrace();
+		}
+		
+	}
+	
+	/**
+	 * Realiza un delay en Milisegundo
+	 * @param n numero de Milisegundo que se quiere hacer el delay
+	 */
+	private void delayMS(int n) {
+		try {
+			TimeUnit.MILLISECONDS.sleep(n);
+		} catch (InterruptedException b) {
+			// TODO Auto-generated catch block
+			b.printStackTrace();
+		}
+		
 	}
 	
 	/**	Evalua si el raton esta sobre una region
@@ -164,6 +201,8 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 						Thread hbd = new Thread(bd);
 						hbd.start();
 						
+						puntLocal += puntSumados;
+						
 						try {																				
 					        Clip sonido = AudioSystem.getClip();
 							AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s1_filePath));
@@ -172,7 +211,17 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 				        }catch(Exception e2) {
 				        	System.out.println("error");
 				        }
+						
+						if(dianasActivas.size() == 0) {
+							tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
+							delaySeg(2);
+							delaySeg(1);
+							//BaseDatos.insertarGame1(idPartida, puntLocal, fallos, primeraCarta, tiempoPrimeraCarta, tiempoTotal);
+							Game.partida  = new Partida( puntos + puntLocal, vidasRestadas, null, jugador, idPartida);
+							
+						}
 					}else{
+						vidasRestadas++;
 						System.out.println("miss");
 					}
 				}
@@ -262,7 +311,12 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 					g.drawImage(media.diana_IMG, d.getX(), d.getY(), (int)d.getSize(), (int)d.getSize(), null);
 				}else if(d.isRota() && !dianasRotas.contains(d)){
 					g.drawImage(media.dianaRota_IMG, d.getX(), d.getY(), (int)d.getSize(), (int)d.getSize(), null);
-				}else{
+					
+					g.setColor(Color.WHITE);
+					Font fuente = media.customFontBot;
+					fuente = fuente.deriveFont(Font.PLAIN, (int)d.getSize()/2);
+					g.setFont(fuente);
+					g.drawString(String.valueOf(puntSumados), d.getX() + (int)(d.getSize()/2), d.getY()+(int)(d.getSize()/3));
 				}
 			}
 			
