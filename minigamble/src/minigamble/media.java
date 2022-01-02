@@ -25,7 +25,7 @@ public class media {
 	public static Image tapeteImg;	
 	public static ImageIcon tapeteIcn;
 	
-	//game1
+	//GAME1
 	
 	public static ImageIcon card_hearts_A;
 	public static ImageIcon card_hearts_Q;
@@ -51,25 +51,51 @@ public class media {
 	public static Image card_diamonds_K_IMG;
 	public static Image cardBackIMG;
 	
-	//game3
+	//GAME2
 	
-	public static  Image lab1Img;
-	public static  ImageIcon lab1Icon;
+	public static ImageIcon corazonblanco;
+	public static ImageIcon corazonnegro;
+	public static ImageIcon diamanteblanco;
+	public static ImageIcon diamantenegro;
+	public static ImageIcon picablanca;
+	public static ImageIcon picanegra;
+	public static ImageIcon trebolblanco;
+	public static ImageIcon trebolnegro;
+	
+	public static ImageIcon crossarrow;
+	
+	
+	public static Image corazonblanco_IMG;
+	public static Image corazonnegro_IMG;
+	public static Image diamanteblanco_IMG;
+	public static Image diamantenegro_IMG;
+	public static Image picablanca_IMG;
+	public static Image picanegra_IMG;
+	public static Image trebolblanco_IMG;
+	public static Image trebolnegro_IMG;
+	
+	public static Image crossarrow_IMG;
+	
+	//GAME3
+	
+	public static Image lab1Img;
+	public static ImageIcon lab1Icon;
 	
 	public static Image lab2Img;
 	public static ImageIcon lab2Icon;
 	
-	public static  Image lab3Img;
-	public static  ImageIcon lab3Icon;
+	public static Image lab3Img;
+	public static ImageIcon lab3Icon;
 	
-	public static  Image endingImg1;
-	public static  ImageIcon endingIcon1;
+	public static Image endingImg1;
+	public static ImageIcon endingIcon1;
 	
-	public static  Image endingImg2;
-	public static  ImageIcon endingIcon2;
+	public static Image endingImg2;
+	public static ImageIcon endingIcon2;
 	
 	
-	//game5
+	//GAME5
+	
 	public static ImageIcon iconS1;
 	public static Image imageS1;
 	
@@ -99,7 +125,7 @@ public class media {
 			bStart_true = new ImageIcon( Game.class.getResource("multimedia/red_button3.png").toURI().toURL() );	
 			tapeteIcn = new ImageIcon( Game.class.getResource("multimedia/tapete.png").toURI().toURL() );
 			
-			//game1
+			//GAME1
 			
 			cardBack = new ImageIcon( Game.class.getResource("multimedia/cartas/cardBack_red5.png").toURI().toURL() );
 			card_hearts_A = new ImageIcon( Game.class.getResource("multimedia/cartas/cardHeartsA.png").toURI().toURL() );
@@ -113,14 +139,27 @@ public class media {
 			card_diamonds_A = new ImageIcon( Game.class.getResource("multimedia/cartas/cardDiamondsA.png").toURI().toURL() );
 			card_diamonds_K = new ImageIcon( Game.class.getResource("multimedia/cartas/cardDiamondsK.png").toURI().toURL() );
 			
-			//game3	
+			//GAME2
+			
+			corazonblanco = new ImageIcon( Game.class.getResource("multimedia/fichassimon/corazonblanco.png").toURI().toURL() );
+			corazonnegro = new ImageIcon( Game.class.getResource("multimedia/fichassimon/corazonnegro.png").toURI().toURL() );
+			diamanteblanco = new ImageIcon( Game.class.getResource("multimedia/fichassimon/diamanteblanco.png").toURI().toURL() );
+			diamantenegro = new ImageIcon( Game.class.getResource("multimedia/fichassimon/diamantenegro.png").toURI().toURL() );
+			picablanca = new ImageIcon( Game.class.getResource("multimedia/fichassimon/picablanca.png").toURI().toURL() );
+			picanegra = new ImageIcon( Game.class.getResource("multimedia/fichassimon/picanegra.png").toURI().toURL() );
+			trebolblanco = new ImageIcon( Game.class.getResource("multimedia/fichassimon/trebolblanco.png").toURI().toURL() );
+			trebolnegro = new ImageIcon( Game.class.getResource("multimedia/fichassimon/trebolnegro.png").toURI().toURL() );
+			
+			crossarrow = new ImageIcon( Game.class.getResource("multimedia/crossarrowpixel.png").toURI().toURL() );
+			
+			//GAME3	
 			lab1Icon = new ImageIcon( Game.class.getResource("multimedia/laberintos/lab1.png").toURI().toURL() );
 			lab2Icon = new ImageIcon( Game.class.getResource("multimedia/laberintos/lab2.png").toURI().toURL() );
 			lab3Icon = new ImageIcon( Game.class.getResource("multimedia/laberintos/lab3.png").toURI().toURL() );
 			endingIcon1 = new ImageIcon( Game.class.getResource("multimedia/laberintos/endlab1.png").toURI().toURL() );
 			endingIcon2 = new ImageIcon( Game.class.getResource("multimedia/laberintos/endlab2.png").toURI().toURL() );
 			
-			//game5
+			//GAME5
 			
 			iconS1= new ImageIcon( Game.class.getResource("multimedia/simbolos/heartS2.png").toURI().toURL() );
 			iconS2= new ImageIcon( Game.class.getResource("multimedia/simbolos/lemonS2.png").toURI().toURL() );
@@ -143,7 +182,8 @@ public class media {
 				
 		
 		
-		//game1
+		//GAME1
+		
 		card_hearts_A_IMG = card_hearts_A.getImage();
 		card_hearts_Q_IMG = card_hearts_Q.getImage();
 		card_hearts_K_IMG = card_hearts_K.getImage();
@@ -156,8 +196,22 @@ public class media {
 		card_diamonds_K_IMG = card_diamonds_K.getImage();
 		cardBackIMG = cardBack.getImage();
 		
+		//GAME2
 		
-		//game3
+		corazonblanco_IMG = corazonblanco.getImage();
+		corazonnegro_IMG = corazonnegro.getImage();
+		diamanteblanco_IMG = diamanteblanco.getImage();
+		diamantenegro_IMG = diamantenegro.getImage();
+		picablanca_IMG = picablanca.getImage();
+		picanegra_IMG = picanegra.getImage();
+		trebolblanco_IMG = trebolblanco.getImage();
+		trebolnegro_IMG = trebolnegro.getImage();
+		
+		crossarrow_IMG = crossarrow.getImage();
+		
+		
+		//GAME3
+		
 		lab1Img = lab1Icon.getImage();
 		lab2Img = lab2Icon.getImage();
 		lab3Img = lab3Icon.getImage();
@@ -166,7 +220,7 @@ public class media {
 		endingImg2 = endingIcon2.getImage();
 		
 		
-		//game5
+		//GAME5
 		imageS1 = iconS1.getImage();
 		imageS2 = iconS2.getImage();
 		imageS3 = iconS3.getImage();

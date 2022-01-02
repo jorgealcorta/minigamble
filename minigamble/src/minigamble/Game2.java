@@ -25,32 +25,6 @@ public class Game2 implements KeyListener{
 	private boolean diamDestacar = false;
 	private boolean picaDestacar = false;
 	private boolean trebDestacar = false;
-
-	private Font customFontBot;
-	private Font customFontFin;
-	
-	
-	private ImageIcon corazonblanco;
-	private ImageIcon corazonnegro;
-	private ImageIcon diamanteblanco;
-	private ImageIcon diamantenegro;
-	private ImageIcon picablanca;
-	private ImageIcon picanegra;
-	private ImageIcon trebolblanco;
-	private ImageIcon trebolnegro;
-	
-	private ImageIcon crossarrow;
-	
-	private Image corazonblanco_IMG;
-	private Image corazonnegro_IMG;
-	private Image diamanteblanco_IMG;
-	private Image diamantenegro_IMG;
-	private Image picablanca_IMG;
-	private Image picanegra_IMG;
-	private Image trebolblanco_IMG;
-	private Image trebolnegro_IMG;
-	
-	private Image crossarrow_IMG;
 	
 	// ArrayList empleado para almacenar los cuatro posibles palos.
 	private ArrayList<String> palos = new ArrayList<String>();
@@ -64,55 +38,6 @@ public class Game2 implements KeyListener{
 
 	
 	public Game2(int dificultad) {
-			
-			try {
-				//Cargo todas las imagenes como iconos
-				corazonblanco = new ImageIcon( Game.class.getResource("multimedia/fichassimon/corazonblanco.png").toURI().toURL() );
-				corazonnegro = new ImageIcon( Game.class.getResource("multimedia/fichassimon/corazonnegro.png").toURI().toURL() );
-				diamanteblanco = new ImageIcon( Game.class.getResource("multimedia/fichassimon/diamanteblanco.png").toURI().toURL() );
-				diamantenegro = new ImageIcon( Game.class.getResource("multimedia/fichassimon/diamantenegro.png").toURI().toURL() );
-				picablanca = new ImageIcon( Game.class.getResource("multimedia/fichassimon/picablanca.png").toURI().toURL() );
-				picanegra = new ImageIcon( Game.class.getResource("multimedia/fichassimon/picanegra.png").toURI().toURL() );
-				trebolblanco = new ImageIcon( Game.class.getResource("multimedia/fichassimon/trebolblanco.png").toURI().toURL() );
-				trebolnegro = new ImageIcon( Game.class.getResource("multimedia/fichassimon/trebolnegro.png").toURI().toURL() );
-				
-				crossarrow = new ImageIcon( Game.class.getResource("multimedia/crossarrowpixel.png").toURI().toURL() );
-	
-			} catch (Exception e1) {
-				e1.printStackTrace();
-			}
-			
-			
-			// Paso todos los iconos a imagenes
-			corazonblanco_IMG = corazonblanco.getImage();
-			corazonnegro_IMG = corazonnegro.getImage();
-			diamanteblanco_IMG = diamanteblanco.getImage();
-			diamantenegro_IMG = diamantenegro.getImage();
-			picablanca_IMG = picablanca.getImage();
-			picanegra_IMG = picanegra.getImage();
-			trebolblanco_IMG = trebolblanco.getImage();
-			trebolnegro_IMG = trebolnegro.getImage();
-			
-			crossarrow_IMG = crossarrow.getImage();
-			
-			
-			//Cargamos fuentes
-			
-			try {
-				customFontBot = Font.createFont(Font.TRUETYPE_FONT, Inicio.class.getResourceAsStream("fuentes/fuenteBot.ttf"));
-				customFontBot=customFontBot.deriveFont(Font.PLAIN,20);
-			} catch (FontFormatException | IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				System.out.println("Error con la fuente Boton");
-			}
-			
-			try {   
-				customFontFin = Font.createFont(Font.TRUETYPE_FONT, Inicio.class.getResourceAsStream("fuentes/fuente.ttf"));
-				customFontFin = customFontFin.deriveFont(Font.PLAIN,100);				
-			}catch(Exception e){	
-				System.out.println("Problema con la fuente Minigamble");
-			}
 			
 			//Creamos el array de los cuatro palos
 			palos.add("cora");
@@ -136,6 +61,7 @@ public class Game2 implements KeyListener{
 	 * Realiza un delay en Segundos
 	 * @param n numero de segundos que se quiere hacer el delay
 	 */
+	
 	private void delaySeg(int n) {
 		try {
 			TimeUnit.SECONDS.sleep(n);
@@ -150,6 +76,7 @@ public class Game2 implements KeyListener{
 	 * Realiza un delay en Milisegundo
 	 * @param n numero de Milisegundo que se quiere hacer el delay
 	 */
+	
 	private void delayMS(int n) {
 		try {
 			TimeUnit.MILLISECONDS.sleep(n);
@@ -317,17 +244,17 @@ public class Game2 implements KeyListener{
 		 */
 		
 		if(start == 1) {
-			g.setFont(customFontBot);
+			g.setFont(media.customFontBot);
 			
-			g.drawImage(corazonblanco_IMG, 520, 125, null);
-			g.drawImage(diamanteblanco_IMG, 350	, 290, null);
-			g.drawImage(picablanca_IMG, 520, 450, null);
-			g.drawImage(trebolblanco_IMG, 690, 290, null);
+			g.drawImage(media.corazonblanco_IMG, 520, 125, null);
+			g.drawImage(media.diamanteblanco_IMG, 350	, 290, null);
+			g.drawImage(media.picablanca_IMG, 520, 450, null);
+			g.drawImage(media.trebolblanco_IMG, 690, 290, null);
 			
-			g.drawImage(crossarrow_IMG, 520, 285, null);
+			g.drawImage(media.crossarrow_IMG, 520, 285, null);
 			
 			g.setColor(Color.BLACK);
-			g.drawString("PULSA ESPACIO PARA REPRODUCIR LA COMBINACION", 200, 60);
+			g.drawString("PULSA ESPACIO PARA REPRODUCIR LA COMBINACION", 200, 70);
 		}
 		
 		/*
@@ -339,30 +266,30 @@ public class Game2 implements KeyListener{
 		else if(start == 2) {
 			g.setColor(Color.BLACK);
 			if(!coraDestacar) {
-				g.drawImage(corazonblanco_IMG, 520, 125, null);
+				g.drawImage(media.corazonblanco_IMG, 520, 125, null);
 			}else {
-				g.drawImage(corazonnegro_IMG, 520, 125, null);
+				g.drawImage(media.corazonnegro_IMG, 520, 125, null);
 			}
 			
 			if(!diamDestacar) {
-				g.drawImage(diamanteblanco_IMG, 350, 290, null);
+				g.drawImage(media.diamanteblanco_IMG, 350, 290, null);
 			}else {
-				g.drawImage(diamantenegro_IMG, 350, 290, null);
+				g.drawImage(media.diamantenegro_IMG, 350, 290, null);
 			}
 			
 			if(!picaDestacar) {
-				g.drawImage(picablanca_IMG, 520, 450, null);
+				g.drawImage(media.picablanca_IMG, 520, 450, null);
 			}else {
-				g.drawImage(picanegra_IMG, 520, 450, null);
+				g.drawImage(media.picanegra_IMG, 520, 450, null);
 			}
 			
 			if(!trebDestacar) {
-				g.drawImage(trebolblanco_IMG, 690, 290, null);
+				g.drawImage(media.trebolblanco_IMG, 690, 290, null);
 			}else {
-				g.drawImage(trebolnegro_IMG, 690, 290, null);
+				g.drawImage(media.trebolnegro_IMG, 690, 290, null);
 			}
 			
-			g.drawImage(crossarrow_IMG, 520, 285, null);
+			g.drawImage(media.crossarrow_IMG, 520, 285, null);
 	
 		}
 		
@@ -374,35 +301,35 @@ public class Game2 implements KeyListener{
 		else if(start == 3) {
 			g.setColor(Color.BLACK);
 			if(!coraDestacar) {
-				g.drawImage(corazonblanco_IMG, 520, 125, null);
+				g.drawImage(media.corazonblanco_IMG, 520, 125, null);
 			}else {
-				g.drawImage(corazonnegro_IMG, 520, 125, null);
+				g.drawImage(media.corazonnegro_IMG, 520, 125, null);
 			}
 			
 			if(!diamDestacar) {
-				g.drawImage(diamanteblanco_IMG, 350, 290, null);
+				g.drawImage(media.diamanteblanco_IMG, 350, 290, null);
 			}else {
-				g.drawImage(diamantenegro_IMG, 350, 290, null);
+				g.drawImage(media.diamantenegro_IMG, 350, 290, null);
 			}
 			
 			if(!picaDestacar) {
-				g.drawImage(picablanca_IMG, 520, 450, null);
+				g.drawImage(media.picablanca_IMG, 520, 450, null);
 			}else {
-				g.drawImage(picanegra_IMG, 520, 450, null);
+				g.drawImage(media.picanegra_IMG, 520, 450, null);
 			}
 			
 			if(!trebDestacar) {
-				g.drawImage(trebolblanco_IMG, 690, 290, null);
+				g.drawImage(media.trebolblanco_IMG, 690, 290, null);
 			}else {
-				g.drawImage(trebolnegro_IMG, 690, 290, null);
+				g.drawImage(media.trebolnegro_IMG, 690, 290, null);
 			}
 			
-			g.drawImage(crossarrow_IMG, 520, 285, null);
+			g.drawImage(media.crossarrow_IMG, 520, 285, null);
 	
 		}
 		
 		else if(start == 4) {
-			g.setFont(customFontFin);
+			g.setFont(media.customFontBot);
 			g.setColor(Color.BLACK);
 			g.drawString("ENHORABUENA", 325, 300);
 		}
