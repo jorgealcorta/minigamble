@@ -18,34 +18,6 @@ public class Game6 implements KeyListener{
 	
 	private int start = 1;
 	
-	private Font customFontBot;
-	private Font customFontFin;
-	
-	private ImageIcon flechaabj;
-	private ImageIcon flechaabjtrans;
-	
-	private ImageIcon flechaarr;
-	private ImageIcon flechaarrtrans;
-	
-	private ImageIcon flechadch;
-	private ImageIcon flechadchtrans;
-	
-	private ImageIcon flechaizq;
-	private ImageIcon flechaizqtrans;
-	
-	
-	private Image flechaabj_IMG;
-	private Image flechaabjtrans_IMG;
-	
-	private Image flechaarr_IMG;
-	private Image flechaarrtrans_IMG;
-	
-	private Image flechadch_IMG;
-	private Image flechadchtrans_IMG;
-	
-	private Image flechaizq_IMG;
-	private Image flechaizqtrans_IMG;
-	
 	private String dirPosibles[] = {"izq", "arr", "abj", "dch"};
 	
 	private CopyOnWriteArrayList<Flecha> flechasCreadas = new CopyOnWriteArrayList<Flecha>();
@@ -53,58 +25,6 @@ public class Game6 implements KeyListener{
 
 	
 	public Game6(int dificultad) {
-		
-		try {
-			
-			//Cargo todas las imagenes como iconos
-						
-			flechaabj = new ImageIcon(Game.class.getResource("multimedia/flechas/flechaabj.png").toURI().toURL() );
-			flechaabjtrans = new ImageIcon(Game.class.getResource("multimedia/flechas/flechaabjtrans.png").toURI().toURL() );
-
-			flechaarr = new ImageIcon(Game.class.getResource("multimedia/flechas/flechaarr.png").toURI().toURL() );
-			flechaarrtrans = new ImageIcon(Game.class.getResource("multimedia/flechas/flechaarrtrans.png").toURI().toURL() );
-
-			flechadch = new ImageIcon(Game.class.getResource("multimedia/flechas/flechadch.png").toURI().toURL() );
-			flechadchtrans = new ImageIcon(Game.class.getResource("multimedia/flechas/flechadchtrans.png").toURI().toURL() );
-
-			flechaizq = new ImageIcon(Game.class.getResource("multimedia/flechas/flechaizq.png").toURI().toURL() );
-			flechaizqtrans = new ImageIcon(Game.class.getResource("multimedia/flechas/flechaizqtrans.png").toURI().toURL() );
-
-			
-			
-		}catch(Exception e1) {
-			e1.printStackTrace();
-		}
-		
-		// Cargar fuentes
-		
-		try {
-			customFontBot = Font.createFont(Font.TRUETYPE_FONT, Inicio.class.getResourceAsStream("fuentes/fuenteBot.ttf"));
-			customFontBot=customFontBot.deriveFont(Font.PLAIN,20);
-		} catch (FontFormatException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("Error con la fuente Boton");
-		}
-		
-		try {   
-			customFontFin = Font.createFont(Font.TRUETYPE_FONT, Inicio.class.getResourceAsStream("fuentes/fuente.ttf"));
-			customFontFin = customFontFin.deriveFont(Font.PLAIN,100);
-		}catch(Exception e){	
-			System.out.println("Problema con la fuente Minigamble");
-		}
-		
-		flechaabj_IMG = flechaabj.getImage();
-		flechaabjtrans_IMG = flechaabjtrans.getImage();
-		
-		flechaarr_IMG = flechaarr.getImage();
-		flechaarrtrans_IMG = flechaarrtrans.getImage();
-
-		flechadch_IMG = flechadch.getImage();
-		flechadchtrans_IMG = flechadchtrans.getImage();		
-		
-		flechaizq_IMG = flechaizq.getImage();
-		flechaizqtrans_IMG = flechaizqtrans.getImage();
 		
 		// Crear ArrayList de flechas aleatorias
 		for(int i = 0; i<10; i++) {
@@ -170,20 +90,20 @@ public class Game6 implements KeyListener{
 		
 		g.drawImage(media.tapeteImg, 0, 0, 1184, 663, null);
 		
-		g.drawImage(flechaizqtrans_IMG, 250, 450, 128, 128, null);
-		g.drawImage(flechaarrtrans_IMG, 450, 450, 128, 128, null);
-		g.drawImage(flechaabjtrans_IMG, 650, 450, 128, 128, null);
-		g.drawImage(flechadchtrans_IMG, 850, 450, 128, 128, null);
+		g.drawImage(media.flechaizqtrans_IMG, 250, 450, 128, 128, null);
+		g.drawImage(media.flechaarrtrans_IMG, 450, 450, 128, 128, null);
+		g.drawImage(media.flechaabjtrans_IMG, 650, 450, 128, 128, null);
+		g.drawImage(media.flechadchtrans_IMG, 850, 450, 128, 128, null);
 		
 		for(Flecha f : flechasActivas) {
 			if(f.getDir() == "izq" && f.getY()<700) {
-				g.drawImage(flechaizq_IMG, 250, f.getY(), 128, 128, null);
+				g.drawImage(media.flechaizq_IMG, 250, f.getY(), 128, 128, null);
 			}else if (f.getDir() == "arr" && f.getY()<700) {
-				g.drawImage(flechaarr_IMG, 450, f.getY(), 128, 128, null);
+				g.drawImage(media.flechaarr_IMG, 450, f.getY(), 128, 128, null);
 			}else if (f.getDir() == "abj" && f.getY()<700) {
-				g.drawImage(flechaabj_IMG, 650, f.getY(), 128, 128, null);
+				g.drawImage(media.flechaabj_IMG, 650, f.getY(), 128, 128, null);
 			}else if (f.getDir() == "dch" && f.getY()<700) {
-				g.drawImage(flechadch_IMG, 850, f.getY(), 128, 128, null);
+				g.drawImage(media.flechadch_IMG, 850, f.getY(), 128, 128, null);
 
 			}
 		}

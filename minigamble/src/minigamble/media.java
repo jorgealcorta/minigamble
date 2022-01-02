@@ -14,16 +14,18 @@ import javax.swing.ImageIcon;
 public class media {
 	
 	//COMPARTIDOS
+	
 	public static Image bStartIMG_True;
 	public static ImageIcon bStart_true;
 	
 	public static Image bStartIMG_False;	
 	public static ImageIcon bStart_false;	
 	
-	public static Font customFontBot;
-	
 	public static Image tapeteImg;	
 	public static ImageIcon tapeteIcn;
+	
+	public static Font customFontBot;
+	public static Font customFontFin;
 	
 	//GAME1
 	
@@ -93,6 +95,17 @@ public class media {
 	public static Image endingImg2;
 	public static ImageIcon endingIcon2;
 	
+	//GAME4
+	
+	public static ImageIcon diana;
+	public static ImageIcon dianaRota;
+	
+	public static ImageIcon mira;
+	
+	public static Image diana_IMG;
+	public static Image dianaRota_IMG;
+	
+	public static Image mira_IMG;
 	
 	//GAME5
 	
@@ -117,9 +130,38 @@ public class media {
 	public static Image tapeteInfImg;	
 	public static ImageIcon tapeteInfIcn;
 	
+	//GAME6
+	
+	public static ImageIcon flechaabj;
+	public static ImageIcon flechaabjtrans;
+	
+	public static ImageIcon flechaarr;
+	public static ImageIcon flechaarrtrans;
+	
+	public static ImageIcon flechadch;
+	public static ImageIcon flechadchtrans;
+	
+	public static ImageIcon flechaizq;
+	public static ImageIcon flechaizqtrans;
+	
+	
+	public static Image flechaabj_IMG;
+	public static Image flechaabjtrans_IMG;
+	
+	public static Image flechaarr_IMG;
+	public static Image flechaarrtrans_IMG;
+	
+	public static Image flechadch_IMG;
+	public static Image flechadchtrans_IMG;
+	
+	public static Image flechaizq_IMG;
+	public static Image flechaizqtrans_IMG;
+	
 	public media() {
 		
 		try {
+			
+			//COMPARTIDOS
 			
 			bStart_false = new ImageIcon( Game.class.getResource("multimedia/red_button2.png").toURI().toURL() );
 			bStart_true = new ImageIcon( Game.class.getResource("multimedia/red_button3.png").toURI().toURL() );	
@@ -152,12 +194,20 @@ public class media {
 			
 			crossarrow = new ImageIcon( Game.class.getResource("multimedia/crossarrowpixel.png").toURI().toURL() );
 			
-			//GAME3	
+			//GAME3
+			
 			lab1Icon = new ImageIcon( Game.class.getResource("multimedia/laberintos/lab1.png").toURI().toURL() );
 			lab2Icon = new ImageIcon( Game.class.getResource("multimedia/laberintos/lab2.png").toURI().toURL() );
 			lab3Icon = new ImageIcon( Game.class.getResource("multimedia/laberintos/lab3.png").toURI().toURL() );
 			endingIcon1 = new ImageIcon( Game.class.getResource("multimedia/laberintos/endlab1.png").toURI().toURL() );
 			endingIcon2 = new ImageIcon( Game.class.getResource("multimedia/laberintos/endlab2.png").toURI().toURL() );
+			
+			//GAME4
+			
+			diana = new ImageIcon(Game.class.getResource("multimedia/dianas/diana.png").toURI().toURL() );
+			dianaRota = new ImageIcon(Game.class.getResource("multimedia/dianas/dianaRota.png").toURI().toURL() );
+			
+			mira = new ImageIcon(Game.class.getResource("multimedia/mira.png").toURI().toURL() );
 			
 			//GAME5
 			
@@ -170,11 +220,26 @@ public class media {
 			tapeteSupIcn = new ImageIcon( Game.class.getResource("multimedia/tapeteSuperior.png").toURI().toURL() );
 			tapeteInfIcn = new ImageIcon( Game.class.getResource("multimedia/tapeteInferior.png").toURI().toURL() );
 			
+			//GAME6
+			
+			flechaabj = new ImageIcon(Game.class.getResource("multimedia/flechas/flechaabj.png").toURI().toURL() );
+			flechaabjtrans = new ImageIcon(Game.class.getResource("multimedia/flechas/flechaabjtrans.png").toURI().toURL() );
+
+			flechaarr = new ImageIcon(Game.class.getResource("multimedia/flechas/flechaarr.png").toURI().toURL() );
+			flechaarrtrans = new ImageIcon(Game.class.getResource("multimedia/flechas/flechaarrtrans.png").toURI().toURL() );
+
+			flechadch = new ImageIcon(Game.class.getResource("multimedia/flechas/flechadch.png").toURI().toURL() );
+			flechadchtrans = new ImageIcon(Game.class.getResource("multimedia/flechas/flechadchtrans.png").toURI().toURL() );
+
+			flechaizq = new ImageIcon(Game.class.getResource("multimedia/flechas/flechaizq.png").toURI().toURL() );
+			flechaizqtrans = new ImageIcon(Game.class.getResource("multimedia/flechas/flechaizqtrans.png").toURI().toURL() );
+			
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
 		
-				
+		
+		//COMPARTIDOS
 		
 		bStartIMG_True = bStart_true.getImage();
 		bStartIMG_False = bStart_false.getImage();	
@@ -219,8 +284,16 @@ public class media {
 		endingImg1 = endingIcon1.getImage();
 		endingImg2 = endingIcon2.getImage();
 		
+		//GAME4
+		
+		diana_IMG = diana.getImage();
+		dianaRota_IMG = dianaRota.getImage();
+		
+		mira_IMG = mira.getImage();
+		
 		
 		//GAME5
+		
 		imageS1 = iconS1.getImage();
 		imageS2 = iconS2.getImage();
 		imageS3 = iconS3.getImage();
@@ -228,9 +301,26 @@ public class media {
 		
 		arrowIm = arrowIc.getImage();
 		tapeteSupImg = tapeteSupIcn.getImage();		
-		tapeteInfImg = tapeteInfIcn.getImage();	
+		tapeteInfImg = tapeteInfIcn.getImage();
 		
-		//fuente estandar botones
+		//GAME6
+		
+		flechaabj_IMG = flechaabj.getImage();
+		flechaabjtrans_IMG = flechaabjtrans.getImage();
+		
+		flechaarr_IMG = flechaarr.getImage();
+		flechaarrtrans_IMG = flechaarrtrans.getImage();
+
+		flechadch_IMG = flechadch.getImage();
+		flechadchtrans_IMG = flechadchtrans.getImage();		
+		
+		flechaizq_IMG = flechaizq.getImage();
+		flechaizqtrans_IMG = flechaizqtrans.getImage();
+		
+		//FONTS
+		
+		//FUENTE ESTANDAR BOTONES
+		
 		try {
 			customFontBot = Font.createFont(Font.TRUETYPE_FONT, Inicio.class.getResourceAsStream("fuentes/fuenteBot.ttf"));
 			customFontBot=customFontBot.deriveFont(Font.PLAIN,20);
@@ -239,7 +329,12 @@ public class media {
 			System.out.println("Error con la fuente Boton");
 		}
 		
-		
+		try {   
+			customFontFin = Font.createFont(Font.TRUETYPE_FONT, Inicio.class.getResourceAsStream("fuentes/fuente.ttf"));
+			customFontFin = customFontFin.deriveFont(Font.PLAIN,100);
+		}catch(Exception e){	
+			System.out.println("Problema con la fuente Minigamble");
+		}
 
 		
 		

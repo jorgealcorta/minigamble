@@ -26,28 +26,10 @@ import javax.swing.ImageIcon;
 
 public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 	
-	private Image bStartIMG_True;
-	private Image bStartIMG_False;
 	
-	
-	private ImageIcon bStart_false;		// boton Start
-	private ImageIcon bStart_true;
 	private boolean bStart_state = false;
 	
 	private int start = 1; //1=START, 2= JUEGO
-	
-	private Font customFontBot;
-	private Font customFontFin;
-	
-	private ImageIcon diana;
-	private ImageIcon dianaRota;
-	
-	private ImageIcon mira;
-	
-	private Image diana_IMG;
-	private Image dianaRota_IMG;
-	
-	private Image mira_IMG;
 	
 	// CopyOnWriteArrayList que almacena las dianas generadas aleatoriamente.
 	private CopyOnWriteArrayList<Diana> dianasCreadas = new CopyOnWriteArrayList<Diana>();
@@ -64,50 +46,6 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 	private int mdy;
 	
 	public Game4(int dificultad){
-		
-		try {
-			
-			//Cargo todas las imagenes como iconos
-			
-			bStart_false = new ImageIcon( Game.class.getResource("multimedia/red_button2.png").toURI().toURL() );
-			bStart_true = new ImageIcon( Game.class.getResource("multimedia/red_button3.png").toURI().toURL() );
-			
-			diana = new ImageIcon(Game.class.getResource("multimedia/dianas/diana.png").toURI().toURL() );
-			dianaRota = new ImageIcon(Game.class.getResource("multimedia/dianas/dianaRota.png").toURI().toURL() );
-			
-			mira = new ImageIcon(Game.class.getResource("multimedia/mira.png").toURI().toURL() );
-			
-		}catch(Exception e1) {
-			e1.printStackTrace();
-		}
-		
-		// Cargar fuentes
-		
-		try {
-			customFontBot = Font.createFont(Font.TRUETYPE_FONT, Inicio.class.getResourceAsStream("fuentes/fuenteBot.ttf"));
-			customFontBot=customFontBot.deriveFont(Font.PLAIN,20);
-		} catch (FontFormatException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("Error con la fuente Boton");
-		}
-		
-		try {   
-			customFontFin = Font.createFont(Font.TRUETYPE_FONT, Inicio.class.getResourceAsStream("fuentes/fuente.ttf"));
-			customFontFin = customFontFin.deriveFont(Font.PLAIN,100);
-		}catch(Exception e){	
-			System.out.println("Problema con la fuente Minigamble");
-		}
-		
-		//Paso todos los iconos a imágenes
-		
-		bStartIMG_True = bStart_true.getImage();
-		bStartIMG_False = bStart_false.getImage();
-		
-		diana_IMG = diana.getImage();
-		dianaRota_IMG = dianaRota.getImage();
-		
-		mira_IMG = mira.getImage();
 		
 		//Ir creando dianas
 		//xmin=0
@@ -291,13 +229,13 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 		//Pantalla de boton START
 		
 		if(start==1) {
-			g.setFont(customFontBot);
+			g.setFont(media.customFontBot);
 			g.setColor(Color.BLACK);
 			if(bStart_state == true) {					                   //caso start = 1
-				g.drawImage(bStartIMG_True, 500, 294, null);
+				g.drawImage(media.bStartIMG_True, 500, 294, null);
 				g.drawString("Start", 540, 326);
 			}else{
-				g.drawImage(bStartIMG_False, 500, 290, null);
+				g.drawImage(media.bStartIMG_False, 500, 290, null);
 				g.drawString("Start", 547, 322);
 			}
 		}
@@ -310,15 +248,15 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 			// entera o rota
 			for(Diana d : dianasActivas) {
 				if(!d.isRota()) {
-					g.drawImage(diana_IMG, d.getX(), d.getY(), (int)d.getSize(), (int)d.getSize(), null);
+					g.drawImage(media.diana_IMG, d.getX(), d.getY(), (int)d.getSize(), (int)d.getSize(), null);
 				}else if(d.isRota() && !dianasRotas.contains(d)){
-					g.drawImage(dianaRota_IMG, d.getX(), d.getY(), (int)d.getSize(), (int)d.getSize(), null);
+					g.drawImage(media.dianaRota_IMG, d.getX(), d.getY(), (int)d.getSize(), (int)d.getSize(), null);
 				}else{
 				}
 			}
 			
 			//En cada frame se dibuja el punto de mira encima del raton
-			g.drawImage(mira_IMG, mox-16, moy-16, 32, 32, null);
+			g.drawImage(media.mira_IMG, mox-16, moy-16, 32, 32, null);
 			
 		}
 
