@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -66,6 +67,29 @@ public class BaseDatos {
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
 				
+				try {
+					Scanner scanner = new Scanner( BaseDatos.class.getResourceAsStream("inicio/game1_inic.txt") );
+					while (scanner.hasNextLine()) {
+						String linea = scanner.nextLine();
+						String[] datos = linea.split( "\t" );
+						sent = "insert into game1 (id, idPartida, puntuacion, fallos, primera_carta, tiempo_primera_carta, tiempo_total) values (" + datos[0] + ", " + datos[1] + ", " + datos[2] + ", " + datos[3] + ", '" + datos[4] + "', " + datos[5] + ", " + datos[6] + ");";
+						logger.log( Level.INFO, "Statement: " + sent );
+						statement.executeUpdate( sent );
+					}
+					scanner.close();
+					scanner = new Scanner( BaseDatos.class.getResourceAsStream("inicio/jugadores_inic.txt") );
+					while (scanner.hasNextLine()) {
+						String linea = scanner.nextLine();
+						String[] datos = linea.split( "\t" );
+						sent = "insert into jugador (nombre, password) values ('" + datos[0] + "', '" + Hash.md5(datos[1]) + "');";
+						logger.log( Level.INFO, "Statement: " + sent );
+						statement.executeUpdate( sent );
+					}
+					scanner.close();
+				} catch(Exception e) {
+					logger.log( Level.SEVERE, "ExcepciÃ³n", e );
+				}
+			
 			}
 			return true;
 		} catch(Exception e) {
@@ -171,7 +195,7 @@ public class BaseDatos {
 	 * @param idPartida ID de la partida que se esta jugando
 	 * @param puntuacion Puntuacion obtenida en Game5
 	 * @param premio Adquiere valor 1 si ha conseguido hacer 3 en linea, 0 en caso de que no
-	 * @param symbol String que indica qué simbolo ha elegido el primero.
+	 * @param symbol String que indica quï¿½ simbolo ha elegido el primero.
 	 * @return devuelve True si se hace correctamente
 	 */
 	

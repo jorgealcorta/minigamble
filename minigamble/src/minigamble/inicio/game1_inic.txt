@@ -1,0 +1,15 @@
+1	1	2660	1	card_hearts_K	3011	10907
+2	1	2320	2	card_hearts_Q	6193	17621
+3	2	3000	0	card_hearts_A	3056	6415
+4	3	2320	2	card_hearts_Q	2979	6454
+5	4	2660	1	card_hearts_Q	3213	5129
+6	4	3000	0	card_hearts_K	3211	6129
+7	4	2320	2	card_hearts_A	2748	9129
+8	5	3000	0	card_hearts_K	3103	9085
+9	5	2660	1	card_hearts_Q	3781	7830
+10	5	2320	2	card_hearts_K	3977	7898
+11	6	2660	1	card_hearts_A	6193	15621
+12	7	2660	1	card_hearts_A	6003	6425
+13	8	3000	0	card_hearts_K	3911	14907
+14	9	2660	1	card_hearts_A	7193	7907
+15	9	3000	0	card_hearts_A	3091	9034
