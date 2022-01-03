@@ -104,6 +104,7 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 	 * Realiza un delay en Segundos
 	 * @param n numero de segundos que se quiere hacer el delay
 	 */
+	
 	private void delaySeg(int n) {
 		try {
 			TimeUnit.SECONDS.sleep(n);
@@ -191,7 +192,7 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 						tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
 						delaySeg(2);
 						//BaseDatos.insertarGame1(idPartida, puntLocal, fallos, primeraCarta, tiempoPrimeraCarta, tiempoTotal);
-						Game.partida  = new Partida( puntos + puntLocal, vidasRestadas, null, jugador, idPartida);
+						Game.partida  = new Partida(puntos + puntLocal, vidasRestadas, null, jugador, idPartida);
 						
 					}
 					

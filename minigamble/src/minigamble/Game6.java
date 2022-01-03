@@ -14,9 +14,20 @@ import java.util.concurrent.TimeUnit;
 
 import javax.swing.ImageIcon;
 
-public class Game6 implements KeyListener{	
+public class Game6 implements KeyListener{
 	
-	private int start = 1;
+	private boolean aciertoReciente = false;
+	
+	private int puntos;
+	private int puntSumados;
+	private int puntLocal = 0;
+	private int idPartida;
+	private String jugador;
+	private int fallos;
+	private long tiempoComienzo = System.currentTimeMillis();
+	private long tiempoTotal;
+	private int vidasRestadas = 0;
+	
 	
 	private String dirPosibles[] = {"izq", "arr", "abj", "dch"};
 	
@@ -32,6 +43,8 @@ public class Game6 implements KeyListener{
 			Flecha f = new Flecha(dirRandom);
 			flechasCreadas.add(f);
 		}
+		
+		puntSumados = (int)(500/(flechasCreadas.size()));
 		
 		System.out.println(flechasCreadas);
 		
@@ -50,6 +63,23 @@ public class Game6 implements KeyListener{
 		Thread hfm = new Thread(fm);
 		hfm.start();
 	}
+	
+
+	/**
+	 * Realiza un delay en Segundos
+	 * @param n numero de segundos que se quiere hacer el delay
+	 */
+	
+	private void delaySeg(int n) {
+		try {
+			TimeUnit.SECONDS.sleep(n);
+		} catch (InterruptedException b) {
+			// TODO Auto-generated catch block
+			b.printStackTrace();
+		}
+		
+	}
+	
 
 
 	@Override
@@ -67,6 +97,9 @@ public class Game6 implements KeyListener{
 //		arr 38
 //		abj 40
 //		dch 39
+		
+		aciertoReciente = false;
+		
 		for(Flecha f : flechasActivas) {
 			//Damos margen de acierto con 64 pixeles de fallo arriba y abajo
 			if(((key == 37 && f.getDir() == "izq") ||
@@ -74,9 +107,23 @@ public class Game6 implements KeyListener{
 				(key == 40 && f.getDir() == "abj") ||
 				(key == 39 && f.getDir() == "dch")) && 
 				f.getY()>386 && f.getY()<514) {
+				
+					aciertoReciente = true;
+				
+					puntLocal += puntSumados;
 					flechasActivas.remove(f);
+					
+					if(flechasActivas.size() == 0) {
+						tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
+						delaySeg(2);
+						//BaseDatos.insertarGame1(idPartida, puntLocal, fallos, primeraCarta, tiempoPrimeraCarta, tiempoTotal);
+						Game.partida  = new Partida(puntos + puntLocal, vidasRestadas, null, jugador, idPartida);
+						
+					}
 			}
 		}
+		
+		if(!aciertoReciente) fallos++;
 		
 	}
 
@@ -94,6 +141,10 @@ public class Game6 implements KeyListener{
 		g.drawImage(media.flechaarrtrans_IMG, 450, 450, 128, 128, null);
 		g.drawImage(media.flechaabjtrans_IMG, 650, 450, 128, 128, null);
 		g.drawImage(media.flechadchtrans_IMG, 850, 450, 128, 128, null);
+		
+		g.setColor(Color.WHITE);
+		g.setFont(media.customFontBot);
+		g.drawString(String.valueOf(puntLocal), 150, 400);
 		
 		for(Flecha f : flechasActivas) {
 			if(f.getDir() == "izq" && f.getY()<700) {
