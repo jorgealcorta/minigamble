@@ -54,7 +54,7 @@ public class Partida {
 		
 
 
-		rand=3 ; //PARA HACER PRUEBAS, LUEGO BORRARRRRRRRRRRRRRRRRRRRRRRRR
+		rand=5 ; //PARA HACER PRUEBAS, LUEGO BORRARRRRRRRRRRRRRRRRRRRRRRRR
 
 
 		if(vidas<1 ) {
@@ -86,7 +86,7 @@ public class Partida {
 				Game.eventoRaton();
 				
 			} else if(rand==5) {
-				Game.game6 = new Game6(puntuacionGeneral);
+				Game.game6 = new Game6(puntuacionGeneral, jugador, idPartida);
 				Game.estadoJuego = minijuegos.get(rand);
 				Game.eventoRaton();
 				
