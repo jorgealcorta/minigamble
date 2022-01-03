@@ -24,7 +24,7 @@ public class Game6 implements KeyListener{
 	private CopyOnWriteArrayList<Flecha> flechasActivas = new CopyOnWriteArrayList<Flecha>();
 
 	
-	public Game6(int dificultad) {
+	public Game6(int puntuacion, String nombreJugador, int idPart) {
 		
 		// Crear ArrayList de flechas aleatorias
 		for(int i = 0; i<10; i++) {

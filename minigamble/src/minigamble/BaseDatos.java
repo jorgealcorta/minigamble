@@ -81,6 +81,13 @@ public class BaseDatos {
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
 				
+				sent = "DROP TABLE IF EXISTS game6";
+				logger.log( Level.INFO, "Statement: " + sent );
+				statement.executeUpdate( sent );
+				sent = "CREATE TABLE game6 (id INTEGER PRIMARY KEY AUTOINCREMENT ,idPartida int, puntuacion int, fallos int, tiempo_total bigint);";
+				logger.log( Level.INFO, "Statement: " + sent );
+				statement.executeUpdate( sent );
+				
 				try {
 					Scanner scanner = new Scanner( BaseDatos.class.getResourceAsStream("inicio/game1_inic.txt") );
 					while (scanner.hasNextLine()) {
@@ -251,6 +258,19 @@ public class BaseDatos {
 	public static boolean insertarGame5( int idPartida, int puntuacion, int premio, String symbol) {
 		try (Statement statement = conexion.createStatement()) {
 			String sent = "insert into game5 (idPartida, puntuacion, premio, symbol ) values (" + idPartida + ", " + puntuacion + ", " + premio + " , " + symbol + " );";											
+			logger.log( Level.INFO, "Statement: " + sent );
+			int insertados = statement.executeUpdate( sent );
+			if (insertados!=1) return false;  // Error en inserción
+			return true;
+		} catch (Exception e) {
+			logger.log( Level.SEVERE, "Excepción", e );
+			return false;
+		}
+	}
+	
+	public static boolean insertarGame6( int idPartida, int puntuacion, int fallos, long tiempoTot) {
+		try (Statement statement = conexion.createStatement()) {
+			String sent = "insert into game6 (idPartida, puntuacion, fallos, tiempo_total ) values (" + idPartida + ", " + puntuacion + ", "+ fallos + ", " + tiempoTot + " );";											
 			logger.log( Level.INFO, "Statement: " + sent );
 			int insertados = statement.executeUpdate( sent );
 			if (insertados!=1) return false;  // Error en inserción
