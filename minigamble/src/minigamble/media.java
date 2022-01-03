@@ -157,6 +157,14 @@ public class media {
 	public static Image flechaizq_IMG;
 	public static Image flechaizqtrans_IMG;
 	
+	//GAME7
+	
+	public static ImageIcon circleIcn;
+	public static Image circleImg;
+	
+	public static ImageIcon crossIcn;
+	public static Image crossImg;
+	
 	public media() {
 		
 		try {
@@ -233,6 +241,11 @@ public class media {
 
 			flechaizq = new ImageIcon(Game.class.getResource("multimedia/flechas/flechaizq.png").toURI().toURL() );
 			flechaizqtrans = new ImageIcon(Game.class.getResource("multimedia/flechas/flechaizqtrans.png").toURI().toURL() );
+			
+			//GAME7
+			
+			circleIcn = new ImageIcon(Game.class.getResource("multimedia/circle.png").toURI().toURL() );
+			crossIcn = new ImageIcon(Game.class.getResource("multimedia/cross.png").toURI().toURL() );
 			
 		} catch (Exception e1) {
 			e1.printStackTrace();
@@ -316,6 +329,13 @@ public class media {
 		
 		flechaizq_IMG = flechaizq.getImage();
 		flechaizqtrans_IMG = flechaizqtrans.getImage();
+		
+		//GAME7
+		
+		circleImg = circleIcn.getImage();
+		crossImg = crossIcn.getImage();
+		
+		
 		
 		//FONTS
 		
