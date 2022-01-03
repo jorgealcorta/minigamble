@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Game7 implements MouseListener {
 	
-	private int[][] matrix = { {1,0,-1},{0,1,0},{0,0,-1}};
+	private int[][] matrix = { {0,0,0},{0,0,0},{0,0,0}};
 	private int mox;
 	private int moy;
 	
@@ -151,6 +151,22 @@ public class Game7 implements MouseListener {
 				}
 			}
 		}
+		
+		if(start==2) {
+			g.setFont(media.customFontBot);
+			g.drawString("You won", 200, 200);
+		}
+		
+		if(start==3) {
+			g.setFont(media.customFontBot);
+			g.drawString("I won", 200, 200);
+		}
+		
+		if(start==4) {
+			g.setFont(media.customFontBot);
+			g.drawString("Draw", 200, 200);
+		}
+		
 	}
 
 	
@@ -247,7 +263,9 @@ public class Game7 implements MouseListener {
 							
 							if(checkRow(matrix)==1) {
 								start=2;
-							} else {
+							} else if(count(matrix)==0){
+								start=4;
+							}else {
 								
 								ArrayList<Integer> positions= new ArrayList<Integer>();
 								ArrayList<Double> probabilities= new ArrayList<Double>();
@@ -288,7 +306,13 @@ public class Game7 implements MouseListener {
 								
 								matrix[a][b] = -1;
 									
-								
+								delayMS(200);
+								if(checkRow(matrix) == -1) {
+									start=3;
+								}
+								if(count(matrix)==0) {
+									start=4;
+								}
 																
 							}
 							
