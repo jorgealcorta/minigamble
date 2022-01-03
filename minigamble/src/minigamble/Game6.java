@@ -28,6 +28,8 @@ public class Game6 implements KeyListener{
 	private long tiempoTotal;
 	private int vidasRestadas = 0;
 	
+	public static int nFlechas = 5;
+	
 	
 	private String dirPosibles[] = {"izq", "arr", "abj", "dch"};
 	
@@ -40,8 +42,18 @@ public class Game6 implements KeyListener{
 		flechasActivas.removeAll(flechasActivas);
 		flechasCreadas.removeAll(flechasCreadas);
 		
+		if(puntos >= 0 && puntos < 1500) {
+			nFlechas = 5;
+		}else if(puntos >= 1500 && puntos < 3000) {
+			nFlechas = 10;
+		}else if(puntos >= 3000 && puntos < 4500) {
+			nFlechas = 15;
+		}else if(puntos >= 4500) {
+			nFlechas = 20;
+		}
+		
 		// Crear ArrayList de flechas aleatorias
-		for(int i = 0; i<10; i++) {
+		for(int i = 0; i<nFlechas; i++) {
 			String dirRandom = dirPosibles[new Random().nextInt(dirPosibles.length)];
 			Flecha f = new Flecha(dirRandom);
 			flechasCreadas.add(f);

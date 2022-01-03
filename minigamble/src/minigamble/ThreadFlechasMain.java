@@ -17,7 +17,7 @@ public class ThreadFlechasMain extends Thread{
 			f.move(5);
 		}
 		try {
-			Thread.sleep(7); //MARCA LA VELOCIDAD DE CAIDA
+			Thread.sleep(60/Game6.nFlechas); //MARCA LA VELOCIDAD DE CAIDA
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
