@@ -50,6 +50,8 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 	private long tiempoComienzo = System.currentTimeMillis();
 	private long tiempoTotal;
 	private int vidasRestadas = 0;
+	
+	private int nDianas;
 
 	
 	public Game4(int puntuacion, String nombreJugador, int idPart){
@@ -59,6 +61,16 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 		jugador = nombreJugador;
 		
 		puntLocal = 0;
+				
+		if(puntos >= 0 && puntos < 1500) {
+			nDianas = 5;
+		}else if(puntos >= 1500 && puntos < 3000) {
+			nDianas = 10;
+		}else if(puntos >= 3000 && puntos < 4500) {
+			nDianas = 15;
+		}else if(puntos >= 4500) {
+			nDianas = 20;
+		}
 		
 		
 		//Ir creando dianas
@@ -75,8 +87,8 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 		 * limites para las coordenadas x e y de la diana, con el fin de que no se salgan de la ventana en ningun momento.
 		 */
 		
-		for(int i=0; i<5; i++) {
-			int rSize = (int)(Math.random() * 300) + 50;
+		for(int i=0; i<nDianas; i++) {
+			int rSize = (int)(Math.random() * (1000/nDianas)) + 50;
 			Diana dRandom = new Diana((int)(Math.random() * (1200 - rSize + 1)), (int)(Math.random() * (660-rSize + 1)), rSize, false);
 			dianasCreadas.add(dRandom);
 		}
