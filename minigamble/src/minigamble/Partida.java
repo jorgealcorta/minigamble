@@ -43,6 +43,7 @@ public class Partida {
 		minijuegos.add(ESTADO.Game4);
 		minijuegos.add(ESTADO.Game5);
 		minijuegos.add(ESTADO.Game6);
+		minijuegos.add(ESTADO.Game7);
 		minijuegos.add(ESTADO.PantallaIntermedia);
 		
 		int rand = (int) (Math.random() * 6);
@@ -57,7 +58,7 @@ public class Partida {
 		
 
 
-		rand=3 ; //PARA HACER PRUEBAS, LUEGO BORRARRRRRRRRRRRRRRRRRRRRRRRR
+		rand=6		 ; //PARA HACER PRUEBAS, LUEGO BORRARRRRRRRRRRRRRRRRRRRRRRRR
 
 
 		if(vidas<1 ) {

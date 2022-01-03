@@ -287,8 +287,7 @@ public class Game7 implements MouseListener {
 								int b = positions.get(bestMove*2+1);
 								
 								matrix[a][b] = -1;
-								
-								System.out.println(matrix);
+									
 								
 																
 							}
