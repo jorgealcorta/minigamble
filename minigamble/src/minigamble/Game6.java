@@ -37,6 +37,9 @@ public class Game6 implements KeyListener{
 	
 	public Game6(int puntuacion, String nombreJugador, int idPart) {
 		
+		flechasActivas.removeAll(flechasActivas);
+		flechasCreadas.removeAll(flechasCreadas);
+		
 		// Crear ArrayList de flechas aleatorias
 		for(int i = 0; i<10; i++) {
 			String dirRandom = dirPosibles[new Random().nextInt(dirPosibles.length)];
@@ -114,10 +117,12 @@ public class Game6 implements KeyListener{
 					flechasActivas.remove(f);
 					
 					if(flechasActivas.size() == 0) {
+						System.out.println("victoria");
 						tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
 						delaySeg(2);
 						//BaseDatos.insertarGame1(idPartida, puntLocal, fallos, primeraCarta, tiempoPrimeraCarta, tiempoTotal);
 						Game.partida  = new Partida(puntos + puntLocal, vidasRestadas, null, jugador, idPartida);
+						
 						
 					}
 			}

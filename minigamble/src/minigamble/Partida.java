@@ -45,16 +45,19 @@ public class Partida {
 		minijuegos.add(ESTADO.Game6);
 		minijuegos.add(ESTADO.PantallaIntermedia);
 		
-		int rand = (int) (Math.random() * 3);
+		int rand = (int) (Math.random() * 6);
+		System.out.println("rand1");
+		System.out.println(rand);
 		
 		while(Game.estadoJuego == minijuegos.get(rand)) {
-			rand = (int) (Math.random() * 3);
+			rand = (int) (Math.random() * 6);
+			System.out.println("rand2");
 			System.out.println(rand);
 		}
 		
 
 
-		rand=5 ; //PARA HACER PRUEBAS, LUEGO BORRARRRRRRRRRRRRRRRRRRRRRRRR
+		//rand=5 ; //PARA HACER PRUEBAS, LUEGO BORRARRRRRRRRRRRRRRRRRRRRRRRR
 
 
 		if(vidas<1 ) {

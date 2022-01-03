@@ -206,7 +206,7 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 			        }
 					
 				}else{
-					vidasRestadas++;
+					//vidasRestadas++;
 					System.out.println("miss");
 				}
 			
