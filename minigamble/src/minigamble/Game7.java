@@ -12,8 +12,7 @@ public class Game7 implements MouseListener {
 	private int mox;
 	private int moy;
 	
-	private int start=0;
-		
+	private int start=0;		
 		
 	
 	public Game7(int dificultad, String nombreJugador, int idPart) {
@@ -118,11 +117,184 @@ public class Game7 implements MouseListener {
 	}
 	
 	
-	
-	public void nextMove() {
 		
+	public double probab(int[][] matProb, int alpha) {
 		
+		System.out.println("count matr like: " + count(matProb));
+		System.out.println("check like: " + checkRow(matProb));
+		
+		if(count(matProb) == 0) {
+			return checkRow(matProb);			
+			
+		} else if (checkRow(matProb)!=0) {
+			return checkRow(matProb);
+						
+		} else {
+			
+			double allsum=0;
+			
+			for(int i=0; i<=2; i++) {
+				for(int j=0; j<=2; j++) {
+					if(matProb[i][j]==0) {
+						
+						System.out.println("zero in " +j+" "+ i);
+						
+						int[][] newMatrix = copied(matProb);
+						
+						if(alpha % 2 == 0) {
+							newMatrix[i][j] = 1;
+						}else {
+							newMatrix[i][j] = -1;							
+						}
+						
+												
+						allsum = allsum + (probab(newMatrix, alpha+1) /count(matProb));
+					}
+				}
+				
+			}
+			return allsum;
+		}
 	}
+	
+	
+	private int getMinIndex(ArrayList<Double> array) {
+		
+		Double min=(double) 1000;
+		int minIndex=-1;
+		for (int i=0; i<array.size(); i++) {
+			if(array.get(i)<min) {
+				min=array.get(i);
+				minIndex=i;
+			}			
+		}		
+		return minIndex;
+	}
+	
+	
+	public boolean mouseOver(int mx, int my, int x, int y, int width, int heigth) {   
+		if(mx > x && mx < x + width) {
+			if(my > y && my < y + heigth) {
+				return true;			
+			}else {
+				return false;
+			}
+		}else {
+			return false;
+		}}
+	
+	
+	private void delayMS(int n) {
+		try {
+			TimeUnit.MILLISECONDS.sleep(n);
+		} catch (InterruptedException b) {
+			b.printStackTrace();
+		}		
+	}
+	
+	
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		
+		if(start==0){
+			mox = e.getX();	
+			moy = e.getY();
+			
+			if(mouseOver(mox, moy, 0, 0, 100, 100)){
+					start=1;
+			}
+		}
+		
+		
+		if(start==1){
+			mox = e.getX();	
+			moy = e.getY();
+			
+			for(int i=200; i<=400; i=i+100) {			
+				for (int j=450; j<=650; j=j+100) {	
+					
+					if(mouseOver(mox, moy, j, i, 100, 100)){
+						if(matrix[(i-200)/100][(j-450)/100]==0) {
+							
+							matrix[(i-200)/100][(j-450)/100]= 1;	
+							
+							if(checkRow(matrix)==1) {
+								delayMS(500);
+								start=2;
+							} else if(count(matrix)==0){
+								delayMS(500);
+								start=4;
+							}else {
+								
+								ArrayList<Integer> positions= new ArrayList<Integer>();
+								ArrayList<Double> probabilities= new ArrayList<Double>();
+								
+								
+								for(int a =0; a<=2; a++) {
+									for(int b=0; b<=2; b++) {
+										
+										if(matrix[a][b]==0) {
+											
+											positions.add(a);
+											positions.add(b);
+											
+											int[][] newMatrix= copied(matrix);
+											newMatrix[a][b] = -1;											
+											double probab1 = probab(newMatrix, 2);											
+											probabilities.add(probab1);
+										}
+										
+									}
+								}
+								
+																
+								for (int x=0; x<probabilities.size() ; x++) {
+									System.out.println("posib of "+ probabilities.get(x) + " for position " + positions.get(x*2) + positions.get(x*2+1));									
+								}
+								
+								
+								int bestMove = getMinIndex(probabilities);
+								System.out.println("best move is " + bestMove);
+								int a = positions.get(bestMove*2);
+								int b = positions.get(bestMove*2+1);
+								
+								matrix[a][b] = -1;
+									
+								
+								if(checkRow(matrix) == -1) {
+									delayMS(500);
+									start=3;
+								}
+								if(count(matrix)==0) {
+									delayMS(500);
+									start=4;
+								}																
+							}
+						}
+					}
+				}				
+			}		
+		}
+	}
+	
+	@Override
+	public void mousePressed(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+	}
+	
+	
+
 	
 	public void render(Graphics g){
 		
@@ -168,201 +340,5 @@ public class Game7 implements MouseListener {
 		}
 		
 	}
-
-	
-	public double probab(int[][] matProb, int alpha) {
-		
-		System.out.println("count matr like: " + count(matProb));
-		System.out.println("check like: " + checkRow(matProb));
-		
-		if(count(matProb) == 0) {
-			System.out.println("case 1");
-			return checkRow(matProb);			
-			
-		} else if (checkRow(matProb)!=0) {
-			System.out.println("case 2 returning" );
-			return checkRow(matProb);
-			
-			
-		} else {
-			
-			System.out.println("Case else");
-				
-			double allsum=0;
-			int numR=0;
-			
-			for(int i=0; i<=2; i++) {
-				for(int j=0; j<=2; j++) {
-					if(matProb[i][j]==0) {
-						
-						System.out.println("zero in " +j+" "+ i);
-						
-						int[][] newMatrix = copied(matProb);
-						
-						if(alpha % 2 == 0) {
-							newMatrix[i][j] = 1;
-						}else {
-							newMatrix[i][j] = -1;							
-						}
-						
-												
-						allsum = allsum + (probab(newMatrix, alpha+1) /count(matProb));
-						
-						System.out.println("returned from posib "+ numR);
-						System.out.println("alsum  post sum like " + allsum );
-						
-					}
-				}
-				
-			}
-			return allsum;
-		}
-	}
-	
-	
-	private int getMinIndex(ArrayList<Double> array) {
-		
-		Double min=(double) 1000;
-		int minIndex=-1;
-		for (int i=0; i<array.size(); i++) {
-			if(array.get(i)<min) {
-				min=array.get(i);
-				minIndex=i;
-			}			
-		}
-		
-		return minIndex;
-	}
-	
-	
-	
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		
-		if(start==0){
-			mox = e.getX();	
-			moy = e.getY();
-			
-			if(mouseOver(mox, moy, 0, 0, 100, 100)){
-					start=1;
-			}
-		}
-		
-		
-		if(start==1){
-			mox = e.getX();	
-			moy = e.getY();
-			
-			for(int i=200; i<=400; i=i+100) {			
-				for (int j=450; j<=650; j=j+100) {	
-					
-					if(mouseOver(mox, moy, j, i, 100, 100)){
-						if(matrix[(i-200)/100][(j-450)/100]==0) {
-							
-							matrix[(i-200)/100][(j-450)/100]= 1;	
-							
-							if(checkRow(matrix)==1) {
-								start=2;
-							} else if(count(matrix)==0){
-								start=4;
-							}else {
-								
-								ArrayList<Integer> positions= new ArrayList<Integer>();
-								ArrayList<Double> probabilities= new ArrayList<Double>();
-								
-								
-								for(int a =0; a<=2; a++) {
-									for(int b=0; b<=2; b++) {
-										
-										if(matrix[a][b]==0) {
-											
-											positions.add(a);
-											positions.add(b);
-											
-											int[][] newMatrix= copied(matrix);
-											newMatrix[a][b] = -1;
-											
-											double probab1 = probab(newMatrix, 2);
-											
-											probabilities.add(probab1);
-											
-											System.out.println("Case now added a probablilty of " + probab1 );
-										}
-										
-									}
-								}
-								
-																
-								for (int x=0; x<probabilities.size() ; x++) {
-									System.out.println("posib of "+ probabilities.get(x) + " for position " + positions.get(x*2) + positions.get(x*2+1));
-									
-								}
-								
-								
-								int bestMove = getMinIndex(probabilities);
-								System.out.println("best move is " + bestMove);
-								int a = positions.get(bestMove*2);
-								int b = positions.get(bestMove*2+1);
-								
-								matrix[a][b] = -1;
-									
-								delayMS(200);
-								if(checkRow(matrix) == -1) {
-									start=3;
-								}
-								if(count(matrix)==0) {
-									start=4;
-								}
-																
-							}
-							
-							
-						}
-					}
-					
-				
-				}
-				
-			}
-		
-		}
-	}
-	
-	private void delayMS(int n) {
-		try {
-			TimeUnit.MILLISECONDS.sleep(n);
-		} catch (InterruptedException b) {
-			// TODO Auto-generated catch block
-			b.printStackTrace();
-		}
-		
-	}
-	
-	@Override
-	public void mousePressed(MouseEvent e) {
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-	}
-	
-	public boolean mouseOver(int mx, int my, int x, int y, int width, int heigth) {   
-		if(mx > x && mx < x + width) {
-			if(my > y && my < y + heigth) {
-				return true;			
-			}else {
-				return false;
-			}
-		}else {
-			return false;
-		}}
-
 }
+
