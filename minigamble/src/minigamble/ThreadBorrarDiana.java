@@ -34,6 +34,8 @@ public class ThreadBorrarDiana extends Thread{
 		
 		rotas.add(rota);
 		
+		
+		
 	}
 	
 	

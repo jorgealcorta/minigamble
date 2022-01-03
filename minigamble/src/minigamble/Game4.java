@@ -26,11 +26,7 @@ import javax.swing.ImageIcon;
 
 public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 	
-	
-	private boolean bStart_state = false;
-	
-	private int start = 1; //1=START, 2= JUEGO
-	
+			
 	// CopyOnWriteArrayList que almacena las dianas generadas aleatoriamente.
 	private CopyOnWriteArrayList<Diana> dianasCreadas = new CopyOnWriteArrayList<Diana>();
 	
@@ -86,6 +82,9 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 		}
 		
 		puntSumados = (int)(500 / (dianasCreadas.size()));
+		
+		System.out.println(dianasCreadas);
+		runThreadDianasActivas();
 				
 	}
 	
@@ -172,60 +171,46 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 			
 			
 			/*
-			 * Secuencia de boton Start 
-			 */
-			
-			if( mouseOver(mox, moy, 500, 290, 190, 50) && start == 1 ){
-				bStart_state = true;
-				try {																				
-			        Clip sonido = AudioSystem.getClip();
-					AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s1_filePath));
-			        sonido.open(ais);
-			        sonido.start();
-		        }catch(Exception e2) {
-		        	System.out.println("error");
-		        }}
-			
-			/*
-			 * Si el juego esta en start=2, verifica si el click esta sobre alguna de las dianas.
+			 * Verifica si el click esta sobre alguna de las dianas.
 			 * Si lo esta, pone el atributo rota de la diana a true, y lanza el hilo de borrar diana con la(s) diana(s) acertada(s).
 			 */
 			
-			if(start == 2) {
-				for(Diana d : dianasActivas) {
-					if(e.getX() >= d.getX() && e.getX() <= d.getX() + d.getSize() && e.getY() >= d.getY() && e.getY() <= d.getY() + d.getSize() && !d.isRota()) {
-						System.out.println("acierto");
-						d.setRota(true);
+			for(Diana d : dianasActivas) {
+				if(e.getX() >= d.getX() && e.getX() <= d.getX() + d.getSize() && e.getY() >= d.getY() && e.getY() <= d.getY() + d.getSize() && !d.isRota()) {
+					System.out.println("acierto");
+					d.setRota(true);
+					
+					ThreadBorrarDiana bd = new ThreadBorrarDiana(d, dianasActivas, dianasRotas);
+					Thread hbd = new Thread(bd);
+					hbd.start();
+					
+					puntLocal += puntSumados;
+					
+					if(dianasRotas.size() == dianasCreadas.size()-1) {
+						System.out.println("victoria");
+						tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
+						delaySeg(2);
+						//BaseDatos.insertarGame1(idPartida, puntLocal, fallos, primeraCarta, tiempoPrimeraCarta, tiempoTotal);
+						Game.partida  = new Partida( puntos + puntLocal, vidasRestadas, null, jugador, idPartida);
 						
-						ThreadBorrarDiana bd = new ThreadBorrarDiana(d, dianasActivas, dianasRotas);
-						Thread hbd = new Thread(bd);
-						hbd.start();
-						
-						puntLocal += puntSumados;
-						
-						try {																				
-					        Clip sonido = AudioSystem.getClip();
-							AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s1_filePath));
-					        sonido.open(ais);
-					        sonido.start();
-				        }catch(Exception e2) {
-				        	System.out.println("error");
-				        }
-						
-						if(dianasActivas.size() == 0) {
-							tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
-							delaySeg(2);
-							delaySeg(1);
-							//BaseDatos.insertarGame1(idPartida, puntLocal, fallos, primeraCarta, tiempoPrimeraCarta, tiempoTotal);
-							Game.partida  = new Partida( puntos + puntLocal, vidasRestadas, null, jugador, idPartida);
-							
-						}
-					}else{
-						vidasRestadas++;
-						System.out.println("miss");
 					}
+					
+					try {																				
+				        Clip sonido = AudioSystem.getClip();
+						AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s1_filePath));
+				        sonido.open(ais);
+				        sonido.start();
+			        }catch(Exception e2) {
+			        	System.out.println("error");
+			        }
+					
+				}else{
+					vidasRestadas++;
+					System.out.println("miss");
 				}
+			
 			}
+			
 			
 			
 		}
@@ -233,32 +218,6 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		if(Game.estadoJuego == Game.ESTADO.Game4) {
-			
-			//BOTON START
-			
-			String filePath = new File("").getAbsolutePath();										// Ruta hasta el proyecto
-			String s2_filePath = filePath.concat("/minigamble/src/minigamble/sonido/click2.wav");	//Continuacion de la ruta hasta el archivo de audio 2
-		
-			if (start == 1) {// caso start == 1
-				if(bStart_state == true){ 
-					try {																				
-				        Clip sonido = AudioSystem.getClip();
-						AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s2_filePath));
-				        sonido.open(ais);
-				        sonido.start();
-			        }catch(Exception e2) {
-			        	System.out.println("error");
-			        }
-				}
-			bStart_state = false;
-			start = 2;
-			System.out.println(dianasCreadas);
-			runThreadDianasActivas();
-
-			}
-			
-		}
 		
 	}
 
@@ -285,45 +244,27 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 	public void render(Graphics g) {
 		
 		g.drawImage(media.tapeteImg, 0, 0, 1184, 663, null);
-		
-		//Pantalla de boton START
-		
-		if(start==1) {
-			g.setFont(media.customFontBot);
-			g.setColor(Color.BLACK);
-			if(bStart_state == true) {					                   //caso start = 1
-				g.drawImage(media.bStartIMG_True, 500, 294, null);
-				g.drawString("Start", 540, 326);
-			}else{
-				g.drawImage(media.bStartIMG_False, 500, 290, null);
-				g.drawString("Start", 547, 322);
-			}
-		}
-		
-		if(start == 2) {
-			
-			//g.drawImage(Image img, int x, int y, int width, int height, ImageObserver observer);
 			
 			// Cada frame se dibujan todas las dianas en dianasActivas, comprobando el booleano rota para decidir si dibujar la diana
 			// entera o rota
-			for(Diana d : dianasActivas) {
-				if(!d.isRota()) {
-					g.drawImage(media.diana_IMG, d.getX(), d.getY(), (int)d.getSize(), (int)d.getSize(), null);
-				}else if(d.isRota() && !dianasRotas.contains(d)){
-					g.drawImage(media.dianaRota_IMG, d.getX(), d.getY(), (int)d.getSize(), (int)d.getSize(), null);
-					
-					g.setColor(Color.WHITE);
-					Font fuente = media.customFontBot;
-					fuente = fuente.deriveFont(Font.PLAIN, (int)d.getSize()/2);
-					g.setFont(fuente);
-					g.drawString(String.valueOf(puntSumados), d.getX() + (int)(d.getSize()/2), d.getY()+(int)(d.getSize()/3));
-				}
+		for(Diana d : dianasActivas) {
+			if(!d.isRota()) {
+				g.drawImage(media.diana_IMG, d.getX(), d.getY(), (int)d.getSize(), (int)d.getSize(), null);
+			}else if(d.isRota() && !dianasRotas.contains(d)){
+				g.drawImage(media.dianaRota_IMG, d.getX(), d.getY(), (int)d.getSize(), (int)d.getSize(), null);
+				
+				g.setColor(Color.WHITE);
+				Font fuente = media.customFontBot;
+				fuente = fuente.deriveFont(Font.PLAIN, (int)d.getSize()/2);
+				g.setFont(fuente);
+				g.drawString(String.valueOf(puntSumados), d.getX() + (int)(d.getSize()/2), d.getY()+(int)(d.getSize()/3));
 			}
-			
-			//En cada frame se dibuja el punto de mira encima del raton
-			g.drawImage(media.mira_IMG, mox-16, moy-16, 32, 32, null);
-			
 		}
+		
+		//En cada frame se dibuja el punto de mira encima del raton
+		g.drawImage(media.mira_IMG, mox-16, moy-16, 32, 32, null);
+		
+
 
 	}
 
