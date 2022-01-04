@@ -3,6 +3,7 @@ package minigamble;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
@@ -21,6 +22,7 @@ import java.util.concurrent.TimeUnit;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
 import javax.swing.ImageIcon;
 
 
@@ -52,6 +54,9 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 	private int vidasRestadas = 0;
 	
 	private int nDianas;
+	
+	private int timer;
+	private boolean todasRotas = false;
 
 	
 	public Game4(int puntuacion, String nombreJugador, int idPart){
@@ -72,6 +77,8 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 			nDianas = 20;
 		}
 		
+		timer = 30;
+		todasRotas = false;
 		
 		//Ir creando dianas
 		//xmin=0
@@ -97,11 +104,23 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 		
 		System.out.println(dianasCreadas);
 		runThreadDianasActivas();
-				
+		
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				while(timer > 0) {
+					try {
+						Thread.sleep(1000);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+					timer--;
+				}
+			}
+		}).start();
+	    
 	}
 	
-
-		
 	
 	// Metodo para lanzar el hilo que se encarga de insertar, con un delay, las dianas creadas aleatoriamente,
 	// al CopyOnWriteArrayList de las dianas activas que se dibujaran.
@@ -127,19 +146,6 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 		
 	}
 	
-	/**
-	 * Realiza un delay en Milisegundo
-	 * @param n numero de Milisegundo que se quiere hacer el delay
-	 */
-	private void delayMS(int n) {
-		try {
-			TimeUnit.MILLISECONDS.sleep(n);
-		} catch (InterruptedException b) {
-			// TODO Auto-generated catch block
-			b.printStackTrace();
-		}
-		
-	}
 	
 	/**	Evalua si el raton esta sobre una region
 	 * @param mx posicion X del raton
@@ -198,15 +204,23 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 					hbd.start();
 					
 					puntLocal += puntSumados;
+					for(Diana dd : dianasActivas) {
+						if(!dd.isRota()) {
+							todasRotas = false;
+							break;
+						}
+						todasRotas = true;
+					}
 					
-					if(dianasRotas.size() == dianasCreadas.size()-1) {
+					if(todasRotas) {
 						System.out.println("victoria");
 						tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
 						delaySeg(2);
 						//BaseDatos.insertarGame1(idPartida, puntLocal, fallos, primeraCarta, tiempoPrimeraCarta, tiempoTotal);
 						Game.partida  = new Partida(puntos + puntLocal, vidasRestadas, null, jugador, idPartida);
-						
 					}
+					
+					
 					
 					try {																				
 				        Clip sonido = AudioSystem.getClip();
@@ -256,6 +270,8 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 	
 	public void render(Graphics g) {
 		
+		g.setColor(Color.WHITE);
+		
 		g.drawImage(media.tapeteImg, 0, 0, 1184, 663, null);
 			
 			// Cada frame se dibujan todas las dianas en dianasActivas, comprobando el booleano rota para decidir si dibujar la diana
@@ -266,7 +282,6 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 			}else if(d.isRota() && !dianasRotas.contains(d)){
 				g.drawImage(media.dianaRota_IMG, d.getX(), d.getY(), (int)d.getSize(), (int)d.getSize(), null);
 				
-				g.setColor(Color.WHITE);
 				Font fuente = media.customFontBot;
 				fuente = fuente.deriveFont(Font.PLAIN, (int)d.getSize()/2);
 				g.setFont(fuente);
@@ -277,8 +292,14 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 		//En cada frame se dibuja el punto de mira encima del raton
 		g.drawImage(media.mira_IMG, mox-16, moy-16, 32, 32, null);
 		
-
-
+		Font fuente = media.customFontBot;
+		fuente = fuente.deriveFont(Font.PLAIN, 100);
+		g.setFont(fuente);
+		
+		FontMetrics metrics = g.getFontMetrics();
+		int timerWidth = metrics.stringWidth(String.valueOf(timer));
+		
+		g.drawString(String.valueOf(timer),(1200/2) - (timerWidth/2), 150);
 	}
 
 }
