@@ -171,6 +171,16 @@ public class media {
 	public static ImageIcon rowHorzIcn;
 	public static Image rowHorzImg;
 	
+	//PANTALLA INTERMEDIA
+	
+	public static ImageIcon vida;
+	public static ImageIcon vidatrans;
+	public static ImageIcon vidalado;
+	
+	public static Image vida_IMG;
+	public static Image vidatrans_IMG;
+	public static Image vidalado_IMG;
+	
 	public media() {
 		
 		try {
@@ -254,6 +264,12 @@ public class media {
 			crossIcn = new ImageIcon(Game.class.getResource("multimedia/cross.png").toURI().toURL() );
 			rowVertIcn = new ImageIcon(Game.class.getResource("multimedia/row.png").toURI().toURL() );
 			rowHorzIcn = new ImageIcon(Game.class.getResource("multimedia/rowHorz.png").toURI().toURL() );
+			
+			//PANTALLA INTERMEDIA
+			
+			vida = new ImageIcon(Game.class.getResource("multimedia/vida.png").toURI().toURL() );
+			vidatrans = new ImageIcon(Game.class.getResource("multimedia/vidatrans.png").toURI().toURL() );
+			vidalado = new ImageIcon(Game.class.getResource("multimedia/vidalado.png").toURI().toURL() );
 			
 		} catch (Exception e1) {
 			e1.printStackTrace();
@@ -344,6 +360,12 @@ public class media {
 		crossImg = crossIcn.getImage();
 		rowHorzImg = rowHorzIcn.getImage();
 		rowVertImg = rowVertIcn.getImage();
+		
+		//PANTALLA INTERMEDIA
+		
+		vida_IMG = vida.getImage();
+		vidatrans_IMG = vidatrans.getImage();
+		vidalado_IMG = vidalado.getImage();
 		
 		
 		//FONTS

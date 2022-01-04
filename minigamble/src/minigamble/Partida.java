@@ -14,7 +14,7 @@ public class Partida {
 	public static int puntuacionGeneral = 0;
 	public static int vidas = 3;
 	
-	public static ArrayList<Minijuego> minisJugados = new ArrayList<Minijuego>();
+	public static ArrayList<Integer> minisJugados = new ArrayList<Integer>();
 		
 	
 	/**
@@ -25,7 +25,7 @@ public class Partida {
 	 * @param jugador Nombre del jugador
 	 * @param idPartida ID de la partida que se está jugando
 	 */
-	public Partida(int puntuacion, int vidasRestadas, Minijuego miniJugado, String jugador, int idPartida) { //meter arraylist como atributo
+	public Partida(int puntuacion, int vidasRestadas, int miniJugado, String jugador, int idPartida) { //meter arraylist como atributo
 		
 		System.out.println("puntuacion:" +puntuacionGeneral);
 		System.out.println("vidas;"+vidas); 
@@ -50,7 +50,7 @@ public class Partida {
 		System.out.println("rand1");
 		System.out.println(rand);
 		
-		while(Game.estadoJuego == minijuegos.get(rand)) {
+		while(PantallaIntermedia.miniJugado == rand) {
 			rand = (int) (Math.random() * 6);
 			System.out.println("rand2");
 			System.out.println(rand);
@@ -58,7 +58,7 @@ public class Partida {
 		
 
 
-		rand=3		 ; //PARA HACER PRUEBAS, LUEGO BORRARRRRRRRRRRRRRRRRRRRRRRRR
+		rand=5		 ; //PARA HACER PRUEBAS, LUEGO BORRARRRRRRRRRRRRRRRRRRRRRRRR
 
 
 		if(vidas<1 ) {
@@ -99,8 +99,10 @@ public class Partida {
 				Game.estadoJuego = minijuegos.get(rand);
 				Game.eventoRaton();
 				
-			} else if(rand==7) {
-				Game.pantallaIntermedia = new PantallaIntermedia(1200, 1, 7);
+			} 
+			
+			else if(rand==7) {
+				Game.pi = new PantallaIntermedia(1500, 1, 5, "a", 12);
 				Game.estadoJuego = minijuegos.get(rand);
 				Game.eventoRaton();
 			}

@@ -57,6 +57,7 @@ public class ThreadVidasDisplay extends Thread {
 				e.printStackTrace();
 			}
 		}
+		
 				
 	}
 

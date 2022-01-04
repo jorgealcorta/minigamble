@@ -14,6 +14,8 @@ import java.util.concurrent.TimeUnit;
 
 import javax.swing.ImageIcon;
 
+import minigamble.Game.ESTADO;
+
 public class Game6 implements KeyListener{
 	
 	private boolean aciertoReciente = false;
@@ -22,7 +24,7 @@ public class Game6 implements KeyListener{
 	private int puntSumados;
 	private int puntLocal = 0;
 	private int idPartida;
-	private String jugador;
+	private String idJugador;
 	private int fallos;
 	private long tiempoComienzo = System.currentTimeMillis();
 	private long tiempoTotal;
@@ -37,7 +39,11 @@ public class Game6 implements KeyListener{
 	private CopyOnWriteArrayList<Flecha> flechasActivas = new CopyOnWriteArrayList<Flecha>();
 
 	
-	public Game6(int puntuacion, String nombreJugador, int idPart) {
+	public Game6(int puntuacion, String idJugador, int idPartida) {
+		
+		this.puntos = puntuacion;
+		this.idJugador = idJugador;
+		this.idPartida = idPartida;
 		
 		flechasActivas.removeAll(flechasActivas);
 		flechasCreadas.removeAll(flechasCreadas);
@@ -133,8 +139,10 @@ public class Game6 implements KeyListener{
 						tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
 						delaySeg(2);
 						//BaseDatos.insertarGame1(idPartida, puntLocal, fallos, primeraCarta, tiempoPrimeraCarta, tiempoTotal);
-						Game.partida  = new Partida(puntos + puntLocal, vidasRestadas, null, jugador, idPartida);
-						
+						//new PantallaIntermedia(puntos + puntLocal, vidasRestadas, 5, jugador, idPartida);
+						Game.pi = new PantallaIntermedia(puntos + puntLocal, vidasRestadas, 5, idJugador, idPartida);
+						Game.estadoJuego = ESTADO.PantallaIntermedia;
+						Game.eventoRaton();
 						
 					}
 			}

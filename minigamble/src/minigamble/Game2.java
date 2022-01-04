@@ -257,7 +257,7 @@ public class Game2 implements KeyListener{
 				delaySeg(2);
 				long tiempofin = System.currentTimeMillis() - tiempoIni;
 				BaseDatos.insertarGame2(idPartida, puntos, fallos, tiempofin);
-				Game.partida  = new Partida(puntos, 1, null, jugador, idPartida);
+				Game.partida  = new Partida(puntos, 1, 1, jugador, idPartida);
 			}
 			
 			/*
@@ -270,7 +270,7 @@ public class Game2 implements KeyListener{
 				delaySeg(2);
 				long tiempofin = System.currentTimeMillis() - tiempoIni;
 				BaseDatos.insertarGame2(idPartida, puntos, fallos, tiempofin);
-				Game.partida  = new Partida(puntos + puntLocal, vidasRestadas, null, jugador, idPartida);
+				Game.partida  = new Partida(puntos + puntLocal, vidasRestadas, 1, jugador, idPartida);
 			}
 			
 		}	

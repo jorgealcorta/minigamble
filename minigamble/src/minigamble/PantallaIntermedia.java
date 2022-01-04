@@ -12,22 +12,21 @@ import java.io.IOException;
 
 import javax.swing.ImageIcon;
 
+import minigamble.Game.ESTADO;
+
 public class PantallaIntermedia implements KeyListener{
 	
-	private ImageIcon vida;
-	private ImageIcon vidatrans;
-	private ImageIcon vidalado;
-	
-	private Image vida_IMG;
-	private Image vidatrans_IMG;
-	private Image vidalado_IMG;
 	
 	private int puntos = 0;
-	private int puntosDisplay = 0;
-	private int vidas = 3;
+	private int vidasRestadas;
+	private String jugador;
+	private int idPartida;
 	private int rondas = 1;
 	
-	public boolean hiloPuntosAcabado = false;
+	public static boolean hiloPuntosAcabado = false;
+	public static int puntosDisplay = 0;
+	
+	public static int miniJugado;
 	
 	Thread hpd;
 	Thread hvd;
@@ -38,58 +37,44 @@ public class PantallaIntermedia implements KeyListener{
 	
 	private Font fontPuntos;
 	
-	public PantallaIntermedia(int dificultad, int vidas, int rondas) {
+	public PantallaIntermedia(int puntos, int vidasRestadas, int miniJugado, String jugador, int idPartida) {
+		
+		Game.eventoRaton();
+
+		this.puntos = puntos;
+		this.vidasRestadas = vidasRestadas;
+		this.jugador = jugador;
+		this.idPartida = idPartida;
 		
 		hiloPuntosAcabado = false;
+		puntosDisplay = 0;
 		
-		try {
-									
-			vida = new ImageIcon(Game.class.getResource("multimedia/vida.png").toURI().toURL() );
-			vidatrans = new ImageIcon(Game.class.getResource("multimedia/vidatrans.png").toURI().toURL() );
-			vidalado = new ImageIcon(Game.class.getResource("multimedia/vidalado.png").toURI().toURL() );
+		PantallaIntermedia.miniJugado = miniJugado;
 
-			
-			
-		}catch(Exception e1) {
-			e1.printStackTrace();
-		}
 		
-		vida_IMG = vida.getImage();
-		vidatrans_IMG = vidatrans.getImage();
-		vidalado_IMG = vidalado.getImage();
-		
-		this.puntosDisplay = 0;
-		this.puntos = dificultad;
-		this.vidas = vidas;
-		this.rondas = rondas;
-		
-		if(vidas < 3 && vidas > 0) {
-			if(vidas == 1) {
+		if(Partida.vidas < 3 && Partida.vidas > 0) {
+			if(Partida.vidas == 1) {
 				vida2.setVida(false);;
 			}
 			vida3.setVida(false);;
 		}
 		
-		runThreadPuntosDisplay();
-		runThreadVidasDisplay();
-	}
-	
-	public void runThreadPuntosDisplay() {
-		ThreadPuntosDisplay pd = new ThreadPuntosDisplay(puntos, this);
-		Thread hpd = new Thread(pd);
+		ThreadPuntosDisplay pd = new ThreadPuntosDisplay(puntos);
+		hpd = new Thread(pd);
 		hpd.start();
-	}
-	
-	public void runThreadVidasDisplay() {
-		ThreadVidasDisplay vd = new ThreadVidasDisplay(vidas, this);
-		Thread hvd = new Thread(vd);
+		
+		ThreadVidasDisplay vd = new ThreadVidasDisplay(Partida.vidas, this);
+		hvd = new Thread(vd);
 		hvd.start();
+		
+//		if(hiloPuntosAcabado) {
+//			System.out.println("aaa");
+//			//Game.partida  = new Partida(puntos, 1, null, jugador, idPartida);
+//		}
 	}
 
 
-	public void setPuntosDisplay(int puntosDisplay) {
-		this.puntosDisplay = puntosDisplay;
-	}
+
 
 	@Override
 	public void keyTyped(KeyEvent e) {
@@ -97,18 +82,25 @@ public class PantallaIntermedia implements KeyListener{
 		
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		int key = e.getKeyCode();
 		
-		if(key == 44) {
+		if(key == 32) {
 			System.out.println("espacio");
-			if(!hpd.isInterrupted()) {
-				hpd.interrupt();
+			hpd.stop();
+			if(puntosDisplay != puntos) {
+				puntosDisplay = puntos;
+				vida1.display = true;
+				vida2.display = true;
+				vida3.display = true;
+			}else {
+				System.out.println("segundo");
+				Game.partida  = new Partida(puntos, vidasRestadas, miniJugado, jugador, idPartida);
 			}
 			
-			puntosDisplay = puntos;
 		}
 	}
 
@@ -142,11 +134,25 @@ public class PantallaIntermedia implements KeyListener{
 		int puntosWidth = metrics.stringWidth(String.valueOf(puntosDisplay));
 		g.drawString(String.valueOf(puntosDisplay),(1200/2) - (puntosWidth/2), 440);
 		
+		fontPuntos = fontPuntos.deriveFont(Font.PLAIN,70);
+		g.setFont(fontPuntos);
+		FontMetrics metrics2 = g.getFontMetrics();
+		
+		if(puntosDisplay != puntos) {
+			int skipWidth = metrics2.stringWidth(String.valueOf("SPACE TO SKIP"));
+			g.drawString("SPACE TO SKIP",(1200/2) - (skipWidth/2), 550);
+		}else {
+			int skipWidth = metrics2.stringWidth(String.valueOf("SPACE FOR NEXT GAME"));
+			g.drawString("SPACE FOR NEXT GAME",(1200/2) - (skipWidth/2), 550);
+		}	
+		
+
+		
 		if(vida1.display) {
 			if(vida1.frente) {
-				g.drawImage(vida_IMG, 250, 75, 200, 200, null);
+				g.drawImage(media.vida_IMG, 250, 75, 200, 200, null);
 			}else{
-				g.drawImage(vidalado_IMG, 250, 75, 200, 200, null);
+				g.drawImage(media.vidalado_IMG, 250, 75, 200, 200, null);
 			}
 		}
 		
@@ -154,24 +160,24 @@ public class PantallaIntermedia implements KeyListener{
 			if(vida2.vida) {
 				//ventanawidth/2 - fotowidth/2
 				if(vida2.frente) {
-					g.drawImage(vida_IMG, 500, 75, 200, 200, null);
+					g.drawImage(media.vida_IMG, 500, 75, 200, 200, null);
 				}else {
-					g.drawImage(vidalado_IMG, 500, 75, 200, 200, null);
+					g.drawImage(media.vidalado_IMG, 500, 75, 200, 200, null);
 				}
 			}else {
-				g.drawImage(vidatrans_IMG, 500, 75, 200, 200, null);
+				g.drawImage(media.vidatrans_IMG, 500, 75, 200, 200, null);
 			}
 		}
 		
 		if(vida3.display) {
 			if(vida3.vida) {
 				if(vida3.frente) {
-					g.drawImage(vida_IMG, 750, 75, 200, 200, null);
+					g.drawImage(media.vida_IMG, 750, 75, 200, 200, null);
 				}else {
-					g.drawImage(vidalado_IMG, 750, 75, 200, 200, null);
+					g.drawImage(media.vidalado_IMG, 750, 75, 200, 200, null);
 				}
 			}else {
-				g.drawImage(vidatrans_IMG, 750, 75, 200, 200, null);
+				g.drawImage(media.vidatrans_IMG, 750, 75, 200, 200, null);
 			}
 		}
 	}

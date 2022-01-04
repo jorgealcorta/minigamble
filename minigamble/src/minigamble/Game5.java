@@ -195,11 +195,11 @@ public class Game5 implements Runnable , KeyListener{
 					if(chos1==chos2 && chos2==chos3) {
 						start=3;
 						BaseDatos.insertarGame5(idPartida, 1000, 1, elegido);	
-						Game.partida  = new Partida( 1000 ,0 , null, jugador, idPartida);
+						Game.partida  = new Partida( 1000 ,0 , 4, jugador, idPartida);
 					} else {
 						start=2;
 						BaseDatos.insertarGame5(idPartida, 0, 0, elegido);
-						Game.partida  = new Partida( 0 ,1 , null, jugador, idPartida);
+						Game.partida  = new Partida( 0 ,1 , 4, jugador, idPartida);
 						
 					}
 					

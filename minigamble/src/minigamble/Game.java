@@ -19,7 +19,7 @@ public class Game extends Canvas implements Runnable{
 	public static Game5 game5;
 	public static Game6 game6;
 	public static Game7 game7;
-	public static PantallaIntermedia pantallaIntermedia;
+	public static PantallaIntermedia pi;
 	
 	public static media media;
 	
@@ -96,7 +96,7 @@ public class Game extends Canvas implements Runnable{
 		}else if(estadoJuego == ESTADO.Game7) {
 			game.addMouseListener(game7);
 		}else if(estadoJuego == ESTADO.PantallaIntermedia) {
-			game.addKeyListener(pantallaIntermedia);
+			game.addKeyListener(pi);
 		}
 	}
 	
@@ -203,7 +203,7 @@ public class Game extends Canvas implements Runnable{
 			game7.render(g);
 			break;
 		case PantallaIntermedia:
-			pantallaIntermedia.render(g);
+			pi.render(g);
 			break;
 		case LogIn:
 			login.render(g);

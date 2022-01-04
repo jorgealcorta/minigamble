@@ -3,20 +3,16 @@ package minigamble;
 public class ThreadPuntosDisplay extends Thread {
 	
 	int puntos = 0;
-	PantallaIntermedia pi;
 	
-	public ThreadPuntosDisplay(int puntos, PantallaIntermedia pi) {
-		
+	public ThreadPuntosDisplay(int puntos) {
 		this.puntos = puntos;
-		this.pi = pi;
-		
 	}
 
 	@Override
 	public void run() {
 		
 		for(int i = 0; i <= puntos; i++) {
-			pi.setPuntosDisplay(i);
+			PantallaIntermedia.puntosDisplay = i;
 			try {
 				Thread.sleep(1);
 			} catch (InterruptedException e) {
@@ -24,8 +20,5 @@ public class ThreadPuntosDisplay extends Thread {
 				e.printStackTrace();
 			}
 		}
-		
-		pi.hiloPuntosAcabado = true;	
-
 	}
 }

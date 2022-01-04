@@ -52,7 +52,7 @@ public class ThreadDianasActivas extends Thread{
 		}
 		System.out.println("derrota por desaparecer todas");
 		Game4.tiempoTotal = System.currentTimeMillis() - Game4.tiempoComienzo;
-		Game.partida  = new Partida(Game4.puntos + Game4.puntLocal, 1, null, Game4.jugador, Game4.idPartida);
+		Game.partida  = new Partida(Game4.puntos + Game4.puntLocal, 1, 3, Game4.jugador, Game4.idPartida);
 		
 	}
 	
