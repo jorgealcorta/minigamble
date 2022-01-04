@@ -30,11 +30,30 @@ public class ThreadDianasActivas extends Thread{
 		for(Diana d : creadas) {
 			activas.add(d);
 			try {
-				Thread.sleep(750);
+				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
+		}while(activas.size() > 0) {
+			activas.remove(0);
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		}
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("derrota por desaparecer todas");
+		Game4.tiempoTotal = System.currentTimeMillis() - Game4.tiempoComienzo;
+		Game.partida  = new Partida(Game4.puntos + Game4.puntLocal, 1, null, Game4.jugador, Game4.idPartida);
+		
 	}
 	
 	

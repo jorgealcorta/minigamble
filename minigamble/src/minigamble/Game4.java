@@ -43,29 +43,42 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 	private int mdx;
 	private int mdy;
 	
-	private int puntos;
+	private Thread hda;
+	
+	public static int puntos;
 	private int puntSumados;
-	private int puntLocal = 0;
-	private int idPartida;
-	private String jugador;
-	private int fallos;
-	private long tiempoComienzo = System.currentTimeMillis();
-	private long tiempoTotal;
+	public static int puntLocal = 0;
+	public static int idPartida;
+	public static String jugador;
+	public static int fallos;
+	public static long tiempoComienzo = System.currentTimeMillis();
+	public static long tiempoTotal;
 	private int vidasRestadas = 0;
 	
 	private int nDianas;
 	
-	private int timer;
 	private boolean todasRotas = false;
 
 	
 	public Game4(int puntuacion, String nombreJugador, int idPart){
+		
+		dianasCreadas = new CopyOnWriteArrayList<Diana>();
+		
+		dianasActivas = new CopyOnWriteArrayList<Diana>();
+		
+		dianasRotas = new CopyOnWriteArrayList<Diana>();
+
 		
 		puntos = puntuacion;
 		idPartida = idPart;
 		jugador = nombreJugador;
 		
 		puntLocal = 0;
+		fallos = 0;
+		vidasRestadas = 0;
+		
+		tiempoComienzo = System.currentTimeMillis();
+
 				
 		if(puntos >= 0 && puntos < 1500) {
 			nDianas = 5;
@@ -77,17 +90,7 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 			nDianas = 20;
 		}
 		
-		timer = 30;
 		todasRotas = false;
-		
-		//Ir creando dianas
-		//xmin=0
-		//xmax=1200-size
-		//ymin=0
-		//ymax=660-size
-		//sizemin=200
-		//sizemax=300
-		//meter x y restringidas para que no se solapen?
 		
 		/*
 		 * Se crean dianas aleatoriamente, primero se genera el size de la diana, y segun ese tamanyo se estableceran los
@@ -102,22 +105,9 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 		
 		puntSumados = (int)(500 / (dianasCreadas.size()));
 		
-		System.out.println(dianasCreadas);
+		System.out.println("constructor");
 		runThreadDianasActivas();
-		
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				while(timer > 0) {
-					try {
-						Thread.sleep(1000);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					timer--;
-				}
-			}
-		}).start();
+
 	    
 	}
 	
@@ -127,7 +117,7 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 
 	public void runThreadDianasActivas(){
 		ThreadDianasActivas da = new ThreadDianasActivas(dianasCreadas, dianasActivas);
-		Thread hda = new Thread(da);
+		hda = new Thread(da);
 		hda.start();
 	}
 	
@@ -204,7 +194,7 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 					hbd.start();
 					
 					puntLocal += puntSumados;
-					for(Diana dd : dianasActivas) {
+					for(Diana dd : dianasCreadas) {
 						if(!dd.isRota()) {
 							todasRotas = false;
 							break;
@@ -213,10 +203,10 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 					}
 					
 					if(todasRotas) {
-						System.out.println("victoria");
+						System.out.println("victoria por todas rotas");
 						tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
 						delaySeg(2);
-						//BaseDatos.insertarGame1(idPartida, puntLocal, fallos, primeraCarta, tiempoPrimeraCarta, tiempoTotal);
+						if(fallos>3) vidasRestadas = 1;
 						Game.partida  = new Partida(puntos + puntLocal, vidasRestadas, null, jugador, idPartida);
 					}
 					
@@ -232,7 +222,7 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 			        }
 					
 				}else{
-					//vidasRestadas++;
+					fallos++;
 					System.out.println("miss");
 				}
 			
@@ -290,16 +280,8 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 		}
 		
 		//En cada frame se dibuja el punto de mira encima del raton
-		g.drawImage(media.mira_IMG, mox-16, moy-16, 32, 32, null);
-		
-		Font fuente = media.customFontBot;
-		fuente = fuente.deriveFont(Font.PLAIN, 100);
-		g.setFont(fuente);
-		
-		FontMetrics metrics = g.getFontMetrics();
-		int timerWidth = metrics.stringWidth(String.valueOf(timer));
-		
-		g.drawString(String.valueOf(timer),(1200/2) - (timerWidth/2), 150);
+		g.drawImage(media.mira_IMG, mox-16, moy-16, 32, 32, null);		
+
 	}
 
 }
