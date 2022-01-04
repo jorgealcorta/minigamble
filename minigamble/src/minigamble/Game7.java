@@ -1,5 +1,6 @@
 package minigamble;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -115,8 +116,7 @@ public class Game7 implements MouseListener {
 		}
 		return copy;
 	}
-	
-	
+		
 		
 	public double probab(int[][] matProb, int alpha) {
 		
@@ -182,7 +182,7 @@ public class Game7 implements MouseListener {
 		}else {
 			return false;
 		}}
-	
+	 	
 	
 	private void delayMS(int n) {
 		try {
@@ -306,16 +306,18 @@ public class Game7 implements MouseListener {
 			
 		if(start==1) {
 			g.drawImage(media.tapeteImg, 0, 0, 1184, 663, null);
-			g.drawLine(550, 200, 550, 500);
-			g.drawLine(650, 200, 650, 500);
-			g.drawLine(450, 300, 750, 300);
-			g.drawLine(450, 400, 750, 400);
+			
+			g.drawImage(media.rowVertImg, 547, 180, 5, 340,null);
+			g.drawImage(media.rowVertImg, 647, 180, 5, 340,null);
+			g.drawImage(media.rowHorzImg, 430, 297, 340, 5,null);
+			g.drawImage(media.rowHorzImg, 430, 397, 340, 5,null);
+			
 			
 			for(int i=200; i<=400; i=i+100) {			
 				for (int j=450; j<=650; j=j+100) {
 					
 					if(matrix[(i-200)/100][(j-450)/100] == 1) {
-						g.drawImage(media.circleImg ,j , i, 100, 100, null);
+						g.drawImage(media.circleImg ,j+10 , i+10, 80, 80, null);
 					} else if(matrix[(i-200)/100][(j-450)/100]== -1) {
 						
 						g.drawImage(media.crossImg ,j , i, 100, 100, null);

@@ -165,6 +165,12 @@ public class media {
 	public static ImageIcon crossIcn;
 	public static Image crossImg;
 	
+	public static ImageIcon rowVertIcn;
+	public static Image rowVertImg;
+	
+	public static ImageIcon rowHorzIcn;
+	public static Image rowHorzImg;
+	
 	public media() {
 		
 		try {
@@ -246,6 +252,8 @@ public class media {
 			
 			circleIcn = new ImageIcon(Game.class.getResource("multimedia/circle.png").toURI().toURL() );
 			crossIcn = new ImageIcon(Game.class.getResource("multimedia/cross.png").toURI().toURL() );
+			rowVertIcn = new ImageIcon(Game.class.getResource("multimedia/row.png").toURI().toURL() );
+			rowHorzIcn = new ImageIcon(Game.class.getResource("multimedia/rowHorz.png").toURI().toURL() );
 			
 		} catch (Exception e1) {
 			e1.printStackTrace();
@@ -334,7 +342,8 @@ public class media {
 		
 		circleImg = circleIcn.getImage();
 		crossImg = crossIcn.getImage();
-		
+		rowHorzImg = rowHorzIcn.getImage();
+		rowVertImg = rowVertIcn.getImage();
 		
 		
 		//FONTS
