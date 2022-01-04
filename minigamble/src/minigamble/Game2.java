@@ -38,19 +38,31 @@ public class Game2 implements KeyListener{
 	// ArrayList empleado para almacenar la combinacion de palos introducida por el usuario, se reinicia en cada intento.
 	private ArrayList<String> palosUsuario = new ArrayList<String>();
 
-	private int puntTotal;
+	private int puntos;
 	private int puntLocal = 500;
 	private int idPartida;
 	private String jugador;
 	private int fallos;
 	private long tiempoIni = System.currentTimeMillis();
 	
+	private int nPalos;
+	
 	public Game2(int puntuacion, String nombreJugador, int idPart) {
 			
-			puntTotal = puntuacion;
+			puntos = puntuacion;
 			puntLocal = 500;
 			idPartida = idPart;
 			jugador = nombreJugador;
+			
+			if(puntos >= 0 && puntos < 1500) {
+				nPalos = 3;
+			}else if(puntos >= 1500 && puntos < 3000) {
+				nPalos = 5;
+			}else if(puntos >= 3000 && puntos < 4500) {
+				nPalos = 7;
+			}else if(puntos >= 4500) {
+				nPalos = 9;
+			}
 			
 			//Creamos el array de los cuatro palos
 			palos.add("cora");
@@ -60,7 +72,7 @@ public class Game2 implements KeyListener{
 			
 			
 			//Creamos la combinacion correcta del simon says
-			for(int i = 0 ; i < 5; i++) {
+			for(int i = 0 ; i < nPalos; i++) {
 				palosCorrectos.add(palos.get((int) Math.floor(Math.random()*4)));
 			}
 			
@@ -119,39 +131,48 @@ public class Game2 implements KeyListener{
 		 */
 		 
 		if(key == 32 && start==1) { //reproducir secuencia
-			start = 2;
-			for(String palo : palosCorrectos) {
+			Thread tSecuencia = new Thread() {
+				public void run() {
+					start = 2;
+					for(String palo : palosCorrectos) {
+						
+						if(palo == "cora") {
+							coraDestacar = true; 	
+							delayMS(250);
+							coraDestacar = false;
+							delayMS(250);
+						}
+						else if(palo == "diam") {
+							diamDestacar = true; 	
+							delayMS(250);
+							diamDestacar = false;
+							delayMS(250);			
+						}
+						else if(palo == "pica") {
+							picaDestacar = true; 	
+							delayMS(250);
+							picaDestacar = false;
+							delayMS(250);
+						}
+						else if(palo == "treb") {
+							trebDestacar = true; 	
+							delayMS(250);
+							trebDestacar = false;
+							delayMS(250);
+						}
+			
+					}
+					
+					start = 3;
+				}
 				
-				if(palo == "cora") {
-					coraDestacar = true; 	
-					delayMS(250);
-					coraDestacar = false;
-					delayMS(250);
-				}
-				else if(palo == "diam") {
-					diamDestacar = true; 	
-					delayMS(250);
-					diamDestacar = false;
-					delayMS(250);			
-				}
-				else if(palo == "pica") {
-					picaDestacar = true; 	
-					delayMS(250);
-					picaDestacar = false;
-					delayMS(250);
-				}
-				else if(palo == "treb") {
-					trebDestacar = true; 	
-					delayMS(250);
-					trebDestacar = false;
-					delayMS(250);
-				}
-	
+				};
+				
+				tSecuencia.start();
+
 			}
 			
-			start = 3;
-		}
-		
+			
 		/*
 		 * Si el juego esta en start=3, se reaccionara ante el input de las cuatro flechas del teclado, cada cual
 		 * corresponde a uno de los palos disponibles. En el keyPressed unicamente se gestionara el booleano
@@ -223,14 +244,20 @@ public class Game2 implements KeyListener{
 			 * el usuario estar� haciendolo bien.
 			 */
 			
-			if(palosUsuario.size() > 0 && palosUsuario.get(cuentaPulsaciones) != palosCorrectos.get(cuentaPulsaciones)) {
+			if(puntLocal > 0 && palosUsuario.size() > 0 && palosUsuario.get(cuentaPulsaciones) != palosCorrectos.get(cuentaPulsaciones)) {
 				System.out.println(palosUsuario);
 				palosUsuario.removeAll(palosUsuario);
 				cuentaPulsaciones = -1;
 				start = 1;
-				puntLocal -= 500;
+				puntLocal -= 100;
 				vidasRestadas++;
 				System.out.println("error");
+			}else if(puntLocal <= 0) {
+				start = 4;
+				delaySeg(2);
+				long tiempofin = System.currentTimeMillis() - tiempoIni;
+				BaseDatos.insertarGame2(idPartida, puntos, fallos, tiempofin);
+				Game.partida  = new Partida(puntos, 1, null, jugador, idPartida);
 			}
 			
 			/*
@@ -242,8 +269,8 @@ public class Game2 implements KeyListener{
 				start = 4;
 				delaySeg(2);
 				long tiempofin = System.currentTimeMillis() - tiempoIni;
-				BaseDatos.insertarGame2(idPartida, puntTotal, fallos, tiempofin);
-				Game.partida  = new Partida(puntTotal, vidasRestadas, null, jugador, idPartida);
+				BaseDatos.insertarGame2(idPartida, puntos, fallos, tiempofin);
+				Game.partida  = new Partida(puntos + puntLocal, vidasRestadas, null, jugador, idPartida);
 			}
 			
 		}	
