@@ -88,6 +88,13 @@ public class BaseDatos {
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
 				
+				sent = "DROP TABLE IF EXISTS game7";
+				logger.log( Level.INFO, "Statement: " + sent );
+				statement.executeUpdate( sent );
+				sent = "CREATE TABLE game7 (id INTEGER PRIMARY KEY AUTOINCREMENT ,idPartida int, puntuacion int, tiempo_total bigint , fristX int, firstY int);";
+				logger.log( Level.INFO, "Statement: " + sent );
+				statement.executeUpdate( sent );
+				
 				try {
 					Scanner scanner = new Scanner( BaseDatos.class.getResourceAsStream("inicio/game1_inic.txt") );
 					while (scanner.hasNextLine()) {
@@ -178,7 +185,7 @@ public class BaseDatos {
 		}
 	}
 	
-	/** Inserta una Game1 en la base de datos previamente abierta con {@link #abrirConexion(String, boolean)}
+	/** Inserta un Game1 en la base de datos previamente abierta con {@link #abrirConexion(String, boolean)}
 	 * @param idPartida ID de la partida que se está jugando
 	 * @param puntuacion Puntuacion obtenida en Game1
 	 * @param fallos Numero de fallos cometidos
@@ -192,7 +199,7 @@ public class BaseDatos {
 			String sent = "insert into game1 (idPartida, puntuacion, fallos, primera_carta, tiempo_primera_carta, tiempo_total ) values (" + idPartida + ", " + puntuacion + ", "+ fallos + ", '"+ primeraCarta +"', " + tiempoPrimCar + ", " + tiempoTot + " );";											
 			logger.log( Level.INFO, "Statement: " + sent );
 			int insertados = statement.executeUpdate( sent );
-			if (insertados!=1) return false;  // Error en inserción
+			if (insertados!=1) return false;  // Error en insercion
 			return true;
 		} catch (Exception e) {
 			logger.log( Level.SEVERE, "Excepción", e );
@@ -205,7 +212,7 @@ public class BaseDatos {
 			String sent = "insert into game2 (idPartida, puntuacion, fallos, tiempo_total ) values (" + idPartida + ", " + puntuacion + ", "+ fallos + ", " + tiempoTot + " );";											
 			logger.log( Level.INFO, "Statement: " + sent );
 			int insertados = statement.executeUpdate( sent );
-			if (insertados!=1) return false;  // Error en inserción
+			if (insertados!=1) return false;  // Error en insercion
 			return true;
 		} catch (Exception e) {
 			logger.log( Level.SEVERE, "Excepción", e );
@@ -213,7 +220,7 @@ public class BaseDatos {
 		}
 	}
 	
-	/** Inserta una Game3 en la base de datos previamente abierta con {@link #abrirConexion(String, boolean)}
+	/** Inserta un Game3 en la base de datos previamente abierta con {@link #abrirConexion(String, boolean)}
 	 * @param idPartida ID de la partida que se esta jugando
 	 * @param puntuacion Puntuacion obtenida en Game3
 	 * @param fallos Numero de fallos cometidos
@@ -226,7 +233,7 @@ public class BaseDatos {
 			String sent = "insert into game3 (idPartida, puntuacion, fallos, tiempo_total, laberinto) values (" + idPartida + ", " + puntuacion + ", "+ fallos + ", " + tiempoTot +", "+ laberinto + " );";											
 			logger.log( Level.INFO, "Statement: " + sent );
 			int insertados = statement.executeUpdate( sent );
-			if (insertados!=1) return false;  // Error en inserción
+			if (insertados!=1) return false;  // Error en insercion
 			return true;
 		} catch (Exception e) {
 			logger.log( Level.SEVERE, "Excepción", e );
@@ -239,7 +246,7 @@ public class BaseDatos {
 			String sent = "insert into game4 (idPartida, puntuacion, fallos, tiempo_total ) values (" + idPartida + ", " + puntuacion + ", "+ fallos + ", " + tiempoTot + " );";											
 			logger.log( Level.INFO, "Statement: " + sent );
 			int insertados = statement.executeUpdate( sent );
-			if (insertados!=1) return false;  // Error en inserción
+			if (insertados!=1) return false;  // Error en insercion
 			return true;
 		} catch (Exception e) {
 			logger.log( Level.SEVERE, "Excepción", e );
@@ -247,7 +254,7 @@ public class BaseDatos {
 		}
 	}
 	
-	/** Inserta una Game5 en la base de datos previamente abierta con {@link #abrirConexion(String, boolean)}
+	/** Inserta un Game5 en la base de datos previamente abierta con {@link #abrirConexion(String, boolean)}
 	 * @param idPartida ID de la partida que se esta jugando
 	 * @param puntuacion Puntuacion obtenida en Game5
 	 * @param premio Adquiere valor 1 si ha conseguido hacer 3 en linea, 0 en caso de que no
@@ -260,7 +267,7 @@ public class BaseDatos {
 			String sent = "insert into game5 (idPartida, puntuacion, premio, symbol ) values (" + idPartida + ", " + puntuacion + ", " + premio + " , " + symbol + " );";											
 			logger.log( Level.INFO, "Statement: " + sent );
 			int insertados = statement.executeUpdate( sent );
-			if (insertados!=1) return false;  // Error en inserción
+			if (insertados!=1) return false;  // Error en insercion
 			return true;
 		} catch (Exception e) {
 			logger.log( Level.SEVERE, "Excepción", e );
@@ -273,7 +280,29 @@ public class BaseDatos {
 			String sent = "insert into game6 (idPartida, puntuacion, fallos, tiempo_total ) values (" + idPartida + ", " + puntuacion + ", "+ fallos + ", " + tiempoTot + " );";											
 			logger.log( Level.INFO, "Statement: " + sent );
 			int insertados = statement.executeUpdate( sent );
-			if (insertados!=1) return false;  // Error en inserción
+			if (insertados!=1) return false;  // Error en insercion
+			return true;
+		} catch (Exception e) {
+			logger.log( Level.SEVERE, "Excepción", e );
+			return false;
+		}
+	}
+	
+	/** Inserta un Game7 en la base de datos previamente abierta con {@link #abrirConexion(String, boolean)}
+	 * @param idPartida ID de la partida que se esta jugando
+	 * @param puntuacion Puntuacion obtenida en Game3
+	 * @param tiempoTot Tiempo total en terminar el juego
+	 * @param firstX coordenada x del primer movimiento realizado
+	 * @param firstY coordenada y del primer movimiento realizado
+	 * @return devuelve True si se hace correctamente
+	 */
+	
+	public static boolean insertarGame7( int idPartida, int puntuacion, long tiempoTot, int firstX, int firstY) {
+		try (Statement statement = conexion.createStatement()) {
+			String sent = "insert into game6 (idPartida, puntuacion, fallos, tiempo_total ) values (" + idPartida + ", " + puntuacion + ", "+ tiempoTot + ", " + firstX + ", " + firstY + " );";											
+			logger.log( Level.INFO, "Statement: " + sent );
+			int insertados = statement.executeUpdate( sent );
+			if (insertados!=1) return false;  // Error en insercion
 			return true;
 		} catch (Exception e) {
 			logger.log( Level.SEVERE, "Excepción", e );

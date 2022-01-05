@@ -16,6 +16,10 @@ import java.util.concurrent.TimeUnit;
 
 import javax.swing.ImageIcon;
 
+/**
+ * @author Nicolás
+ *
+ */
 public class Game5 implements Runnable , KeyListener{
  
 	
@@ -39,8 +43,8 @@ public class Game5 implements Runnable , KeyListener{
 	 
 	private int start=0;
 	private int count=0;
-	private int fallos=0;
 	private String elegido;
+	private int speed;
 	
 	private int chos1;
 	private int chos2;
@@ -51,6 +55,16 @@ public class Game5 implements Runnable , KeyListener{
 		PuntTotal = dificultad;
 		idPartida = idPart;
 		jugador = nombreJugador;
+		
+		if(PuntTotal <2000) {
+			speed=7;
+		} else if (PuntTotal<4000) {
+			speed = 21;
+		} else if (PuntTotal<6000) {
+			speed = 34;
+		} else if (PuntTotal<6000) {
+			speed = 42;
+		}
 		
 		symbols.add(media.imageS1);
 		symbols.add(media.imageS2);
@@ -90,6 +104,9 @@ public class Game5 implements Runnable , KeyListener{
 	}
 	
 	
+	/**
+	 * Hilo que realiza la animacion de movimiento de la maquina targaperras en funcion del parametro speed
+	 */
 	@Override
 	public void run() {
 		while(true) {			
@@ -97,15 +114,15 @@ public class Game5 implements Runnable , KeyListener{
 			try {Thread.sleep(10);} 
 			catch (InterruptedException e) 
 			{e.printStackTrace();}										
-				sym1.move(5);
-				sym2.move(5);
-				sym3.move(5);
-				sym4.move(5);
-				sym5.move(5);
-				sym6.move(5);
-				sym7.move(5);
-				sym8.move(5);
-				sym9.move(5);
+				sym1.move(speed);
+				sym2.move(speed);
+				sym3.move(speed);
+				sym4.move(speed);
+				sym5.move(speed);
+				sym6.move(speed);
+				sym7.move(speed);
+				sym8.move(speed);
+				sym9.move(speed);
 			}			
 	}
 	
