@@ -21,6 +21,7 @@ public class PantallaIntermedia implements KeyListener{
 	private int vidasRestadas;
 	private String jugador;
 	private int idPartida;
+	private int puntLocal;
 	private int rondas = 1;
 	
 	public static boolean hiloPuntosAcabado = false;
@@ -37,17 +38,16 @@ public class PantallaIntermedia implements KeyListener{
 	
 	private Font fontPuntos;
 	
-	public PantallaIntermedia(int puntos, int vidasRestadas, int miniJugado, String jugador, int idPartida) {
+	public PantallaIntermedia(int puntos, int puntLocal, int vidasRestadas, int miniJugado, String jugador, int idPartida) {
 		
-		Game.eventoRaton();
-
 		this.puntos = puntos;
 		this.vidasRestadas = vidasRestadas;
 		this.jugador = jugador;
 		this.idPartida = idPartida;
+		this.puntLocal = puntLocal;
 		
 		hiloPuntosAcabado = false;
-		puntosDisplay = 0;
+		puntosDisplay = puntos;
 		
 		PantallaIntermedia.miniJugado = miniJugado;
 
@@ -59,7 +59,7 @@ public class PantallaIntermedia implements KeyListener{
 			vida3.setVida(false);;
 		}
 		
-		ThreadPuntosDisplay pd = new ThreadPuntosDisplay(puntos);
+		ThreadPuntosDisplay pd = new ThreadPuntosDisplay(puntos, puntLocal);
 		hpd = new Thread(pd);
 		hpd.start();
 		
@@ -91,14 +91,14 @@ public class PantallaIntermedia implements KeyListener{
 		if(key == 32) {
 			System.out.println("espacio");
 			hpd.stop();
-			if(puntosDisplay != puntos) {
-				puntosDisplay = puntos;
+			if(puntosDisplay != puntos + puntLocal) {
+				puntosDisplay = puntos + puntLocal;
 				vida1.display = true;
 				vida2.display = true;
 				vida3.display = true;
 			}else {
 				System.out.println("segundo");
-				Game.partida  = new Partida(puntos, vidasRestadas, miniJugado, jugador, idPartida);
+				Game.partida  = new Partida(puntos+puntLocal, vidasRestadas, miniJugado, jugador, idPartida);
 			}
 			
 		}
@@ -138,7 +138,7 @@ public class PantallaIntermedia implements KeyListener{
 		g.setFont(fontPuntos);
 		FontMetrics metrics2 = g.getFontMetrics();
 		
-		if(puntosDisplay != puntos) {
+		if(puntosDisplay != puntos + puntLocal) {
 			int skipWidth = metrics2.stringWidth(String.valueOf("SPACE TO SKIP"));
 			g.drawString("SPACE TO SKIP",(1200/2) - (skipWidth/2), 550);
 		}else {

@@ -13,6 +13,8 @@ import java.util.concurrent.TimeUnit;
 
 import javax.swing.ImageIcon;
 
+import minigamble.Game.ESTADO;
+
 public class Game2 implements KeyListener{
 	
 	private int start = 1; //1 = esperando, 2 = reproduciendo, 3 = jugando, 4 = ganado
@@ -257,7 +259,10 @@ public class Game2 implements KeyListener{
 				delaySeg(2);
 				long tiempofin = System.currentTimeMillis() - tiempoIni;
 				BaseDatos.insertarGame2(idPartida, puntos, fallos, tiempofin);
-				Game.partida  = new Partida(puntos, 1, 1, jugador, idPartida);
+				
+				Game.pi = new PantallaIntermedia(puntos, puntLocal, vidasRestadas, 1, jugador, idPartida);
+				Game.estadoJuego = ESTADO.PantallaIntermedia;
+				Game.eventoRaton();
 			}
 			
 			/*
@@ -270,7 +275,10 @@ public class Game2 implements KeyListener{
 				delaySeg(2);
 				long tiempofin = System.currentTimeMillis() - tiempoIni;
 				BaseDatos.insertarGame2(idPartida, puntos, fallos, tiempofin);
-				Game.partida  = new Partida(puntos + puntLocal, vidasRestadas, 1, jugador, idPartida);
+
+				Game.pi = new PantallaIntermedia(puntos, puntLocal, vidasRestadas, 1, jugador, idPartida);
+				Game.estadoJuego = ESTADO.PantallaIntermedia;
+				Game.eventoRaton();
 			}
 			
 		}	

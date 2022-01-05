@@ -140,7 +140,7 @@ public class Game6 implements KeyListener{
 						delaySeg(2);
 						//BaseDatos.insertarGame1(idPartida, puntLocal, fallos, primeraCarta, tiempoPrimeraCarta, tiempoTotal);
 						//new PantallaIntermedia(puntos + puntLocal, vidasRestadas, 5, jugador, idPartida);
-						Game.pi = new PantallaIntermedia(puntos + puntLocal, vidasRestadas, 5, idJugador, idPartida);
+						Game.pi = new PantallaIntermedia(puntos, puntLocal, vidasRestadas, 5, idJugador, idPartida);
 						Game.estadoJuego = ESTADO.PantallaIntermedia;
 						Game.eventoRaton();
 						

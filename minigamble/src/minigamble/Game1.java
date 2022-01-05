@@ -20,6 +20,8 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 
+import minigamble.Game.ESTADO;
+
 
 /**
  * Clase encargada del juego 1 (Memory de cartas)
@@ -440,8 +442,10 @@ public class Game1  implements MouseMotionListener, MouseListener {
 								start = 4;
 								delaySeg(1);
 								BaseDatos.insertarGame1(idPartida, puntLocal, fallos, primeraCarta, tiempoPrimeraCarta, tiempoTotal);
-								Game.partida  = new Partida( puntTotal + puntLocal ,0, 0, jugador, idPartida);
 								
+								Game.pi = new PantallaIntermedia(puntTotal, puntLocal, 0, 0, jugador, idPartida);
+								Game.estadoJuego = ESTADO.PantallaIntermedia;
+								Game.eventoRaton();								
 							}
 							
 						}

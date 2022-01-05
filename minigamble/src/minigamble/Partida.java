@@ -58,7 +58,7 @@ public class Partida {
 		
 
 
-		rand=5		 ; //PARA HACER PRUEBAS, LUEGO BORRARRRRRRRRRRRRRRRRRRRRRRRR
+		rand=1	 ; //PARA HACER PRUEBAS, LUEGO BORRARRRRRRRRRRRRRRRRRRRRRRRR
 
 
 		if(vidas<1 ) {
@@ -102,7 +102,7 @@ public class Partida {
 			} 
 			
 			else if(rand==7) {
-				Game.pi = new PantallaIntermedia(1500, 1, 5, "a", 12);
+				Game.pi = new PantallaIntermedia(1500, 500, 1, 5, "a", 12);
 				Game.estadoJuego = minijuegos.get(rand);
 				Game.eventoRaton();
 			}
