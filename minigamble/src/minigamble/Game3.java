@@ -87,14 +87,16 @@ public class Game3 implements MouseListener , MouseMotionListener {
 			
 				
 		Laberinto lab1 = new Laberinto(media.lab1Img, 001 );
-		Laberinto lab2 = new Laberinto(media.lab3Img, 002 );
-		Laberinto lab3 = new Laberinto(media.lab2Img, 003 );		
+		Laberinto lab2 = new Laberinto(media.lab2Img, 002 );
+		Laberinto lab3 = new Laberinto(media.lab3Img, 003 );
+		Laberinto lab4 = new Laberinto(media.lab4Img, 004 );
 				
 		allLabs.add(lab1);
 		allLabs.add(lab2);
 		allLabs.add(lab3);
+		allLabs.add(lab4);
 		
-		thisLab = getRandom(allLabs, dificultad);		
+		thisLab = getRandom(allLabs, puntTotal);		
 		
 		try {
 			robot = new Robot();
@@ -111,10 +113,17 @@ public class Game3 implements MouseListener , MouseMotionListener {
 	 * @return el laberinto elegido
 	 */
 	
-	public Laberinto getRandom( ArrayList<Laberinto> array, int dificultad) {
-	    int rnd = new Random().nextInt(array.size());
-	   // return array.get(rnd);
-	    return array.get(rnd);
+	public Laberinto getRandom( ArrayList<Laberinto> array, int puntTotal) {
+	    if (puntTotal<2000) {
+	    	return array.get(0);
+	    } else if (puntTotal < 4000) {
+	    	return array.get(1);
+	    } else if (puntTotal < 6000) {
+	    	return array.get(2);
+	    } else  {
+	    	return array.get(3);
+	    }
+	 
 	}
 	
 	/**	Evalua si el raton esta sobre una region
@@ -301,12 +310,14 @@ public class Game3 implements MouseListener , MouseMotionListener {
 		try {
 			TimeUnit.MILLISECONDS.sleep(n);
 		} catch (InterruptedException b) {
-			// TODO Auto-generated catch block
 			b.printStackTrace();
 		}
 		
 	}
 	
+	/** Hace el render de los elementos
+	 * @param g recibe Grephics de Game
+	 */	
 	public void render(Graphics g) {
 		
 		g.drawImage(media.tapeteImg, 0, 0, 1184, 663, null);

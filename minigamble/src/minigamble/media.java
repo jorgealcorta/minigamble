@@ -89,6 +89,9 @@ public class media {
 	public static Image lab3Img;
 	public static ImageIcon lab3Icon;
 	
+	public static Image lab4Img;
+	public static ImageIcon lab4Icon;
+	
 	public static Image endingImg1;
 	public static ImageIcon endingIcon1;
 	
@@ -223,6 +226,7 @@ public class media {
 			lab1Icon = new ImageIcon( Game.class.getResource("multimedia/laberintos/lab1.png").toURI().toURL() );
 			lab2Icon = new ImageIcon( Game.class.getResource("multimedia/laberintos/lab2.png").toURI().toURL() );
 			lab3Icon = new ImageIcon( Game.class.getResource("multimedia/laberintos/lab3.png").toURI().toURL() );
+			lab4Icon = new ImageIcon( Game.class.getResource("multimedia/laberintos/lab4.png").toURI().toURL() );
 			endingIcon1 = new ImageIcon( Game.class.getResource("multimedia/laberintos/endlab1.png").toURI().toURL() );
 			endingIcon2 = new ImageIcon( Game.class.getResource("multimedia/laberintos/endlab2.png").toURI().toURL() );
 			
@@ -317,6 +321,7 @@ public class media {
 		lab1Img = lab1Icon.getImage();
 		lab2Img = lab2Icon.getImage();
 		lab3Img = lab3Icon.getImage();
+		lab4Img = lab4Icon.getImage();
 		
 		endingImg1 = endingIcon1.getImage();
 		endingImg2 = endingIcon2.getImage();
