@@ -261,9 +261,19 @@ public class Game3 implements MouseListener , MouseMotionListener {
 					BaseDatos.insertarGame3(idPartida, puntLocal, numFallos, tiempoTotal, thisLab.getId());
 					
 					if(numFallos>3) {
-						Game.partida  = new Partida( puntLocal ,1 , 2, jugador, idPartida);
+						
+						Game.pi = new PantallaIntermedia(puntTotal, puntLocal, 1, 2, jugador, idPartida);
+						Game.estadoJuego = ESTADO.PantallaIntermedia;
+						Game.eventoRaton();
+						
+						//Game.partida  = new Partida( puntLocal ,1 , 2, jugador, idPartida);
 					} else {
-						Game.partida  = new Partida( puntLocal ,0 , 2, jugador, idPartida);
+						
+						Game.pi = new PantallaIntermedia(puntTotal, puntLocal, 0, 2, jugador, idPartida);
+						Game.estadoJuego = ESTADO.PantallaIntermedia;
+						Game.eventoRaton();
+						
+						//Game.partida  = new Partida( puntLocal ,0 , 2, jugador, idPartida);
 					}
 					
 				} 

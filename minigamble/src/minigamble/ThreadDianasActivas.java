@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Vector;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import minigamble.Game.ESTADO;
+
 public class ThreadDianasActivas extends Thread{
 	
 	// Utilizaremos los Arraylist dianasCreadas y dianasActivas en este hilo, las cuales insertaremos como parametros.
@@ -52,8 +54,10 @@ public class ThreadDianasActivas extends Thread{
 		}
 		System.out.println("derrota por desaparecer todas");
 		Game4.tiempoTotal = System.currentTimeMillis() - Game4.tiempoComienzo;
-		Game.partida  = new Partida(Game4.puntos + Game4.puntLocal, 1, 3, Game4.jugador, Game4.idPartida);
 		
+		Game.pi = new PantallaIntermedia(Game4.puntos, Game4.puntLocal, 1, 3, Game4.jugador, Game4.idPartida);
+		Game.estadoJuego = ESTADO.PantallaIntermedia;
+		Game.eventoRaton();		
 	}
 	
 	

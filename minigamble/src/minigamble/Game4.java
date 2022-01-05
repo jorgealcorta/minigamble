@@ -25,6 +25,8 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
 import javax.swing.ImageIcon;
 
+import minigamble.Game.ESTADO;
+
 
 public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 	
@@ -207,7 +209,10 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 						tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
 						delaySeg(2);
 						if(fallos>3) vidasRestadas = 1;
-						Game.partida  = new Partida(puntos + puntLocal, vidasRestadas, 3, jugador, idPartida);
+						
+						Game.pi = new PantallaIntermedia(puntos, puntLocal, vidasRestadas, 3, jugador, idPartida);
+						Game.estadoJuego = ESTADO.PantallaIntermedia;
+						Game.eventoRaton();
 					}
 					
 					

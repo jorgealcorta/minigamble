@@ -16,6 +16,8 @@ import java.util.concurrent.TimeUnit;
 
 import javax.swing.ImageIcon;
 
+import minigamble.Game.ESTADO;
+
 public class Game5 implements Runnable , KeyListener{
  
 	
@@ -194,12 +196,22 @@ public class Game5 implements Runnable , KeyListener{
 					
 					if(chos1==chos2 && chos2==chos3) {
 						start=3;
-						BaseDatos.insertarGame5(idPartida, 1000, 1, elegido);	
-						Game.partida  = new Partida( 1000 ,0 , 4, jugador, idPartida);
+						BaseDatos.insertarGame5(idPartida, 1000, 1, elegido);
+						
+						Game.pi = new PantallaIntermedia(PuntTotal, 1000, 0, 4, jugador, idPartida);
+						Game.estadoJuego = ESTADO.PantallaIntermedia;
+						Game.eventoRaton();
+						
+						//Game.partida  = new Partida( 1000 ,0 , 4, jugador, idPartida);
 					} else {
 						start=2;
 						BaseDatos.insertarGame5(idPartida, 0, 0, elegido);
-						Game.partida  = new Partida( 0 ,1 , 4, jugador, idPartida);
+						
+						Game.pi = new PantallaIntermedia(PuntTotal, 0, 1, 4, jugador, idPartida);
+						Game.estadoJuego = ESTADO.PantallaIntermedia;
+						Game.eventoRaton();
+						
+						//Game.partida  = new Partida( 0 ,1 , 4, jugador, idPartida);
 						
 					}
 					
