@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -230,6 +231,55 @@ public class Game7 implements MouseListener {
 	}
 	
 		
+	
+	private boolean ifYes() {
+		double rnd = Math.random();
+		
+		if(puntTotal <2000) {
+			if(rnd>0.85) {
+				return false;
+			} else {
+				return true;
+			}
+		} else if (puntTotal<4000) {
+			if(rnd>0.9) {
+				return false;
+			} else {
+				return true;
+			}
+		} else if (puntTotal<6000) {
+			if(rnd>0.95) {
+				return false;
+			} else {
+				return true;
+			}
+		} else {
+			return true;
+		}
+	}
+	
+	
+	
+	private  int getIndex ( ArrayList<Double> array,int min, boolean chosemin){
+		
+		if (chosemin) {
+			
+			return min;
+			
+		} else {
+			
+			int num = min;
+			while(num == min) {
+				num = (int) Math.random() * (array.size()-1);
+			}
+			return num;	
+			
+		}
+	}
+	
+	
+	
+	
 	/**
 	 * Metodo que devuelve el indice del valor minimo de un arraylist
 	 * @param array del que queremos hayar su minimo
@@ -360,9 +410,11 @@ public class Game7 implements MouseListener {
 								
 								
 								int bestMove = getMinIndex(probabilities);
+								int playMove = getIndex(probabilities, bestMove, ifYes());
 								System.out.println("best move is " + bestMove);
-								int a = positions.get(bestMove*2);
-								int b = positions.get(bestMove*2+1);
+								System.out.println("chosen move is " + playMove);
+								int a = positions.get(playMove*2);
+								int b = positions.get(playMove*2+1);
 								
 								matrix[a][b] = -1;
 									
