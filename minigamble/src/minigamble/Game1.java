@@ -90,7 +90,7 @@ public class Game1  implements MouseMotionListener, MouseListener {
 	
 	/**
 	 * Constructor del juego 1
-	 * @param puntuacion Puntuacion del juego 1 según la cual aparecerán más o menos cartas
+	 * @param puntuacion Puntuacion del juego 1 segun la cual aparecerán más o menos cartas
 	 * @param nombreJugador	nombre del jugador (se usa para la base de datos)
 	 * @param idPart identificador de la partida (se usa para la base de datos)
 	 */
@@ -237,9 +237,10 @@ public class Game1  implements MouseMotionListener, MouseListener {
 	}
 	
 	/**
-	 * Realiza un delay en Milisegundo
-	 * @param n numero de Milisegundo que se quiere hacer el delay
+	 * Realiza un delay en el juego
+	 * @param n numero de milisegundo que queremos  que dure el delay
 	 */
+	
 	private void delayMS(int n) {
 		try {
 			TimeUnit.MILLISECONDS.sleep(n);
@@ -467,14 +468,14 @@ public class Game1  implements MouseMotionListener, MouseListener {
    	public void mouseMoved(MouseEvent e) {			
 	}
 	
-	/**	Evalua si el ratón está sobre una región
-	 * @param mx posición X del ratón
-	 * @param my posición Y del ratón
-	 * @param x	posición X en la que comienza la región
-	 * @param y	posición Y en la que comienza la región
-	 * @param width	anchura de la región
-	 * @param heigth altura de la región
-	 * @return True si el ratón está sobre esa región y False si no lo está
+	/**	Evalua si el raton esta sobre una region
+	 * @param mx posicion X del raton
+	 * @param my posicion Y del raton
+	 * @param x	posicion X en la que comienza la region
+	 * @param y	posicion Y en la que comienza la region
+	 * @param width	anchura de la region
+	 * @param heigth altura de la region
+	 * @return True si el raton esta sobre esa regio y False si no lo esta
 	 */
 	
 	public boolean mouseOver(int mx, int my, int x, int y, int width, int heigth) {   // devuelve true si el raton ha sido presionado dentro de un cuadrado 
