@@ -11,8 +11,8 @@ import minigamble.Game.ESTADO;
  */
 public class Partida {
 	
-	public static int puntuacionGeneral = media.puntInicial;
-	public static int vidas = media.numVidas;
+	public static int puntuacionGeneral = 0;
+	public static int vidas =3;
 	
 	public static ArrayList<Integer> minisJugados = new ArrayList<Integer>();
 		
@@ -58,7 +58,7 @@ public class Partida {
 		
 
 
-		//rand=7	 ; //PARA HACER PRUEBAS, LUEGO BORRARRRRRRRRRRRRRRRRRRRRRRRR
+		//rand=6	 ; //PARA HACER PRUEBAS, LUEGO BORRARRRRRRRRRRRRRRRRRRRRRRRR
 
 
 		if(vidas<1 ) {

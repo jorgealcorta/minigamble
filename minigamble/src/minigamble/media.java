@@ -404,7 +404,7 @@ public class media {
 		InputStream is = null;
 		
 		try {
-			is = new FileInputStream("datos.properties");
+			is = new FileInputStream("minigamble/datos.properties");
 			
 			properties.load(is);
 			
