@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -404,20 +405,17 @@ public class media {
 		InputStream is = null;
 		
 		try {
-			is = new FileInputStream("minigamble/datos.properties");
+			FileReader reader = new FileReader("scr/minigamble/datos.properties");
 			
-			properties.load(is);
-			
-			
-			numVidas = Integer.parseInt(properties.getProperty("vidas")); //para conseguir el numero de telefono como int en vez de string
-			puntInicial = Integer.parseInt(properties.getProperty("puntInicial")); //prueba para ver si funciona con valores float 
-			
+//			properties.load(is);
+//			
+//			
+//			numVidas = Integer.parseInt(properties.getProperty("vidas")); //para conseguir el numero de telefono como int en vez de string
+//			puntInicial = Integer.parseInt(properties.getProperty("puntInicial")); //prueba para ver si funciona con valores float 
+//			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
-		
 		
 		
 	}
