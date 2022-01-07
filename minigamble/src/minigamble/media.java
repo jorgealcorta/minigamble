@@ -4,7 +4,11 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Image;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -26,6 +30,9 @@ public class media {
 	
 	public static Font customFontBot;
 	public static Font customFontFin;
+	
+	public static int numVidas;
+	public static int puntInicial;
 	
 	//GAME1
 	
@@ -392,6 +399,25 @@ public class media {
 			System.out.println("Problema con la fuente Minigamble");
 		}
 
+		
+		Properties properties = new Properties();
+		InputStream is = null;
+		
+		try {
+			is = new FileInputStream("datos.properties");
+			
+			properties.load(is);
+			
+			
+			numVidas = Integer.parseInt(properties.getProperty("vidas")); //para conseguir el numero de telefono como int en vez de string
+			puntInicial = Integer.parseInt(properties.getProperty("puntInicial")); //prueba para ver si funciona con valores float 
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		
 		
 	}
