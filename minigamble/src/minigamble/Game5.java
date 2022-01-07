@@ -16,6 +16,8 @@ import java.util.concurrent.TimeUnit;
 
 import javax.swing.ImageIcon;
 
+import minigamble.Game.ESTADO;
+
 /**
  * @author Nicol�s
  *
