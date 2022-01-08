@@ -252,7 +252,7 @@ public class Game2 implements KeyListener{
 				cuentaPulsaciones = -1;
 				start = 1;
 				puntLocal -= 100;
-				vidasRestadas++;
+				fallos++;
 				System.out.println("error");
 			}else if(puntLocal <= 0) {
 				start = 4;
@@ -275,7 +275,15 @@ public class Game2 implements KeyListener{
 				delaySeg(2);
 				long tiempofin = System.currentTimeMillis() - tiempoIni;
 				BaseDatos.insertarGame2(idPartida, puntos, fallos, tiempofin);
-
+				
+				if(fallos == 0) {
+					vidasRestadas = 0;
+				}else if(fallos>0 && fallos <1) {
+					vidasRestadas = 1;
+				}else if(fallos>1) {
+					vidasRestadas = 1;
+				}
+				
 				Game.pi = new PantallaIntermedia(puntos, puntLocal, vidasRestadas, 1, jugador, idPartida);
 				Game.estadoJuego = ESTADO.PantallaIntermedia;
 				Game.eventoRaton();
