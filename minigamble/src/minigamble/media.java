@@ -405,7 +405,7 @@ public class media {
 		InputStream is = null;
 		
 		try {
-			FileReader reader = new FileReader("scr/minigamble/datos.properties");
+			FileReader reader = new FileReader("minigamble/src/minigamble/datos.properties");
 			
 //			properties.load(is);
 //			
