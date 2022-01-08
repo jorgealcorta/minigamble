@@ -1,13 +1,12 @@
 package minigamble;
 
 public class ThreadVidasDisplay extends Thread {
-	
-	int vidas = 3;
+
 	PantallaIntermedia pi;
 	
 	
-	public ThreadVidasDisplay(int vidas, PantallaIntermedia pi) {
-		this.vidas = vidas;
+	public ThreadVidasDisplay(PantallaIntermedia pi) {
+
 		this.pi = pi;
 	}
 	

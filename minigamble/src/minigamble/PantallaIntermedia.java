@@ -52,8 +52,8 @@ public class PantallaIntermedia implements KeyListener{
 		PantallaIntermedia.miniJugado = miniJugado;
 
 		
-		if(Partida.vidas < 3 && Partida.vidas > 0) {
-			if(Partida.vidas == 1) {
+		if(Partida.vidas - vidasRestadas < 3 && Partida.vidas - vidasRestadas > 0) {
+			if(Partida.vidas - vidasRestadas == 1) {
 				vida2.setVida(false);;
 			}
 			vida3.setVida(false);;
@@ -63,7 +63,7 @@ public class PantallaIntermedia implements KeyListener{
 		hpd = new Thread(pd);
 		hpd.start();
 		
-		ThreadVidasDisplay vd = new ThreadVidasDisplay(Partida.vidas, this);
+		ThreadVidasDisplay vd = new ThreadVidasDisplay(this);
 		hvd = new Thread(vd);
 		hvd.start();
 		
@@ -88,7 +88,7 @@ public class PantallaIntermedia implements KeyListener{
 		// TODO Auto-generated method stub
 		int key = e.getKeyCode();
 		
-		if(key == 32) {
+		if(key == 32 && Game.estadoJuego == ESTADO.PantallaIntermedia) {
 			System.out.println("espacio");
 			hpd.stop();
 			if(puntosDisplay != puntos + puntLocal) {
