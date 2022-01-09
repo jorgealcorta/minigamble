@@ -3,6 +3,8 @@ package minigamble;
 import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 
 
 
@@ -73,7 +75,8 @@ public class Game extends Canvas implements Runnable{
 //		this.addMouseMotionListener(game1);
 //		this.addKeyListener(game2);
 		
-
+		
+		
 	}
 	
 	public static void eventoRaton(){

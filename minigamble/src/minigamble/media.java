@@ -405,8 +405,9 @@ public class media {
 		InputStream is = null;
 		
 		try {
+
 			FileReader reader = new FileReader("minigamble/src/minigamble/datos.properties");
-			
+
 //			properties.load(is);
 //			
 //			
@@ -416,7 +417,6 @@ public class media {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		
 		
 	}
 
