@@ -52,12 +52,18 @@ public class ThreadDianasActivas extends Thread{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("derrota por desaparecer todas");
-		Game4.tiempoTotal = System.currentTimeMillis() - Game4.tiempoComienzo;
 		
-		Game.pi = new PantallaIntermedia(Game4.puntos, Game4.puntLocal, 1, 3, Game4.jugador, Game4.idPartida);
-		Game.estadoJuego = ESTADO.PantallaIntermedia;
-		Game.eventoRaton();		
+		if(activas.size() == 0) {
+			
+			System.out.println("derrota por desaparecer todas");
+			Game4.tiempoTotal = System.currentTimeMillis() - Game4.tiempoComienzo;
+			
+			Game.pi = new PantallaIntermedia(Game4.puntos, Game4.puntLocal, 1, 3, Game4.jugador, Game4.idPartida);
+			Game.estadoJuego = ESTADO.PantallaIntermedia;
+			Game.eventoRaton();	
+		}
+		
+			
 	}
 	
 	

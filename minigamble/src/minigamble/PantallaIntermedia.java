@@ -84,26 +84,27 @@ public class PantallaIntermedia implements KeyListener{
 		
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		int key = e.getKeyCode();
 		
 		if(key == 32 && Game.estadoJuego == ESTADO.PantallaIntermedia) {
-			System.out.println("espacio");
-			hpd.stop();
-			if(puntosDisplay != puntos + puntLocal) {
-				puntosDisplay = puntos + puntLocal;
-				vida1.display = true;
-				vida2.display = true;
-				vida3.display = true;
-			}else {
-				System.out.println("segundo");
-				hvd.interrupt();
-				hpd.interrupt();
-				Game.partida  = new Partida(puntos+puntLocal, vidasRestadas, miniJugado, jugador, idPartida);
+			
+			System.out.println("segundo");
+			while(hvd.isAlive()) {
+				try {
+					hvd.interrupt();
+				}catch(Exception e1) {
+				}
 			}
+			if(!hvd.isAlive()) {
+				System.out.println("vidas matadas");
+			}else {
+				System.out.println("vidas vivas");
+			}
+			hpd.interrupt();
+			Game.partida  = new Partida(puntos+puntLocal, vidasRestadas, miniJugado, jugador, idPartida);
 			
 		}
 	}
