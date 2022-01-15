@@ -2,14 +2,12 @@ package minigamble;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -18,7 +16,6 @@ import java.util.concurrent.TimeUnit;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.swing.ImageIcon;
 
 import minigamble.Game.ESTADO;
 
@@ -44,7 +41,6 @@ public class Game1  implements MouseMotionListener, MouseListener {
 	private ArrayList<ArrayList<ArrayList<Integer>>> posCartas;
 	
 	private boolean bStart_state = false;
-	private int nivel = 1;
 	private int fallos = 0;
 	
 	private ArrayList<Carta> allCards = new ArrayList<Carta>();
@@ -75,15 +71,16 @@ public class Game1  implements MouseMotionListener, MouseListener {
 	private int click1 = -1;
 	private int click2 = -1;
 	private int puntTotal = 0;
-	private int puntLocal =0;
-	private int puntIni = 0;
-	private int puntTemp = 1000;
+	private float puntLocal =0;
+	private double puntTemp;
 	private String jugador;
 	private int idPartida;
 	private String primeraCarta = "";
 	private long tiempoComienzo = System.currentTimeMillis();
 	private long tiempoTotal;
 	private long tiempoPrimeraCarta;
+	
+	private double puntuacionPorCarta;
 	
 
 	
@@ -98,33 +95,39 @@ public class Game1  implements MouseMotionListener, MouseListener {
 	public Game1(int puntuacion, String nombreJugador, int idPart) {
 		
 		puntTotal = puntuacion;
-		puntIni = puntuacion;
+		System.out.println("La puntuacion inicial con la que empieza es: " + puntTotal);
 		jugador = nombreJugador;
 		idPartida = idPart;
 		
 		
-		if (nivel == 1) {
+		if (puntTotal < 1500) {
 			nCol = 3;
 			nFil = 2;
 			cartX = 140;//126
 			cartY = 190;//171
-		}else if(nivel == 2) {
+			puntuacionPorCarta = (double) 500/3;
+			System.out.println(puntuacionPorCarta);
+		}else if(puntTotal < 3000) {
 			nCol = 3;
 			nFil = 4;
 			cartX = 98;
 			cartY = 133;
-		}else if(nivel == 3) {
+			puntuacionPorCarta = 500/6;
+		}else if(puntTotal < 4500) {
 			nCol = 4;
 			nFil = 4;
 			cartX = 98;
 			cartY = 133;
-		}else if(nivel == 4) {
+			puntuacionPorCarta = 500/8;
+		}else if(puntTotal >= 4500) {
 			nCol = 5;
 			nFil = 4;
 			cartX = 98;
 			cartY = 133;
+			puntuacionPorCarta = 500/10;
 		}
 		
+		puntTemp = puntuacionPorCarta;
 			
 		allCards.add(c1);
 		allCards.add(c2);
@@ -423,12 +426,14 @@ public class Game1  implements MouseMotionListener, MouseListener {
 							
 							if(allCards.get(click1).getId() == selectCards.get(click2).getId()){
 								puntLocal += puntTemp;
-								puntTemp=1000;
+								puntTemp = puntuacionPorCarta;
+								System.out.println(puntLocal);
+								System.out.println(puntuacionPorCarta);
 								
 							}else {
 								                            //delay de sec
 								delaySeg(2);
-								puntTemp = (int)Math.round(0.66*puntTemp);
+								puntTemp = (int)Math.round(0.5*puntTemp);
 								selectCards.get(click1).setArriba(false);
 								selectCards.get(click2).setArriba(false);
 								fallos = fallos + 1;
@@ -442,9 +447,11 @@ public class Game1  implements MouseMotionListener, MouseListener {
 								delaySeg(2);
 								start = 4;
 								delaySeg(1);
-								BaseDatos.insertarGame1(idPartida, puntLocal, fallos, primeraCarta, tiempoPrimeraCarta, tiempoTotal);
+								BaseDatos.insertarGame1(idPartida,(int) Math.round(puntLocal), fallos, primeraCarta, tiempoPrimeraCarta, tiempoTotal);
 								
-								Game.pi = new PantallaIntermedia(puntTotal, puntLocal, 0, 0, jugador, idPartida);
+								int prueba = puntTotal + (int) Math.round(puntLocal);
+								System.out.println("La puntiacion total es: " + prueba);
+								Game.pi = new PantallaIntermedia(puntTotal,(int) Math.round(puntLocal), 0, 0, jugador, idPartida);
 								Game.estadoJuego = ESTADO.PantallaIntermedia;
 								Game.eventoRaton();								
 							}
@@ -516,7 +523,7 @@ public class Game1  implements MouseMotionListener, MouseListener {
 			g.drawImage(media.tapeteImg, 0, 0, 1184, 663, null);			
 			g.setFont(media.customFontBot);
 			g.setColor(Color.BLACK);
-			String strPunt = String.valueOf(puntLocal);
+			
 			
 			int nCarta = 0;
 			for (ArrayList<ArrayList<Integer>> filas : posCartas) {
@@ -531,7 +538,7 @@ public class Game1  implements MouseMotionListener, MouseListener {
 			}
 			
 			
-			
+			String strPunt = String.valueOf(Math.round(puntLocal));
 			g.drawString(strPunt, 1020, 60);
 			
 		}
