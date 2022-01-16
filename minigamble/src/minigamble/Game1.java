@@ -1,7 +1,6 @@
 package minigamble;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
@@ -80,6 +79,10 @@ public class Game1  implements MouseMotionListener, MouseListener, Runnable {
 	
 	private double puntuacionPorCarta;
 	
+	private int maxFallos;
+	private int vidasRestadas = 0;
+	
+	
 
 	
 	
@@ -104,25 +107,28 @@ public class Game1  implements MouseMotionListener, MouseListener, Runnable {
 			cartX = 140;//126
 			cartY = 190;//171
 			puntuacionPorCarta = (double) 500/3;
-			System.out.println(puntuacionPorCarta);
+			maxFallos = 1;
 		}else if(puntTotal < 3000) {
 			nCol = 3;
 			nFil = 4;
 			cartX = 98;
 			cartY = 133;
 			puntuacionPorCarta = 500/6;
+			maxFallos = 3;
 		}else if(puntTotal < 4500) {
 			nCol = 4;
 			nFil = 4;
 			cartX = 98;
 			cartY = 133;
 			puntuacionPorCarta = 500/8;
+			maxFallos = 5;
 		}else if(puntTotal >= 4500) {
 			nCol = 5;
 			nFil = 4;
 			cartX = 98;
 			cartY = 133;
 			puntuacionPorCarta = 500/10;
+			maxFallos = 6;
 		}
 		
 		puntTemp = puntuacionPorCarta;
@@ -420,11 +426,17 @@ public class Game1  implements MouseMotionListener, MouseListener, Runnable {
 							if (todasLevantadas()) {
 								tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
 								delaySeg(2);
+								
+								if(fallos > maxFallos) {
+									vidasRestadas = 1;
+								}
+								
 								BaseDatos.insertarGame1(idPartida,(int) Math.round(puntLocal), fallos, primeraCarta, tiempoPrimeraCarta, tiempoTotal);
 								
-								int prueba = puntTotal + (int) Math.round(puntLocal);
-								System.out.println("La puntiacion total es: " + prueba);
-								Game.pi = new PantallaIntermedia(puntTotal,(int) Math.round(puntLocal), 0, 0, jugador, idPartida);
+								int prueba = puntTotal + (int) Math.round(puntLocal);		//BORRRAAAAARRRRRR
+								System.out.println("La puntiacion total es: " + prueba);	//BORRRAAAAARRRRRR
+								
+								Game.pi = new PantallaIntermedia(puntTotal,(int) Math.round(puntLocal), vidasRestadas, 0, jugador, idPartida);
 								Game.estadoJuego = ESTADO.PantallaIntermedia;
 								Game.eventoRaton();								
 							}
