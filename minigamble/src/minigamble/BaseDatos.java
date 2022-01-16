@@ -49,7 +49,7 @@ public class BaseDatos {
 				sent = "DROP TABLE IF EXISTS game1";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
-				sent = "CREATE TABLE game1 (id INTEGER PRIMARY KEY AUTOINCREMENT ,idPartida int, puntuacion int, fallos int, primera_carta varchar(20), tiempo_primera_carta bigint, tiempo_total bigint);";
+				sent = "CREATE TABLE game1 (id INTEGER PRIMARY KEY AUTOINCREMENT ,idPartida int, puntuacion int, fallos int, primera_carta varchar(20), tiempo_primera_carta bigint, tiempo_total bigint, superado varchar(5) , dificultad int );";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
 				
@@ -100,7 +100,7 @@ public class BaseDatos {
 					while (scanner.hasNextLine()) {
 						String linea = scanner.nextLine();
 						String[] datos = linea.split( "\t" );
-						sent = "insert into game1 (id, idPartida, puntuacion, fallos, primera_carta, tiempo_primera_carta, tiempo_total) values (" + datos[0] + ", " + datos[1] + ", " + datos[2] + ", " + datos[3] + ", '" + datos[4] + "', " + datos[5] + ", " + datos[6] + ");";
+						sent = "insert into game1 (id, idPartida, puntuacion, fallos, primera_carta, tiempo_primera_carta, tiempo_total, superado, dificultad) values (" + datos[0] + ", " + datos[1] + ", " + datos[2] + ", " + datos[3] + ", '" + datos[4] + "', " + datos[5] + ", " + datos[6] + ", 'true', 1);";
 						logger.log( Level.INFO, "Statement: " + sent );
 						statement.executeUpdate( sent );
 					}
@@ -194,9 +194,9 @@ public class BaseDatos {
 	 * @param tiempoTot Tiempo total en terminar el juego
 	 * @return devuelve True si se hace correctamente
 	 */
-	public static boolean insertarGame1( int idPartida, int puntuacion, int fallos, String primeraCarta, long tiempoPrimCar, long tiempoTot) {
+	public static boolean insertarGame1( int idPartida, int puntuacion, int fallos, String primeraCarta, long tiempoPrimCar, long tiempoTot, String superado, int dificultad) {
 		try (Statement statement = conexion.createStatement()) {
-			String sent = "insert into game1 (idPartida, puntuacion, fallos, primera_carta, tiempo_primera_carta, tiempo_total ) values (" + idPartida + ", " + puntuacion + ", "+ fallos + ", '"+ primeraCarta +"', " + tiempoPrimCar + ", " + tiempoTot + " );";											
+			String sent = "insert into game1 (idPartida, puntuacion, fallos, primera_carta, tiempo_primera_carta, tiempo_total, superado, dificultad) values (" + idPartida + ", " + puntuacion + ", "+ fallos + ", '"+ primeraCarta +"', " + tiempoPrimCar + ", " + tiempoTot + ", '" + superado + "', " + dificultad +" );";											
 			logger.log( Level.INFO, "Statement: " + sent );
 			int insertados = statement.executeUpdate( sent );
 			if (insertados!=1) return false;  // Error en insercion

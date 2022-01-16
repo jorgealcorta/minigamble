@@ -81,7 +81,8 @@ public class Game1  implements MouseMotionListener, MouseListener, Runnable {
 	
 	private int maxFallos;
 	private int vidasRestadas = 0;
-	
+	private String superado;
+	private Integer dificultad;
 	
 
 	
@@ -108,6 +109,7 @@ public class Game1  implements MouseMotionListener, MouseListener, Runnable {
 			cartY = 190;//171
 			puntuacionPorCarta = (double) 500/3;
 			maxFallos = 1;
+			dificultad = 1;
 		}else if(puntTotal < 3000) {
 			nCol = 3;
 			nFil = 4;
@@ -115,6 +117,7 @@ public class Game1  implements MouseMotionListener, MouseListener, Runnable {
 			cartY = 133;
 			puntuacionPorCarta = 500/6;
 			maxFallos = 3;
+			dificultad = 2;
 		}else if(puntTotal < 4500) {
 			nCol = 4;
 			nFil = 4;
@@ -122,6 +125,7 @@ public class Game1  implements MouseMotionListener, MouseListener, Runnable {
 			cartY = 133;
 			puntuacionPorCarta = 500/8;
 			maxFallos = 5;
+			dificultad = 3;
 		}else if(puntTotal >= 4500) {
 			nCol = 5;
 			nFil = 4;
@@ -129,6 +133,7 @@ public class Game1  implements MouseMotionListener, MouseListener, Runnable {
 			cartY = 133;
 			puntuacionPorCarta = 500/10;
 			maxFallos = 6;
+			dificultad = 4;
 		}
 		
 		puntTemp = puntuacionPorCarta;
@@ -427,11 +432,13 @@ public class Game1  implements MouseMotionListener, MouseListener, Runnable {
 								tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
 								delaySeg(2);
 								
+								superado = "true";
 								if(fallos > maxFallos) {
 									vidasRestadas = 1;
+									superado = "false";
 								}
 								
-								BaseDatos.insertarGame1(idPartida,(int) Math.round(puntLocal), fallos, primeraCarta, tiempoPrimeraCarta, tiempoTotal);
+								BaseDatos.insertarGame1(idPartida,(int) Math.round(puntLocal), fallos, primeraCarta, tiempoPrimeraCarta, tiempoTotal, superado, dificultad);
 								
 								int prueba = puntTotal + (int) Math.round(puntLocal);		//BORRRAAAAARRRRRR
 								System.out.println("La puntiacion total es: " + prueba);	//BORRRAAAAARRRRRR
