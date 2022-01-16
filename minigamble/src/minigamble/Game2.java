@@ -49,6 +49,9 @@ public class Game2 implements KeyListener{
 	
 	private int nPalos;
 	
+	private int dificultad = 1;
+	private String superado = "true";
+	
 	public Game2(int puntuacion, String nombreJugador, int idPart) {
 			
 			puntos = puntuacion;
@@ -58,12 +61,16 @@ public class Game2 implements KeyListener{
 			
 			if(puntos >= 0 && puntos < 1500) {
 				nPalos = 3;
+				dificultad = 1;
 			}else if(puntos >= 1500 && puntos < 3000) {
 				nPalos = 5;
+				dificultad = 2;
 			}else if(puntos >= 3000 && puntos < 4500) {
 				nPalos = 7;
+				dificultad = 3;
 			}else if(puntos >= 4500) {
 				nPalos = 9;
+				dificultad = 4;
 			}
 			
 			//Creamos el array de los cuatro palos
@@ -258,9 +265,9 @@ public class Game2 implements KeyListener{
 				start = 4;
 				delaySeg(2);
 				long tiempofin = System.currentTimeMillis() - tiempoIni;
-				BaseDatos.insertarGame2(idPartida, puntos, fallos, tiempofin);
+				BaseDatos.insertarGame2(idPartida, 0, fallos, tiempofin, "falso" , dificultad);
 				
-				Game.pi = new PantallaIntermedia(puntos, puntLocal, vidasRestadas, 1, jugador, idPartida);
+				Game.pi = new PantallaIntermedia(puntos, 0, 1, 1, jugador, idPartida);
 				Game.estadoJuego = ESTADO.PantallaIntermedia;
 				Game.eventoRaton();
 			}
@@ -274,16 +281,21 @@ public class Game2 implements KeyListener{
 				start = 4;
 				delaySeg(2);
 				long tiempofin = System.currentTimeMillis() - tiempoIni;
-				BaseDatos.insertarGame2(idPartida, puntos, fallos, tiempofin);
+				
+				
 				
 				if(fallos == 0) {
 					vidasRestadas = 0;
+					superado = "true";
 				}else if(fallos>0 && fallos <1) {
 					vidasRestadas = 1;
+					superado = "false";
 				}else if(fallos>1) {
 					vidasRestadas = 1;
+					superado = "false";
 				}
 				
+				BaseDatos.insertarGame2(idPartida, puntLocal, fallos, tiempofin, superado , dificultad);
 				Game.pi = new PantallaIntermedia(puntos, puntLocal, vidasRestadas, 1, jugador, idPartida);
 				Game.estadoJuego = ESTADO.PantallaIntermedia;
 				Game.eventoRaton();
