@@ -416,10 +416,10 @@ public class LogIn implements MouseMotionListener, MouseListener, KeyListener{
 		if(usuario_state == 2 && contrasena_state == 2) {
 			if(bstart_state == true) {				// Dibuja el boton Log In y texto del botón presionado
 				g.drawImage(bStartIMG_true, 500, 394, null);
-				g.drawString("Start", 555, 426);			
+				g.drawString("Start", 545, 426);			
 			}else {								// Dibuja el boton Log In y texto del boton sin presionar
 				g.drawImage(bStartIMG_false, 500, 390, null);		
-				g.drawString("Start", 555, 422);		
+				g.drawString("Start", 545, 422);		
 			}
 			
 			
