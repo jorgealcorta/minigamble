@@ -267,17 +267,17 @@ public class Game3 implements MouseListener , MouseMotionListener {
 					start = 3;
 					tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
 					delayMS(2000);
-					BaseDatos.insertarGame3(idPartida, puntLocal, numFallos, tiempoTotal, thisLab.getId());
+					
 					
 					if(numFallos>3) {
-						
+						BaseDatos.insertarGame3(idPartida, puntLocal, numFallos, tiempoTotal, "false", thisLab.getId());
 						Game.pi = new PantallaIntermedia(puntTotal, puntLocal, 1, 2, jugador, idPartida);
 						Game.estadoJuego = ESTADO.PantallaIntermedia;
 						Game.eventoRaton();
 						
 						//Game.partida  = new Partida( puntLocal ,1 , 2, jugador, idPartida);
 					} else {
-						
+						BaseDatos.insertarGame3(idPartida, puntLocal, numFallos, tiempoTotal, "true", thisLab.getId());
 						Game.pi = new PantallaIntermedia(puntTotal, puntLocal, 0, 2, jugador, idPartida);
 						Game.estadoJuego = ESTADO.PantallaIntermedia;
 						Game.eventoRaton();
