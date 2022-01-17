@@ -52,6 +52,10 @@ public class Game5 implements Runnable , KeyListener{
 	private int chos1;
 	private int chos2;
 	private int chos3;
+	
+	private int dificultad;
+	private long tiempoComienzo = System.currentTimeMillis();
+	private long tiempoTotal;
 
 	public Game5(int dificultad, String nombreJugador, int idPart) {
 
@@ -59,14 +63,18 @@ public class Game5 implements Runnable , KeyListener{
 		idPartida = idPart;
 		jugador = nombreJugador;
 
-		if(PuntTotal <2000) {
+		if(PuntTotal <1500) {
 			speed=7;
-		} else if (PuntTotal<4000) {
+			dificultad = 1;
+		} else if (PuntTotal<3000) {
 			speed = 21;
-		} else if (PuntTotal<6000) {
+			dificultad = 2;
+		} else if (PuntTotal<4500) {
 			speed = 34;
-		} else if (PuntTotal<6000) {
+			dificultad = 3;
+		} else if (PuntTotal>=4500) {
 			speed = 42;
+			dificultad = 4;
 		}
 
 		symbols.add(media.imageS1);
@@ -214,16 +222,18 @@ public class Game5 implements Runnable , KeyListener{
 
 					if(chos1==chos2 && chos2==chos3) {
 						start=3;
-						BaseDatos.insertarGame5(idPartida, 1000, 1, elegido);
+						tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
+						BaseDatos.insertarGame5(idPartida, 500, elegido, tiempoTotal, "true", dificultad);
 
-						Game.pi = new PantallaIntermedia(PuntTotal, 1000, 0, 4, jugador, idPartida);
+						Game.pi = new PantallaIntermedia(PuntTotal, 500, 0, 4, jugador, idPartida);
 						Game.estadoJuego = ESTADO.PantallaIntermedia;
 						Game.eventoRaton();
 
 						//Game.partida  = new Partida( 1000 ,0 , 4, jugador, idPartida);
 					} else {
 						start=2;
-						BaseDatos.insertarGame5(idPartida, 0, 0, elegido);
+						tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
+						BaseDatos.insertarGame5(idPartida, 0, elegido, tiempoTotal, "false", dificultad);
 
 						Game.pi = new PantallaIntermedia(PuntTotal, 0, 1, 4, jugador, idPartida);
 						Game.estadoJuego = ESTADO.PantallaIntermedia;
