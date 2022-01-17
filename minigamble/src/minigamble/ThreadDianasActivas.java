@@ -46,14 +46,9 @@ public class ThreadDianasActivas extends Thread{
 			}
 
 		}
-		try {
-			Thread.sleep(2000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 		
-		if(activas.size() == 0) {
+		if(activas.size() == 0 && Game.estadoJuego==Game.ESTADO.Game4) {
 			
 			System.out.println("derrota por desaparecer todas");
 			Game4.tiempoTotal = System.currentTimeMillis() - Game4.tiempoComienzo;

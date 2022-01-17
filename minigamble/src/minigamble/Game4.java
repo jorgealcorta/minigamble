@@ -60,15 +60,19 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 	private int nDianas;
 	
 	private boolean todasRotas = false;
+	private boolean unaRota = false;
 
 	
 	public Game4(int puntuacion, String nombreJugador, int idPart){
 		
 		dianasCreadas = new CopyOnWriteArrayList<Diana>();
+		dianasCreadas.removeAll(dianasCreadas);
 		
 		dianasActivas = new CopyOnWriteArrayList<Diana>();
+		dianasActivas.removeAll(dianasActivas);
 		
 		dianasRotas = new CopyOnWriteArrayList<Diana>();
+		dianasRotas.removeAll(dianasRotas);
 
 		
 		puntos = puntuacion;
@@ -170,6 +174,8 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 	@Override
 	public void mousePressed(MouseEvent e) {
 		
+		unaRota = false;
+		
 		if(Game.estadoJuego==Game.ESTADO.Game4) {
 			// Guardamos la posicion en la que se pulsa el raton.
 			mox = e.getX();
@@ -187,6 +193,7 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 			 */
 			
 			for(Diana d : dianasActivas) {
+				
 				if(e.getX() >= d.getX() && e.getX() <= d.getX() + d.getSize() && e.getY() >= d.getY() && e.getY() <= d.getY() + d.getSize() && !d.isRota()) {
 					System.out.println("acierto");
 					d.setRota(true);
@@ -196,7 +203,10 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 					hbd.start();
 					
 					puntLocal += puntSumados;
+					unaRota = true;
+					
 					for(Diana dd : dianasCreadas) {
+						
 						if(!dd.isRota()) {
 							todasRotas = false;
 							break;
@@ -226,16 +236,18 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 			        	System.out.println("error");
 			        }
 					
-				}else{
-					fallos++;
-					System.out.println("miss");
 				}
+				
 			
 			}
 			
-			
+			if(!unaRota) {
+				System.out.println("miss");
+				fallos++;
+			}
 			
 		}
+		
 	}
 
 	@Override
