@@ -1,15 +1,12 @@
 package minigamble;
 
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -18,7 +15,6 @@ import java.util.concurrent.TimeUnit;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.swing.ImageIcon;
 
 import minigamble.Game.ESTADO;
 
@@ -27,7 +23,7 @@ import minigamble.Game.ESTADO;
  * Clase encargada del juego 1 (Memory de cartas)
  */
 
-public class Game1  implements MouseMotionListener, MouseListener { 
+public class Game1  implements MouseMotionListener, MouseListener, Runnable { 
 	
 	private int mox;				
 	private int moy;
@@ -38,13 +34,10 @@ public class Game1  implements MouseMotionListener, MouseListener {
 	private int nFil;
 	private int cartX;
 	private int cartY;
-	
-	private Font customFontG1;
-	
+		
 	private ArrayList<ArrayList<ArrayList<Integer>>> posCartas;
 	
 	private boolean bStart_state = false;
-	private int nivel = 1;
 	private int fallos = 0;
 	
 	private ArrayList<Carta> allCards = new ArrayList<Carta>();
@@ -71,19 +64,25 @@ public class Game1  implements MouseMotionListener, MouseListener {
 	private Carta c19 = new Carta("card_diamonds_A", false, false);
 	private Carta c20 = new Carta("card_diamonds_K", false, false);
 	
-	private int start = 1;
+	private int start;
 	private int click1 = -1;
 	private int click2 = -1;
 	private int puntTotal = 0;
-	private int puntLocal =0;
-	private int puntIni = 0;
-	private int puntTemp = 1000;
+	private float puntLocal =0;
+	private double puntTemp;
 	private String jugador;
 	private int idPartida;
 	private String primeraCarta = "";
 	private long tiempoComienzo = System.currentTimeMillis();
 	private long tiempoTotal;
 	private long tiempoPrimeraCarta;
+	
+	private double puntuacionPorCarta;
+	
+	private int maxFallos;
+	private int vidasRestadas = 0;
+	private String superado;
+	private Integer dificultad;
 	
 
 	
@@ -98,33 +97,46 @@ public class Game1  implements MouseMotionListener, MouseListener {
 	public Game1(int puntuacion, String nombreJugador, int idPart) {
 		
 		puntTotal = puntuacion;
-		puntIni = puntuacion;
+		System.out.println("La puntuacion inicial con la que empieza es: " + puntTotal);
 		jugador = nombreJugador;
 		idPartida = idPart;
 		
 		
-		if (nivel == 1) {
+		if (puntTotal < 1500) {
 			nCol = 3;
 			nFil = 2;
 			cartX = 140;//126
 			cartY = 190;//171
-		}else if(nivel == 2) {
+			puntuacionPorCarta = (double) 500/3;
+			maxFallos = 1;
+			dificultad = 1;
+		}else if(puntTotal < 3000) {
 			nCol = 3;
 			nFil = 4;
 			cartX = 98;
 			cartY = 133;
-		}else if(nivel == 3) {
+			puntuacionPorCarta = 500/6;
+			maxFallos = 3;
+			dificultad = 2;
+		}else if(puntTotal < 4500) {
 			nCol = 4;
 			nFil = 4;
 			cartX = 98;
 			cartY = 133;
-		}else if(nivel == 4) {
+			puntuacionPorCarta = 500/8;
+			maxFallos = 5;
+			dificultad = 3;
+		}else if(puntTotal >= 4500) {
 			nCol = 5;
 			nFil = 4;
 			cartX = 98;
 			cartY = 133;
+			puntuacionPorCarta = 500/10;
+			maxFallos = 6;
+			dificultad = 4;
 		}
 		
+		puntTemp = puntuacionPorCarta;
 			
 		allCards.add(c1);
 		allCards.add(c2);
@@ -156,8 +168,36 @@ public class Game1  implements MouseMotionListener, MouseListener {
 		for (Carta c : selectCards) {
 			System.out.println(c.getId());
 		}
-				
+			
+		posCartas = generaMatriz(nCol, nFil, cartX, cartY);
+		start = 3;
+		
+		Thread t = new Thread(this);
+		t.start();
+		
+		
 	}
+	
+	
+	public void run() {
+
+		
+		for (int i = 0; i < (nCol*nFil); i++) {
+			selectCards.get(i).setArriba(true);
+		}
+		
+		delaySeg(2);
+		
+		for (int i = 0; i < (nCol*nFil); i++) {
+			selectCards.get(i).setArriba(false);
+		}
+		
+	}
+	
+	
+	
+	
+	
 	
 	/**
 	 * Obtener imagen de una Carta segun su posición en el array de cartas seleccionadas
@@ -284,10 +324,6 @@ public class Game1  implements MouseMotionListener, MouseListener {
 			mdx = e.getX();
 			mdy = e.getY();
 			
-			if( mouseOver(mdx, mdy, 500, 290, 190, 50)== false && start == 1){	// caso start == 1
-				bStart_state = false;
-			}
-			
 			if(start == 3) {
 				int nCarta = 0;
 				for (ArrayList<ArrayList<Integer>> filas : posCartas) {
@@ -309,76 +345,29 @@ public class Game1  implements MouseMotionListener, MouseListener {
 			
 			mox = e.getX();	// guarda la posicion en la que se presiona
 			moy = e.getY();
+		
 			
-			String filePath = new File("").getAbsolutePath();				// Ruta hasta el proyecto
-			String s1_filePath = filePath.concat("/minigamble/src/minigamble/sonido/click1.wav");	//Continuación de la ruta hasta el archivo de audio 1
-			
-			
-			
-			if( mouseOver(mox, moy, 500, 290, 190, 50) && start == 1 ){	             // Caso start == 1
-				bStart_state = true;
-				try {																				
-			        Clip sonido = AudioSystem.getClip();
-					AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s1_filePath));
-			        sonido.open(ais);
-			        sonido.start();
-		        }catch(Exception e2) {
-		        	System.out.println("error");
-		        }}
-			
-				if (start == 3) {
-					int nCarta = 0;
-					for (ArrayList<ArrayList<Integer>> filas : posCartas) {
-						for(ArrayList<Integer> columnas : filas) {
-							if(mouseOver(moy, mox, columnas.get(1), columnas.get(0), cartY, cartX)) {  //pos1
-								if(!selectCards.get(nCarta).isArriba()) {
-									selectCards.get(nCarta).setPresionada(true);
-								}
+			if (start == 3) {
+				int nCarta = 0;
+				for (ArrayList<ArrayList<Integer>> filas : posCartas) {
+					for(ArrayList<Integer> columnas : filas) {
+						if(mouseOver(moy, mox, columnas.get(1), columnas.get(0), cartY, cartX)) {  //pos1
+							if(!selectCards.get(nCarta).isArriba()) {
+								selectCards.get(nCarta).setPresionada(true);
 							}
-							nCarta++;
 						}
-					}
-					
-				}
+						nCarta++;
+					}	
+				}	
 			}
 		}
+	}
 			
 	
 	public void mouseReleased(MouseEvent e) {
 		if(Game.estadoJuego == Game.ESTADO.Game1) {
 			
-			String filePath = new File("").getAbsolutePath();										// Ruta hasta el proyecto
-			String s2_filePath = filePath.concat("/minigamble/src/minigamble/sonido/click2.wav");	//Continuacio n de la ruta hasta el archivo de audio 2
 			
-			
-			if (start == 1) {                                          // caso start == 1
-				if(bStart_state == true){ 
-					try {																				
-				        Clip sonido = AudioSystem.getClip();
-						AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s2_filePath));
-				        sonido.open(ais);
-				        sonido.start();
-			        }catch(Exception e2) {
-			        	System.out.println("error");
-			        }
-					
-					posCartas = generaMatriz(nCol, nFil, cartX, cartY);
-					
-					start = 3;                                            //cambia a start=2
-					
-					for (int i = 0; i < (nCol*nFil); i++) {
-						selectCards.get(i).setArriba(true);
-					}
-					
-					delaySeg(2);
-					
-					for (int i = 0; i < (nCol*nFil); i++) {
-						selectCards.get(i).setArriba(false);
-					}
-					
-				}
-			bStart_state = false;
-			}
 			if(start == 3) {
 				if(click1==-1) {
 					int nCarta = 0;
@@ -423,12 +412,14 @@ public class Game1  implements MouseMotionListener, MouseListener {
 							
 							if(allCards.get(click1).getId() == selectCards.get(click2).getId()){
 								puntLocal += puntTemp;
-								puntTemp=1000;
+								puntTemp = puntuacionPorCarta;
+								System.out.println(puntLocal);
+								System.out.println(puntuacionPorCarta);
 								
 							}else {
 								                            //delay de sec
 								delaySeg(2);
-								puntTemp = (int)Math.round(0.66*puntTemp);
+								puntTemp = (int)Math.round(0.5*puntTemp);
 								selectCards.get(click1).setArriba(false);
 								selectCards.get(click2).setArriba(false);
 								fallos = fallos + 1;
@@ -440,11 +431,19 @@ public class Game1  implements MouseMotionListener, MouseListener {
 							if (todasLevantadas()) {
 								tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
 								delaySeg(2);
-								start = 4;
-								delaySeg(1);
-								BaseDatos.insertarGame1(idPartida, puntLocal, fallos, primeraCarta, tiempoPrimeraCarta, tiempoTotal);
 								
-								Game.pi = new PantallaIntermedia(puntTotal, puntLocal, 0, 0, jugador, idPartida);
+								superado = "true";
+								if(fallos > maxFallos) {
+									vidasRestadas = 1;
+									superado = "false";
+								}
+								
+								BaseDatos.insertarGame1(idPartida,(int) Math.round(puntLocal), fallos, primeraCarta, tiempoPrimeraCarta, tiempoTotal, superado, dificultad);
+								
+								int prueba = puntTotal + (int) Math.round(puntLocal);		//BORRRAAAAARRRRRR
+								System.out.println("La puntiacion total es: " + prueba);	//BORRRAAAAARRRRRR
+								
+								Game.pi = new PantallaIntermedia(puntTotal,(int) Math.round(puntLocal), vidasRestadas, 0, jugador, idPartida);
 								Game.estadoJuego = ESTADO.PantallaIntermedia;
 								Game.eventoRaton();								
 							}
@@ -516,7 +515,7 @@ public class Game1  implements MouseMotionListener, MouseListener {
 			g.drawImage(media.tapeteImg, 0, 0, 1184, 663, null);			
 			g.setFont(media.customFontBot);
 			g.setColor(Color.BLACK);
-			String strPunt = String.valueOf(puntLocal);
+			
 			
 			int nCarta = 0;
 			for (ArrayList<ArrayList<Integer>> filas : posCartas) {
@@ -531,19 +530,10 @@ public class Game1  implements MouseMotionListener, MouseListener {
 			}
 			
 			
-			
+			String strPunt = String.valueOf(Math.round(puntLocal));
 			g.drawString(strPunt, 1020, 60);
 			
 		}
-		
-		if(start == 4) {
-			customFontG1 = media.customFontBot.deriveFont(Font.PLAIN,70);
-			g.setFont(customFontG1);
-			g.setColor(Color.BLACK);
-			g.drawString("ENHORABUENA", 220, 300);
-			g.setFont(media.customFontBot);
-			String strPunt = String.valueOf(puntLocal);
-			g.drawString(strPunt, 570, 400);
-		}
+
 	}	
 }

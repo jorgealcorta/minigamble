@@ -1,6 +1,7 @@
 package minigamble;
 
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
@@ -9,6 +10,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.io.File;
+import java.io.IOException;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -47,6 +49,8 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 	
 	private Image bStartIMG_false;
 	private Image bStartIMG_true;
+	
+	private Font customFontBot;
 	
 	private int usuario_state = 1;		// Estado del usuario -> 1:defecto, 2:Correcto, 3:incorrecto, 0:Habilitado para escribir
 	private int contrasena_state = 1;
@@ -104,6 +108,14 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 		bStartIMG_true = bStart_true.getImage();
 		
 		texto = new Font("arial", 1 ,30); //Fuente del campo de texto
+		
+		try {
+			customFontBot = Font.createFont(Font.TRUETYPE_FONT, Inicio.class.getResourceAsStream("fuentes/fuenteBot.ttf"));
+			customFontBot=customFontBot.deriveFont(Font.PLAIN,20);
+		} catch (FontFormatException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 
@@ -186,7 +198,9 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 			
 			
 			
-			if( mouseOver(mox, moy, 25, 625, 40, 30) ){	// si se presiona encima del boton back se cambia su estado
+			
+			
+			if( mouseOver(mox, moy, 25, 50, 40, 30) ){	// si se presiona encima del boton back se cambia su estado
 				bBack_state = true;
 				try {																				//Reproduce el archivo de sonido 1
 			        Clip sonido = AudioSystem.getClip();
@@ -196,10 +210,10 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 		        }catch(Exception e2) {
 		        	System.out.println("error");
 		        }
-			
-				
-				
 			}
+			
+			
+			
 		}
 	}
 	
@@ -359,9 +373,10 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 		g.drawImage(backgroundIMG, 0, 0, null);   // Dibuja el fondo
 
 		g.setFont(texto);
+		g.setFont(customFontBot);
 		if(usuario_state == 1) {									// Dibuja la imagen texto por defecto y texto del string usuario
 			g.drawImage(textIMG_grey, 500, 194, null);
-			g.drawString("User", 507, 227);			
+			g.drawString("User", 547, 227);			
 		}else if(usuario_state == 2) {								// Dibuja la imagen texto correcto y texto del string usuario
 			g.drawImage(textIMG_green, 500, 194, null);		
 			g.drawString(usuario, 507, 227);		
@@ -376,26 +391,26 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 		if(usuario_state == 2) {
 			if(contrasena_state == 1) {									// Dibuja la imagen texto por defecto y texto del string usuario
 				g.drawImage(textIMG_grey, 500, 294, null);
-				g.drawString("Password", 507, 327);			
+				g.drawString("Password", 510, 327);			
 			}else if(contrasena_state == 2) {								// Dibuja la imagen texto correcto y texto del string usuario
 				g.drawImage(textIMG_green, 500, 294, null);		
-				g.drawString(contrasena_oculta, 507, 327);		
+				g.drawString(contrasena_oculta, 515, 327);		
 			}else if(contrasena_state == 3) {								// Dibuja la imagen texto incorrecto y texto del string usuario
 				g.drawImage(textIMG_red, 500, 294, null);		
-				g.drawString(contrasena_oculta, 507, 327);		
+				g.drawString(contrasena_oculta, 515, 327);		
 			}else {													// Dibuja la imagen texto habilitado y texto del string usuario
 				g.drawImage(textIMG_write, 500, 294, null);		
-				g.drawString(contrasena_oculta, 507, 327);		
+				g.drawString(contrasena_oculta, 515, 327);		
 			}
 		}
 		
 		if(usuario_state == 2 && contrasena_state == 2) {
 			if(bstart_state == true) {				// Dibuja el boton Log In y texto del botón presionado
 				g.drawImage(bStartIMG_true, 500, 394, null);
-				g.drawString("Start", 555, 426);			
+				g.drawString("Start", 545, 426);			
 			}else {								// Dibuja el boton Log In y texto del boton sin presionar
 				g.drawImage(bStartIMG_false, 500, 390, null);		
-				g.drawString("Start", 555, 422);		
+				g.drawString("Start", 545, 422);		
 			}
 			
 			
@@ -404,9 +419,9 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 		
 		
 		if(bBack_state == true) {					// Dibuja el boton Back y texto del boton presionado
-			g.drawImage(bBackIMG_true, 25, 628, null);
+			g.drawImage(bBackIMG_true, 25, 54, null);
 		}else {									// Dibuja el boton Back y texto del boton sin presionar
-			g.drawImage(bBackIMG_false, 25, 625, null);
+			g.drawImage(bBackIMG_false, 25, 50, null);
 		}
 		
 	}

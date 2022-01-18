@@ -204,7 +204,9 @@ public class LogIn implements MouseMotionListener, MouseListener, KeyListener{
 			
 			
 			
-			if( mouseOver(mox, moy, 25, 625, 40, 30) ){	// si se presiona encima del boton back se cambia su estado
+			
+			
+			if( mouseOver(mox, moy, 25, 50, 40, 30) ){	// si se presiona encima del boton back se cambia su estado
 				bBack_state = true;
 				try {																				//Reproduce el archivo de sonido 1
 			        Clip sonido = AudioSystem.getClip();
@@ -214,7 +216,6 @@ public class LogIn implements MouseMotionListener, MouseListener, KeyListener{
 		        }catch(Exception e2) {
 		        	System.out.println("error");
 		        }
-			
 				
 				
 			}
@@ -416,10 +417,10 @@ public class LogIn implements MouseMotionListener, MouseListener, KeyListener{
 		if(usuario_state == 2 && contrasena_state == 2) {
 			if(bstart_state == true) {				// Dibuja el boton Log In y texto del botón presionado
 				g.drawImage(bStartIMG_true, 500, 394, null);
-				g.drawString("Start", 555, 426);			
+				g.drawString("Start", 545, 426);			
 			}else {								// Dibuja el boton Log In y texto del boton sin presionar
 				g.drawImage(bStartIMG_false, 500, 390, null);		
-				g.drawString("Start", 555, 422);		
+				g.drawString("Start", 545, 422);		
 			}
 			
 			
@@ -428,9 +429,9 @@ public class LogIn implements MouseMotionListener, MouseListener, KeyListener{
 		
 		
 		if(bBack_state == true) {					// Dibuja el boton Back y texto del boton presionado
-			g.drawImage(bBackIMG_true, 25, 628, null);
+			g.drawImage(bBackIMG_true, 25, 54, null);
 		}else {									// Dibuja el boton Back y texto del boton sin presionar
-			g.drawImage(bBackIMG_false, 25, 625, null);
+			g.drawImage(bBackIMG_false, 25, 50, null);
 		}
 		
 	}

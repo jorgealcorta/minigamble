@@ -49,21 +49,21 @@ public class BaseDatos {
 				sent = "DROP TABLE IF EXISTS game1";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
-				sent = "CREATE TABLE game1 (id INTEGER PRIMARY KEY AUTOINCREMENT ,idPartida int, puntuacion int, fallos int, primera_carta varchar(20), tiempo_primera_carta bigint, tiempo_total bigint);";
+				sent = "CREATE TABLE game1 (id INTEGER PRIMARY KEY AUTOINCREMENT ,idPartida int, puntuacion int, fallos int, primera_carta varchar(20), tiempo_primera_carta bigint, tiempo_total bigint, superado varchar(5) , dificultad int );";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
 				
 				sent = "DROP TABLE IF EXISTS game2";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
-				sent = "CREATE TABLE game2 (id INTEGER PRIMARY KEY AUTOINCREMENT ,idPartida int, puntuacion int, fallos int, tiempo_total bigint);";
+				sent = "CREATE TABLE game2 (id INTEGER PRIMARY KEY AUTOINCREMENT ,idPartida int, puntuacion int, fallos int, tiempo_total bigint, superado varchar(5) , dificultad int);";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate(sent);
 			
 				sent = "DROP TABLE IF EXISTS game3";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
-				sent = "CREATE TABLE game3 (id INTEGER PRIMARY KEY AUTOINCREMENT ,idPartida int, puntuacion int, fallos int, tiempo_total bigint, laberinto int);";
+				sent = "CREATE TABLE game3 (id INTEGER PRIMARY KEY AUTOINCREMENT ,idPartida int, puntuacion int, fallos int, tiempo_total bigint, superado varchar(5) , dificultad int);";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
 				
@@ -77,7 +77,7 @@ public class BaseDatos {
 				sent = "DROP TABLE IF EXISTS game5";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
-				sent = "CREATE TABLE game5 (id INTEGER PRIMARY KEY AUTOINCREMENT ,idPartida int, puntuacion int, premio int, symbol varchar(10));";
+				sent = "CREATE TABLE game5 (id INTEGER PRIMARY KEY AUTOINCREMENT ,idPartida int, puntuacion int, symbol varchar(10), tiempo_total bigint, superado varchar(5) , dificultad int);";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
 				
@@ -100,7 +100,7 @@ public class BaseDatos {
 					while (scanner.hasNextLine()) {
 						String linea = scanner.nextLine();
 						String[] datos = linea.split( "\t" );
-						sent = "insert into game1 (id, idPartida, puntuacion, fallos, primera_carta, tiempo_primera_carta, tiempo_total) values (" + datos[0] + ", " + datos[1] + ", " + datos[2] + ", " + datos[3] + ", '" + datos[4] + "', " + datos[5] + ", " + datos[6] + ");";
+						sent = "insert into game1 (id, idPartida, puntuacion, fallos, primera_carta, tiempo_primera_carta, tiempo_total, superado, dificultad) values (" + datos[0] + ", " + datos[1] + ", " + datos[2] + ", " + datos[3] + ", '" + datos[4] + "', " + datos[5] + ", " + datos[6] + ", 'true', 1);";
 						logger.log( Level.INFO, "Statement: " + sent );
 						statement.executeUpdate( sent );
 					}
@@ -194,9 +194,9 @@ public class BaseDatos {
 	 * @param tiempoTot Tiempo total en terminar el juego
 	 * @return devuelve True si se hace correctamente
 	 */
-	public static boolean insertarGame1( int idPartida, int puntuacion, int fallos, String primeraCarta, long tiempoPrimCar, long tiempoTot) {
+	public static boolean insertarGame1( int idPartida, int puntuacion, int fallos, String primeraCarta, long tiempoPrimCar, long tiempoTot, String superado, int dificultad) {
 		try (Statement statement = conexion.createStatement()) {
-			String sent = "insert into game1 (idPartida, puntuacion, fallos, primera_carta, tiempo_primera_carta, tiempo_total ) values (" + idPartida + ", " + puntuacion + ", "+ fallos + ", '"+ primeraCarta +"', " + tiempoPrimCar + ", " + tiempoTot + " );";											
+			String sent = "insert into game1 (idPartida, puntuacion, fallos, primera_carta, tiempo_primera_carta, tiempo_total, superado, dificultad) values (" + idPartida + ", " + puntuacion + ", "+ fallos + ", '"+ primeraCarta +"', " + tiempoPrimCar + ", " + tiempoTot + ", '" + superado + "', " + dificultad +" );";											
 			logger.log( Level.INFO, "Statement: " + sent );
 			int insertados = statement.executeUpdate( sent );
 			if (insertados!=1) return false;  // Error en insercion
@@ -207,9 +207,9 @@ public class BaseDatos {
 		}
 	}
 	
-	public static boolean insertarGame2( int idPartida, int puntuacion, int fallos, long tiempoTot) {
+	public static boolean insertarGame2( int idPartida, int puntuacion, int fallos, long tiempoTot,  String superado, int dificultad) {
 		try (Statement statement = conexion.createStatement()) {
-			String sent = "insert into game2 (idPartida, puntuacion, fallos, tiempo_total ) values (" + idPartida + ", " + puntuacion + ", "+ fallos + ", " + tiempoTot + " );";											
+			String sent = "insert into game2 (idPartida, puntuacion, fallos, tiempo_total, superado, dificultad ) values (" + idPartida + ", " + puntuacion + ", "+ fallos + ", " + tiempoTot + ", '" + superado + "', " + dificultad + " );";											
 			logger.log( Level.INFO, "Statement: " + sent );
 			int insertados = statement.executeUpdate( sent );
 			if (insertados!=1) return false;  // Error en insercion
@@ -228,9 +228,9 @@ public class BaseDatos {
 	 * @return devuelve True si se hace correctamente
 	 */
 	
-	public static boolean insertarGame3( int idPartida, int puntuacion, int fallos, long tiempoTot, int laberinto) {
+	public static boolean insertarGame3( int idPartida, int puntuacion, int fallos, long tiempoTot, String superado, int dificultad) {
 		try (Statement statement = conexion.createStatement()) {
-			String sent = "insert into game3 (idPartida, puntuacion, fallos, tiempo_total, laberinto) values (" + idPartida + ", " + puntuacion + ", "+ fallos + ", " + tiempoTot +", "+ laberinto + " );";											
+			String sent = "insert into game3 (idPartida, puntuacion, fallos, tiempo_total, superado, dificultad) values (" + idPartida + ", " + puntuacion + ", "+ fallos + ", " + tiempoTot + ", '" + superado + "', " + dificultad + " );";											
 			logger.log( Level.INFO, "Statement: " + sent );
 			int insertados = statement.executeUpdate( sent );
 			if (insertados!=1) return false;  // Error en insercion
@@ -262,9 +262,9 @@ public class BaseDatos {
 	 * @return devuelve True si se hace correctamente
 	 */
 	
-	public static boolean insertarGame5( int idPartida, int puntuacion, int premio, String symbol) {
+	public static boolean insertarGame5( int idPartida, int puntuacion, String symbol, long tiempoTot, String superado, int dificultad) {
 		try (Statement statement = conexion.createStatement()) {
-			String sent = "insert into game5 (idPartida, puntuacion, premio, symbol ) values (" + idPartida + ", " + puntuacion + ", " + premio + " , " + symbol + " );";											
+			String sent = "insert into game5 (idPartida, puntuacion, symbol, tiempo_total, superado, dificultad) values (" + idPartida + ", " + puntuacion + " , '" + symbol + "', " +  tiempoTot + ", '" + superado + "', " + dificultad + " );";											
 			logger.log( Level.INFO, "Statement: " + sent );
 			int insertados = statement.executeUpdate( sent );
 			if (insertados!=1) return false;  // Error en insercion
