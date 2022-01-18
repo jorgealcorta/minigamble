@@ -276,6 +276,7 @@ public class Game3 implements MouseListener , MouseMotionListener {
 					
 					if(numFallos>3) {
 						BaseDatos.insertarGame3(idPartida, puntLocal, numFallos, tiempoTotal, "false", thisLab.getId());
+						start = 5;
 						Game.pi = new PantallaIntermedia(puntTotal, puntLocal, 1, 2, jugador, idPartida);
 						Game.estadoJuego = ESTADO.PantallaIntermedia;
 						Game.eventoRaton();
@@ -283,6 +284,7 @@ public class Game3 implements MouseListener , MouseMotionListener {
 						//Game.partida  = new Partida( puntLocal ,1 , 2, jugador, idPartida);
 					} else {
 						BaseDatos.insertarGame3(idPartida, puntLocal, numFallos, tiempoTotal, "true", thisLab.getId());
+						start = 5;
 						Game.pi = new PantallaIntermedia(puntTotal, puntLocal, 0, 2, jugador, idPartida);
 						Game.estadoJuego = ESTADO.PantallaIntermedia;
 						Game.eventoRaton();

@@ -111,6 +111,10 @@ public class Game5 implements Runnable , KeyListener{
 
 		Thread t = new Thread(this);
         t.start();
+        
+        chos1=-1;
+        chos2=-1;
+        chos3=-1;
 
 	}
 

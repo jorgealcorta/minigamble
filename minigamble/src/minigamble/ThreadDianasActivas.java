@@ -58,6 +58,8 @@ public class ThreadDianasActivas extends Thread{
 			Game.eventoRaton();	
 		}
 		
+		System.out.println("hilo dianas acabado");
+		
 			
 	}
 	
