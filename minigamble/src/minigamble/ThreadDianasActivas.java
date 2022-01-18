@@ -48,11 +48,12 @@ public class ThreadDianasActivas extends Thread{
 		}
 
 		
-		if(activas.size() == 0 && Game.estadoJuego==Game.ESTADO.Game4) {
+		if(activas.size() == 0 && Game.estadoJuego==Game.ESTADO.Game4 && !Game4.todasRotas) {
 			
 			System.out.println("derrota por desaparecer todas");
 			Game4.tiempoTotal = System.currentTimeMillis() - Game4.tiempoComienzo;
 			
+			BaseDatos.insertarGame4(Game4.idPartida, Game4.puntLocal, Game4.fallos, Game4.tiempoTotal, "false", Game4.dificultad);
 			Game.pi = new PantallaIntermedia(Game4.puntos, Game4.puntLocal, 1, 3, Game4.jugador, Game4.idPartida);
 			Game.estadoJuego = ESTADO.PantallaIntermedia;
 			Game.eventoRaton();	

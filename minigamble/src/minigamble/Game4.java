@@ -59,8 +59,11 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 	
 	private int nDianas;
 	
-	private boolean todasRotas = false;
+	public static boolean todasRotas = false;
 	private boolean unaRota = false;
+	
+	public static String superado = "true";
+	public static int dificultad = 0;
 
 	
 	public Game4(int puntuacion, String nombreJugador, int idPart){
@@ -88,12 +91,16 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 				
 		if(puntos >= 0 && puntos < 1500) {
 			nDianas = 5;
+			dificultad = 1;
 		}else if(puntos >= 1500 && puntos < 3000) {
 			nDianas = 10;
+			dificultad = 2;
 		}else if(puntos >= 3000 && puntos < 4500) {
 			nDianas = 15;
+			dificultad = 3;
 		}else if(puntos >= 4500) {
 			nDianas = 20;
+			dificultad = 0;
 		}
 		
 		todasRotas = false;
@@ -218,7 +225,15 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 						System.out.println("victoria por todas rotas");
 						tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
 						delaySeg(2);
-						if(fallos>3) vidasRestadas = 1;
+						if(fallos>3) {
+							vidasRestadas = 1;
+							superado = "false";
+							
+						}
+						
+						
+						BaseDatos.insertarGame4(idPartida, puntLocal, fallos, tiempoTotal, superado, dificultad);
+						
 						
 						Game.pi = new PantallaIntermedia(puntos, puntLocal, vidasRestadas, 3, jugador, idPartida);
 						Game.estadoJuego = ESTADO.PantallaIntermedia;
