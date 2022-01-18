@@ -405,16 +405,22 @@ public class media {
 		InputStream is = null;
 		
 		try {
+			is =  new FileInputStream("minigamble/src/minigamble/datos.properties");
+			
 
-			FileReader reader = new FileReader("minigamble/src/minigamble/datos.properties");
+			//FileReader reader = new FileReader("minigamble/src/minigamble/datos.properties");
 
-//			properties.load(is);
-//			
-//			
-//			numVidas = Integer.parseInt(properties.getProperty("vidas")); //para conseguir el numero de telefono como int en vez de string
+			properties.load(is);
+			
+			numVidas=Integer.parseInt(properties.getProperty("vidas"));
+			puntInicial = Integer.parseInt(properties.getProperty("puntInicial"));
+			//			numVidas = Integer.parseInt(properties.getProperty("vidas")); //para conseguir el numero de telefono como int en vez de string
 //			puntInicial = Integer.parseInt(properties.getProperty("puntInicial")); //prueba para ver si funciona con valores float 
 //			
 		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
