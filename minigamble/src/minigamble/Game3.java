@@ -53,6 +53,7 @@ public class Game3 implements MouseListener , MouseMotionListener {
 	private int startY;
 	
 	private Color pathColor;
+	private Color pathColor2;
 	
 	private ArrayList <Laberinto> allLabs = new ArrayList<Laberinto>();
 	private Laberinto thisLab;
@@ -252,11 +253,13 @@ public class Game3 implements MouseListener , MouseMotionListener {
 				
 				
 				if(pathColor == null ) {
+					
 					pathColor = Color.decode("#c8bfe7");
+					pathColor2 = Color.decode("#caabea");
 				}
 							
 							
-				if(robot.getPixelColor(Mox, Moy).getRGB() != pathColor.getRGB()) {
+				if(robot.getPixelColor(Mox, Moy).getRGB() != pathColor.getRGB() && robot.getPixelColor(Mox, Moy).getRGB() != pathColor2.getRGB()) {
 					System.out.println("path "+ pathColor.getRGB());
 					System.out.println("gotten "+ robot.getPixelColor(Mox, Moy).getRGB());
 					robot.mouseMove(startX, startY);	
