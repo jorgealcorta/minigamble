@@ -162,11 +162,25 @@ public class PantallaIntermedia implements KeyListener{
 		
 
 		
+//		if(vida1.display) {
+//			if(vida1.frente) {
+//				g.drawImage(media.vida_IMG, 250, 75, 200, 200, null);
+//			}else{
+//				g.drawImage(media.vidalado_IMG, 250, 75, 200, 200, null);
+//			}
+//		}
+//		
+		
 		if(vida1.display) {
-			if(vida1.frente) {
-				g.drawImage(media.vida_IMG, 250, 75, 200, 200, null);
-			}else{
-				g.drawImage(media.vidalado_IMG, 250, 75, 200, 200, null);
+			if(vida1.vida) {
+				//ventanawidth/2 - fotowidth/2
+				if(vida1.frente) {
+					g.drawImage(media.vida_IMG, 250, 75, 200, 200, null);
+				}else {
+					g.drawImage(media.vidalado_IMG, 250, 75, 200, 200, null);
+				}
+			}else {
+				g.drawImage(media.vidatrans_IMG, 250, 75, 200, 200, null);
 			}
 		}
 		
