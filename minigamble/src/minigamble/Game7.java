@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import minigamble.Game.ESTADO;
+
 /**
  * Clase encargada del juego 7 (tres en raya)
  */
@@ -371,7 +373,10 @@ public class Game7 implements MouseListener {
 								
 								tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
 								BaseDatos.insertarGame7(idPartida, 500 , tiempoTotal, firstX, firstY );
-								Game.partida  = new Partida( 500 ,0 , 6	, jugador, idPartida);
+								//Game.partida  = new Partida( 500 ,0 , 6	, jugador, idPartida);
+								
+								Game.pi = new PantallaIntermedia(puntTotal, 500, 0, 6, jugador, idPartida);
+								Game.estadoJuego = ESTADO.PantallaIntermedia;
 								
 							} else if(count(matrix)==0){
 								delayMS(500);
@@ -379,7 +384,11 @@ public class Game7 implements MouseListener {
 								
 								tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
 								BaseDatos.insertarGame7(idPartida, 100 , tiempoTotal, firstX, firstY );
-								Game.partida  = new Partida( 100 ,0 , 6	, jugador, idPartida);
+								//Game.partida  = new Partida( 100 ,0 , 6	, jugador, idPartida);
+								
+								Game.pi = new PantallaIntermedia(puntTotal, 100, 0, 6, jugador, idPartida);
+								Game.estadoJuego = ESTADO.PantallaIntermedia;
+								
 							}else {
 								
 								ArrayList<Integer> positions= new ArrayList<Integer>();
@@ -424,7 +433,9 @@ public class Game7 implements MouseListener {
 									start=3;
 									tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
 									BaseDatos.insertarGame7(idPartida, 0 , tiempoTotal, firstX, firstY );
-									Game.partida  = new Partida( 0 ,1 , 6	, jugador, idPartida);
+									//Game.partida  = new Partida( 0 ,1 , 6	, jugador, idPartida);
+									Game.pi = new PantallaIntermedia(puntTotal, 0, 1, 6, jugador, idPartida);
+									Game.estadoJuego = ESTADO.PantallaIntermedia;
 								}
 								if(count(matrix)==0) {
 									delayMS(500);
@@ -432,7 +443,9 @@ public class Game7 implements MouseListener {
 									
 									tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
 									BaseDatos.insertarGame7(idPartida, 100 , tiempoTotal, firstX, firstY );
-									Game.partida  = new Partida( 100 ,0 , 6	, jugador, idPartida);
+									//Game.partida  = new Partida( 100 ,0 , 6	, jugador, idPartida);
+									Game.pi = new PantallaIntermedia(puntTotal, 100, 0, 6, jugador, idPartida);
+									Game.estadoJuego = ESTADO.PantallaIntermedia;
 								}																
 							}
 						}
