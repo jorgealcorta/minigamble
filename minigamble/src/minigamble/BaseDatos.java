@@ -91,7 +91,7 @@ public class BaseDatos {
 				sent = "DROP TABLE IF EXISTS game7";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
-				sent = "CREATE TABLE game7 (id INTEGER PRIMARY KEY AUTOINCREMENT ,idPartida int, puntuacion int, tiempo_total bigint , fristX int, firstY int);";
+				sent = "CREATE TABLE game7 (id INTEGER PRIMARY KEY AUTOINCREMENT ,idPartida int, puntuacion int, tiempo_total bigint , firstX int, firstY int);";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
 				
@@ -299,7 +299,7 @@ public class BaseDatos {
 	
 	public static boolean insertarGame7( int idPartida, int puntuacion, long tiempoTot, int firstX, int firstY) {
 		try (Statement statement = conexion.createStatement()) {
-			String sent = "insert into game6 (idPartida, puntuacion, fallos, tiempo_total ) values (" + idPartida + ", " + puntuacion + ", "+ tiempoTot + ", " + firstX + ", " + firstY + " );";											
+			String sent = "insert into game7 (idPartida, puntuacion, tiempo_total, firstX, firstY ) values (" + idPartida + ", " + puntuacion + ", "+ tiempoTot + ", " + firstX + ", " + firstY + " );";											
 			logger.log( Level.INFO, "Statement: " + sent );
 			int insertados = statement.executeUpdate( sent );
 			if (insertados!=1) return false;  // Error en insercion
