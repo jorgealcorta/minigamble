@@ -51,15 +51,24 @@ public class PantallaIntermedia implements KeyListener{
 		
 		PantallaIntermedia.miniJugado = miniJugado;
 
-		
-		if(Partida.vidas - vidasRestadas < 3 && Partida.vidas - vidasRestadas > 0) {
-			if(Partida.vidas - vidasRestadas == 1) {
-				vida2.setVida(false);
-			}else if(Partida.vidas - vidasRestadas == 0) {
-				vida1.setVida(false);
-			}
+		if(Partida.vidas - vidasRestadas == 3) {
+			vida1.setVida(true);
+			vida2.setVida(true);
+			vida3.setVida(true);
+		}else if(Partida.vidas - vidasRestadas == 2) {
+			vida1.setVida(true);
+			vida2.setVida(true);
+			vida3.setVida(false);
+		}else if(Partida.vidas - vidasRestadas == 1) {
+			vida1.setVida(true);
+			vida2.setVida(false);
+			vida3.setVida(false);
+		}else if(Partida.vidas - vidasRestadas <= 0) {
+			vida1.setVida(false);
+			vida2.setVida(false);
 			vida3.setVida(false);
 		}
+		
 		
 		ThreadPuntosDisplay pd = new ThreadPuntosDisplay(puntos, puntLocal);
 		this.hpd = new Thread(pd);
