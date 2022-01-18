@@ -168,7 +168,7 @@ public class Game7 implements MouseListener {
 	 * Metodo recursivo que devuelve cual es la probabilidad de que cada usuariho gane en una matriz
 	 * @param matProb la matriz de la que queremos saber su probabilidad
 	 * @param alpha parametro numerico que se va incrementndo en cada llamada recursiva. 
-	 * Sirve para llevar la cuenta de a qué jugador le toca mover en cada llamada a la funcion pudiendo ser par (turno de la maquina) o impar (turno del jugador)
+	 * Sirve para llevar la cuenta de a quï¿½ jugador le toca mover en cada llamada a la funcion pudiendo ser par (turno de la maquina) o impar (turno del jugador)
 	 * @return un double que epresenta la probabilidad de ganar. El valor puede variar entre 1 (probabilidad segura de que gane el usuario) o -1 (probabilidad segura de que gane la maquina)
 	 */
 	
@@ -476,7 +476,11 @@ public class Game7 implements MouseListener {
 	public void render(Graphics g){
 		
 		if(start==0) {
-			g.drawImage(media.tapeteImg, 0, 0, 1184, 663, null);
+			if(VentanaPrincipal.soWindows) {
+				g.drawImage(media.tapeteImg, 0, 0, 1184, 663, null);
+			}else {
+				g.drawImage(media.tapeteImg, 0, 0, 1200, 672, null);
+			}
 			g.drawRect(0, 0, 100, 100);
 			
 		}

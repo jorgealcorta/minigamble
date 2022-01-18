@@ -19,6 +19,9 @@ public class VentanaPrincipal extends Canvas{
 	
 	public JFrame frame;
 	
+	public static boolean soWindows = true;
+	
+	
 	public VentanaPrincipal(String title, Game game) {
 		
 		frame = new JFrame(title);
@@ -49,6 +52,13 @@ public class VentanaPrincipal extends Canvas{
         } catch (final SecurityException e) {
             System.out.println("There was a security exception for: 'taskbar.setIconImage'");
         }
+		
+		String so = System.getProperty("os.name");
+		System.out.println(so);
+		
+		if(so.equals("Mac OS X")) {
+			soWindows = false;
+		}
 		
 		frame.setIconImage(logo.getImage());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Para que la X pare los hilos

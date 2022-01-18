@@ -495,7 +495,11 @@ public class Game1  implements MouseMotionListener, MouseListener, Runnable {
 	 */
 	public void render(Graphics g) {
 	
-		g.drawImage(media.tapeteImg, 0, 0, 1184, 663, null);
+		if(VentanaPrincipal.soWindows) {
+			g.drawImage(media.tapeteImg, 0, 0, 1184, 663, null);
+		}else {
+			g.drawImage(media.tapeteImg, 0, 0, 1200, 672, null);
+		}
 		
 		if(start==1) {
 			g.setFont(media.customFontBot);
