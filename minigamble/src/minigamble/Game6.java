@@ -148,6 +148,7 @@ public class Game6 implements KeyListener{
 			}
 		}
 		
+		System.out.println("miss");
 		if(!aciertoReciente) fallos++;
 		
 	}
