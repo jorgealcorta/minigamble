@@ -171,7 +171,11 @@ public class Game6 implements KeyListener{
 	
 	public void render(Graphics g) {
 		
-		g.drawImage(media.tapeteImg, 0, 0, 1184, 663, null);
+		if(VentanaPrincipal.soWindows) {
+			g.drawImage(media.tapeteImg, 0, 0, 1184, 663, null);
+		}else {
+			g.drawImage(media.tapeteImg, 0, 0, 1200, 672, null);
+		}
 		
 		g.drawImage(media.flechaizqtrans_IMG, 250, 450, 128, 128, null);
 		g.drawImage(media.flechaarrtrans_IMG, 450, 450, 128, 128, null);

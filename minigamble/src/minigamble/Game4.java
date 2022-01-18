@@ -295,7 +295,11 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 		
 		g.setColor(Color.WHITE);
 		
-		g.drawImage(media.tapeteImg, 0, 0, 1184, 663, null);
+		if(VentanaPrincipal.soWindows) {
+			g.drawImage(media.tapeteImg, 0, 0, 1184, 663, null);
+		}else {
+			g.drawImage(media.tapeteImg, 0, 0, 1200, 672, null);
+		}
 			
 			// Cada frame se dibujan todas las dianas en dianasActivas, comprobando el booleano rota para decidir si dibujar la diana
 			// entera o rota

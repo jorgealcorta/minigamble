@@ -309,7 +309,12 @@ public class Game2 implements KeyListener{
 	 */
 	
 	public void render(Graphics g) {
-		g.drawImage(media.tapeteImg, 0, 0, 1184, 663, null);
+		
+		if(VentanaPrincipal.soWindows) {
+			g.drawImage(media.tapeteImg, 0, 0, 1184, 663, null);
+		}else {
+			g.drawImage(media.tapeteImg, 0, 0, 1200, 672, null);
+		}
 		
 		/*
 		 * Si el juego esta en start=1, se dibujan todas las fichas transparentes y se muestra un texto que muestra al usuario
