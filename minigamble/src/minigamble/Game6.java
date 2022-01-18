@@ -20,11 +20,11 @@ public class Game6 implements KeyListener{
 	
 	private boolean aciertoReciente = false;
 	
-	private int puntos;
+	public static int puntos;
 	private int puntSumados;
-	private int puntLocal = 0;
-	private int idPartida;
-	private String idJugador;
+	public static int puntLocal = 0;
+	public static int idPartida;
+	public static String idJugador;
 	private int fallos;
 	private long tiempoComienzo = System.currentTimeMillis();
 	private long tiempoTotal;
@@ -32,6 +32,8 @@ public class Game6 implements KeyListener{
 	
 	public static int nFlechas = 5;
 	
+	public int dificultad = 1;
+	public String superado = "true";
 	
 	private String dirPosibles[] = {"izq", "arr", "abj", "dch"};
 	
@@ -39,11 +41,11 @@ public class Game6 implements KeyListener{
 	private CopyOnWriteArrayList<Flecha> flechasActivas = new CopyOnWriteArrayList<Flecha>();
 
 	
-	public Game6(int puntuacion, String idJugador, int idPartida) {
+	public Game6(int puntuacion, String Jugador, int Partida) {
 		
-		this.puntos = puntuacion;
-		this.idJugador = idJugador;
-		this.idPartida = idPartida;
+		puntos = puntuacion;
+		idJugador = Jugador;
+		idPartida = Partida;
 		
 		flechasActivas.removeAll(flechasActivas);
 		flechasCreadas.removeAll(flechasCreadas);
@@ -52,10 +54,13 @@ public class Game6 implements KeyListener{
 			nFlechas = 5;
 		}else if(puntos >= 1500 && puntos < 3000) {
 			nFlechas = 10;
+			dificultad = 2;
 		}else if(puntos >= 3000 && puntos < 4500) {
 			nFlechas = 15;
+			dificultad = 3;
 		}else if(puntos >= 4500) {
 			nFlechas = 20;
+			dificultad = 4;
 		}
 		
 		// Crear ArrayList de flechas aleatorias
@@ -140,10 +145,14 @@ public class Game6 implements KeyListener{
 						delaySeg(2);
 						//BaseDatos.insertarGame1(idPartida, puntLocal, fallos, primeraCarta, tiempoPrimeraCarta, tiempoTotal);
 						//new PantallaIntermedia(puntos + puntLocal, vidasRestadas, 5, jugador, idPartida);
+						if(fallos > 2) {
+						vidasRestadas = 1;
+						superado = "false";
+						}						
+						BaseDatos.insertarGame6(idPartida, puntLocal, fallos, tiempoTotal, superado, dificultad);
 						Game.pi = new PantallaIntermedia(puntos, puntLocal, vidasRestadas, 5, idJugador, idPartida);
 						Game.estadoJuego = ESTADO.PantallaIntermedia;
 						Game.eventoRaton();
-						
 					}
 			}
 		}
