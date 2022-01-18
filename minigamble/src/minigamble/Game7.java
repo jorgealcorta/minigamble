@@ -45,28 +45,7 @@ public class Game7 implements MouseListener {
 		
 	}
 	
-	
-//	private int pair( int a, int b){     
-//        int result =(int) (0.5 * (a + b) * (a + b + 1) + b);
-//        return if (depair(result) == input) {
-//            result //Return the result
-//        } else {
-//            throw IllegalStateException("Cantor.depair no longer provides " +
-//                    "valid inverse of Cantor.pair, implementation is broken")
-//        }
-//    }
-//
-//    private Pair<Long, Long> depair(int z)  {  
-//        val t = Math.floor((Math.sqrt((8 * z + 1).toDouble()) - 1) / 2).toInt().toLong()
-//        val x = t * (t + 3) / 2 - z
-//        val y = z - t * (t + 1) / 2
-//        return Pair(x, y)
-//    }
-	
-	
-	
-	
-	
+
 	/**
 	 * Metodo checkRow comprueba si hay alguna posible combinacion de 3 en raya y devuelve un integer
 	 * en funcion de si alguien ha ganado o no.
@@ -234,6 +213,11 @@ public class Game7 implements MouseListener {
 	
 		
 	
+	/**
+	 * Metodo que en funcion de la dificultad con la que se llame al juego, devolvera un valor booleano. 
+	 * Cuanto mayor sea la dificultad con la que se le llama, meyor sera la probabilidad de que devuelva true 
+	 * @return booleano utilizado para indicar si debemos coger el movimiento optimo en una jgada o no.
+	 */
 	private boolean ifYes() {
 		double rnd = Math.random();
 		
@@ -262,14 +246,19 @@ public class Game7 implements MouseListener {
 	
 	
 	
-	private  int getIndex ( ArrayList<Double> array,int min, boolean chosemin){
-		
-		if (chosemin) {
-			
+	
+	
+	/**
+	 * @param array arraylist de movimientos posibles del cual se desea escoger uno.
+	 * @param min integer que indica cual es el elemento minimo del arraylist, es decir el movimiento optimo.
+	 * @param chosemin booleano que indica si queremos elegir el movimiento optimo en este turno o no.
+	 * @return num indice del arraylist. Si chosemin es verdadero, se devolvera el indice optimo, en caso contrario un indice aleatorio.
+	 */
+	private  int getIndex( ArrayList<Double> array,int min, boolean chosemin){
+		if (chosemin) {		
 			return min;
 			
-		} else {
-			
+		} else {			
 			int num = min;
 			while(num == min) {
 				num = (int) Math.random() * (array.size()-1);
@@ -379,6 +368,7 @@ public class Game7 implements MouseListener {
 								
 								Game.pi = new PantallaIntermedia(puntTotal, 500, 0, 6, jugador, idPartida);
 								Game.estadoJuego = ESTADO.PantallaIntermedia;
+								Game.eventoRaton();
 								
 							} else if(count(matrix)==0){
 								delayMS(500);
@@ -392,7 +382,7 @@ public class Game7 implements MouseListener {
 								
 								Game.pi = new PantallaIntermedia(puntTotal, 100, 0, 6, jugador, idPartida);
 								Game.estadoJuego = ESTADO.PantallaIntermedia;
-								
+								Game.eventoRaton();
 							}else {
 								
 								ArrayList<Integer> positions= new ArrayList<Integer>();
@@ -442,6 +432,7 @@ public class Game7 implements MouseListener {
 									//Game.partida  = new Partida( 0 ,1 , 6	, jugador, idPartida);
 									Game.pi = new PantallaIntermedia(puntTotal, 0, 1, 6, jugador, idPartida);
 									Game.estadoJuego = ESTADO.PantallaIntermedia;
+									Game.eventoRaton();
 								}
 								if(count(matrix)==0) {
 									delayMS(500);
@@ -454,6 +445,7 @@ public class Game7 implements MouseListener {
 									//Game.partida  = new Partida( 100 ,0 , 6	, jugador, idPartida);
 									Game.pi = new PantallaIntermedia(puntTotal, 100, 0, 6, jugador, idPartida);
 									Game.estadoJuego = ESTADO.PantallaIntermedia;
+									Game.eventoRaton();
 								}																
 							}
 						}
