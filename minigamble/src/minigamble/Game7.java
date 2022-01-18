@@ -372,7 +372,9 @@ public class Game7 implements MouseListener {
 								start=2;
 								
 								tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
+								System.out.println("insert1");
 								BaseDatos.insertarGame7(idPartida, 500 , tiempoTotal, firstX, firstY );
+					
 								//Game.partida  = new Partida( 500 ,0 , 6	, jugador, idPartida);
 								
 								Game.pi = new PantallaIntermedia(puntTotal, 500, 0, 6, jugador, idPartida);
@@ -383,7 +385,9 @@ public class Game7 implements MouseListener {
 								start=4;
 								
 								tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
+								System.out.println("insert2");
 								BaseDatos.insertarGame7(idPartida, 100 , tiempoTotal, firstX, firstY );
+								
 								//Game.partida  = new Partida( 100 ,0 , 6	, jugador, idPartida);
 								
 								Game.pi = new PantallaIntermedia(puntTotal, 100, 0, 6, jugador, idPartida);
@@ -432,7 +436,9 @@ public class Game7 implements MouseListener {
 									delayMS(500);
 									start=3;
 									tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
+									System.out.println("insert3");
 									BaseDatos.insertarGame7(idPartida, 0 , tiempoTotal, firstX, firstY );
+									
 									//Game.partida  = new Partida( 0 ,1 , 6	, jugador, idPartida);
 									Game.pi = new PantallaIntermedia(puntTotal, 0, 1, 6, jugador, idPartida);
 									Game.estadoJuego = ESTADO.PantallaIntermedia;
@@ -442,7 +448,9 @@ public class Game7 implements MouseListener {
 									start=4;
 									
 									tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
+									System.out.println("insert4");
 									BaseDatos.insertarGame7(idPartida, 100 , tiempoTotal, firstX, firstY );
+									
 									//Game.partida  = new Partida( 100 ,0 , 6	, jugador, idPartida);
 									Game.pi = new PantallaIntermedia(puntTotal, 100, 0, 6, jugador, idPartida);
 									Game.estadoJuego = ESTADO.PantallaIntermedia;
