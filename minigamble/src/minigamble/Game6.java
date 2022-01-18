@@ -25,20 +25,21 @@ public class Game6 implements KeyListener{
 	public static int puntLocal = 0;
 	public static int idPartida;
 	public static String idJugador;
-	private int fallos;
-	private long tiempoComienzo = System.currentTimeMillis();
-	private long tiempoTotal;
+	public static int fallos;
+	public static long tiempoComienzo = System.currentTimeMillis();
+	public static long tiempoTotal;
 	private int vidasRestadas = 0;
+	public static boolean algunAcierto = false;
 	
 	public static int nFlechas = 5;
 	
-	public int dificultad = 1;
+	public static int dificultad = 1;
 	public String superado = "true";
 	
 	private String dirPosibles[] = {"izq", "arr", "abj", "dch"};
 	
 	private CopyOnWriteArrayList<Flecha> flechasCreadas = new CopyOnWriteArrayList<Flecha>();
-	private CopyOnWriteArrayList<Flecha> flechasActivas = new CopyOnWriteArrayList<Flecha>();
+	public static CopyOnWriteArrayList<Flecha> flechasActivas = new CopyOnWriteArrayList<Flecha>();
 
 	
 	public Game6(int puntuacion, String Jugador, int Partida) {
@@ -133,7 +134,7 @@ public class Game6 implements KeyListener{
 				(key == 40 && f.getDir() == "abj") ||
 				(key == 39 && f.getDir() == "dch")) && 
 				f.getY()>386 && f.getY()<514) {
-				
+					algunAcierto = true;
 					aciertoReciente = true;
 				
 					puntLocal += puntSumados;
