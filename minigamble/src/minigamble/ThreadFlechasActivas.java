@@ -26,12 +26,10 @@ public class ThreadFlechasActivas extends Thread{
 				e.printStackTrace();
 			}
 		}while(activas.size() > 0) {
-			activas.remove(0);
-			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			for(Flecha f : activas) {
+				if(f.getY() > 700) {
+					activas.remove(f);
+				}
 			}
 
 		}
