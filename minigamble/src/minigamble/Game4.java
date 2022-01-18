@@ -32,13 +32,13 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 	
 			
 	// CopyOnWriteArrayList que almacena las dianas generadas aleatoriamente.
-	private CopyOnWriteArrayList<Diana> dianasCreadas = new CopyOnWriteArrayList<Diana>();
+	private static CopyOnWriteArrayList<Diana> dianasCreadas = new CopyOnWriteArrayList<Diana>();
 	
 	// CopyOnWriteArrayList que almacena las dianas que se encuentran en pantalla.
-	private CopyOnWriteArrayList<Diana> dianasActivas = new CopyOnWriteArrayList<Diana>();
+	private static CopyOnWriteArrayList<Diana> dianasActivas = new CopyOnWriteArrayList<Diana>();
 	
 	// CopyOnWriteArrayList que almacena todas las dianas que ya se han disparado, y ha pasado el tiempo para que desaparezcan mediante el hilo.
-	private CopyOnWriteArrayList<Diana> dianasRotas = new CopyOnWriteArrayList<Diana>();
+	private static CopyOnWriteArrayList<Diana> dianasRotas = new CopyOnWriteArrayList<Diana>();
 	
 	private int mox;				//Posicion en la que se presiona el raton
 	private int moy;
@@ -68,13 +68,13 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 	
 	public Game4(int puntuacion, String nombreJugador, int idPart){
 		
-		dianasCreadas = new CopyOnWriteArrayList<Diana>();
+//		dianasCreadas = new CopyOnWriteArrayList<Diana>();
 		dianasCreadas.removeAll(dianasCreadas);
-		
-		dianasActivas = new CopyOnWriteArrayList<Diana>();
+//		
+//		dianasActivas = new CopyOnWriteArrayList<Diana>();
 		dianasActivas.removeAll(dianasActivas);
-		
-		dianasRotas = new CopyOnWriteArrayList<Diana>();
+//		
+//		dianasRotas = new CopyOnWriteArrayList<Diana>();
 		dianasRotas.removeAll(dianasRotas);
 
 		
@@ -258,6 +258,7 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 			
 			if(!unaRota) {
 				System.out.println("miss");
+				System.out.println(dianasActivas);
 				fallos++;
 			}
 			
