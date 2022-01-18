@@ -255,7 +255,7 @@ public class Game3 implements MouseListener , MouseMotionListener {
 				if(pathColor == null ) {
 					
 					pathColor = Color.decode("#c8bfe7");
-					pathColor2 = Color.decode("#caabea");
+					pathColor2 = Color.decode("#CABEEA");
 				}
 							
 							
