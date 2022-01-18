@@ -258,17 +258,17 @@ public class media {
 			
 			//GAME6
 			
-			flechaabj = new ImageIcon(Game.class.getResource("multimedia/flechas/flechaabj.png").toURI().toURL() );
-			flechaabjtrans = new ImageIcon(Game.class.getResource("multimedia/flechas/flechaabjtrans.png").toURI().toURL() );
+			flechaabj = new ImageIcon(Game.class.getResource("multimedia/arrowsFalling/flechaDown.png").toURI().toURL() );
+			flechaabjtrans = new ImageIcon(Game.class.getResource("multimedia/arrowsFalling/negativeDown.png").toURI().toURL() );
 
-			flechaarr = new ImageIcon(Game.class.getResource("multimedia/flechas/flechaarr.png").toURI().toURL() );
-			flechaarrtrans = new ImageIcon(Game.class.getResource("multimedia/flechas/flechaarrtrans.png").toURI().toURL() );
+			flechaarr = new ImageIcon(Game.class.getResource("multimedia/arrowsFalling/flechaUp.png").toURI().toURL() );
+			flechaarrtrans = new ImageIcon(Game.class.getResource("multimedia/arrowsFalling/negativeUp.png").toURI().toURL() );
 
-			flechadch = new ImageIcon(Game.class.getResource("multimedia/flechas/flechadch.png").toURI().toURL() );
-			flechadchtrans = new ImageIcon(Game.class.getResource("multimedia/flechas/flechadchtrans.png").toURI().toURL() );
+			flechadch = new ImageIcon(Game.class.getResource("multimedia/arrowsFalling/flechaRight.png").toURI().toURL() );
+			flechadchtrans = new ImageIcon(Game.class.getResource("multimedia/arrowsFalling/negativeRight.png").toURI().toURL() );
 
-			flechaizq = new ImageIcon(Game.class.getResource("multimedia/flechas/flechaizq.png").toURI().toURL() );
-			flechaizqtrans = new ImageIcon(Game.class.getResource("multimedia/flechas/flechaizqtrans.png").toURI().toURL() );
+			flechaizq = new ImageIcon(Game.class.getResource("multimedia/arrowsFalling/flechaLeft.png").toURI().toURL() );
+			flechaizqtrans = new ImageIcon(Game.class.getResource("multimedia/arrowsFalling/negativeLeft.png").toURI().toURL() );
 			
 			//GAME7
 			

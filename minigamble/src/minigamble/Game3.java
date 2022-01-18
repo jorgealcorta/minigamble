@@ -149,11 +149,12 @@ public class Game3 implements MouseListener , MouseMotionListener {
 			return false;
 		}}
 	
+	
 	@Override
 	public void mousePressed(MouseEvent e) {
 		
 		if(Game.estadoJuego==Game.ESTADO.Game3) {
-			mox = e.getX();	// guarda la posicion en la que se presiona
+			mox = e.getX();                                	// guarda la posicion en la que se presiona por cada click
 			moy = e.getY();
 			
 			
@@ -184,7 +185,7 @@ public class Game3 implements MouseListener , MouseMotionListener {
 			String filePath = new File("").getAbsolutePath();										// Ruta hasta el proyecto
 			String s2_filePath = filePath.concat("/minigamble/src/minigamble/sonido/click2.wav");	//Continuacio n de la ruta hasta el archivo de audio 2
 		
-			if (start == 1) {                                          // caso start == 1
+			if (start == 1) {                                                       				// caso start == 1, 
 				
 				if(bStart_state == true){ 
 					try {																				
@@ -327,11 +328,7 @@ public class Game3 implements MouseListener , MouseMotionListener {
 	 */	
 	public void render(Graphics g) {
 		
-		if(VentanaPrincipal.soWindows) {
-			g.drawImage(media.tapeteImg, 0, 0, 1184, 663, null);
-		}else {
-			g.drawImage(media.tapeteImg, 0, 0, 1200, 672, null);
-		}
+		g.drawImage(media.tapeteImg, 0, 0, 1184, 663, null);
 		
 		if(start==1) {
 			g.setFont(media.customFontBot);
