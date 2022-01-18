@@ -177,6 +177,7 @@ public class Game5 implements Runnable , KeyListener{
 					}
 					System.out.println(chos1);
 
+					System.out.println("chos1 is" + chos1);
 					if(chos1 == 0) {
 						elegido="heart";
 					} else if (chos1 == 1) {

@@ -257,6 +257,8 @@ public class Game3 implements MouseListener , MouseMotionListener {
 							
 							
 				if(robot.getPixelColor(Mox, Moy).getRGB() != pathColor.getRGB()) {
+					System.out.println("path "+ pathColor.getRGB());
+					System.out.println("path "+ robot.getPixelColor(Mox, Moy).getRGB());
 					robot.mouseMove(startX, startY);	
 					numFallos = numFallos +1;
 					puntLocal = (int)Math.round( puntLocal * 0.66);
