@@ -20,11 +20,11 @@ public class Game6 implements KeyListener{
 	
 	private boolean aciertoReciente = false;
 	
-	private int puntos;
+	public static int puntos;
 	private int puntSumados;
-	private int puntLocal = 0;
-	private int idPartida;
-	private String idJugador;
+	public static int puntLocal = 0;
+	public static int idPartida;
+	public static String idJugador;
 	private int fallos;
 	private long tiempoComienzo = System.currentTimeMillis();
 	private long tiempoTotal;
