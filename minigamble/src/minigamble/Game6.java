@@ -41,6 +41,12 @@ public class Game6 implements KeyListener{
 	private CopyOnWriteArrayList<Flecha> flechasCreadas = new CopyOnWriteArrayList<Flecha>();
 	public static CopyOnWriteArrayList<Flecha> flechasActivas = new CopyOnWriteArrayList<Flecha>();
 
+	/**
+	 * Constructor de la clase Game6
+	 * @param puntuacion acumulada
+	 * @param Jugador
+	 * @param idPart identificador de la partida
+	 */
 	
 	public Game6(int puntuacion, String Jugador, int Partida) {
 		
@@ -71,6 +77,7 @@ public class Game6 implements KeyListener{
 			flechasCreadas.add(f);
 		}
 		
+		// Una partida perfecta implica sumar 500 puntos.
 		puntSumados = (int)(500/(flechasCreadas.size()));
 		
 		System.out.println(flechasCreadas);
@@ -201,3 +208,5 @@ public class Game6 implements KeyListener{
 
 	}
 }
+
+		

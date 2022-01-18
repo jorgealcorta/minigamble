@@ -47,17 +47,26 @@ public class Game2 implements KeyListener{
 	private int fallos;
 	private long tiempoIni = System.currentTimeMillis();
 	
+	// Longitud de la combinacion en la que se basa el juego
 	private int nPalos;
 	
 	private int dificultad = 1;
 	private String superado = "true";
 	
+	/**
+	 * Constructor de la clase Game2
+	 * @param puntuacion acumulada
+	 * @param nombreJugador
+	 * @param idPart identificador de la partida
+	 */
 	public Game2(int puntuacion, String nombreJugador, int idPart) {
 			
 			puntos = puntuacion;
 			puntLocal = 500;
 			idPartida = idPart;
 			jugador = nombreJugador;
+			
+			// Establecemos la longitud de la combinacion dependiendo de puntuacion acumulada, aumentando la dificultad a la par de la puntuacion.
 			
 			if(puntos >= 0 && puntos < 1500) {
 				nPalos = 3;
@@ -73,7 +82,7 @@ public class Game2 implements KeyListener{
 				dificultad = 4;
 			}
 			
-			//Creamos el array de los cuatro palos
+			//Creamos el array de los cuatro palos posibles
 			palos.add("cora");
 			palos.add("diam");
 			palos.add("pica");
@@ -405,6 +414,8 @@ public class Game2 implements KeyListener{
 			g.drawImage(media.crossarrow_IMG, 520, 285, null);
 	
 		}
+		
+		// start = 4 implica que el usuario ha superado el juego
 		
 		else if(start == 4) {
 			g.setFont(media.customFontBot);
