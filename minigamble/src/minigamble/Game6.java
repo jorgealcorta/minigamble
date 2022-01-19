@@ -31,6 +31,10 @@ public class Game6 implements KeyListener{
 	private int vidasRestadas = 0;
 	public static boolean algunAcierto = false;
 	
+	public static boolean todasPulsadas = false;
+	public static int nPulsadas = 0;
+
+	
 	public static int nFlechas = 5;
 	
 	public static int dificultad = 1;
@@ -69,6 +73,9 @@ public class Game6 implements KeyListener{
 			nFlechas = 20;
 			dificultad = 4;
 		}
+		
+		todasPulsadas = false;
+		nPulsadas = 0;
 		
 		// Crear ArrayList de flechas aleatorias
 		for(int i = 0; i<nFlechas; i++) {
@@ -149,7 +156,10 @@ public class Game6 implements KeyListener{
 					puntLocal += puntSumados;
 					flechasActivas.remove(f);
 					
-					if(flechasActivas.size() == 0) {
+					nPulsadas++;
+					if(nPulsadas == nFlechas) todasPulsadas = true;
+					
+					if(todasPulsadas) {
 						System.out.println("victoria");
 						tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
 						delaySeg(2);
