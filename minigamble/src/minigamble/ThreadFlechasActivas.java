@@ -29,12 +29,13 @@ public class ThreadFlechasActivas extends Thread{
 			for(Flecha f : creadas) {
 				if(f.getY() > 700) {
 					activas.remove(f);
+					Game6.todasPulsadas = false;
 				}
 			}
 		}
 		
 		
-		if(activas.size() == 0 && Game.estadoJuego==Game.ESTADO.Game6) {
+		if(activas.size() == 0 && Game.estadoJuego==Game.ESTADO.Game6 && !Game6.todasPulsadas) {
 			
 			System.out.println("derrota por no pulsar todas");
 			Game6.tiempoTotal = System.currentTimeMillis() - Game6.tiempoComienzo;
