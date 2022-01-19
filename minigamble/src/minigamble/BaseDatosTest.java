@@ -2,7 +2,6 @@ package minigamble;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.junit.After;
@@ -74,6 +73,19 @@ public class BaseDatosTest {
 		
 		
 	}
+	
+	
+	@Test
+	public void testGetJugadores() {
+		
+		HashMap<String, String> lJ = BaseDatos.getJugadores();
+		
+		assertEquals( 4, lJ.size());
+		
+		
+	}
+	
+	
 	
 	
 }

@@ -398,6 +398,25 @@ public class BaseDatos {
 	
 	
 	
+	public static HashMap<String, String> getJugadores(){
+		
+		try (Statement statement = conexion.createStatement()) {
+			HashMap<String, String> resultado = new HashMap<String, String>();
+			String sent = "select nombre, password from jugador;";
+			logger.log( Level.INFO, "Statement: " + sent );
+			ResultSet rs = statement.executeQuery( sent );
+			while( rs.next() ) { // Leer el resultset
+				String nombre = rs.getString("nombre");
+				String password = rs.getString("password");
+				resultado.put(nombre, password);
+			}
+			return resultado;
+		} catch (Exception e) {
+			logger.log( Level.SEVERE, "Excepción", e );
+			return null;
+		}
+	}
+	
 	
 	
 }
