@@ -155,6 +155,7 @@ public class BaseDatos {
 	 */
 	public static boolean insertarJugador( String nombre, String password) {
 		try (Statement statement = conexion.createStatement()) {
+			password = Hash.md5(password);
 			String sent = "insert into jugador (nombre, password) values ('" + nombre + "','" + password + "');";
 			logger.log( Level.INFO, "Statement: " + sent );
 			int insertados = statement.executeUpdate( sent );
@@ -346,6 +347,7 @@ public class BaseDatos {
 	public static boolean comparaContrasena(String n, String p) {
 		
 		try (Statement statement = conexion.createStatement()) {
+			p = Hash.md5(p);
 			ArrayList<ArrayList<String>> ret = new ArrayList<>();
 			String sent = "select * from jugador;";
 			logger.log( Level.INFO, "Statement: " + sent );

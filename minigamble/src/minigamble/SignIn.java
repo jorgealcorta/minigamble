@@ -36,7 +36,6 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 	private String usuario = "";	// String con el nombre de usuario
 	private String contrasena = "";
 	private String contrasena_oculta = "";
-	private String contrasena_segura = "";
 	
 	
 	private boolean bBack_state = false;
@@ -119,8 +118,6 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 				if( !mouseOver(mox, moy, 500, 295, 190, 45) ){	// si se presiona fuera del campo de texto
 					if(contrasena.length()>=5 && BaseDatos.existeNombre(usuario) == false) {
 						contrasena_state = 2;			// !!!! de momento cambia el estado a correcto pero hay que hacer que evalue el string y mire si es correcto o incorrecto
-						contrasena_segura = Hash.md5(contrasena);
-						System.out.println(contrasena_segura);
 					}else {
 						contrasena_state = 3;
 					}
@@ -158,7 +155,6 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 		        	System.out.println("error");
 		        }
 				
-				BaseDatos.insertarJugador(usuario, contrasena_segura);
 				int idPart = BaseDatos.insertarPartida(usuario);
 				Game.partida  = new Partida(0,0,0, usuario, idPart);
 			}
@@ -222,8 +218,6 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 			if (e.getKeyCode() == 10) {		// Tecla enter
 				if(contrasena.length() >= 5) {
 					contrasena_state = 2;				
-					contrasena_segura = Hash.md5(contrasena);
-//					System.out.println(contrasena_segura);
 				}else {
 					contrasena_state = 3;
 				}
