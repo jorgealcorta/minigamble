@@ -82,6 +82,11 @@ public class BaseDatosTest {
 		
 		assertEquals( 4, lJ.size());
 		
+		for (String nombre : lJ.keySet()) {
+			String contrasena = lJ.get(nombre);
+			
+			assertTrue(contrasena.length() == 32);
+		}
 		
 	}
 	
