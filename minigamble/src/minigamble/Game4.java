@@ -45,6 +45,7 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 	private int mdx;
 	private int mdy;
 	
+	// Hilo que se utilizará para gestionar las dianas activas.
 	private Thread hda;
 	
 	public static int puntos;
@@ -57,14 +58,22 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 	public static long tiempoTotal;
 	private int vidasRestadas = 0;
 	
+	// Numero de dianas, que se ajustara conforme a la dificultad del juego.
 	private int nDianas;
 	
+	// Booleano utilizado para indicar que todas las dianas han sido disparadas.
 	public static boolean todasRotas = false;
 	private boolean unaRota = false;
 	
 	public static String superado = "true";
 	public static int dificultad = 0;
 
+	/**
+	 * Constructor de la clase Game4
+	 * @param puntuacion acumulada
+	 * @param nombreJugador
+	 * @param idPart identificador de la partida
+	 */
 	
 	public Game4(int puntuacion, String nombreJugador, int idPart){
 		
@@ -82,13 +91,14 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 		idPartida = idPart;
 		jugador = nombreJugador;
 		
+		// Reset
 		puntLocal = 0;
 		fallos = 0;
 		vidasRestadas = 0;
 		
 		tiempoComienzo = System.currentTimeMillis();
 
-				
+		//Establecemos el numero de dianas que apareceneran, que aumentara conforme la puntuacion acumulada aumente.
 		if(puntos >= 0 && puntos < 1500) {
 			nDianas = 5;
 			dificultad = 1;
@@ -116,6 +126,7 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 			dianasCreadas.add(dRandom);
 		}
 		
+		//Una partida perfecta implica una suma de 500 puntos
 		puntSumados = (int)(500 / (dianasCreadas.size()));
 		
 		System.out.println("constructor");
@@ -212,6 +223,8 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 					puntLocal += puntSumados;
 					unaRota = true;
 					
+					// Comprueba si todas las dianas estan rotas
+					
 					for(Diana dd : dianasCreadas) {
 						
 						if(!dd.isRota()) {
@@ -220,6 +233,8 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 						}
 						todasRotas = true;
 					}
+					
+					// Si todas las dianas estan rotas, el usuario ha ganado.
 					
 					if(todasRotas) {
 						System.out.println("victoria por todas rotas");
@@ -240,7 +255,7 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 						Game.eventoRaton();
 					}
 					
-					
+					// Reproducir clip de sonido al disparar
 					
 					try {																				
 				        Clip sonido = AudioSystem.getClip();
@@ -255,6 +270,8 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 				
 			
 			}
+			
+			// Si no se ha roto ninguna de las dianas con el disparo efectuado, miss.
 			
 			if(!unaRota) {
 				System.out.println("miss");

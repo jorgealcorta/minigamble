@@ -26,16 +26,15 @@ public class ThreadFlechasActivas extends Thread{
 				e.printStackTrace();
 			}
 		}while(activas.size() > 0) {
-			for(Flecha f : activas) {
+			for(Flecha f : creadas) {
 				if(f.getY() > 700) {
 					activas.remove(f);
 				}
 			}
-
 		}
 		
 		
-		if(activas.size() == 0 && Game.estadoJuego==Game.ESTADO.Game6 && !Game6.algunAcierto) {
+		if(activas.size() == 0 && Game.estadoJuego==Game.ESTADO.Game6) {
 			
 			System.out.println("derrota por no pulsar todas");
 			Game6.tiempoTotal = System.currentTimeMillis() - Game6.tiempoComienzo;
