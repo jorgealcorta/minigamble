@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -369,6 +370,27 @@ public class BaseDatos {
 		} catch (Exception e) {
 			logger.log( Level.SEVERE, "Excepción", e );
 			return true;
+		}
+	}
+	
+	
+	
+	public static HashMap<Integer, String> getPartidas(){
+		
+		try (Statement statement = conexion.createStatement()) {
+			HashMap<Integer, String> resultado = new HashMap<Integer, String>();
+			String sent = "select id, nombre from partida;";
+			logger.log( Level.INFO, "Statement: " + sent );
+			ResultSet rs = statement.executeQuery( sent );
+			while( rs.next() ) { // Leer el resultset
+				int id = rs.getInt("id");
+				String nombre = rs.getString("nombre");
+				resultado.put(id, nombre);
+			}
+			return resultado;
+		} catch (Exception e) {
+			logger.log( Level.SEVERE, "Excepción", e );
+			return null;
 		}
 	}
 	
