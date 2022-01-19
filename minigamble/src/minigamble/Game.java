@@ -13,6 +13,15 @@ import java.io.FileReader;
 public class Game extends Canvas implements Runnable{
 	
 	
+	public static int game1Check =0;
+	public static int game2Check =0;
+	public static int game3Check =0;
+	public static int game4Check =0;
+	public static int game5Check =0;
+	public static int game6Check =0;
+	public static int game7Check =0;
+	public static int piCheck =0;
+	
 	public static Partida partida;
 	public static Game1 game1;
 	public static Game2 game2;
@@ -71,6 +80,7 @@ public class Game extends Canvas implements Runnable{
 		this.addMouseMotionListener(login);
 		this.addKeyListener(login);
 		
+		
 //		this.addMouseListener(game1); 				// anyado un mouseListener a la pantalla game1
 //		this.addMouseMotionListener(game1);
 //		this.addKeyListener(game2);
@@ -80,26 +90,53 @@ public class Game extends Canvas implements Runnable{
 	}
 	
 	public static void eventoRaton(){
-		if (estadoJuego == ESTADO.Game1) {
+		
+		
+		if (estadoJuego == ESTADO.Game1 && game1Check==0) {
+			
 			game.addMouseListener(game1);
 			game.addMouseMotionListener(game1);
+			game1Check=1;
+			System.out.println("game1 listener add");
 			
-		}else if (estadoJuego == ESTADO.Game2){
+		}else if (estadoJuego == ESTADO.Game2 && game2Check==0){
+			
 			game.addKeyListener(game2);
-		}else if(estadoJuego == ESTADO.Game3) {
+			game2Check=1;
+			System.out.println("game2 listener add");
+			
+		}else if(estadoJuego == ESTADO.Game3 && game3Check==0) {
 			game.addMouseListener(game3);
 			game.addMouseMotionListener(game3);
-		}else if(estadoJuego == ESTADO.Game4) {
+			game3Check=1;
+			System.out.println("game3 listener add");
+			
+		}else if(estadoJuego == ESTADO.Game4 && game4Check==0) {
 			game.addMouseListener(game4);
 			game.addMouseMotionListener(game4);
-		}else if(estadoJuego == ESTADO.Game5) {
+			game4Check=1;
+			System.out.println("game4 listener add");
+			
+		}else if(estadoJuego == ESTADO.Game5 && game5Check==0) {
 			game.addKeyListener(game5);
-		}else if(estadoJuego == ESTADO.Game6) {
+			game5Check=1;
+			System.out.println("game5 listener add");
+			
+		}else if(estadoJuego == ESTADO.Game6 && game6Check==0) {
 			game.addKeyListener(game6);
-		}else if(estadoJuego == ESTADO.Game7) {
+			game6Check=1;
+			System.out.println("game6 listener add");
+			
+		}else if(estadoJuego == ESTADO.Game7 && game7Check==0) {
 			game.addMouseListener(game7);
-		}else if(estadoJuego == ESTADO.PantallaIntermedia) {
+			game7Check=1;
+			System.out.println("game7 listener add");
+			
+		}else if(estadoJuego == ESTADO.PantallaIntermedia && piCheck==0) {
 			game.addKeyListener(pi);
+			piCheck=1;
+			System.out.println("pi listener add");
+			
 		}
 	}
 	
