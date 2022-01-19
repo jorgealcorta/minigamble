@@ -86,6 +86,18 @@ public class BaseDatosTest {
 	}
 	
 	
+	@Test
+	public void testInsertarJugador() {
+		HashMap<String, String> lJ = BaseDatos.getJugadores();
+		int antSize = lJ.size();
+
+		assertTrue( BaseDatos.insertarJugador("prueba", "prueba123"));
+		
+		lJ = BaseDatos.getJugadores();
+		
+		assertTrue(lJ.size() > antSize);
+		
+	}
 	
 	
 }
