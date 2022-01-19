@@ -22,24 +22,9 @@ public class Inicio   implements MouseMotionListener, MouseListener  {
 	
 //	public  static Font customFont;
 	
-	private ImageIcon background;	// Fondo
-	
-	private ImageIcon b1_false;		// boton 1
-	private ImageIcon b1_true;
 	private boolean b1_state = false;
 	
-	private ImageIcon b2_false;		// boton 2 
-	private ImageIcon b2_true;
 	private boolean b2_state = false;
-	
-	private Image backgroundIMG;
-	private Image b1IMG_false;
-	private Image b1IMG_true;
-	private Image b2IMG_false;
-	private Image b2IMG_true;
-	
-	private Font customFontMG;
-	private Font customFontBot;
 	
 	private int mox;				//Posicion en la que se presiona el raton
 	private int moy;
@@ -51,42 +36,6 @@ public class Inicio   implements MouseMotionListener, MouseListener  {
 	 * Constructor de la primera ventana
 	 */
 	public Inicio() {
-		
-		try {
-			background = new ImageIcon( Game.class.getResource("multimedia/fondoInicioRecortado.png").toURI().toURL() );		//Cargo todas las imagenes como iconos
-			b1_false = new ImageIcon( Game.class.getResource("multimedia/yellow_button2.png").toURI().toURL() );
-			b1_true = new ImageIcon( Game.class.getResource("multimedia/yellow_button3.png").toURI().toURL() );
-			b2_false = new ImageIcon( Game.class.getResource("multimedia/red_button2.png").toURI().toURL() );
-			b2_true = new ImageIcon( Game.class.getResource("multimedia/red_button3.png").toURI().toURL() );
-			
-			} catch (Exception e1) {
-			e1.printStackTrace();
-			}
-		
-		backgroundIMG = background.getImage();	// Paso todos los iconos a imágenes
-		b1IMG_false = b1_false.getImage();
-		b1IMG_true = b1_true.getImage();
-		b2IMG_false = b2_false.getImage();
-		b2IMG_true = b2_true.getImage();
-		
-		try {
-	         
-			customFontMG = Font.createFont(Font.TRUETYPE_FONT, Inicio.class.getResourceAsStream("fuentes/fuente.ttf"));
-			customFontMG = customFontMG.deriveFont(Font.PLAIN,100);
-			
-						
-		}catch(Exception e){	
-			System.out.println("Problema con la fuente Minigamble");
-		}
-		
-		try {
-			customFontBot = Font.createFont(Font.TRUETYPE_FONT, Inicio.class.getResourceAsStream("fuentes/fuenteBot.ttf"));
-			customFontBot=customFontBot.deriveFont(Font.PLAIN,20);
-		} catch (FontFormatException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			System.out.println("Error con la fuente Boton");
-		}
 		
 		
 	}
@@ -236,69 +185,34 @@ public class Inicio   implements MouseMotionListener, MouseListener  {
 	 */
 	public void render(Graphics g) {
 		
-		Font title = new Font("serif", 1 ,50);  //Fuente del título
-//		Font fButton = new Font("arial", 1 ,30); //Fuente de los botones
-		
-		
-		
-		
-		g.drawImage(backgroundIMG, 0, 0, null);   // Dibuja el fondo
-		
 	
 		
-		try {
-	         
-			g.setFont(customFontBot);
-						
-			if(b1_state == true) {				// Dibuja el boton 1 y texto del botón presionado
-				g.drawImage(b1IMG_true, 500, 294, null);
-				g.drawString("Comenzar", 512, 326);			
-			}else {								// Dibuja el boton 1 y texto del boton sin presionar
-				g.drawImage(b1IMG_false, 500, 290, null);		
-				g.drawString("Comenzar", 512, 322);		
-			}
-			
-			if(b2_state == true) {					// Dibuja el boton 2 y texto del boton presionado
-				g.drawImage(b2IMG_true, 500, 394, null);
-				g.drawString("Salir", 550, 426);
-			}else {									// Dibuja el boton 2 y texto del boton sin presionar
-				g.drawImage(b2IMG_false, 500, 390, null);
-				g.drawString("Salir", 550, 422);
-			}
-		
-		}catch(Exception e){	
-			
-			
-			g.setFont(customFontBot);
-			if(b1_state == true) {				// Dibuja el boton 1 y texto del botón presionado
-				g.drawImage(b1IMG_true, 500, 294, null);
-				g.drawString("Comenzar", 515, 326);			
-			}else {								// Dibuja el boton 1 y texto del boton sin presionar
-				g.drawImage(b1IMG_false, 500, 290, null);		
-				g.drawString("Comenzar", 515, 322);		
-			}
-			if(b2_state == true) {					// Dibuja el boton 2 y texto del boton presionado
-				g.drawImage(b2IMG_true, 500, 394, null);
-				g.drawString("Salir", 557, 426);
-			}else {									// Dibuja el boton 2 y texto del boton sin presionar
-				g.drawImage(b2IMG_false, 500, 390, null);
-				g.drawString("Salir", 557, 422);
-			}
-		
+		g.drawImage(media.FondoFichas_img, 0, 0, null);   // Dibuja el fondo
+		g.setFont(media.customFontBot);
+					
+		if(b1_state == true) {				// Dibuja el boton 1 y texto del botón presionado
+			g.drawImage(media.bIMGYellow_True, 500, 294, null);
+			g.drawString("Comenzar", 512, 326);			
+		}else {								// Dibuja el boton 1 y texto del boton sin presionar
+			g.drawImage(media.bIMGYellow_False, 500, 290, null);		
+			g.drawString("Comenzar", 512, 322);		
 		}
+		
+		if(b2_state == true) {					// Dibuja el boton 2 y texto del boton presionado
+			g.drawImage(media.bStartIMG_True, 500, 394, null);
+			g.drawString("Salir", 550, 426);
+		}else {									// Dibuja el boton 2 y texto del boton sin presionar
+			g.drawImage(media.bStartIMG_False, 500, 390, null);
+			g.drawString("Salir", 550, 422);
+		}
+	
 				
-		
-		try {
-			g.setFont(customFontMG);
-			g.drawString("Minigamble", 370, 150); //Dibuja el titulo con una fuente personalizada
+	
+		g.setFont(media.customFontTitle);
+		g.drawString("MINIGAMBLE", 50, 150); //Dibuja el titulo con una fuente personalizada
 			
 						
-		}catch(Exception e){	
-			
-			g.setFont(title);
-			g.drawString("Minigamble", 430, 150); //Dibuja el titulo en caso de que no se encuentre la fuente
-		}
-		
+				
 	
 	}
 

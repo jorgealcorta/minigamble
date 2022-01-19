@@ -20,20 +20,58 @@ public class media {
 	
 	//COMPARTIDOS
 	
+	public static Image FondoFichas_img;
+	public static ImageIcon Fondofichas;
+	
 	public static Image bStartIMG_True;
 	public static ImageIcon bStart_true;
 	
 	public static Image bStartIMG_False;	
 	public static ImageIcon bStart_false;	
 	
+	public static Image bIMGYellow_True;
+	public static ImageIcon bYellow_True;
+	
+	public static Image bIMGYellow_False;
+	public static ImageIcon bYellow_False;
+	
+	public static Image bIMGBlue_True;
+	public static ImageIcon bBlue_True;
+	
+	public static Image bIMGBlue_False;
+	public static ImageIcon bBlue_False;
+	
+	
+	public static Image bBack_false_img;
+	public static ImageIcon bBack_false;
+	
+	public static Image bBack_true_img;
+	public static ImageIcon bBack_true;
+	
 	public static Image tapeteImg;	
 	public static ImageIcon tapeteIcn;
 	
 	public static Font customFontBot;
 	public static Font customFontFin;
+	public static Font customFontTitle;
 	
 	public static int numVidas;
 	public static int puntInicial;
+	
+	
+	//SIGNIN
+	
+	public static ImageIcon text;
+	public static Image textIMG;
+		
+	public static ImageIcon textWrite;
+	public static Image textWriteIMG;
+	
+	public static ImageIcon textCorrect;
+	public static Image textCorrectIMG;
+	
+	public static ImageIcon textError;
+	public static Image textErrorIMG;
 	
 	//GAME1
 	
@@ -63,26 +101,26 @@ public class media {
 	
 	//GAME2
 	
-	public static ImageIcon corazonblanco;
-	public static ImageIcon corazonnegro;
-	public static ImageIcon diamanteblanco;
-	public static ImageIcon diamantenegro;
-	public static ImageIcon picablanca;
-	public static ImageIcon picanegra;
-	public static ImageIcon trebolblanco;
-	public static ImageIcon trebolnegro;
+	public static ImageIcon leftBlanco;
+	public static ImageIcon leftNegro;
+	public static ImageIcon upBlanco;
+	public static ImageIcon upNegro;
+	public static ImageIcon downBlanco;
+	public static ImageIcon downNegro;
+	public static ImageIcon rightBlanco;
+	public static ImageIcon rightNegro;
 	
 	public static ImageIcon crossarrow;
 	
 	
-	public static Image corazonblanco_IMG;
-	public static Image corazonnegro_IMG;
-	public static Image diamanteblanco_IMG;
-	public static Image diamantenegro_IMG;
-	public static Image picablanca_IMG;
-	public static Image picanegra_IMG;
-	public static Image trebolblanco_IMG;
-	public static Image trebolnegro_IMG;
+	public static Image leftBlanco_img;
+	public static Image leftNegro_img;
+	public static Image upBlanco_img;
+	public static Image upNegro_img;
+	public static Image downBlanco_img;
+	public static Image downNegro_img;
+	public static Image rightBlanco_img;
+	public static Image rightNegro_img;
 	
 	public static Image crossarrow_IMG;
 	
@@ -201,9 +239,26 @@ public class media {
 			
 			//COMPARTIDOS
 			
+			Fondofichas = new ImageIcon( Game.class.getResource("multimedia/fondoInicioRecortado.png").toURI().toURL() );
+			
 			bStart_false = new ImageIcon( Game.class.getResource("multimedia/red_button2.png").toURI().toURL() );
 			bStart_true = new ImageIcon( Game.class.getResource("multimedia/red_button3.png").toURI().toURL() );	
+			bYellow_True = new ImageIcon( Game.class.getResource("multimedia/yellow_button3.png").toURI().toURL() );
+			bYellow_False = new ImageIcon( Game.class.getResource("multimedia/yellow_button2.png").toURI().toURL() );
+			bBlue_True = new ImageIcon( Game.class.getResource("multimedia/blue_button3.png").toURI().toURL() );
+			bBlue_False = new ImageIcon( Game.class.getResource("multimedia/blue_button2.png").toURI().toURL() );
+			bBack_true = new ImageIcon( Game.class.getResource("multimedia/green_back2.png").toURI().toURL() );
+			bBack_false = new ImageIcon( Game.class.getResource("multimedia/green_back1.png").toURI().toURL() );
+			
 			tapeteIcn = new ImageIcon( Game.class.getResource("multimedia/tapete.png").toURI().toURL() );
+			
+			
+			//SIGNIN
+			
+			text = new ImageIcon( Game.class.getResource("multimedia/greyTextPath.png").toURI().toURL() );
+			textCorrect = new ImageIcon( Game.class.getResource("multimedia/greenTextPath.png").toURI().toURL() );
+			textError = new ImageIcon( Game.class.getResource("multimedia/redTextPath.png").toURI().toURL() );
+			textWrite = new ImageIcon( Game.class.getResource("multimedia/writeTextPath.png").toURI().toURL() );
 			
 			//GAME1
 			
@@ -221,14 +276,14 @@ public class media {
 			
 			//GAME2
 			
-			corazonblanco = new ImageIcon( Game.class.getResource("multimedia/fichassimon/corazonblanco.png").toURI().toURL() );
-			corazonnegro = new ImageIcon( Game.class.getResource("multimedia/fichassimon/corazonnegro.png").toURI().toURL() );
-			diamanteblanco = new ImageIcon( Game.class.getResource("multimedia/fichassimon/diamanteblanco.png").toURI().toURL() );
-			diamantenegro = new ImageIcon( Game.class.getResource("multimedia/fichassimon/diamantenegro.png").toURI().toURL() );
-			picablanca = new ImageIcon( Game.class.getResource("multimedia/fichassimon/picablanca.png").toURI().toURL() );
-			picanegra = new ImageIcon( Game.class.getResource("multimedia/fichassimon/picanegra.png").toURI().toURL() );
-			trebolblanco = new ImageIcon( Game.class.getResource("multimedia/fichassimon/trebolblanco.png").toURI().toURL() );
-			trebolnegro = new ImageIcon( Game.class.getResource("multimedia/fichassimon/trebolnegro.png").toURI().toURL() );
+			leftBlanco = new ImageIcon( Game.class.getResource("multimedia/fichassimon/flechaRoja.png").toURI().toURL() );
+			leftNegro = new ImageIcon( Game.class.getResource("multimedia/fichassimon/flechaNegra.png").toURI().toURL() );
+			upBlanco = new ImageIcon( Game.class.getResource("multimedia/fichassimon/flechaRojaUp.png").toURI().toURL() );
+			upNegro = new ImageIcon( Game.class.getResource("multimedia/fichassimon/flechaNegraUp.png").toURI().toURL() );
+			rightBlanco = new ImageIcon( Game.class.getResource("multimedia/fichassimon/flechaRojaRight.png").toURI().toURL() );
+			rightNegro = new ImageIcon( Game.class.getResource("multimedia/fichassimon/flechaNegraRight.png").toURI().toURL() );
+			downBlanco = new ImageIcon( Game.class.getResource("multimedia/fichassimon/flechaRojaDown.png").toURI().toURL() );
+			downNegro = new ImageIcon( Game.class.getResource("multimedia/fichassimon/flechaNegraDown.png").toURI().toURL() );
 			
 			crossarrow = new ImageIcon( Game.class.getResource("multimedia/crossarrowpixel.png").toURI().toURL() );
 			
@@ -297,8 +352,20 @@ public class media {
 		
 		bStartIMG_True = bStart_true.getImage();
 		bStartIMG_False = bStart_false.getImage();	
+		bIMGYellow_True = bYellow_True.getImage();
+		bIMGYellow_False = bYellow_False.getImage();
+		bIMGBlue_True = bBlue_True.getImage();
+		bIMGBlue_False = bBlue_False.getImage();
+		
 		tapeteImg = tapeteIcn.getImage();
+		
+		FondoFichas_img = Fondofichas.getImage();
 				
+		//SIGNIN
+		textIMG = text.getImage();
+		textCorrectIMG = textCorrect.getImage();
+		textErrorIMG = textError.getImage();
+		textWriteIMG = textWrite.getImage();
 		
 		
 		//GAME1
@@ -317,14 +384,14 @@ public class media {
 		
 		//GAME2
 		
-		corazonblanco_IMG = corazonblanco.getImage();
-		corazonnegro_IMG = corazonnegro.getImage();
-		diamanteblanco_IMG = diamanteblanco.getImage();
-		diamantenegro_IMG = diamantenegro.getImage();
-		picablanca_IMG = picablanca.getImage();
-		picanegra_IMG = picanegra.getImage();
-		trebolblanco_IMG = trebolblanco.getImage();
-		trebolnegro_IMG = trebolnegro.getImage();
+		leftBlanco_img = leftBlanco.getImage();
+		leftNegro_img = leftNegro.getImage();
+		upBlanco_img = upBlanco.getImage();
+		upNegro_img = upNegro.getImage();
+		downBlanco_img = downBlanco.getImage();
+		downNegro_img = downNegro.getImage();
+		rightBlanco_img = rightBlanco.getImage();
+		rightNegro_img = rightNegro.getImage();
 		
 		crossarrow_IMG = crossarrow.getImage();
 		
@@ -390,8 +457,6 @@ public class media {
 		
 		//FONTS
 		
-		//FUENTE ESTANDAR BOTONES
-		
 		try {
 			customFontBot = Font.createFont(Font.TRUETYPE_FONT, Inicio.class.getResourceAsStream("fuentes/fuenteBot.ttf"));
 			customFontBot=customFontBot.deriveFont(Font.PLAIN,20);
@@ -407,6 +472,22 @@ public class media {
 			System.out.println("Problema con la fuente Minigamble");
 		}
 
+		try {   
+			customFontTitle = Font.createFont(Font.TRUETYPE_FONT, Inicio.class.getResourceAsStream("fuentes/Pixelmania.ttf"));
+			customFontTitle = customFontTitle.deriveFont(Font.PLAIN,75);
+		}catch(Exception e){	
+			System.out.println("Problema con la fuente Minigamble");
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		Properties properties = new Properties();
 		InputStream is = null;

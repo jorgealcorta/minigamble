@@ -333,10 +333,10 @@ public class Game2 implements KeyListener{
 		if(start == 1) {
 			g.setFont(media.customFontBot);
 			
-			g.drawImage(media.corazonblanco_IMG, 520, 125, null);
-			g.drawImage(media.diamanteblanco_IMG, 350	, 290, null);
-			g.drawImage(media.picablanca_IMG, 520, 450, null);
-			g.drawImage(media.trebolblanco_IMG, 690, 290, null);
+			g.drawImage(media.upNegro_img, 520, 125, 128, 128, null);
+			g.drawImage(media.leftNegro_img, 350, 290, 128, 128, null);
+			g.drawImage(media.downNegro_img, 520, 450, 128, 128, null);
+			g.drawImage(media.rightNegro_img, 690, 290, 128, 128, null);
 			
 			g.drawImage(media.crossarrow_IMG, 520, 285, null);
 			
@@ -353,30 +353,30 @@ public class Game2 implements KeyListener{
 		else if(start == 2) {
 			g.setColor(Color.BLACK);
 			if(!coraDestacar) {
-				g.drawImage(media.corazonblanco_IMG, 520, 125, null);
+				g.drawImage(media.upNegro_img, 520, 125,  128, 128, null);
 			}else {
-				g.drawImage(media.corazonnegro_IMG, 520, 125, null);
+				g.drawImage(media.upBlanco_img, 520, 125, 128, 128, null);
 			}
 			
 			if(!diamDestacar) {
-				g.drawImage(media.diamanteblanco_IMG, 350, 290, null);
+				g.drawImage(media.leftNegro_img, 350, 290, 128, 128, null);
 			}else {
-				g.drawImage(media.diamantenegro_IMG, 350, 290, null);
+				g.drawImage(media.leftBlanco_img, 350, 290, 128, 128, null);
 			}
 			
 			if(!picaDestacar) {
-				g.drawImage(media.picablanca_IMG, 520, 450, null);
+				g.drawImage(media.downNegro_img, 520, 450, 128, 128, null);
 			}else {
-				g.drawImage(media.picanegra_IMG, 520, 450, null);
+				g.drawImage(media.downBlanco_img, 520, 450, 128, 128, null);
 			}
 			
 			if(!trebDestacar) {
-				g.drawImage(media.trebolblanco_IMG, 690, 290, null);
+				g.drawImage(media.rightNegro_img, 690, 290, 128, 128, null);
 			}else {
-				g.drawImage(media.trebolnegro_IMG, 690, 290, null);
+				g.drawImage(media.rightBlanco_img, 690, 290, 128, 128, null);
 			}
 			
-			g.drawImage(media.crossarrow_IMG, 520, 285, null);
+			g.drawImage(media.crossarrow_IMG, 520, 285, 128, 128, null);
 	
 		}
 		
@@ -388,27 +388,27 @@ public class Game2 implements KeyListener{
 		else if(start == 3) {
 			g.setColor(Color.BLACK);
 			if(!coraDestacar) {
-				g.drawImage(media.corazonblanco_IMG, 520, 125, null);
+				g.drawImage(media.upNegro_img, 520, 125, 128, 128, null);
 			}else {
-				g.drawImage(media.corazonnegro_IMG, 520, 125, null);
+				g.drawImage(media.upBlanco_img, 520, 125, 128, 128, null);
 			}
 			
 			if(!diamDestacar) {
-				g.drawImage(media.diamanteblanco_IMG, 350, 290, null);
+				g.drawImage(media.leftNegro_img, 350, 290,  128, 128,null);
 			}else {
-				g.drawImage(media.diamantenegro_IMG, 350, 290, null);
+				g.drawImage(media.leftBlanco_img, 350, 290,  128, 128,null);
 			}
 			
 			if(!picaDestacar) {
-				g.drawImage(media.picablanca_IMG, 520, 450, null);
+				g.drawImage(media.downNegro_img, 520, 450,  128, 128,null);
 			}else {
-				g.drawImage(media.picanegra_IMG, 520, 450, null);
+				g.drawImage(media.downBlanco_img, 520, 450,  128, 128,null);
 			}
 			
 			if(!trebDestacar) {
-				g.drawImage(media.trebolblanco_IMG, 690, 290, null);
+				g.drawImage(media.rightNegro_img, 690, 290, 128, 128, null);
 			}else {
-				g.drawImage(media.trebolnegro_IMG, 690, 290, null);
+				g.drawImage(media.rightBlanco_img, 690, 290, 128, 128, null);
 			}
 			
 			g.drawImage(media.crossarrow_IMG, 520, 285, null);

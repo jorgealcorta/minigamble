@@ -26,31 +26,7 @@ import javax.swing.ImageIcon;
  */
 public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 	
-	private ImageIcon background;	// Fondo
-	
-	private ImageIcon text;         // Imagen del texto por defecto
-	private ImageIcon textCorrect;	// Imagen del texto valido
-	private ImageIcon textError;	// Imagen del texto no valido
-	private ImageIcon textWrite;	// Imagen del texto habilitado para escribir
-	private ImageIcon bBack_false;		// boton volver atras 
-	private ImageIcon bBack_true;
-	
-	private ImageIcon bStart_false;
-	private ImageIcon bStart_true;
-	
-	
-	private Image backgroundIMG;
-	private Image textIMG_grey;
-	private Image textIMG_green;
-	private Image textIMG_red;
-	private Image textIMG_write;
-	private Image bBackIMG_false;
-	private Image bBackIMG_true;
-	
-	private Image bStartIMG_false;
-	private Image bStartIMG_true;
-	
-	private Font customFontBot;
+
 	
 	private int usuario_state = 1;		// Estado del usuario -> 1:defecto, 2:Correcto, 3:incorrecto, 0:Habilitado para escribir
 	private int contrasena_state = 1;
@@ -64,9 +40,7 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 	
 	
 	private boolean bBack_state = false;
-	
-	private Font texto;
-	
+		
 	private int mox;				//Posicion en la que se presiona el raton
 	private int moy;
 	private int mdx;
@@ -75,47 +49,7 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 	/**
 	 * Constructor de SignIn
 	 */
-	public SignIn() {
-		
-		try {
-			background = new ImageIcon( Game.class.getResource("multimedia/fondoInicioRecortado.png").toURI().toURL() );			//Cargo todas las imagenes como iconos
-			
-			text = new ImageIcon( Game.class.getResource("multimedia/greyTextPath.png").toURI().toURL() );
-			textCorrect = new ImageIcon( Game.class.getResource("multimedia/greenTextPath.png").toURI().toURL() );
-			textError = new ImageIcon( Game.class.getResource("multimedia/redTextPath.png").toURI().toURL() );
-			textWrite = new ImageIcon( Game.class.getResource("multimedia/writeTextPath.png").toURI().toURL() );
-			bBack_false = new ImageIcon( Game.class.getResource("multimedia/green_back1.png").toURI().toURL() );
-			bBack_true = new ImageIcon( Game.class.getResource("multimedia/green_back2.png").toURI().toURL() );
-			
-			bStart_false = new ImageIcon( Game.class.getResource("multimedia/blue_button2.png").toURI().toURL() );
-			bStart_true = new ImageIcon( Game.class.getResource("multimedia/blue_button3.png").toURI().toURL() );
-			
-			
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}
-		
-		backgroundIMG = background.getImage();	// Paso todos los iconos a imagenes
-		
-		textIMG_grey = text.getImage();
-		textIMG_green = textCorrect.getImage();
-		textIMG_red = textError.getImage();
-		textIMG_write= textWrite.getImage();
-		bBackIMG_false = bBack_false.getImage();
-		bBackIMG_true = bBack_true.getImage();
-		
-		bStartIMG_false = bStart_false.getImage();
-		bStartIMG_true = bStart_true.getImage();
-		
-		texto = new Font("arial", 1 ,30); //Fuente del campo de texto
-		
-		try {
-			customFontBot = Font.createFont(Font.TRUETYPE_FONT, Inicio.class.getResourceAsStream("fuentes/fuenteBot.ttf"));
-			customFontBot=customFontBot.deriveFont(Font.PLAIN,20);
-		} catch (FontFormatException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public SignIn() {		
 	}
 	
 
@@ -168,9 +102,7 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 				}			
 			}
 			
-			
-			
-			
+						
 			if (usuario_state == 2) {
 				if( mouseOver(mox, moy, 500, 295, 190, 45) ){	// si se presiona encima del campo de texto
 					contrasena_state = 0;								// cambia el estado a hablilitado para escribir
@@ -195,11 +127,7 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 				}	
 			}
 			
-			
-			
-			
-			
-			
+						
 			if( mouseOver(mox, moy, 25, 50, 40, 30) ){	// si se presiona encima del boton back se cambia su estado
 				bBack_state = true;
 				try {																				//Reproduce el archivo de sonido 1
@@ -211,9 +139,6 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 		        	System.out.println("error");
 		        }
 			}
-			
-			
-			
 		}
 	}
 	
@@ -236,11 +161,8 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 				BaseDatos.insertarJugador(usuario, contrasena_segura);
 				int idPart = BaseDatos.insertarPartida(usuario);
 				Game.partida  = new Partida(0,0,0, usuario, idPart);
-				
 			}
-			
-			
-			
+						
 			if(bBack_state == true){																// si se ha presionado y soltado encima del segundo boton termina el programa y suena
 				try {																				//Reproduce el archivo de sonido 2
 			        Clip sonido = AudioSystem.getClip();
@@ -370,46 +292,46 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 		
 		
 		
-		g.drawImage(backgroundIMG, 0, 0, null);   // Dibuja el fondo
+		g.drawImage(media.FondoFichas_img, 0, 0, null);   // Dibuja el fondo
 
-		g.setFont(texto);
-		g.setFont(customFontBot);
+	
+		g.setFont(media.customFontBot);
 		if(usuario_state == 1) {									// Dibuja la imagen texto por defecto y texto del string usuario
-			g.drawImage(textIMG_grey, 500, 194, null);
+			g.drawImage(media.textIMG, 500, 194, null);
 			g.drawString("User", 547, 227);			
 		}else if(usuario_state == 2) {								// Dibuja la imagen texto correcto y texto del string usuario
-			g.drawImage(textIMG_green, 500, 194, null);		
+			g.drawImage(media.textCorrectIMG, 500, 194, null);		
 			g.drawString(usuario, 507, 227);		
 		}else if(usuario_state == 3) {								// Dibuja la imagen texto incorrecto y texto del string usuario
-			g.drawImage(textIMG_red, 500, 194, null);		
+			g.drawImage(media.textErrorIMG, 500, 194, null);		
 			g.drawString(usuario, 507, 227);		
 		}else {													// Dibuja la imagen texto habilitado y texto del string usuario
-			g.drawImage(textIMG_write, 500, 194, null);		
+			g.drawImage(media.textWriteIMG, 500, 194, null);		
 			g.drawString(usuario, 507, 227);		
 		}
 		
 		if(usuario_state == 2) {
 			if(contrasena_state == 1) {									// Dibuja la imagen texto por defecto y texto del string usuario
-				g.drawImage(textIMG_grey, 500, 294, null);
+				g.drawImage(media.textIMG, 500, 294, null);
 				g.drawString("Password", 510, 327);			
 			}else if(contrasena_state == 2) {								// Dibuja la imagen texto correcto y texto del string usuario
-				g.drawImage(textIMG_green, 500, 294, null);		
+				g.drawImage(media.textCorrectIMG, 500, 294, null);		
 				g.drawString(contrasena_oculta, 515, 327);		
 			}else if(contrasena_state == 3) {								// Dibuja la imagen texto incorrecto y texto del string usuario
-				g.drawImage(textIMG_red, 500, 294, null);		
+				g.drawImage(media.textErrorIMG, 500, 294, null);		
 				g.drawString(contrasena_oculta, 515, 327);		
 			}else {													// Dibuja la imagen texto habilitado y texto del string usuario
-				g.drawImage(textIMG_write, 500, 294, null);		
+				g.drawImage(media.textWriteIMG, 500, 294, null);		
 				g.drawString(contrasena_oculta, 515, 327);		
 			}
 		}
 		
 		if(usuario_state == 2 && contrasena_state == 2) {
 			if(bstart_state == true) {				// Dibuja el boton Log In y texto del botón presionado
-				g.drawImage(bStartIMG_true, 500, 394, null);
+				g.drawImage(media.bStartIMG_True, 500, 394, null);
 				g.drawString("Start", 545, 426);			
 			}else {								// Dibuja el boton Log In y texto del boton sin presionar
-				g.drawImage(bStartIMG_false, 500, 390, null);		
+				g.drawImage(media.bStartIMG_False, 500, 390, null);		
 				g.drawString("Start", 545, 422);		
 			}
 			
@@ -419,9 +341,9 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 		
 		
 		if(bBack_state == true) {					// Dibuja el boton Back y texto del boton presionado
-			g.drawImage(bBackIMG_true, 25, 54, null);
+			g.drawImage(media.bBack_true_img, 25, 54, null);
 		}else {									// Dibuja el boton Back y texto del boton sin presionar
-			g.drawImage(bBackIMG_false, 25, 50, null);
+			g.drawImage(media.bBack_false_img, 25, 50, null);
 		}
 		
 	}
