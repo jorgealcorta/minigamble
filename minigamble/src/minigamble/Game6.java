@@ -133,7 +133,7 @@ public class Game6 implements KeyListener{
 				(key == 38 && f.getDir() == "arr") ||
 				(key == 40 && f.getDir() == "abj") ||
 				(key == 39 && f.getDir() == "dch")) && 
-				f.getY()>386 && f.getY()<514) {
+				f.getY()>428 && f.getY()<559) {
 					algunAcierto = true;
 					aciertoReciente = true;
 				
@@ -172,29 +172,29 @@ public class Game6 implements KeyListener{
 	public void render(Graphics g) {
 		
 		if(VentanaPrincipal.soWindows) {
-			g.drawImage(media.tapeteImg, 0, 0, 1184, 663, null);
+			g.drawImage(media.tapeteChainz_IMG, 0, 0, 1184, 663, null);
 		}else {
-			g.drawImage(media.tapeteImg, 0, 0, 1200, 672, null);
+			g.drawImage(media.tapeteChainz_IMG, 0, 0, 1200, 672, null);
 		}
 		
-		g.drawImage(media.flechaizqtrans_IMG, 250, 450, 128, 128, null);
-		g.drawImage(media.flechaarrtrans_IMG, 450, 450, 128, 128, null);
-		g.drawImage(media.flechaabjtrans_IMG, 650, 450, 128, 128, null);
-		g.drawImage(media.flechadchtrans_IMG, 850, 450, 128, 128, null);
+		g.drawImage(media.flechaizqtrans_IMG, 240, 495, 128, 128, null);
+		g.drawImage(media.flechaarrtrans_IMG, 435, 495, 128, 128, null);
+		g.drawImage(media.flechaabjtrans_IMG, 623, 495, 128, 128, null);
+		g.drawImage(media.flechadchtrans_IMG, 820, 495, 128, 128, null);
 		
 		g.setColor(Color.WHITE);
 		g.setFont(media.customFontBot);
-		g.drawString(String.valueOf(puntLocal), 150, 400);
+		g.drawString(String.valueOf(puntLocal), 1050, 100);
 		
 		for(Flecha f : flechasActivas) {
 			if(f.getDir() == "izq" && f.getY()<700) {
-				g.drawImage(media.flechaizq_IMG, 250, f.getY(), 128, 128, null);
+				g.drawImage(media.flechaizq_IMG, 240, f.getY(), 128, 128, null);
 			}else if (f.getDir() == "arr" && f.getY()<700) {
-				g.drawImage(media.flechaarr_IMG, 450, f.getY(), 128, 128, null);
+				g.drawImage(media.flechaarr_IMG, 435, f.getY(), 128, 128, null);
 			}else if (f.getDir() == "abj" && f.getY()<700) {
-				g.drawImage(media.flechaabj_IMG, 650, f.getY(), 128, 128, null);
+				g.drawImage(media.flechaabj_IMG, 623, f.getY(), 128, 128, null);
 			}else if (f.getDir() == "dch" && f.getY()<700) {
-				g.drawImage(media.flechadch_IMG, 850, f.getY(), 128, 128, null);
+				g.drawImage(media.flechadch_IMG, 820, f.getY(), 128, 128, null);
 
 			}
 		}

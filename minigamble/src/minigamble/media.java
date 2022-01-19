@@ -155,6 +155,7 @@ public class media {
 	public static ImageIcon flechaizq;
 	public static ImageIcon flechaizqtrans;
 	
+	public static ImageIcon tapeteChainz;
 	
 	public static Image flechaabj_IMG;
 	public static Image flechaabjtrans_IMG;
@@ -167,6 +168,8 @@ public class media {
 	
 	public static Image flechaizq_IMG;
 	public static Image flechaizqtrans_IMG;
+	
+	public static Image tapeteChainz_IMG;
 	
 	//GAME7
 	
@@ -270,6 +273,8 @@ public class media {
 			flechaizq = new ImageIcon(Game.class.getResource("multimedia/arrowsFalling/flechaLeft.png").toURI().toURL() );
 			flechaizqtrans = new ImageIcon(Game.class.getResource("multimedia/arrowsFalling/negativeLeft.png").toURI().toURL() );
 			
+			tapeteChainz = new ImageIcon(Game.class.getResource("multimedia/tapeteChainz.png").toURI().toURL() );
+			
 			//GAME7
 			
 			circleIcn = new ImageIcon(Game.class.getResource("multimedia/circle.png").toURI().toURL() );
@@ -366,6 +371,8 @@ public class media {
 		
 		flechaizq_IMG = flechaizq.getImage();
 		flechaizqtrans_IMG = flechaizqtrans.getImage();
+		
+		tapeteChainz_IMG = tapeteChainz.getImage();
 		
 		//GAME7
 		
