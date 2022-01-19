@@ -52,6 +52,26 @@ public class BaseDatosTest {
 		
 		assertFalse(BaseDatos.existeNombre(nombreQueNoExiste));
 		// El nombre "juan no se encuentra incluido en el .txt que rellena la BBDD al pricipio"
+	}
+	
+	@Test
+	public void testCompararContrasena() {
+		
+		String nombreCorrecto = "admin";
+		String nombreIncorrecto = "ADMIN";
+		
+		String contrasenaCorrecta = "admin";
+		String contrasenaIncorrecta = "ADMIN";
+		
+		assertTrue(BaseDatos.comparaContrasena(nombreCorrecto, contrasenaCorrecta));
+		
+		assertFalse(BaseDatos.comparaContrasena(nombreIncorrecto, contrasenaCorrecta));
+		
+		assertFalse(BaseDatos.comparaContrasena(nombreCorrecto, contrasenaIncorrecta));
+		
+		assertFalse(BaseDatos.comparaContrasena(nombreIncorrecto, contrasenaIncorrecta));
+		
+		
 		
 	}
 	
