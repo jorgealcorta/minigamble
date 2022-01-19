@@ -13,7 +13,7 @@ public class BaseDatosTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		BaseDatos.abrirConexion( "test.bd", true );
+		BaseDatos.abrirConexion( "test.db", true );
 	}
 
 	@After
@@ -43,4 +43,17 @@ public class BaseDatosTest {
 		assertTrue( BaseDatos.insertarPartida("Juan") >= antId);
 	}
 
+	@Test
+	public void testExisteNombre(){
+		String nombreQueExiste = "admin";
+		String nombreQueNoExiste = "juan";
+		
+		assertTrue(BaseDatos.existeNombre(nombreQueExiste));
+		
+		assertFalse(BaseDatos.existeNombre(nombreQueNoExiste));
+		// El nombre "juan no se encuentra incluido en el .txt que rellena la BBDD al pricipio"
+		
+	}
+	
+	
 }
