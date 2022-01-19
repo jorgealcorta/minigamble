@@ -126,7 +126,6 @@ public class Game6 implements KeyListener{
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		int key = e.getKeyCode();
-		System.out.println(key);
 //		izq 37
 //		arr 38
 //		abj 40
@@ -141,6 +140,8 @@ public class Game6 implements KeyListener{
 				(key == 40 && f.getDir() == "abj") ||
 				(key == 39 && f.getDir() == "dch")) && 
 				f.getY()>386 && f.getY()<514) {
+					
+					System.out.println("acierto");
 					algunAcierto = true;
 					aciertoReciente = true;
 				
@@ -165,7 +166,7 @@ public class Game6 implements KeyListener{
 			}
 		}
 		
-		System.out.println("miss");
+		if(!aciertoReciente) System.out.println("miss");
 		if(!aciertoReciente) fallos++;
 		
 	}
