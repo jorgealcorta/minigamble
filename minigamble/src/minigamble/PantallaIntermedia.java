@@ -23,6 +23,7 @@ public class PantallaIntermedia implements KeyListener{
 	private int idPartida;
 	private int puntLocal;
 	private int rondas = 1;
+	private int check =1;
 	
 	public static boolean hiloPuntosAcabado = false;
 	public static int puntosDisplay = 0;
@@ -39,8 +40,7 @@ public class PantallaIntermedia implements KeyListener{
 	private Font fontPuntos;
 	
 	public PantallaIntermedia(int puntos, int puntLocal, int vidasRestadas, int miniJugado, String jugador, int idPartida) {
-		System.out.println(" vidas partida" + Partida.vidas);
-		System.out.println(" vidas restadas" + vidasRestadas);
+		
 		
 		this.puntos = puntos;
 		this.vidasRestadas = vidasRestadas;
@@ -48,8 +48,13 @@ public class PantallaIntermedia implements KeyListener{
 		this.idPartida = idPartida;
 		this.puntLocal = puntLocal;
 		
+		
+				
 		hiloPuntosAcabado = false;
 		puntosDisplay = puntos;
+		
+		
+		System.out.println("PantallaIntermedia creada con vidasRestadas" + this.vidasRestadas + " vidas de partida "+ Game.partida.vidas+  " y puntos " + puntos +"  mas "+ puntLocal);
 		
 		PantallaIntermedia.miniJugado = miniJugado;
 
@@ -97,26 +102,31 @@ public class PantallaIntermedia implements KeyListener{
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		int key = e.getKeyCode();
 		
-		if(key == 32 && Game.estadoJuego == ESTADO.PantallaIntermedia) {
+		if (this.check ==1) {
+			this.check--;
 			
-			System.out.println("segundo");
-			while(hvd.isAlive()) {
-				try {
-					hvd.interrupt();
-				}catch(Exception e1) {
+			System.out.println("seguimiento2 de " + this.vidasRestadas);
+			int key = e.getKeyCode();
+			
+			if(key == 32 && Game.estadoJuego == ESTADO.PantallaIntermedia) {
+				
+				System.out.println("segundo");
+				while(hvd.isAlive()) {
+					try {
+						hvd.interrupt();
+					}catch(Exception e1) {
+					}
 				}
-			}
-			if(!hvd.isAlive()) {
-				System.out.println("vidas matadas");
-			}else {
-				System.out.println("vidas vivas");
-			}
-			hpd.interrupt();
-			System.out.println("pi creado nueva partida");
-			Game.partida  = new Partida(puntos+puntLocal, this.vidasRestadas, miniJugado, jugador, idPartida);
-			
+				if(!hvd.isAlive()) {
+					System.out.println("vidas matadas");
+				}else {
+					System.out.println("vidas vivas");
+				}
+				hpd.interrupt();
+				System.out.println("Llamada de panmtallaintermedia , crear nueva partida (puntosLocal = " + " puntTotal"+ " + " + puntos + " puntos ,vidasrestadas "+  this.vidasRestadas );
+				Game.partida  = new Partida(puntos+puntLocal, this.vidasRestadas, miniJugado, jugador, idPartida);
+			}	
 		}
 	}
 
@@ -125,6 +135,14 @@ public class PantallaIntermedia implements KeyListener{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public void showrestadas() {
+		System.out.println(this.vidasRestadas);
+		
+		
+	}
+	
+	
 	
 	public void render(Graphics g) {
 		g.setColor(Color.decode("#208b3a"));

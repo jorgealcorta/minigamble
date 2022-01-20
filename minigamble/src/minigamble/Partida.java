@@ -12,7 +12,7 @@ import minigamble.Game.ESTADO;
 public class Partida {
 	
 	public static int puntuacionGeneral = media.puntInicial;
-	public static int vidas = media.numVidas;
+	public static int vidas ;
 	
 	public static ArrayList<Integer> minisJugados = new ArrayList<Integer>();
 		
@@ -27,12 +27,18 @@ public class Partida {
 	 */
 	public Partida(int puntuacion, int vidasRestadas, int miniJugado, String jugador, int idPartida) { //meter arraylist como atributo
 		
-		System.out.println("puntuacion:" +puntuacionGeneral);
-				
+		
+		
+		if(!(vidas==1||vidas ==2 ||vidas ==3)) {
+			vidas = media.numVidas;
+			
+		}
+			
+		
 		minisJugados.add(miniJugado);
 		puntuacionGeneral += puntuacion;
 		vidas -= vidasRestadas; //OJO, ESTA RESTANDO
-		System.out.println("nueva partida vidas " +vidas);
+		System.out.println("nueva partida creada de vidas " +vidas + " y  puntuacion "+ puntuacionGeneral);
 		
 		ArrayList<ESTADO> minijuegos = new ArrayList<ESTADO>();
 
