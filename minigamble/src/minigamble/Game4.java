@@ -45,7 +45,7 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 	private int mdx;
 	private int mdy;
 	
-	// Hilo que se utilizar� para gestionar las dianas activas.
+	// Hilo que se utilizar� para gestionar las dianas activas.
 	private Thread hda;
 	
 	public static int puntos;
@@ -161,6 +161,41 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 	}
 	
 	
+	/**
+	 * Reproduce el sonido del disparo
+	 */
+	private void sonidoDisparo() {
+		String filePath = new File("").getAbsolutePath();				// Ruta hasta el proyecto
+		String s1_filePath = filePath.concat("/minigamble/src/minigamble/sonido/Game4/disparo.wav");	//Continuación de la ruta hasta el archivo de audio 1
+		try {																				
+	        Clip sonido = AudioSystem.getClip();
+			AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s1_filePath));
+	        sonido.open(ais);
+	        sonido.start();
+        }catch(Exception e2) {
+        	System.out.println("error");
+        }
+		
+	}
+	
+	/**
+	 * Reproduce el sonido de acertar
+	 */
+	private void sonidoDiana() {
+		String filePath = new File("").getAbsolutePath();				// Ruta hasta el proyecto
+		String s1_filePath = filePath.concat("/minigamble/src/minigamble/sonido/Game4/diana.wav");	//Continuación de la ruta hasta el archivo de audio 1
+		try {																				
+	        Clip sonido = AudioSystem.getClip();
+			AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s1_filePath));
+	        sonido.open(ais);
+	        sonido.start();
+        }catch(Exception e2) {
+        	System.out.println("error");
+        }
+		
+	}
+	
+	
 	/**	Evalua si el raton esta sobre una region
 	 * @param mx posicion X del raton
 	 * @param my posicion Y del raton
@@ -200,9 +235,7 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 			moy = e.getY();
 			
 			//Reproducir sonido
-			String filePath = new File("").getAbsolutePath();				// Ruta hasta el proyecto
-			String s1_filePath = filePath.concat("/minigamble/src/minigamble/sonido/click1.wav");	//Continuacion de la ruta hasta el archivo de audio 1
-//			String escopeta_filePath = filePath.concat()
+			sonidoDisparo();
 			
 			
 			/*
@@ -213,6 +246,7 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 			for(Diana d : dianasActivas) {
 				
 				if(e.getX() >= d.getX() && e.getX() <= d.getX() + d.getSize() && e.getY() >= d.getY() && e.getY() <= d.getY() + d.getSize() && !d.isRota()) {
+					sonidoDiana();
 					System.out.println("acierto");
 					d.setRota(true);
 					
@@ -257,14 +291,7 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 					
 					// Reproducir clip de sonido al disparar
 					
-					try {																				
-				        Clip sonido = AudioSystem.getClip();
-						AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s1_filePath));
-				        sonido.open(ais);
-				        sonido.start();
-			        }catch(Exception e2) {
-			        	System.out.println("error");
-			        }
+					
 					
 				}
 				
