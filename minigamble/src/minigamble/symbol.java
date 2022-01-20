@@ -65,6 +65,7 @@ public class symbol  {
 				this.ypos = this.ypos+numPix-600;
 				this.image = getRandom();
 				
+				
 			}else {
 				this.ypos = this.ypos+numPix;
 			}
@@ -73,7 +74,9 @@ public class symbol  {
 	
 	public static int getRandom() {
 	    int rnd = new Random().nextInt(Game5.symbols.size());
+	    System.out.println("newrand" + rnd );
 	    return rnd;
+	    
 	}
 
 }

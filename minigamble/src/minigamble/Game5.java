@@ -77,10 +77,15 @@ public class Game5 implements Runnable , KeyListener{
 			dificultad = 4;
 		}
 
-		symbols.add(media.imageS1);
-		symbols.add(media.imageS2);
-		symbols.add(media.imageS3);
-		symbols.add(media.imageS4);
+		if(symbols.size()==0) {
+			
+			symbols.add(media.imageS1);
+			symbols.add(media.imageS2);
+			symbols.add(media.imageS3);
+			symbols.add(media.imageS4);
+			
+		}
+
 
 		sym1 = new symbol();
 		sym2 = new symbol();
@@ -173,10 +178,13 @@ public class Game5 implements Runnable , KeyListener{
 					sym3.setMoving(false);
 
 					if(150 <= sym1.getYpos() && sym1.getYpos()<350) {
+						
 						chos1=sym1.getImage();
 					}else if(150 <= sym2.getYpos() && sym2.getYpos()<350) {
+						chos1=0;
 						chos1=sym2.getImage();
 					} else {
+						
 						chos1=sym3.getImage();
 					}
 					System.out.println(chos1);
