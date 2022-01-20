@@ -38,8 +38,6 @@ public class Partida {
 		minisJugados.add(miniJugado);
 		puntuacionGeneral += puntuacion;
 		vidas -= vidasRestadas; //OJO, ESTA RESTANDO
-		System.out.println("nueva partida creada de vidas " +vidas + " y  puntuacion "+ puntuacionGeneral);
-		
 		ArrayList<ESTADO> minijuegos = new ArrayList<ESTADO>();
 
 		minijuegos.add(ESTADO.Game1);

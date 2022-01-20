@@ -20,7 +20,7 @@ public class Game7 implements MouseListener {
 	private int mox;
 	private int moy;
 	
-	private int start=0;	
+	private int start=1;	
 	private int firstX=-1;
 	private int firstY=-1;
 	private long tiempoComienzo = System.currentTimeMillis();
@@ -29,6 +29,7 @@ public class Game7 implements MouseListener {
 	int idPartida;
 	String jugador;
 	int puntTotal;
+	private int check;
 		
 	/**
 	 * Constructor del juego 7
@@ -42,6 +43,7 @@ public class Game7 implements MouseListener {
 		puntTotal = dificultad;
 		jugador = nombreJugador;
 		idPartida = idPart;
+		check =0;
 		
 	}
 	
@@ -326,14 +328,10 @@ public class Game7 implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		
-		if(start==0){
-			mox = e.getX();	
-			moy = e.getY();
+		if(check ==0){
+			check ++;
 			
-			if(mouseOver(mox, moy, 0, 0, 100, 100)){
-					start=1;
-			}
-		}
+		}else {
 		
 
 					
@@ -448,7 +446,8 @@ public class Game7 implements MouseListener {
 						}
 					}
 				}				
-			}		
+			
+			}}		
 		}
 	}
 	
@@ -472,16 +471,6 @@ public class Game7 implements MouseListener {
 	
 	public void render(Graphics g){
 		
-		if(start==0) {
-			if(VentanaPrincipal.soWindows) {
-				g.drawImage(media.tapeteImg, 0, 0, 1184, 663, null);
-			}else {
-				g.drawImage(media.tapeteImg, 0, 0, 1200, 672, null);
-			}
-			g.drawRect(0, 0, 100, 100);
-			
-		}
-			
 		if(start==1) {
 			g.drawImage(media.tapeteImg, 0, 0, 1184, 663, null);
 			
