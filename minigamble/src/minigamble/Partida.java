@@ -61,10 +61,16 @@ public class Partida {
 		
 
 
-		rand=6	 ; //PARA HACER PRUEBAS, LUEGO BORRARRRRRRRRRRRRRRRRRRRRRRRR
+		rand=0	 ; //PARA HACER PRUEBAS, LUEGO BORRARRRRRRRRRRRRRRRRRRRRRRRR
 
 
 		if(vidas<1 ) {
+			BaseDatos.cambiarPuntTotal(idPartida, puntuacion);
+			if(jugador != null) {
+				int puntos = BaseDatos.obtenerMaxPunt(jugador);
+				BaseDatos.cambiarMaxPunt(jugador, puntos);
+			
+			}
 			Game.estadoJuego= ESTADO.Start;
 			Game.again();
 		}else {				
