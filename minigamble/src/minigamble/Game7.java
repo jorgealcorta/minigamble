@@ -438,6 +438,7 @@ public class Game7 implements MouseListener {
 									BaseDatos.insertarGame7(idPartida, 100 , tiempoTotal, firstX, firstY );
 									
 									//Game.partida  = new Partida( 100 ,0 , 6	, jugador, idPartida);
+									System.out.println("");							
 									Game.pi = new PantallaIntermedia(puntTotal, 100, 0, 6, jugador, idPartida);
 									Game.estadoJuego = ESTADO.PantallaIntermedia;
 									Game.eventoRaton();
@@ -491,6 +492,8 @@ public class Game7 implements MouseListener {
 					}
 				}
 			}
+			
+			
 		}
 		
 		if(start==2) {

@@ -124,6 +124,9 @@ public class PantallaIntermedia implements KeyListener{
 					System.out.println("vidas vivas");
 				}
 				hpd.interrupt();
+				
+				System.out.println("creando partida de puntLocal mas pumtod de "  + puntos+puntLocal);
+				
 				Game.partida  = new Partida(puntos+puntLocal, this.vidasRestadas, miniJugado, jugador, idPartida);
 			}	
 		}
