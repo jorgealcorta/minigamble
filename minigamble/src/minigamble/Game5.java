@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
@@ -14,6 +15,9 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 
 import minigamble.Game.ESTADO;
@@ -56,6 +60,7 @@ public class Game5 implements Runnable , KeyListener{
 	private int dificultad;
 	private long tiempoComienzo = System.currentTimeMillis();
 	private long tiempoTotal;
+	Clip sonido1;
 
 	public Game5(int dificultad, String nombreJugador, int idPart) {
 
@@ -159,6 +164,7 @@ public class Game5 implements Runnable , KeyListener{
 		if(start==0) {
 			if(e.getKeyCode()==32) {
 				start=1;
+				sonidoTragaperras();
 				sym1.setMoving(true);
 				sym2.setMoving(true);
 				sym3.setMoving(true);
@@ -172,6 +178,7 @@ public class Game5 implements Runnable , KeyListener{
 		} else if(start==1) {
 			if(e.getKeyCode()==32) {
 				if(count==0) {
+					sonidoPalanca();
 					count++;
 					sym1.setMoving(false);
 					sym2.setMoving(false);
@@ -201,6 +208,7 @@ public class Game5 implements Runnable , KeyListener{
 					}
 
 				}else if(count==1) {
+					sonidoPalanca();
 					count++;
 					sym4.setMoving(false);
 					sym5.setMoving(false);
@@ -217,7 +225,7 @@ public class Game5 implements Runnable , KeyListener{
 					System.out.println(chos2);
 
 				}else if(count==2) {
-					{
+					sonidoPalanca();
 					count++;
 					sym7.setMoving(false);
 					sym8.setMoving(false);
@@ -231,13 +239,14 @@ public class Game5 implements Runnable , KeyListener{
 						chos3=sym9.getImage();
 					}
 					System.out.println(chos3);
-
+					
+					sonido1.stop();
 
 					if(chos1==chos2 && chos2==chos3) {
+						
 						start=3;
 						tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
 						BaseDatos.insertarGame5(idPartida, 500, elegido, tiempoTotal, "true", dificultad);
-
 						Game.pi = new PantallaIntermedia(PuntTotal, 500, 0, 4, jugador, idPartida);
 						Game.estadoJuego = ESTADO.PantallaIntermedia;
 						Game.eventoRaton();
@@ -256,12 +265,47 @@ public class Game5 implements Runnable , KeyListener{
 
 					}
 
-					}
 				}
 			}
 
 		}
 
+	}
+	
+	
+	
+	/**
+	 * Reproduce el sonido de la palanca
+	 */
+	private void sonidoPalanca() {
+		String filePath = new File("").getAbsolutePath();				// Ruta hasta el proyecto
+		String s1_filePath = filePath.concat("/minigamble/src/minigamble/sonido/Game5/palanca.wav");	//Continuación de la ruta hasta el archivo de audio 1
+		try {																				
+	        Clip sonido = AudioSystem.getClip();
+			AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s1_filePath));
+	        sonido.open(ais);
+	        sonido.start();
+        }catch(Exception e2) {
+        	System.out.println("error");
+        }
+		
+	}
+	
+	/**
+	 * Reproduce el sonido de la palanca
+	 */
+	private void sonidoTragaperras() {
+		String filePath = new File("").getAbsolutePath();				// Ruta hasta el proyecto
+		String s1_filePath = filePath.concat("/minigamble/src/minigamble/sonido/Game5/tragaperras3.wav");	//Continuación de la ruta hasta el archivo de audio 1
+		try {																				
+	        sonido1 = AudioSystem.getClip();
+			AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s1_filePath));
+	        sonido1.open(ais);
+	        sonido1.loop(Clip.LOOP_CONTINUOUSLY);
+        }catch(Exception e2) {
+        	System.out.println("error");
+        }
+		
 	}
 
 	private void delayMS(int n) {
