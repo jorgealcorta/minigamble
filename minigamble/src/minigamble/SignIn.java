@@ -338,6 +338,7 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 			g.drawImage(media.bBack_true_img, 25, 54, null);
 		}else {									// Dibuja el boton Back y texto del boton sin presionar
 			g.drawImage(media.bBack_false_img, 25, 50, null);
+			g.drawString("oo", 25, 50);
 		}
 		
 	}

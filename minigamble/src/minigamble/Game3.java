@@ -98,7 +98,7 @@ public class Game3 implements MouseListener , MouseMotionListener {
 		allLabs.add(lab4);
 		
 		//thisLab = getRandom(allLabs, puntTotal);		
-		thisLab = allLabs.get(2);
+		thisLab = allLabs.get(0);
 		
 		
 		try {

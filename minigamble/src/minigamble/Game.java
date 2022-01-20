@@ -17,7 +17,7 @@ public class Game extends Canvas implements Runnable{
 	
 
 	public static int game4Check =0;
-	public static int game5Check =0;
+	
 	public static int game6Check =0;
 	public static int game7Check =0;
 	public static int piCheck =0;
@@ -114,9 +114,8 @@ public class Game extends Canvas implements Runnable{
 			game4Check=1;
 			System.out.println("game4 listener add");
 			
-		}else if(estadoJuego == ESTADO.Game5 && game5Check==0) {
+		}else if(estadoJuego == ESTADO.Game5) {
 			game.addKeyListener(game5);
-			game5Check=1;
 			System.out.println("game5 listener add");
 			
 		}else if(estadoJuego == ESTADO.Game6 && game6Check==0) {
