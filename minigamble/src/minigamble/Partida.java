@@ -28,12 +28,11 @@ public class Partida {
 	public Partida(int puntuacion, int vidasRestadas, int miniJugado, String jugador, int idPartida) { //meter arraylist como atributo
 		
 		System.out.println("puntuacion:" +puntuacionGeneral);
-		System.out.println("vidas;"+vidas); 
-		
+				
 		minisJugados.add(miniJugado);
 		puntuacionGeneral += puntuacion;
 		vidas -= vidasRestadas; //OJO, ESTA RESTANDO
-		System.out.println(vidas);
+		System.out.println("nueva partida vidas " +vidas);
 		
 		ArrayList<ESTADO> minijuegos = new ArrayList<ESTADO>();
 
@@ -58,11 +57,12 @@ public class Partida {
 		
 
 
-		rand=4	 ; //PARA HACER PRUEBAS, LUEGO BORRARRRRRRRRRRRRRRRRRRRRRRRR
+		rand=6	 ; //PARA HACER PRUEBAS, LUEGO BORRARRRRRRRRRRRRRRRRRRRRRRRR
 
 
 		if(vidas<1 ) {
 			Game.estadoJuego= ESTADO.Start;
+			Game.again();
 		}else {				
 			if(rand == 0) {
 				Game.game1 = new Game1(puntuacionGeneral, jugador, idPartida);

@@ -174,8 +174,6 @@ public class Game7 implements MouseListener {
 	
 	public double probab(int[][] matProb, int alpha) {
 		
-		System.out.println("count matr like: " + count(matProb));
-		System.out.println("check like: " + checkRow(matProb));
 		
 		if(count(matProb) == 0) {
 			return checkRow(matProb);			
@@ -191,8 +189,7 @@ public class Game7 implements MouseListener {
 				for(int j=0; j<=2; j++) {
 					if(matProb[i][j]==0) {
 						
-						System.out.println("zero in " +j+" "+ i);
-						
+												
 						int[][] newMatrix = copied(matProb);
 						
 						if(alpha % 2 == 0) {

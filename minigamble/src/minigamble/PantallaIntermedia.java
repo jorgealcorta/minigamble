@@ -39,6 +39,8 @@ public class PantallaIntermedia implements KeyListener{
 	private Font fontPuntos;
 	
 	public PantallaIntermedia(int puntos, int puntLocal, int vidasRestadas, int miniJugado, String jugador, int idPartida) {
+		System.out.println(" vidas partida" + Partida.vidas);
+		System.out.println(" vidas restadas" + vidasRestadas);
 		
 		this.puntos = puntos;
 		this.vidasRestadas = vidasRestadas;
@@ -112,6 +114,7 @@ public class PantallaIntermedia implements KeyListener{
 				System.out.println("vidas vivas");
 			}
 			hpd.interrupt();
+			System.out.println("pi creado nueva partida");
 			Game.partida  = new Partida(puntos+puntLocal, this.vidasRestadas, miniJugado, jugador, idPartida);
 			
 		}

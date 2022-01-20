@@ -37,10 +37,10 @@ public class Game extends Canvas implements Runnable{
 	public static VentanaPrincipal ventana;
 	
 	private static final long serialVersionUID = -5339514091919298198L;
-	Inicio inicio = new Inicio(); 				// Pantalla inicio
-	StartScreen start = new StartScreen();
-	SignIn signin = new SignIn();
-	LogIn login = new LogIn();
+	static Inicio inicio = new Inicio(); 				// Pantalla inicio
+	static StartScreen start = new StartScreen();
+	static SignIn signin = new SignIn();
+	static LogIn login = new LogIn();
 	public static Game game;
 
 
@@ -80,12 +80,22 @@ public class Game extends Canvas implements Runnable{
 		this.addMouseMotionListener(login);
 		this.addKeyListener(login);
 		
+			
+	}
+	
+	
+	public static void again() {
 		
-//		this.addMouseListener(game1); 				// anyado un mouseListener a la pantalla game1
-//		this.addMouseMotionListener(game1);
-//		this.addKeyListener(game2);
-		
-		
+		game.addMouseListener(inicio); 				// anyado un mouseListener a la pantalla inicio
+		game.addMouseMotionListener(inicio);
+		game.addMouseListener(start); 				// anyado un mouseListener a la pantalla start
+		game.addMouseMotionListener(start);
+		game.addMouseListener(signin); 				// anyado un mouseListener a la pantalla signin
+		game.addMouseMotionListener(signin);
+		game.addKeyListener(signin);
+		game.addMouseListener(login); 				
+		game.addMouseMotionListener(login);
+		game.addKeyListener(login);
 		
 	}
 	
@@ -96,18 +106,15 @@ public class Game extends Canvas implements Runnable{
 			
 			game.addMouseListener(game1);
 			game.addMouseMotionListener(game1);
-			System.out.println("game1 listener add");
-			
+					
 		}else if (estadoJuego == ESTADO.Game2){
 			
 			game.addKeyListener(game2);
-			System.out.println("game2 listener add");
-			
+						
 		}else if(estadoJuego == ESTADO.Game3) {
 			game.addMouseListener(game3);
 			game.addMouseMotionListener(game3);
-			System.out.println("game3 listener add");
-			
+						
 		}else if(estadoJuego == ESTADO.Game4 && game4Check==0) {
 			game.addMouseListener(game4);
 			game.addMouseMotionListener(game4);
@@ -118,15 +125,14 @@ public class Game extends Canvas implements Runnable{
 			game.addKeyListener(game5);
 			System.out.println("game5 listener add");
 			
-		}else if(estadoJuego == ESTADO.Game6 && game6Check==0) {
+		}else if(estadoJuego == ESTADO.Game6) {
 			game.addKeyListener(game6);
-			game6Check=1;
-			System.out.println("game6 listener add");
 			
-		}else if(estadoJuego == ESTADO.Game7 && game7Check==0) {
+			
+			
+		}else if(estadoJuego == ESTADO.Game7 ) {
 			game.addMouseListener(game7);
-			game7Check=1;
-			System.out.println("game7 listener add");
+			
 			
 		}else if(estadoJuego == ESTADO.PantallaIntermedia && piCheck==0) {
 			game.addKeyListener(pi);
