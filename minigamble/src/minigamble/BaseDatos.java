@@ -36,14 +36,14 @@ public class BaseDatos {
 				String sent = "DROP TABLE IF EXISTS jugador";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
-				sent = "CREATE TABLE jugador (nombre varchar(8) PRIMARY KEY, password varchar(33));";
+				sent = "CREATE TABLE jugador (nombre varchar(8) PRIMARY KEY, password varchar(33), puntMax int);";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
 				
 				sent = "DROP TABLE IF EXISTS partida";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
-				sent = "CREATE TABLE partida (id INTEGER PRIMARY KEY AUTOINCREMENT, fecha bigint, nombre varchar(8));";
+				sent = "CREATE TABLE partida (id INTEGER PRIMARY KEY AUTOINCREMENT, fecha bigint, nombre varchar(8), puntTotal int);";
 				logger.log( Level.INFO, "Statement: " + sent );
 				statement.executeUpdate( sent );
 				
@@ -110,7 +110,7 @@ public class BaseDatos {
 					while (scanner.hasNextLine()) {
 						String linea = scanner.nextLine();
 						String[] datos = linea.split( "\t" );
-						sent = "insert into partida (id, fecha, nombre) values (" + datos[0] + ", " + datos[1] + ", '" + datos[2] + "' );";
+						sent = "insert into partida (id, fecha, nombre, puntTotal) values (" + datos[0] + ", " + datos[1] + ", '" + datos[2] + "', " + 0 + " );";
 						logger.log( Level.INFO, "Statement: " + sent );
 						statement.executeUpdate( sent );
 					}
@@ -119,7 +119,7 @@ public class BaseDatos {
 					while (scanner.hasNextLine()) {
 						String linea = scanner.nextLine();
 						String[] datos = linea.split( "\t" );
-						sent = "insert into jugador (nombre, password) values ('" + datos[0] + "', '" + Hash.md5(datos[1]) + "');";
+						sent = "insert into jugador (nombre, password, puntMax) values ('" + datos[0] + "', '" + Hash.md5(datos[1]) + "', " + 0 + ");";
 						logger.log( Level.INFO, "Statement: " + sent );
 						statement.executeUpdate( sent );
 					}
@@ -156,7 +156,7 @@ public class BaseDatos {
 	public static boolean insertarJugador( String nombre, String password) {
 		try (Statement statement = conexion.createStatement()) {
 			password = Hash.md5(password);
-			String sent = "insert into jugador (nombre, password) values ('" + nombre + "','" + password + "');";
+			String sent = "insert into jugador (nombre, password, puntMax) values ('" + nombre + "','" + password + "', 0);";
 			logger.log( Level.INFO, "Statement: " + sent );
 			int insertados = statement.executeUpdate( sent );
 			if (insertados!=1) return false;
@@ -173,7 +173,7 @@ public class BaseDatos {
 	 */
 	public static int insertarPartida( String jugador) {
 		try (Statement statement = conexion.createStatement()) {
-			String sent = "insert into partida (nombre, fecha) values ('" + jugador + "', " + System.currentTimeMillis() +");";
+			String sent = "insert into partida (nombre, fecha, puntTotal) values ('" + jugador + "', " + System.currentTimeMillis() + ", 0);";
 			logger.log( Level.INFO, "Statement: " + sent );
 			int insertados = statement.executeUpdate( sent );
 			if (insertados!=1) return -1;
@@ -417,6 +417,43 @@ public class BaseDatos {
 		}
 	}
 	
+	public static boolean cambiarMaxPunt(String nombre, Integer puntuacion) {
+		try (Statement statement = conexion.createStatement()) {
+			String sent = "update jugador set puntMax = " + puntuacion + " where nombre = '" + nombre + "';";
+			logger.log( Level.INFO, "Statement: " + sent );
+			int modifi = statement.executeUpdate( sent );
+			if (modifi!=1) return false;  // Error en insercion
+			return true;
+		} catch (Exception e) {
+			logger.log( Level.SEVERE, "Excepción", e );
+			return false;
+		}
+	}
 	
+	public static boolean cambiarPuntTotal(int id, Integer puntuacion) {
+		try (Statement statement = conexion.createStatement()) {
+			String sent = "update partida set puntTotal = " + puntuacion + " where id = '" + id + "';";
+			logger.log( Level.INFO, "Statement: " + sent );
+			int modifi = statement.executeUpdate( sent );
+			if (modifi!=1) return false;  // Error en insercion
+			return true;
+		} catch (Exception e) {
+			logger.log( Level.SEVERE, "Excepción", e );
+			return false;
+		}
+	}
+	
+	public static Integer obtenerMaxPunt(String nombre) {
+		try (Statement statement = conexion.createStatement()) {
+			String sent = "select max(puntTotal) as puntuacion from partida where nombre = '" + nombre + "';";
+			logger.log( Level.INFO, "Statement: " + sent );
+			ResultSet rs = statement.executeQuery( sent );
+			int puntuacion = rs.getInt("puntuacion");
+			return puntuacion;
+		} catch (Exception e) {
+			logger.log( Level.SEVERE, "Excepción", e );
+			return null;
+		}
+	}
 	
 }

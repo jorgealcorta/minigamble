@@ -32,7 +32,7 @@ public class VentanaPrincipal extends Canvas{
 		
 		if (new File("minigamble.db").exists()) {
 			// Poner el parámetro a true si se quiere reiniciar la base de datos
-			BaseDatos.abrirConexion( "minigamble.db", false );  // Abrir base de datos existente
+			BaseDatos.abrirConexion( "minigamble.db", true );  // Abrir base de datos existente
 		} else {
 			BaseDatos.abrirConexion( "minigamble.db", true );  // Crear base de datos con datos iniciales
 		}
