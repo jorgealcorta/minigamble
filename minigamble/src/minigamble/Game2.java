@@ -7,10 +7,14 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 
 import minigamble.Game.ESTADO;
@@ -99,6 +103,73 @@ public class Game2 implements KeyListener{
 			
 					
 		}
+	/**
+	 * Reproduce el sonido Izquierda
+	 */
+	private void sonidoIzq() {
+		String filePath = new File("").getAbsolutePath();				// Ruta hasta el proyecto
+		String s1_filePath = filePath.concat("/minigamble/src/minigamble/sonido/simonSays/simonSound1.wav");	//Continuación de la ruta hasta el archivo de audio 1
+		try {																				
+	        Clip sonido = AudioSystem.getClip();
+			AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s1_filePath));
+	        sonido.open(ais);
+	        sonido.start();
+        }catch(Exception e2) {
+        	System.out.println("error");
+        }
+		
+	}
+	
+	/**
+	 * Reproduce el sonido Arriba
+	 */
+	private void sonidoArriba() {
+		String filePath = new File("").getAbsolutePath();				// Ruta hasta el proyecto
+		String s1_filePath = filePath.concat("/minigamble/src/minigamble/sonido/simonSays/simonSound2.wav");	//Continuación de la ruta hasta el archivo de audio 1
+		try {																				
+	        Clip sonido = AudioSystem.getClip();
+			AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s1_filePath));
+	        sonido.open(ais);
+	        sonido.start();
+        }catch(Exception e2) {
+        	System.out.println("error");
+        }
+		
+	}
+	
+	/**
+	 * Reproduce el sonido Izquierda
+	 */
+	private void sonidoDcha() {
+		String filePath = new File("").getAbsolutePath();				// Ruta hasta el proyecto
+		String s1_filePath = filePath.concat("/minigamble/src/minigamble/sonido/simonSays/simonSound3.wav");	//Continuación de la ruta hasta el archivo de audio 1
+		try {																				
+	        Clip sonido = AudioSystem.getClip();
+			AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s1_filePath));
+	        sonido.open(ais);
+	        sonido.start();
+        }catch(Exception e2) {
+        	System.out.println("error");
+        }
+		
+	}
+	
+	/**
+	 * Reproduce el sonido Abajo
+	 */
+	private void sonidoAbajo() {
+		String filePath = new File("").getAbsolutePath();				// Ruta hasta el proyecto
+		String s1_filePath = filePath.concat("/minigamble/src/minigamble/sonido/simonSays/simonSound4.wav");	//Continuación de la ruta hasta el archivo de audio 1
+		try {																				
+	        Clip sonido = AudioSystem.getClip();
+			AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s1_filePath));
+	        sonido.open(ais);
+	        sonido.start();
+        }catch(Exception e2) {
+        	System.out.println("error");
+        }
+		
+	}
 
 	/**
 	 * Realiza un delay en Segundos
@@ -155,24 +226,28 @@ public class Game2 implements KeyListener{
 					for(String palo : palosCorrectos) {
 						
 						if(palo == "cora") {
+							sonidoArriba();
 							coraDestacar = true; 	
 							delayMS(250);
 							coraDestacar = false;
 							delayMS(250);
 						}
 						else if(palo == "diam") {
+							sonidoIzq();
 							diamDestacar = true; 	
 							delayMS(250);
 							diamDestacar = false;
 							delayMS(250);			
 						}
 						else if(palo == "pica") {
+							sonidoAbajo();
 							picaDestacar = true; 	
 							delayMS(250);
 							picaDestacar = false;
 							delayMS(250);
 						}
 						else if(palo == "treb") {
+							sonidoDcha();
 							trebDestacar = true; 	
 							delayMS(250);
 							trebDestacar = false;
@@ -202,15 +277,19 @@ public class Game2 implements KeyListener{
 			switch(key){
 			
 			case(37):
+				sonidoIzq();
 				diamDestacar = true;
 				break;
 			case(38):
+				sonidoArriba();
 				coraDestacar = true;		
 				break;
 			case(39):
+				sonidoDcha();
 				trebDestacar = true;
 				break;
 			case(40):
+				sonidoAbajo();
 				picaDestacar = true;
 				break;
 			
