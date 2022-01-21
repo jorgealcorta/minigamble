@@ -476,7 +476,7 @@ public class Game7 implements MouseListener {
 						g.drawImage(media.circleImg ,j+10 , i+10, 80, 80, null);
 					} else if(matrix[(i-200)/100][(j-450)/100]== -1) {
 						
-						g.drawImage(media.crossImg ,j-20 , i-20, 130, 130, null);
+						g.drawImage(media.crossImg ,j+10, i+10, 80, 80, null);
 					}
 				}
 			}
