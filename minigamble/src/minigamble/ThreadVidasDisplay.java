@@ -5,6 +5,7 @@ import java.io.File;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 
 public class ThreadVidasDisplay extends Thread {
 
@@ -78,11 +79,14 @@ public class ThreadVidasDisplay extends Thread {
 	 */
 	private void latido1() {
 		String filePath = new File("").getAbsolutePath();				// Ruta hasta el proyecto
-		String s1_filePath = filePath.concat("/minigamble/src/minigamble/sonido/PantallaIntermedia/latido1.wav");	//Continuación de la ruta hasta el archivo de audio 1
+		String s1_filePath = filePath.concat("/minigamble/src/minigamble/sonido/PantallaIntermedia/latido5.wav");	//Continuación de la ruta hasta el archivo de audio 1
 		try {																				
 	        Clip sonido = AudioSystem.getClip();
 			AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s1_filePath));
 			sonido.open(ais);
+			FloatControl gainControl = 
+	        	    (FloatControl) sonido.getControl(FloatControl.Type.MASTER_GAIN);
+	        	gainControl.setValue(-15.0f); // Reduce volume by 10 decibels.
 			sonido.start();
         }catch(Exception e2) {
         	System.out.println("error");
@@ -95,11 +99,14 @@ public class ThreadVidasDisplay extends Thread {
 	 */
 	private void latido2() {
 		String filePath = new File("").getAbsolutePath();				// Ruta hasta el proyecto
-		String s1_filePath = filePath.concat("/minigamble/src/minigamble/sonido/PantallaIntermedia/latido2.wav");	//Continuación de la ruta hasta el archivo de audio 1
+		String s1_filePath = filePath.concat("/minigamble/src/minigamble/sonido/PantallaIntermedia/latido6.wav");	//Continuación de la ruta hasta el archivo de audio 1
 		try {																				
 	        Clip sonido = AudioSystem.getClip();
 			AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s1_filePath));
 			sonido.open(ais);
+			FloatControl gainControl = 
+	        	    (FloatControl) sonido.getControl(FloatControl.Type.MASTER_GAIN);
+	        	gainControl.setValue(-15.0f); // Reduce volume by 10 decibels.
 			sonido.start();
         }catch(Exception e2) {
         	System.out.println("error");
