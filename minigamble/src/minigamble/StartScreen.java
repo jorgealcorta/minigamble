@@ -254,7 +254,10 @@ public class StartScreen implements MouseMotionListener, MouseListener{
 				int idPart = BaseDatos.insertarPartida(null);
 				Partida.vidas = 3;
 				Game.cancion.close();
+				
+				Game.partida.puntuacionGeneral = 0;
 				Game.partida  = new Partida(0,0, 0, null, idPart);
+				
 				
 			}
 			

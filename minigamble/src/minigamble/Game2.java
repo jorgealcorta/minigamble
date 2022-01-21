@@ -407,7 +407,7 @@ public class Game2 implements KeyListener{
 			g.drawImage(media.downNegro_img, 520, 450, 128, 128, null);
 			g.drawImage(media.rightNegro_img, 690, 290, 128, 128, null);
 			
-			g.drawImage(media.crossarrow_IMG, 520, 285, null);
+			g.drawImage(media.crossarrow_IMG, 505, 270, 160, 160, null);
 			
 			g.setColor(Color.BLACK);
 			g.drawString("PULSA ESPACIO PARA REPRODUCIR LA COMBINACION", 200, 70);
@@ -445,7 +445,7 @@ public class Game2 implements KeyListener{
 				g.drawImage(media.rightBlanco_img, 690, 290, 128, 128, null);
 			}
 			
-			g.drawImage(media.crossarrow_IMG, 520, 285, 128, 128, null);
+			g.drawImage(media.crossarrow_IMG, 505, 270, 160, 160, null);
 	
 		}
 		
@@ -477,10 +477,10 @@ public class Game2 implements KeyListener{
 			if(!trebDestacar) {
 				g.drawImage(media.rightNegro_img, 690, 290, 128, 128, null);
 			}else {
-				g.drawImage(media.rightBlanco_img, 690, 290, 128, 128, null);
+				g.drawImage(media.rightBlanco_img, 690, 290, 130, 130, null);
 			}
 			
-			g.drawImage(media.crossarrow_IMG, 520, 285, null);
+			g.drawImage(media.crossarrow_IMG, 505, 270, 160, 160, null);
 	
 		}
 		
