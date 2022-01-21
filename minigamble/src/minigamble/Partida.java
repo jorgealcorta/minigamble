@@ -27,7 +27,7 @@ public class Partida {
 	 */
 	public Partida(int puntuacion, int vidasRestadas, int miniJugado, String jugador, int idPartida) { //meter arraylist como atributo
 		
-		
+		System.out.println("New Partida Creada with puntuacion " + puntuacionGeneral +  "and puntuacion local de " + puntuacion);
 		
 		if(!(vidas==1||vidas ==2 ||vidas ==3)) {
 			vidas = media.numVidas;

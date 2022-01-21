@@ -202,7 +202,7 @@ public class PantallaIntermedia implements KeyListener{
 					g.drawImage(media.vidalado_IMG, 250, 75, 200, 200, null);
 				}
 			}else {
-				g.drawImage(media.vidatrans_IMG, 250, 75, 200, 200, null);
+				g.drawImage(media.vidatrans_IMG, 250, 95, 200, 180, null);
 			}
 		}
 		
@@ -215,7 +215,7 @@ public class PantallaIntermedia implements KeyListener{
 					g.drawImage(media.vidalado_IMG, 500, 75, 200, 200, null);
 				}
 			}else {
-				g.drawImage(media.vidatrans_IMG, 500, 75, 200, 200, null);
+				g.drawImage(media.vidatrans_IMG, 500, 95, 200, 180, null);
 			}
 		}
 		
@@ -227,7 +227,7 @@ public class PantallaIntermedia implements KeyListener{
 					g.drawImage(media.vidalado_IMG, 750, 75, 200, 200, null);
 				}
 			}else {
-				g.drawImage(media.vidatrans_IMG, 750, 75, 200, 200, null);
+				g.drawImage(media.vidatrans_IMG, 750, 95, 200, 180, null);
 			}
 		}
 	}
