@@ -257,17 +257,18 @@ public class media {
 			
 			//GAME1
 			
-			cardBack = new ImageIcon( Game.class.getResource("multimedia/cartas/cardBack_red5.png").toURI().toURL() );
-			card_hearts_A = new ImageIcon( Game.class.getResource("multimedia/cartas/cardHeartsA.png").toURI().toURL() );
-			card_hearts_Q = new ImageIcon( Game.class.getResource("multimedia/cartas/cardHeartsQ.png").toURI().toURL() );
-			card_hearts_K = new ImageIcon( Game.class.getResource("multimedia/cartas/cardHeartsK.png").toURI().toURL() );
-			card_clubs_A = new ImageIcon( Game.class.getResource("multimedia/cartas/cardClubsA.png").toURI().toURL() );
-			card_clubs_Q = new ImageIcon( Game.class.getResource("multimedia/cartas/cardClubsQ.png").toURI().toURL() );
-			card_clubs_K = new ImageIcon( Game.class.getResource("multimedia/cartas/cardClubsK.png").toURI().toURL() );
-			card_clubs_J = new ImageIcon( Game.class.getResource("multimedia/cartas/cardClubsJ.png").toURI().toURL() );
-			card_hearts_J = new ImageIcon( Game.class.getResource("multimedia/cartas/cardHeartsJ.png").toURI().toURL() );
+			cardBack = new ImageIcon( Game.class.getResource("multimedia/cartas/reverso.png").toURI().toURL() );
+			card_hearts_A = new ImageIcon( Game.class.getResource("multimedia/cartas/aHearts.png").toURI().toURL() );
+			card_hearts_Q = new ImageIcon( Game.class.getResource("multimedia/cartas/3Hearts.png").toURI().toURL() );
+			card_hearts_K = new ImageIcon( Game.class.getResource("multimedia/cartas/kRoja.png").toURI().toURL() );
+			card_hearts_J = new ImageIcon( Game.class.getResource("multimedia/cartas/RedJoker.png").toURI().toURL() );
+			card_clubs_A = new ImageIcon( Game.class.getResource("multimedia/cartas/aClubs.png").toURI().toURL() );
+			card_clubs_Q = new ImageIcon( Game.class.getResource("multimedia/cartas/3Clubs.png").toURI().toURL() );
+			card_clubs_K = new ImageIcon( Game.class.getResource("multimedia/cartas/kNegra.png").toURI().toURL() );
+			card_clubs_J = new ImageIcon( Game.class.getResource("multimedia/cartas/BlackJoker.png").toURI().toURL() );
+			
 			card_diamonds_A = new ImageIcon( Game.class.getResource("multimedia/cartas/cardDiamondsA.png").toURI().toURL() );
-			card_diamonds_K = new ImageIcon( Game.class.getResource("multimedia/cartas/cardDiamondsK.png").toURI().toURL() );
+			card_diamonds_K = new ImageIcon( Game.class.getResource("multimedia/cartas/cardClubs8.png").toURI().toURL() );
 			
 			//GAME2
 			
