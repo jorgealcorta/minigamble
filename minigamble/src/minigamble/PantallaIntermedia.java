@@ -125,9 +125,9 @@ public class PantallaIntermedia implements KeyListener{
 				}
 				hpd.interrupt();
 				
-				System.out.println("creando partida de puntLocal mas pumtod de "  + puntos+puntLocal);
+				System.out.println("creando partida de puntLocal mas pumtod de "  + puntos + " " + puntLocal);
 				
-				Game.partida  = new Partida(puntos+puntLocal, this.vidasRestadas, miniJugado, jugador, idPartida);
+				Game.partida  = new Partida(puntLocal, this.vidasRestadas, miniJugado, jugador, idPartida);
 			}	
 		}
 	}
