@@ -2,24 +2,16 @@ package minigamble;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.FontFormatException;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
-
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.swing.ImageIcon;
-
 import minigamble.Game.ESTADO;
 
 /**
@@ -194,9 +186,7 @@ public class Game5 implements Runnable , KeyListener{
 						
 						chos1=sym3.getImage();
 					}
-					System.out.println(chos1);
 
-					System.out.println("chos1 is" + chos1);
 					if(chos1 == 0) {
 						elegido="heart";
 					} else if (chos1 == 1) {
@@ -222,7 +212,7 @@ public class Game5 implements Runnable , KeyListener{
 					} else {
 						chos2=sym6.getImage();
 					}
-					System.out.println(chos2);
+
 
 				}else if(count==2) {
 					sonidoPalanca();
@@ -238,7 +228,6 @@ public class Game5 implements Runnable , KeyListener{
 					} else {
 						chos3=sym9.getImage();
 					}
-					System.out.println(chos3);
 					
 					sonido1.stop();
 

@@ -13,9 +13,7 @@ public class ThreadVidasDisplay extends Thread {
 	@Override
 	public void run() {
 		
-		
-		
-		pi.showrestadas();
+
 		pi.vida1.display = true;
 		try {
 			Thread.sleep(500);
@@ -39,7 +37,7 @@ public class ThreadVidasDisplay extends Thread {
 		}
 		
 		while (!Thread.currentThread().isInterrupted()) {
-			pi.showrestadas();
+
 			pi.vida1.frente = false;
 			pi.vida2.frente = false;
 			pi.vida3.frente = false;

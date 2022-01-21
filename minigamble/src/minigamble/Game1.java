@@ -180,7 +180,6 @@ public class Game1  implements MouseMotionListener, MouseListener, Runnable {
 	
 	
 	public void run() {
-
 		
 		for (int i = 0; i < (nCol*nFil); i++) {
 			selectCards.get(i).setArriba(true);
@@ -193,8 +192,6 @@ public class Game1  implements MouseMotionListener, MouseListener, Runnable {
 		}
 		
 	}
-	
-	
 	
 	
 	
@@ -328,7 +325,7 @@ public class Game1  implements MouseMotionListener, MouseListener, Runnable {
 				int nCarta = 0;
 				for (ArrayList<ArrayList<Integer>> filas : posCartas) {
 					for(ArrayList<Integer> columnas : filas) {
-						if(mouseOver(mdy, mdx, columnas.get(1), columnas.get(0), cartY, cartX) == false) {  //pos1
+						if(mouseOver(mdy, mdx, columnas.get(1), columnas.get(0), cartY, cartX) == false) {  
 								selectCards.get(nCarta).setPresionada(false);
 						}
 						System.out.println(nCarta);
@@ -341,9 +338,9 @@ public class Game1  implements MouseMotionListener, MouseListener, Runnable {
 	
 		
 	public void mousePressed(MouseEvent e) {
-		if(Game.estadoJuego == Game.ESTADO.Game1) {				//si se esta en otro estado no hace nada
+		if(Game.estadoJuego == Game.ESTADO.Game1) {		
 			
-			mox = e.getX();	// guarda la posicion en la que se presiona
+			mox = e.getX();	
 			moy = e.getY();
 		
 			
@@ -351,7 +348,7 @@ public class Game1  implements MouseMotionListener, MouseListener, Runnable {
 				int nCarta = 0;
 				for (ArrayList<ArrayList<Integer>> filas : posCartas) {
 					for(ArrayList<Integer> columnas : filas) {
-						if(mouseOver(moy, mox, columnas.get(1), columnas.get(0), cartY, cartX)) {  //pos1
+						if(mouseOver(moy, mox, columnas.get(1), columnas.get(0), cartY, cartX)) {  
 							if(!selectCards.get(nCarta).isArriba()) {
 								selectCards.get(nCarta).setPresionada(true);
 							}
@@ -383,7 +380,6 @@ public class Game1  implements MouseMotionListener, MouseListener, Runnable {
 								delayMS(100);
 								selectCards.get(nCarta).setArriba(true);
 								click1=nCarta;
-								System.out.println("ckick1 en carta " + nCarta);
 							}
 							
 							nCarta++;
@@ -399,7 +395,6 @@ public class Game1  implements MouseMotionListener, MouseListener, Runnable {
 									delayMS(100);
 									selectCards.get(nCarta).setArriba(true);
 									click2=nCarta;
-									System.out.println("ckick1 en carta " + nCarta);
 								}
 								
 								nCarta++;
@@ -413,11 +408,9 @@ public class Game1  implements MouseMotionListener, MouseListener, Runnable {
 							if(allCards.get(click1).getId() == selectCards.get(click2).getId()){
 								puntLocal += puntTemp;
 								puntTemp = puntuacionPorCarta;
-								System.out.println(puntLocal);
-								System.out.println(puntuacionPorCarta);
 								
 							}else {
-								                            //delay de sec
+								                           
 								delaySeg(2);
 								puntTemp = (int)Math.round(0.5*puntTemp);
 								selectCards.get(click1).setArriba(false);
@@ -439,10 +432,7 @@ public class Game1  implements MouseMotionListener, MouseListener, Runnable {
 								}
 								
 								BaseDatos.insertarGame1(idPartida,(int) Math.round(puntLocal), fallos, primeraCarta, tiempoPrimeraCarta, tiempoTotal, superado, dificultad);
-								
-								int prueba = puntTotal + (int) Math.round(puntLocal);		//BORRRAAAAARRRRRR
-								System.out.println("La puntiacion total es: " + prueba);	//BORRRAAAAARRRRRR
-								
+																
 								Game.pi = new PantallaIntermedia(puntTotal,(int) Math.round(puntLocal), vidasRestadas, 0, jugador, idPartida);
 								Game.estadoJuego = ESTADO.PantallaIntermedia;
 								Game.eventoRaton();								

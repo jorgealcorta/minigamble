@@ -1,11 +1,9 @@
 package minigamble;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import minigamble.Game.ESTADO;
@@ -44,7 +42,6 @@ public class Game7 implements MouseListener {
 		jugador = nombreJugador;
 		idPartida = idPart;
 		check =0;
-		
 	}
 	
 
@@ -356,7 +353,6 @@ public class Game7 implements MouseListener {
 								start=2;
 								
 								tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
-								System.out.println("insert1");
 								BaseDatos.insertarGame7(idPartida, 500 , tiempoTotal, firstX, firstY );
 					
 								//Game.partida  = new Partida( 500 ,0 , 6	, jugador, idPartida);
@@ -370,7 +366,6 @@ public class Game7 implements MouseListener {
 								start=4;
 								
 								tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
-								System.out.println("insert2");
 								BaseDatos.insertarGame7(idPartida, 100 , tiempoTotal, firstX, firstY );
 								
 								//Game.partida  = new Partida( 100 ,0 , 6	, jugador, idPartida);
@@ -402,15 +397,15 @@ public class Game7 implements MouseListener {
 								}
 								
 																
-								for (int x=0; x<probabilities.size() ; x++) {
-									System.out.println("posib of "+ probabilities.get(x) + " for position " + positions.get(x*2) + positions.get(x*2+1));									
-								}
+//								for (int x=0; x<probabilities.size() ; x++) {
+//									System.out.println("posib of "+ probabilities.get(x) + " for position " + positions.get(x*2) + positions.get(x*2+1));									
+//								}
 								
 								
 								int bestMove = getMinIndex(probabilities);
 								int playMove = getIndex(probabilities, bestMove, ifYes());
-								System.out.println("best move is " + bestMove);
-								System.out.println("chosen move is " + playMove);
+//								System.out.println("best move is " + bestMove);
+//								System.out.println("chosen move is " + playMove);
 								int a = positions.get(playMove*2);
 								int b = positions.get(playMove*2+1);
 								
@@ -421,10 +416,7 @@ public class Game7 implements MouseListener {
 									delayMS(500);
 									start=3;
 									tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
-									System.out.println("insert3");
 									BaseDatos.insertarGame7(idPartida, 0 , tiempoTotal, firstX, firstY );
-									
-									//Game.partida  = new Partida( 0 ,1 , 6	, jugador, idPartida);
 									Game.pi = new PantallaIntermedia(puntTotal, 0, 1, 6, jugador, idPartida);
 									Game.estadoJuego = ESTADO.PantallaIntermedia;
 									Game.eventoRaton();
@@ -434,11 +426,7 @@ public class Game7 implements MouseListener {
 									start=4;
 									
 									tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
-									System.out.println("insert4");
 									BaseDatos.insertarGame7(idPartida, 100 , tiempoTotal, firstX, firstY );
-									
-									//Game.partida  = new Partida( 100 ,0 , 6	, jugador, idPartida);
-									System.out.println("");							
 									Game.pi = new PantallaIntermedia(puntTotal, 100, 0, 6, jugador, idPartida);
 									Game.estadoJuego = ESTADO.PantallaIntermedia;
 									Game.eventoRaton();

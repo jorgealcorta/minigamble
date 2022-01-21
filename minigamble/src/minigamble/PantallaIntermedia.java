@@ -2,15 +2,11 @@ package minigamble;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.FontFormatException;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.IOException;
 
-import javax.swing.ImageIcon;
 
 import minigamble.Game.ESTADO;
 
@@ -22,7 +18,6 @@ public class PantallaIntermedia implements KeyListener{
 	private String jugador;
 	private int idPartida;
 	private int puntLocal;
-	private int rondas = 1;
 	private int check =1;
 	
 	public static boolean hiloPuntosAcabado = false;
@@ -54,7 +49,6 @@ public class PantallaIntermedia implements KeyListener{
 		puntosDisplay = puntos;
 		
 		
-		System.out.println("PantallaIntermedia creada con vidasRestadas" + this.vidasRestadas + " vidas de partida "+ Game.partida.vidas+  " y puntos " + puntos +"  mas "+ puntLocal);
 		
 		PantallaIntermedia.miniJugado = miniJugado;
 
@@ -84,10 +78,7 @@ public class PantallaIntermedia implements KeyListener{
 		this.hvd = new Thread(vd);
 		hvd.start();
 		
-//		if(hiloPuntosAcabado) {
-//			System.out.println("aaa");
-//			//Game.partida  = new Partida(puntos, 1, null, jugador, idPartida);
-//		}
+
 	}
 
 
@@ -105,28 +96,20 @@ public class PantallaIntermedia implements KeyListener{
 		
 		if (this.check ==1) {
 			this.check--;
-			
-			System.out.println("seguimiento2 de " + this.vidasRestadas);
+
 			int key = e.getKeyCode();
 			
 			if(key == 32 && Game.estadoJuego == ESTADO.PantallaIntermedia) {
-				
-				System.out.println("segundo");
+
 				while(hvd.isAlive()) {
 					try {
 						hvd.interrupt();
 					}catch(Exception e1) {
 					}
 				}
-				if(!hvd.isAlive()) {
-					System.out.println("vidas matadas");
-				}else {
-					System.out.println("vidas vivas");
-				}
+
 				hpd.interrupt();
-				
-				System.out.println("creando partida de puntLocal mas pumtod de "  + puntos + " " + puntLocal);
-				
+	
 				Game.partida  = new Partida(puntLocal, this.vidasRestadas, miniJugado, jugador, idPartida);
 			}	
 		}
@@ -138,31 +121,13 @@ public class PantallaIntermedia implements KeyListener{
 		
 	}
 	
-	public void showrestadas() {
-		System.out.println(this.vidasRestadas);
-		
-		
-	}
-	
-	
-	
 	public void render(Graphics g) {
 		g.setColor(Color.decode("#208b3a"));
 		g.fillRect(0, 0, 1200, 700);
 		g.setColor(Color.BLACK);
 
 		
-		//CAMBIAR ESTO A MEDIA
-		
-		try {
-			fontPuntos = Font.createFont(Font.TRUETYPE_FONT, Inicio.class.getResourceAsStream("fuentes/fuente.ttf"));
-		} catch (FontFormatException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		fontPuntos = fontPuntos.deriveFont(Font.PLAIN,150);
+		fontPuntos = media.customFontFin.deriveFont(Font.PLAIN,150);
 		
 		g.setFont(fontPuntos);
 		
@@ -184,14 +149,6 @@ public class PantallaIntermedia implements KeyListener{
 		
 
 		
-//		if(vida1.display) {
-//			if(vida1.frente) {
-//				g.drawImage(media.vida_IMG, 250, 75, 200, 200, null);
-//			}else{
-//				g.drawImage(media.vidalado_IMG, 250, 75, 200, 200, null);
-//			}
-//		}
-//		
 		
 		if(vida1.display) {
 			if(vida1.vida) {

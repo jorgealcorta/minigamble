@@ -4,30 +4,22 @@ import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
 
 
-
-
-
 public class Game extends Canvas implements Runnable{
 	
 	
-	
-	
+	public static Game game;
 
-	public static int game4Check =0;
-	
-	public static int game6Check =0;
-	public static int game7Check =0;
-	public static int piCheck =0;
-	
+	static Inicio inicio = new Inicio(); 				
+	static StartScreen start = new StartScreen();
+	static SignIn signin = new SignIn();
+	static LogIn login = new LogIn();
+
 	public static Partida partida;
 	public static Game1 game1;
 	public static Game2 game2;
@@ -45,14 +37,12 @@ public class Game extends Canvas implements Runnable{
 	public static Clip cancion;
 	
 	private static final long serialVersionUID = -5339514091919298198L;
-	static Inicio inicio = new Inicio(); 				// Pantalla inicio
-	static StartScreen start = new StartScreen();
-	static SignIn signin = new SignIn();
-	static LogIn login = new LogIn();
-	public static Game game;
-
-
-
+	
+	//Checks para evitar problemas de multiples listeners en alquellas pantallas que den problemas.
+	public static int game4Check =0;
+	public static int piCheck =0;
+	
+	
 	
 	//Enumeracion con los distintos estados del juego.
 	public enum ESTADO{
@@ -65,8 +55,8 @@ public class Game extends Canvas implements Runnable{
 		Game3, // LABERINTO
 		Game4, // DIANAS
 		Game5, // TRAGAPERRAS
-		Game6,  // FLECHAS CAYENDO
-		Game7,
+		Game6, // FLECHAS CAYENDO
+		Game7, // 3 EN RAYA
 		PantallaIntermedia
 	};
 	
@@ -108,8 +98,7 @@ public class Game extends Canvas implements Runnable{
 	}
 	
 	public static void eventoRaton(){
-		
-		
+				
 		if (estadoJuego == ESTADO.Game1 ) {
 			
 			game.addMouseListener(game1);
@@ -127,27 +116,18 @@ public class Game extends Canvas implements Runnable{
 			game.addMouseListener(game4);
 			game.addMouseMotionListener(game4);
 			game4Check=1;
-			System.out.println("game4 listener add");
 			
 		}else if(estadoJuego == ESTADO.Game5) {
 			game.addKeyListener(game5);
-			System.out.println("game5 listener add");
-			
+					
 		}else if(estadoJuego == ESTADO.Game6) {
 			game.addKeyListener(game6);
-			
-			
-			
+					
 		}else if(estadoJuego == ESTADO.Game7 ) {
-			game.addMouseListener(game7);
+			game.addMouseListener(game7);			
 			
-			
-		}else if(estadoJuego == ESTADO.PantallaIntermedia && piCheck==0) {
-			
-			
+		}else if(estadoJuego == ESTADO.PantallaIntermedia && piCheck==0) {						
 			game.addKeyListener(pi);
-			
-			System.out.println("pi listener add");
 			
 		}
 	}
@@ -156,6 +136,7 @@ public class Game extends Canvas implements Runnable{
 	/**
 	 * Reproduce la cancion
 	 */
+	
 	private void cancion() {
 		String filePath = new File("").getAbsolutePath();				// Ruta hasta el proyecto
 		String s1_filePath = filePath.concat("/minigamble/src/minigamble/sonido/canciones/cancion1.wav");	//Continuación de la ruta hasta el archivo de audio 1
@@ -171,9 +152,7 @@ public class Game extends Canvas implements Runnable{
         	System.out.println("error");
         }
 		
-	}
-	
-	
+	}	
 	
 	
 	
@@ -197,6 +176,7 @@ public class Game extends Canvas implements Runnable{
 		}
 	}
 
+	
 	@Override
 	public void run() {
 		
@@ -214,8 +194,7 @@ public class Game extends Canvas implements Runnable{
 			delta += (now - lastTime) / ns;
 			lastTime = now;
 			while (delta >= 1) { // delta = 1 significa que ha pasado un tick.
-				 tick();
-				 delta--; // Reseteamos delta a 0.
+					 delta--; // Reseteamos delta a 0.
 			}
 			if(running)
 				render(); // Refresca la ventana, ejecutando render.
@@ -230,9 +209,6 @@ public class Game extends Canvas implements Runnable{
 		stop();
 	}
 	
-	private void tick() {
-		
-	}
 	
 	private void render() {
 		BufferStrategy bs = this.getBufferStrategy(); // El Buffer Strategy representa el mecanismo para organizar memoria compleja en una ventana.
@@ -242,8 +218,6 @@ public class Game extends Canvas implements Runnable{
 		}
 		
 		Graphics g = bs.getDrawGraphics();		
-
-
 		
 		switch(estadoJuego) {
 		
@@ -294,8 +268,7 @@ public class Game extends Canvas implements Runnable{
 		
 	}
 
-	public static void main(String[] args) {
-				
+	public static void main(String[] args) {				
 		game = new Game();
 	}
 

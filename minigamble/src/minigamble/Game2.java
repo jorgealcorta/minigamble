@@ -1,21 +1,16 @@
 package minigamble;
 
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontFormatException;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.swing.ImageIcon;
 
 import minigamble.Game.ESTADO;
 
@@ -98,8 +93,6 @@ public class Game2 implements KeyListener{
 				palosCorrectos.add(palos.get((int) Math.floor(Math.random()*4)));
 			}
 			
-			System.out.println(palosCorrectos);
-			
 			
 					
 		}
@@ -115,7 +108,7 @@ public class Game2 implements KeyListener{
 	        sonido.open(ais);
 	        sonido.start();
         }catch(Exception e2) {
-        	System.out.println("error");
+        	System.out.println("error sonido izq");
         }
 		
 	}
@@ -132,13 +125,13 @@ public class Game2 implements KeyListener{
 	        sonido.open(ais);
 	        sonido.start();
         }catch(Exception e2) {
-        	System.out.println("error");
+        	System.out.println("error sonido up");
         }
 		
 	}
 	
 	/**
-	 * Reproduce el sonido Izquierda
+	 * Reproduce el sonido Derecha
 	 */
 	private void sonidoDcha() {
 		String filePath = new File("").getAbsolutePath();				// Ruta hasta el proyecto
@@ -149,7 +142,7 @@ public class Game2 implements KeyListener{
 	        sonido.open(ais);
 	        sonido.start();
         }catch(Exception e2) {
-        	System.out.println("error");
+        	System.out.println("error sonido derecha");
         }
 		
 	}
@@ -166,7 +159,7 @@ public class Game2 implements KeyListener{
 	        sonido.open(ais);
 	        sonido.start();
         }catch(Exception e2) {
-        	System.out.println("error");
+        	System.out.println("error sonido abajo");
         }
 		
 	}
@@ -252,8 +245,7 @@ public class Game2 implements KeyListener{
 							delayMS(250);
 							trebDestacar = false;
 							delayMS(250);
-						}
-			
+						}			
 					}
 					
 					start = 3;
@@ -333,7 +325,7 @@ public class Game2 implements KeyListener{
 			
 			}
 			
-			System.out.println(palosUsuario);
+	
 			
 			/*
 			 * En el caso de que el palo introducido por el usuario no coincida con el correspondiente a su posicion
@@ -342,13 +334,11 @@ public class Game2 implements KeyListener{
 			 */
 			
 			if(puntLocal > 0 && palosUsuario.size() > 0 && palosUsuario.get(cuentaPulsaciones) != palosCorrectos.get(cuentaPulsaciones)) {
-				System.out.println(palosUsuario);
 				palosUsuario.removeAll(palosUsuario);
 				cuentaPulsaciones = -1;
 				start = 1;
 				puntLocal -= 100;
 				fallos++;
-				System.out.println("error");
 			}else if(puntLocal <= 0) {
 				start = 4;
 				delaySeg(2);

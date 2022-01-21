@@ -1,19 +1,12 @@
 package minigamble;
 
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontFormatException;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.IOException;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.TimeUnit;
-
-import javax.swing.ImageIcon;
-
 import minigamble.Game.ESTADO;
 
 public class Game6 implements KeyListener{
@@ -86,9 +79,6 @@ public class Game6 implements KeyListener{
 		
 		// Una partida perfecta implica sumar 500 puntos.
 		puntSumados = (int)(500/(flechasCreadas.size()));
-		
-		System.out.println(flechasCreadas);
-		
 		runThreadFlechasActivas();
 		runThreadFlechasMain();
 	}
@@ -149,7 +139,6 @@ public class Game6 implements KeyListener{
 
 				f.getY()>386 && f.getY()<514) {
 					
-					System.out.println("acierto");
 					algunAcierto = true;
 					aciertoReciente = true;
 				
@@ -160,7 +149,6 @@ public class Game6 implements KeyListener{
 					if(nPulsadas == nFlechas) todasPulsadas = true;
 					
 					if(todasPulsadas) {
-						System.out.println("victoria");
 						tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
 						delaySeg(2);
 						//BaseDatos.insertarGame1(idPartida, puntLocal, fallos, primeraCarta, tiempoPrimeraCarta, tiempoTotal);
@@ -177,7 +165,6 @@ public class Game6 implements KeyListener{
 			}
 		}
 		
-		if(!aciertoReciente) System.out.println("miss");
 		if(!aciertoReciente) fallos++;
 		
 	}

@@ -1,12 +1,7 @@
 package minigamble;
 
-import java.awt.Graphics;
-import java.awt.Image;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
 import java.util.Random;
 
-import javax.swing.ImageIcon;
 
 public class symbol  {
 	

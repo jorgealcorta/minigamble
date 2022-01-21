@@ -3,28 +3,17 @@ package minigamble;
 import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.FontFormatException;
 import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Point;
 import java.awt.Robot;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Random;
-import java.util.Vector;
 import java.util.concurrent.TimeUnit;
-
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.swing.ImageIcon;
-
 import minigamble.Game.ESTADO;
 
 /**
@@ -33,7 +22,7 @@ import minigamble.Game.ESTADO;
 
 public class Game3 implements MouseListener , MouseMotionListener {
 
-	private int dificultad;
+	
 	private String jugador;
 	private int idPartida;
 		
@@ -97,9 +86,7 @@ public class Game3 implements MouseListener , MouseMotionListener {
 		allLabs.add(lab3);
 		allLabs.add(lab4);
 		
-		//thisLab = getRandom(allLabs, puntTotal);		
-		thisLab = allLabs.get(0);
-		
+		thisLab = getRandom(allLabs, puntTotal);				
 		
 		try {
 			robot = new Robot();
@@ -137,9 +124,8 @@ public class Game3 implements MouseListener , MouseMotionListener {
 	 * @param width	anchura de la region
 	 * @param heigth altura de la region
 	 * @return True si el raton esta sobre esa region y False si no lo esta. 
-	 */
-	
-	public boolean mouseOver(int mx, int my, int x, int y, int width, int heigth) {   // devuelve true si el raton ha sido presionado dentro de un cuadrado 
+	 */	
+	public boolean mouseOver(int mx, int my, int x, int y, int width, int heigth) {  
 		
 		if(mx > x && mx < x + width) {
 			if(my > y && my < y + heigth) {
@@ -156,15 +142,13 @@ public class Game3 implements MouseListener , MouseMotionListener {
 	public void mousePressed(MouseEvent e) {
 		
 		if(Game.estadoJuego==Game.ESTADO.Game3) {
-			mox = e.getX();                                	// guarda la posicion en la que se presiona por cada click
+			
+			mox = e.getX();                               
 			moy = e.getY();
-			
-			
+						
 			String filePath = new File("").getAbsolutePath();				
 			String s1_filePath = filePath.concat("/minigamble/src/minigamble/sonido/click1.wav");	
-			
-			
-			
+						
 			if( mouseOver(mox, moy, 500, 290, 190, 50) && start == 1 ){	             
 				bStart_state = true;
 				try {																				
@@ -175,8 +159,7 @@ public class Game3 implements MouseListener , MouseMotionListener {
 		        }catch(Exception e2) {
 		        	System.out.println("error");
 		        }}	
-			
-			
+						
 		}
 	}
 	
@@ -184,10 +167,10 @@ public class Game3 implements MouseListener , MouseMotionListener {
 	public void mouseReleased(MouseEvent e) {
 		if(Game.estadoJuego == Game.ESTADO.Game3) {
 			
-			String filePath = new File("").getAbsolutePath();										// Ruta hasta el proyecto
-			String s2_filePath = filePath.concat("/minigamble/src/minigamble/sonido/click2.wav");	//Continuacio n de la ruta hasta el archivo de audio 2
+			String filePath = new File("").getAbsolutePath();										
+			String s2_filePath = filePath.concat("/minigamble/src/minigamble/sonido/click2.wav");	
 		
-			if (start == 1) {                                                       				// caso start == 1, 
+			if (start == 1) {                                                       				
 				
 				if(bStart_state == true){ 
 					try {																				
@@ -263,8 +246,6 @@ public class Game3 implements MouseListener , MouseMotionListener {
 							
 							
 				if(robot.getPixelColor(Mox, Moy).getRGB() != pathColor.getRGB() && robot.getPixelColor(Mox, Moy).getRGB() != pathColor2.getRGB()) {
-					System.out.println("path "+ pathColor.getRGB());
-					System.out.println("gotten "+ robot.getPixelColor(Mox, Moy).getRGB());
 					robot.mouseMove(startX, startY);	
 					numFallos = numFallos +1;
 					puntLocal = (int)Math.round( puntLocal * 0.66);
@@ -283,16 +264,12 @@ public class Game3 implements MouseListener , MouseMotionListener {
 						Game.pi = new PantallaIntermedia(puntTotal, puntLocal, 1, 2, jugador, idPartida);
 						Game.estadoJuego = ESTADO.PantallaIntermedia;
 						Game.eventoRaton();
-						
-						//Game.partida  = new Partida( puntLocal ,1 , 2, jugador, idPartida);
 					} else {
 						BaseDatos.insertarGame3(idPartida, puntLocal, numFallos, tiempoTotal, "true", thisLab.getId());
 						start = 5;
 						Game.pi = new PantallaIntermedia(puntTotal, puntLocal, 0, 2, jugador, idPartida);
 						Game.estadoJuego = ESTADO.PantallaIntermedia;
 						Game.eventoRaton();
-						
-						//Game.partida  = new Partida( puntLocal ,0 , 2, jugador, idPartida);
 					}
 					
 				} 

@@ -2,28 +2,16 @@ package minigamble;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.FontFormatException;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Vector;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.TimeUnit;
-
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.DataLine;
-import javax.swing.ImageIcon;
 
 import minigamble.Game.ESTADO;
 
@@ -42,8 +30,6 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 	
 	private int mox;				//Posicion en la que se presiona el raton
 	private int moy;
-	private int mdx;
-	private int mdy;
 	
 	// Hilo que se utilizar� para gestionar las dianas activas.
 	private Thread hda;
@@ -128,8 +114,7 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 		
 		//Una partida perfecta implica una suma de 500 puntos
 		puntSumados = (int)(500 / (dianasCreadas.size()));
-		
-		System.out.println("constructor");
+
 		runThreadDianasActivas();
 
 	    
@@ -247,7 +232,6 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 				
 				if(e.getX() >= d.getX() && e.getX() <= d.getX() + d.getSize() && e.getY() >= d.getY() && e.getY() <= d.getY() + d.getSize() && !d.isRota()) {
 					sonidoDiana();
-					System.out.println("acierto");
 					d.setRota(true);
 					
 					ThreadBorrarDiana bd = new ThreadBorrarDiana(d, dianasActivas, dianasRotas);
@@ -271,7 +255,6 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 					// Si todas las dianas estan rotas, el usuario ha ganado.
 					
 					if(todasRotas) {
-						System.out.println("victoria por todas rotas");
 						tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
 						delaySeg(2);
 						if(fallos>3) {
@@ -301,8 +284,6 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 			// Si no se ha roto ninguna de las dianas con el disparo efectuado, miss.
 			
 			if(!unaRota) {
-				System.out.println("miss");
-				System.out.println(dianasActivas);
 				fallos++;
 			}
 			
