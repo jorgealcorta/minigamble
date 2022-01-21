@@ -14,7 +14,7 @@ public class PantallaIntermedia implements KeyListener{
 	
 	
 	private int puntos = 0;
-	private int vidasRestadas;
+	public static int vidasRestadas;
 	private String jugador;
 	private int idPartida;
 	private int puntLocal;
