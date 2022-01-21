@@ -3,8 +3,14 @@ package minigamble;
 import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
 
 
 
@@ -35,6 +41,8 @@ public class Game extends Canvas implements Runnable{
 	public static media media;
 	
 	public static VentanaPrincipal ventana;
+	
+	public static Clip cancion;
 	
 	private static final long serialVersionUID = -5339514091919298198L;
 	static Inicio inicio = new Inicio(); 				// Pantalla inicio
@@ -79,7 +87,7 @@ public class Game extends Canvas implements Runnable{
 		this.addMouseListener(login); 				
 		this.addMouseMotionListener(login);
 		this.addKeyListener(login);
-		
+		cancion();
 			
 	}
 	
@@ -145,6 +153,29 @@ public class Game extends Canvas implements Runnable{
 	}
 	
 
+	/**
+	 * Reproduce la cancion
+	 */
+	private void cancion() {
+		String filePath = new File("").getAbsolutePath();				// Ruta hasta el proyecto
+		String s1_filePath = filePath.concat("/minigamble/src/minigamble/sonido/canciones/cancion1.wav");	//Continuación de la ruta hasta el archivo de audio 1
+		try {																				
+	        cancion = AudioSystem.getClip();
+			AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s1_filePath));
+	        cancion.open(ais);
+	        FloatControl gainControl = 
+	        	    (FloatControl) cancion.getControl(FloatControl.Type.MASTER_GAIN);
+	        	gainControl.setValue(-5.0f); // Reduce volume by 10 decibels.
+	        cancion.loop(Clip.LOOP_CONTINUOUSLY);
+        }catch(Exception e2) {
+        	System.out.println("error");
+        }
+		
+	}
+	
+	
+	
+	
 	
 	//HILOS
 

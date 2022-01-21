@@ -234,7 +234,7 @@ public class LogIn implements MouseMotionListener, MouseListener, KeyListener{
 		        }catch(Exception e2) {
 		        	System.out.println("error");
 		        }
-				
+				Game.cancion.close();
 				BaseDatos.insertarJugador(usuario, contrasena);
 				int idPart = BaseDatos.insertarPartida(usuario);
 				Game.partida  = new Partida(0,0,0, usuario, idPart);
@@ -244,6 +244,7 @@ public class LogIn implements MouseMotionListener, MouseListener, KeyListener{
 			
 			
 			if(bBack_state == true){																// si se ha presionado y soltado encima del segundo boton termina el programa y suena
+				
 				try {																				//Reproduce el archivo de sonido 2
 			        Clip sonido = AudioSystem.getClip();
 					AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s2_filePath));

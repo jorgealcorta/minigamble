@@ -154,6 +154,7 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 		        }catch(Exception e2) {
 		        	System.out.println("error");
 		        }
+				Game.cancion.close();
 				BaseDatos.insertarJugador(usuario, contrasena);
 				int idPart = BaseDatos.insertarPartida(usuario);
 				Game.partida  = new Partida(0,0,0, usuario, idPart);
