@@ -365,10 +365,7 @@ public class Game2 implements KeyListener{
 				if(fallos == 0) {
 					vidasRestadas = 0;
 					superado = "true";
-				}else if(fallos>0 && fallos <1) {
-					vidasRestadas = 1;
-					superado = "false";
-				}else if(fallos>1) {
+				}else if(fallos>0) {
 					vidasRestadas = 1;
 					superado = "false";
 				}

@@ -257,7 +257,7 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 					if(todasRotas) {
 						tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
 						delaySeg(2);
-						if(fallos>3) {
+						if(fallos>=3) {
 							vidasRestadas = 1;
 							superado = "false";
 							
