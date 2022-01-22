@@ -203,10 +203,8 @@ public class Inicio   implements MouseMotionListener, MouseListener  {
 	
 				
 	
-		g.setFont(media.customFontTitle);
-		g.drawString("MINIGAMBLE", 50, 150); //Dibuja el titulo con una fuente personalizada
 			
-						
+		g.drawImage(media.titulo_img, 40 , 75 , 1100, 124, null);				
 				
 	
 	}

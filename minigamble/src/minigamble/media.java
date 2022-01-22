@@ -15,6 +15,9 @@ public class media {
 	
 	//COMPARTIDOS
 	
+	public static Image titulo_img;
+	public static ImageIcon titulo;
+	
 	public static Image FondoFichas_img;
 	public static ImageIcon Fondofichas;
 	
@@ -237,6 +240,7 @@ public class media {
 			
 			//COMPARTIDOS
 			
+			titulo = new ImageIcon( Game.class.getResource("multimedia/titulo.png").toURI().toURL() );
 			Fondofichas = new ImageIcon( Game.class.getResource("multimedia/fondoInicioRecortado.png").toURI().toURL() );
 			
 			bStart_false = new ImageIcon( Game.class.getResource("multimedia/red_button2.png").toURI().toURL() );
@@ -361,7 +365,8 @@ public class media {
 		tapeteImg = tapeteIcn.getImage();
 		
 		FondoFichas_img = Fondofichas.getImage();
-				
+		titulo_img = titulo.getImage();	
+		
 		//SIGNIN
 		textIMG = text.getImage();
 		textCorrectIMG = textCorrect.getImage();
