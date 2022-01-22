@@ -41,6 +41,7 @@ public class Game extends Canvas implements Runnable{
 	
 	//Checks para evitar problemas de multiples listeners en alquellas pantallas que den problemas.
 	public static int game4Check =0;
+	public static int game6Check =0;
 	public static int piCheck =0;
 	
 	
@@ -122,11 +123,15 @@ public class Game extends Canvas implements Runnable{
 		}else if(estadoJuego == ESTADO.Game5) {
 			game.addKeyListener(game5);
 					
-		}else if(estadoJuego == ESTADO.Game6) {
+		}else if(estadoJuego == ESTADO.Game6 && game6Check ==0) {
+			game6Check =1;
 			game.addKeyListener(game6);
+			System.out.println("added listener game6");
+			
 					
 		}else if(estadoJuego == ESTADO.Game7 ) {
-			game.addMouseListener(game7);			
+			game.addMouseListener(game7);		
+			
 			
 		}else if(estadoJuego == ESTADO.PantallaIntermedia && piCheck==0) {						
 			game.addKeyListener(pi);

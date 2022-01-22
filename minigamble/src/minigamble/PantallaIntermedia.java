@@ -36,6 +36,7 @@ public class PantallaIntermedia implements KeyListener{
 	
 	public PantallaIntermedia(int puntos, int puntLocal, int vidasRestadas, int miniJugado, String jugador, int idPartida) {
 		
+		System.out.println("pi creada con vidas " + Game.partida.vidas  + " y vidas restadas "+ vidasRestadas);
 		
 		this.puntos = puntos;
 		this.vidasRestadas = vidasRestadas;
@@ -100,7 +101,7 @@ public class PantallaIntermedia implements KeyListener{
 			int key = e.getKeyCode();
 			
 			if(key == 32 && Game.estadoJuego == ESTADO.PantallaIntermedia) {
-
+				System.out.println("espacio intermedio");
 				while(hvd.isAlive()) {
 					try {
 						hvd.interrupt();
@@ -111,7 +112,8 @@ public class PantallaIntermedia implements KeyListener{
 				hpd.interrupt();
 				ThreadPuntosDisplay.puntos2.close();
 				
-				Game.partida  = new Partida(puntLocal, this.vidasRestadas, miniJugado, jugador, idPartida);
+				System.out.println("creando partida con vidasRes"+ vidasRestadas);
+				Game.partida  = new Partida(puntLocal, vidasRestadas, miniJugado, jugador, idPartida);
 			}	
 		}
 	}

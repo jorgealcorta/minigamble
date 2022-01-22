@@ -34,11 +34,11 @@ public class ThreadFlechasActivas extends Thread{
 		}
 		
 		
-		if(activas.size() == 0 && Game.estadoJuego==Game.ESTADO.Game6 && !Game6.todasPulsadas) {
+		if(activas.size() == 0 && Game.estadoJuego==Game.ESTADO.Game6 && !Game6.todasPulsadas ) {
 			
 			Game6.tiempoTotal = System.currentTimeMillis() - Game6.tiempoComienzo;
 			
-			
+			System.out.println("guardando desde hilo");
 			BaseDatos.insertarGame6(Game6.idPartida, Game6.puntLocal, Game6.fallos, Game6.tiempoTotal, "false", Game6.dificultad);
 			Game.pi = new PantallaIntermedia(Game6.puntos, Game6.puntLocal, 1, 3, Game6.idJugador, Game6.idPartida);
 			Game.estadoJuego = ESTADO.PantallaIntermedia;

@@ -28,8 +28,8 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 	// CopyOnWriteArrayList que almacena todas las dianas que ya se han disparado, y ha pasado el tiempo para que desaparezcan mediante el hilo.
 	private static CopyOnWriteArrayList<Diana> dianasRotas = new CopyOnWriteArrayList<Diana>();
 	
-	private int mox;				//Posicion en la que se presiona el raton
-	private int moy;
+	private static int mox;				//Posicion en la que se presiona el raton
+	private static int moy;
 	
 	// Hilo que se utilizar� para gestionar las dianas activas.
 	private Thread hda;
@@ -79,8 +79,11 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 		
 		// Reset
 		puntLocal = 0;
+		
 		fallos = 0;
 		vidasRestadas = 0;
+		
+				
 		
 		tiempoComienzo = System.currentTimeMillis();
 
@@ -343,7 +346,7 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 		
 		//En cada frame se dibuja el punto de mira encima del raton
 		g.drawImage(media.mira_IMG, mox-16, moy-16, 32, 32, null);		
-
+		g.drawImage(media.mira_IMG, mox-16, moy-16, 32, 32, null);	
 	}
 
 }

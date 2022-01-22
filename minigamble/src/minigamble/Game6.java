@@ -44,6 +44,7 @@ public class Game6 implements KeyListener{
 	private CopyOnWriteArrayList<Flecha> flechasCreadas = new CopyOnWriteArrayList<Flecha>();
 	public static CopyOnWriteArrayList<Flecha> flechasActivas = new CopyOnWriteArrayList<Flecha>();
 
+	private int check;
 	/**
 	 * Constructor de la clase Game6
 	 * @param puntuacion acumulada
@@ -53,9 +54,13 @@ public class Game6 implements KeyListener{
 	
 	public Game6(int puntuacion, String Jugador, int Partida) {
 		
+		
 		puntos = puntuacion;
 		idJugador = Jugador;
 		idPartida = Partida;
+		puntLocal =0;
+		check =1;
+		vidasRestadas=0;
 		
 		flechasActivas.removeAll(flechasActivas);
 		flechasCreadas.removeAll(flechasCreadas);
@@ -202,53 +207,73 @@ public class Game6 implements KeyListener{
 //		arr 38
 //		abj 40
 //		dch 39
-		
-		switch(key) {
-			case 37: sonidoIzq(); break;
-			case 38: sonidoArriba(); break;
-			case 39: sonidoDcha(); break;
-			case 40: sonidoAbajo(); break;
-		}
-		
-		aciertoReciente = false;
-		
-		for(Flecha f : flechasActivas) {
-			//Damos margen de acierto con 64 pixeles de fallo arriba y abajo
-			if(((key == 37 && f.getDir() == "izq") ||
-				(key == 38 && f.getDir() == "arr") ||
-				(key == 40 && f.getDir() == "abj") ||
-				(key == 39 && f.getDir() == "dch")) && 
-
-				f.getY()>386 && f.getY()<514) {
+			
+		if(true) {
+			
+			
+			switch(key) {
+				case 37: sonidoIzq(); break;
+				case 38: sonidoArriba(); break;
+				case 39: sonidoDcha(); break;
+				case 40: sonidoAbajo(); break;
+			}
+			
+			aciertoReciente = false;
+			
+			for(Flecha f : flechasActivas) {
+				//Damos margen de acierto con 64 pixeles de fallo arriba y abajo
+				if(((key == 37 && f.getDir() == "izq") ||
+					(key == 38 && f.getDir() == "arr") ||
+					(key == 40 && f.getDir() == "abj") ||
+					(key == 39 && f.getDir() == "dch")) && 
+	
+					f.getY()>386 && f.getY()<514) {
+						
+						algunAcierto = true;
+						aciertoReciente = true;
+						System.out.println("acierto");
 					
-					algunAcierto = true;
-					aciertoReciente = true;
-				
-					puntLocal += puntSumados;
-					flechasActivas.remove(f);
-					
-					nPulsadas++;
-					if(nPulsadas == nFlechas) todasPulsadas = true;
-					
-					if(todasPulsadas) {
-						tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
-						delaySeg(2);
-						//BaseDatos.insertarGame1(idPartida, puntLocal, fallos, primeraCarta, tiempoPrimeraCarta, tiempoTotal);
-						//new PantallaIntermedia(puntos + puntLocal, vidasRestadas, 5, jugador, idPartida);
-						if(fallos > 2) {
-						vidasRestadas = 1;
-						superado = "false";
-						}						
-						BaseDatos.insertarGame6(idPartida, puntLocal, fallos, tiempoTotal, superado, dificultad);
-						Game.pi = new PantallaIntermedia(puntos, puntLocal, vidasRestadas, 5, idJugador, idPartida);
-						Game.estadoJuego = ESTADO.PantallaIntermedia;
-						Game.eventoRaton();
-					}
+						nPulsadas++;
+						if(nPulsadas == nFlechas) todasPulsadas = true;
+						
+						puntLocal += puntSumados;
+						flechasActivas.remove(f);
+						
+						
+						
+						System.out.println(todasPulsadas);
+						if(todasPulsadas) {
+							tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
+							delaySeg(2);
+							//BaseDatos.insertarGame1(idPartida, puntLocal, fallos, primeraCarta, tiempoPrimeraCarta, tiempoTotal);
+							//new PantallaIntermedia(puntos + puntLocal, vidasRestadas, 5, jugador, idPartida);
+							if(fallos > 2) {
+								vidasRestadas = 1;
+								superado = "false";
+							}			
+							
+							check=0;
+							System.out.println("guardando desde game");
+							BaseDatos.insertarGame6(idPartida, puntLocal, fallos, tiempoTotal, superado, dificultad);
+							System.out.println("creando nueva PI de vidasRes " + vidasRestadas);
+							Game.pi = new PantallaIntermedia(puntos, puntLocal, vidasRestadas, 5, idJugador, idPartida);
+							
+							
+							System.out.println("pint creada");
+							Game.estadoJuego = ESTADO.PantallaIntermedia;
+							Game.eventoRaton();
+							check =0;
+							
+							
+						}
+				}
+			}
+			
+			if(!aciertoReciente) {
+				fallos++;
+				System.out.println("fallo añadido");
 			}
 		}
-		
-		if(!aciertoReciente) fallos++;
-		
 	}
 
 	@Override
