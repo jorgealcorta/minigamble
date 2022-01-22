@@ -131,6 +131,9 @@ public class Game extends Canvas implements Runnable{
 		}else if(estadoJuego == ESTADO.PantallaIntermedia && piCheck==0) {						
 			game.addKeyListener(pi);
 			
+		}else if(estadoJuego == ESTADO.PantallaFinal) {						
+			game.addKeyListener(pf);
+			
 		}
 	}
 	
