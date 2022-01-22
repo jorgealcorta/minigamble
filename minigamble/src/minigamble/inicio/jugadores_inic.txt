@@ -1,4 +1,5 @@
-admin	admin
-unai	igartua
-ortega	gasset
-ramon	cajal
+admin	admin	844
+unai	igartua	1333
+ortega	gasset	355
+ramon	cajal	699
+jorge	alcorta	500

@@ -29,6 +29,7 @@ public class Game extends Canvas implements Runnable{
 	public static Game6 game6;
 	public static Game7 game7;
 	public static PantallaIntermedia pi;
+	public static PantallaFinal pf;
 	
 	public static media media;
 	
@@ -57,7 +58,8 @@ public class Game extends Canvas implements Runnable{
 		Game5, // TRAGAPERRAS
 		Game6, // FLECHAS CAYENDO
 		Game7, // 3 EN RAYA
-		PantallaIntermedia
+		PantallaIntermedia,
+		PantallaFinal
 	};
 	
 	static ESTADO estadoJuego = ESTADO.Inicio;
@@ -257,6 +259,8 @@ public class Game extends Canvas implements Runnable{
 		case LogIn:
 			login.render(g);
 			break;
+		case PantallaFinal:
+			pf.render(g);
 		default:
 			break;
 		}

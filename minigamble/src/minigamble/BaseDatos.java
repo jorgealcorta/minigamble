@@ -101,7 +101,7 @@ public class BaseDatos {
 					while (scanner.hasNextLine()) {
 						String linea = scanner.nextLine();
 						String[] datos = linea.split( "\t" );
-						sent = "insert into game1 (id, idPartida, puntuacion, fallos, primera_carta, tiempo_primera_carta, tiempo_total, superado, dificultad) values (" + datos[0] + ", " + datos[1] + ", " + datos[2] + ", " + datos[3] + ", '" + datos[4] + "', " + datos[5] + ", " + datos[6] + ", 'true', 1);";
+						sent = "insert into game1 (id, idPartida, puntuacion, fallos, primera_carta, tiempo_primera_carta, tiempo_total, superado, dificultad) values (" + datos[0] + ", " + datos[1] + ", " + datos[2] + ", " + datos[3] + ", '" + datos[4] + "', " + datos[5] + ", " + datos[6] + ", '" + datos[7] + "', " + datos[8] + ");";
 						logger.log( Level.INFO, "Statement: " + sent );
 						statement.executeUpdate( sent );
 					}
@@ -110,7 +110,7 @@ public class BaseDatos {
 					while (scanner.hasNextLine()) {
 						String linea = scanner.nextLine();
 						String[] datos = linea.split( "\t" );
-						sent = "insert into partida (id, fecha, nombre, puntTotal) values (" + datos[0] + ", " + datos[1] + ", '" + datos[2] + "', " + 0 + " );";
+						sent = "insert into partida (id, fecha, nombre, puntTotal) values (" + datos[0] + ", " + datos[1] + ", '" + datos[2] + "', " + datos[3] + " );";
 						logger.log( Level.INFO, "Statement: " + sent );
 						statement.executeUpdate( sent );
 					}
@@ -119,7 +119,7 @@ public class BaseDatos {
 					while (scanner.hasNextLine()) {
 						String linea = scanner.nextLine();
 						String[] datos = linea.split( "\t" );
-						sent = "insert into jugador (nombre, password, puntMax) values ('" + datos[0] + "', '" + Hash.md5(datos[1]) + "', " + 0 + ");";
+						sent = "insert into jugador (nombre, password, puntMax) values ('" + datos[0] + "', '" + Hash.md5(datos[1]) + "', " + datos[2] + ");";
 						logger.log( Level.INFO, "Statement: " + sent );
 						statement.executeUpdate( sent );
 					}
@@ -450,6 +450,36 @@ public class BaseDatos {
 			ResultSet rs = statement.executeQuery( sent );
 			int puntuacion = rs.getInt("puntuacion");
 			return puntuacion;
+		} catch (Exception e) {
+			logger.log( Level.SEVERE, "Excepción", e );
+			return null;
+		}
+	}
+	
+	public static Integer cantiadPartidas(String idJ) {
+		try (Statement statement = conexion.createStatement()) {
+			String sent = "select count(*) as cantidad from partida where nombre = '" + idJ + "';";
+			logger.log( Level.INFO, "Statement: " + sent );
+			ResultSet rs = statement.executeQuery( sent );
+			int cantidad = rs.getInt("cantidad");
+			return cantidad;
+		} catch (Exception e) {
+			logger.log( Level.SEVERE, "Excepción", e );
+			return null;
+		}
+	}
+	
+	public static ArrayList<String> obtenerPuntuaciones(){
+		try (Statement statement = conexion.createStatement()) {
+			ArrayList<String> resultado = new ArrayList<String>();
+			String sent = "select nombre from jugador order by puntMax desc, nombre asc;";
+			logger.log( Level.INFO, "Statement: " + sent );
+			ResultSet rs = statement.executeQuery( sent );
+			while( rs.next() ) { // Leer el resultset
+				String nombre = rs.getString("nombre");
+				resultado.add(nombre);
+			}
+			return resultado;
 		} catch (Exception e) {
 			logger.log( Level.SEVERE, "Excepción", e );
 			return null;
