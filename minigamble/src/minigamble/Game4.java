@@ -35,7 +35,7 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 	private Thread hda;
 	
 	public static int puntos;
-	private int puntSumados;
+	private static int puntSumados;
 	public static int puntLocal;
 	public static int idPartida;
 	public static String jugador;
