@@ -65,6 +65,7 @@ public class Game6 implements KeyListener{
 		flechasActivas.removeAll(flechasActivas);
 		flechasCreadas.removeAll(flechasCreadas);
 		
+		// Establecemos el numero de flechas de acuerdo con la puntuacion actual de la partida
 		if(puntos >= 0 && puntos < 1500) {
 			nFlechas = 5;
 		}else if(puntos >= 1500 && puntos < 3000) {
@@ -94,12 +95,18 @@ public class Game6 implements KeyListener{
 		runThreadFlechasMain();
 	}
 	
+	/**
+	 * Ejecuta el hilo que gestiona las flechas activas
+	 */
 	public void runThreadFlechasActivas() {
 		ThreadFlechasActivas fa = new ThreadFlechasActivas(flechasCreadas, flechasActivas);
 		Thread hfa = new Thread(fa);
 		hfa.start();
 	}
 	
+	/**
+	 * Ejecuta el hilo que gestiona todas las flechas
+	 */
 	public void runThreadFlechasMain() {
 		ThreadFlechasMain fm = new ThreadFlechasMain(flechasActivas);
 		Thread hfm = new Thread(fm);
