@@ -142,16 +142,13 @@ public class Game extends Canvas implements Runnable{
 	 * Reproduce la cancion
 	 */
 	
-	private void cancion() {
+	public static void cancion() {
 		String filePath = new File("").getAbsolutePath();				// Ruta hasta el proyecto
 		String s1_filePath = filePath.concat("/minigamble/src/minigamble/sonido/canciones/cancion1.wav");	//Continuación de la ruta hasta el archivo de audio 1
 		try {																				
 	        cancion = AudioSystem.getClip();
 			AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s1_filePath));
 	        cancion.open(ais);
-	        FloatControl gainControl = 
-	        	    (FloatControl) cancion.getControl(FloatControl.Type.MASTER_GAIN);
-	        	gainControl.setValue(-5.0f); // Reduce volume by 10 decibels.
 	        cancion.loop(Clip.LOOP_CONTINUOUSLY);
         }catch(Exception e2) {
         	System.out.println("error");

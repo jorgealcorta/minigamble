@@ -347,10 +347,10 @@ public class StartScreen implements MouseMotionListener, MouseListener{
 		
 		if(bSignUp_state == true) {					// Dibuja el boton Sign In y texto del boton presionado
 			g.drawImage(b2IMG_true, 500, 294, null);
-			g.drawString("Sign In", 540, 326);
+			g.drawString("Sign Up", 540, 326);
 		}else {									// Dibuja el boton Sign In y texto del boton sin presionar
 			g.drawImage(b2IMG_false, 500, 290, null);
-			g.drawString("Sign In", 540, 322);
+			g.drawString("Sign Up", 540, 322);
 		}
 		
 		if(bNoReg_state == true) {					// Dibuja el boton No Reg y texto del boton presionado
@@ -381,10 +381,10 @@ public class StartScreen implements MouseMotionListener, MouseListener{
 		
 		if(bSignUp_state == true) {					// Dibuja el boton Sign In y texto del boton presionado
 			g.drawImage(b2IMG_true, 500, 294, null);
-			g.drawString("Sign In", 545, 326);
+			g.drawString("Sign Up", 545, 326);
 		}else {									// Dibuja el boton Sign In y texto del boton sin presionar
 			g.drawImage(b2IMG_false, 500, 290, null);
-			g.drawString("Sign In", 545, 322);
+			g.drawString("Sign Up", 545, 322);
 		}
 		
 		if(bNoReg_state == true) {					// Dibuja el boton No Reg y texto del boton presionado
