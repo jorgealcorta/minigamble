@@ -12,6 +12,8 @@ import java.util.concurrent.TimeUnit;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
+
 import minigamble.Game.ESTADO;
 
 /**
@@ -273,6 +275,9 @@ public class Game5 implements Runnable , KeyListener{
 	        Clip sonido = AudioSystem.getClip();
 			AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s1_filePath));
 	        sonido.open(ais);
+	        FloatControl gainControl = 
+	        	    (FloatControl) sonido.getControl(FloatControl.Type.MASTER_GAIN);
+	        	gainControl.setValue(-15.0f); // Reduce volume by 10 decibels.
 	        sonido.start();
         }catch(Exception e2) {
         	System.out.println("error");
@@ -290,6 +295,9 @@ public class Game5 implements Runnable , KeyListener{
 	        sonido1 = AudioSystem.getClip();
 			AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s1_filePath));
 	        sonido1.open(ais);
+	        FloatControl gainControl = 
+	        	    (FloatControl) sonido1.getControl(FloatControl.Type.MASTER_GAIN);
+	        	gainControl.setValue(-15.0f); // Reduce volume by 10 decibels.
 	        sonido1.loop(Clip.LOOP_CONTINUOUSLY);
         }catch(Exception e2) {
         	System.out.println("error");
