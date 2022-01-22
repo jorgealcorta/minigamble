@@ -4,8 +4,6 @@ import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 public class PantallaFinal {
 	
@@ -29,6 +27,7 @@ public class PantallaFinal {
 	
 	public PantallaFinal(int idP, String idU, int punt) {
 		System.out.println("EEEEEEEEEEEEOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOEEEEEEEEEEEEEEEEEEEOOOOOOOOOOOOOO");
+		
 		idPartida = idP;
 		idUsuario = idU;
 		puntos = punt;
@@ -39,11 +38,13 @@ public class PantallaFinal {
 		
 		puntuaciones = BaseDatos.obtenerPuntuaciones();
 		
+		System.out.println(puntuaciones.get(2) + " // " + BaseDatos.obtenerMaxPunt(puntuaciones.get(2)));
+		
 		j1 = "1.- " + puntuaciones.get(0) + "   " + BaseDatos.obtenerMaxPunt(puntuaciones.get(0));
 		j2 = "2.- " + puntuaciones.get(1) + "   " + BaseDatos.obtenerMaxPunt(puntuaciones.get(1));
 		j3 = "3.- " + puntuaciones.get(2) + "   " + BaseDatos.obtenerMaxPunt(puntuaciones.get(2));
 		j4 = "4.- " + puntuaciones.get(3) + "   " + BaseDatos.obtenerMaxPunt(puntuaciones.get(3));
-		//j5 = "5.- " + indexes.get(5) + "   " + puntuaciones.get(indexes.get(4));
+		j5 = "5.- " + puntuaciones.get(4) + "   " + BaseDatos.obtenerMaxPunt(puntuaciones.get(4));
 		
 	}
 	
@@ -83,6 +84,9 @@ public class PantallaFinal {
 		
 		int jug4 = metrics3.stringWidth(j4);
 		g.drawString(j4 ,(1200/2) - (jug4/2), 450);
+		
+		int jug5 = metrics3.stringWidth(j5);
+		g.drawString(j5 ,(1200/2) - (jug5/2), 500);
 		
 		
 		
