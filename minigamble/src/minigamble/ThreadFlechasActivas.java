@@ -38,8 +38,9 @@ public class ThreadFlechasActivas extends Thread{
 			
 			Game6.tiempoTotal = System.currentTimeMillis() - Game6.tiempoComienzo;
 			
-			System.out.println("guardando desde hilo");
+			Game.game6.check = 0;
 			BaseDatos.insertarGame6(Game6.idPartida, Game6.puntLocal, Game6.fallos, Game6.tiempoTotal, "false", Game6.dificultad);
+			System.out.println("vidas menos una por deja rpasar");
 			Game.pi = new PantallaIntermedia(Game6.puntos, Game6.puntLocal, 1, 3, Game6.idJugador, Game6.idPartida);
 			Game.estadoJuego = ESTADO.PantallaIntermedia;
 			Game.eventoRaton();	

@@ -44,7 +44,7 @@ public class Game6 implements KeyListener{
 	private CopyOnWriteArrayList<Flecha> flechasCreadas = new CopyOnWriteArrayList<Flecha>();
 	public static CopyOnWriteArrayList<Flecha> flechasActivas = new CopyOnWriteArrayList<Flecha>();
 
-	private int check;
+	public int check ;
 	/**
 	 * Constructor de la clase Game6
 	 * @param puntuacion acumulada
@@ -208,7 +208,7 @@ public class Game6 implements KeyListener{
 //		abj 40
 //		dch 39
 			
-		if(true) {
+		if(check==1) {
 			
 			
 			switch(key) {
@@ -232,6 +232,7 @@ public class Game6 implements KeyListener{
 						algunAcierto = true;
 						aciertoReciente = true;
 						System.out.println("acierto");
+						
 					
 						nPulsadas++;
 						if(nPulsadas == nFlechas) todasPulsadas = true;
@@ -240,8 +241,6 @@ public class Game6 implements KeyListener{
 						flechasActivas.remove(f);
 						
 						
-						
-						System.out.println(todasPulsadas);
 						if(todasPulsadas) {
 							tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
 							delaySeg(2);
@@ -250,6 +249,7 @@ public class Game6 implements KeyListener{
 							if(fallos > 2) {
 								vidasRestadas = 1;
 								superado = "false";
+								System.out.println("vidas restadas menos uno");
 							}			
 							
 							check=0;
@@ -262,13 +262,14 @@ public class Game6 implements KeyListener{
 							System.out.println("pint creada");
 							Game.estadoJuego = ESTADO.PantallaIntermedia;
 							Game.eventoRaton();
-							check =0;
+							
 							
 							
 						}
 				}
 			}
 			
+			System.out.println("acierto reciente es " + aciertoReciente + "check es " + check);
 			if(!aciertoReciente) {
 				fallos++;
 				System.out.println("fallo añadido");
