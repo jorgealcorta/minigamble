@@ -1,6 +1,7 @@
 package minigamble;
 
 import java.awt.Color;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -407,7 +408,11 @@ public class Game2 implements KeyListener{
 			g.drawImage(media.crossarrow_IMG, 505, 270, 160, 160, null);
 			
 			g.setColor(Color.BLACK);
-			g.drawString("PULSA ESPACIO PARA REPRODUCIR LA COMBINACION", 200, 70);
+			
+			FontMetrics metrics1 = g.getFontMetrics();
+			int metrics1Width = metrics1.stringWidth("PULSA ESPACIO PARA REPRODUCIR LA COMBINACION");
+			g.drawString("PULSA ESPACIO PARA REPRODUCIR LA COMBINACION",(1200/2) - (metrics1Width/2), 90);
+			
 		}
 		
 		/*
@@ -417,7 +422,15 @@ public class Game2 implements KeyListener{
 		 */
 		
 		else if(start == 2) {
+			
 			g.setColor(Color.BLACK);
+			
+			g.setFont(media.customFontBot);
+			
+			FontMetrics metrics2 = g.getFontMetrics();
+			int metrics2Width = metrics2.stringWidth("REPRODUCIENDO SECUENCIA");
+			g.drawString("REPRODUCIENDO SECUENCIA",(1200/2) - (metrics2Width/2), 90);
+			
 			if(!coraDestacar) {
 				g.drawImage(media.upNegro_img, 520, 125,  128, 128, null);
 			}else {
@@ -452,6 +465,15 @@ public class Game2 implements KeyListener{
 		 */
 		
 		else if(start == 3) {
+			
+			g.setFont(media.customFontBot);
+			g.setColor(Color.BLACK);
+
+			
+			FontMetrics metrics2 = g.getFontMetrics();
+			int metrics2Width = metrics2.stringWidth("REPITE LA SECUENCIA");
+			g.drawString("REPITE LA SECUENCIA",(1200/2) - (metrics2Width/2), 90);
+			
 			g.setColor(Color.BLACK);
 			if(!coraDestacar) {
 				g.drawImage(media.upNegro_img, 520, 125, 128, 128, null);
