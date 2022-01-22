@@ -74,7 +74,6 @@ public class Game5 implements Runnable , KeyListener{
 			dificultad = 4;
 		}
 		
-		
 		if(symbols.size()==0) {
 			
 			symbols.add(media.imageS1);

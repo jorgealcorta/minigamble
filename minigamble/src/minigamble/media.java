@@ -362,6 +362,9 @@ public class media {
 		bIMGBlue_True = bBlue_True.getImage();
 		bIMGBlue_False = bBlue_False.getImage();
 		
+		bBack_false_img = bBack_false.getImage();
+		bBack_true_img = bBack_true.getImage();
+		
 		tapeteImg = tapeteIcn.getImage();
 		
 		FondoFichas_img = Fondofichas.getImage();

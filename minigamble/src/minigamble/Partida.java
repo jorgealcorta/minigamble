@@ -49,12 +49,12 @@ public class Partida {
 		minijuegos.add(ESTADO.Game7);
 		minijuegos.add(ESTADO.PantallaIntermedia);
 		
-		int rand = (int) (Math.random() * 6);
+		int rand = (int) (Math.random() * 7);
 		System.out.println("rand1");
 		System.out.println(rand);
 		
 		while(PantallaIntermedia.miniJugado == rand) {
-			rand = (int) (Math.random() * 6);
+			rand = (int) (Math.random() * 7);
 			System.out.println("rand2");
 			System.out.println(rand);
 		}
