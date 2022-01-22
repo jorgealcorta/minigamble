@@ -507,9 +507,12 @@ public class Game2 implements KeyListener{
 		// start = 4 implica que el usuario ha superado el juego
 		
 		else if(start == 4) {
-			g.setFont(media.customFontBot);
-			g.setColor(Color.BLACK);
-			g.drawString("ENHORABUENA", 325, 300);
+			g.drawImage(media.upNegro_img, (1200/2)-64, 125, 128, 128, null);
+			g.drawImage(media.leftNegro_img, 366, 290, 128, 128, null);
+			g.drawImage(media.downNegro_img, (1200/2)-64, 450, 128, 128, null);
+			g.drawImage(media.rightNegro_img, 706, 290, 128, 128, null);
+			
+			g.drawImage(media.crossarrow_IMG, 521, 270, 160, 160, null);
 		}
 	}
 	
