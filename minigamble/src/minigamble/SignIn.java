@@ -152,7 +152,12 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 				Game.cancion.close();
 				BaseDatos.insertarJugador(usuario, contrasena);
 				int idPart = BaseDatos.insertarPartida(usuario);
+				usuario_state = 1;
+				contrasena_state = 1;
 				Game.partida  = new Partida(0,0,0, usuario, idPart);
+				contrasena = "";
+				contrasena_oculta = "";
+				usuario = "";
 			}
 						
 			if(bBack_state == true){																// si se ha presionado y soltado encima del segundo boton termina el programa y suena
