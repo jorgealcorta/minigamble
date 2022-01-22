@@ -61,19 +61,20 @@ public class Game5 implements Runnable , KeyListener{
 		jugador = nombreJugador;
 
 		if(PuntTotal <1500) {
-			speed=7;
+			speed=5;
 			dificultad = 1;
 		} else if (PuntTotal<3000) {
-			speed = 21;
+			speed = 8;
 			dificultad = 2;
 		} else if (PuntTotal<4500) {
-			speed = 34;
+			speed = 10;
 			dificultad = 3;
 		} else if (PuntTotal>=4500) {
-			speed = 42;
+			speed = 13;
 			dificultad = 4;
 		}
-
+		
+		
 		if(symbols.size()==0) {
 			
 			symbols.add(media.imageS1);
