@@ -31,7 +31,6 @@ public class PantallaFinal implements KeyListener{
 	private Font fontPuntos;
 	
 	public PantallaFinal(int idP, String idU, int punt) {
-		System.out.println("EEEEEEEEEEEEOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOEEEEEEEEEEEEEEEEEEEOOOOOOOOOOOOOO");
 		
 		idPartida = idP;
 		idUsuario = idU;
@@ -94,6 +93,13 @@ public class PantallaFinal implements KeyListener{
 		int jug5 = metrics3.stringWidth(j5);
 		g.drawString(j5 ,(1200/2) - (jug5/2), 500);
 		
+		
+		fontPuntos = media.customFontFin.deriveFont(Font.PLAIN,50);
+		g.setFont(fontPuntos);
+		FontMetrics metrics4 = g.getFontMetrics();
+		g.setColor(Color.WHITE);
+		int message = metrics4.stringWidth("Space to continue");
+		g.drawString("Space to continue" ,(1200/2) - (message/2), 570);
 		
 		
 		

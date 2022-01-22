@@ -263,7 +263,6 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 						if(fallos>=3) {
 							vidasRestadas = 1;
 							superado = "false";
-							
 						}
 						
 						
