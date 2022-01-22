@@ -253,11 +253,7 @@ public class Game3 implements MouseListener , MouseMotionListener {
 					
 					
 				} else if ( mouseOver(mox, moy, 41, 43, 178, 88)) {
-					start = 3;
 					tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
-					delayMS(2000);
-					
-					
 					if(numFallos>3) {
 						BaseDatos.insertarGame3(idPartida, puntLocal, numFallos, tiempoTotal, "false", thisLab.getId());
 						start = 5;
@@ -327,9 +323,11 @@ public class Game3 implements MouseListener , MouseMotionListener {
 			customFontG3=media.customFontBot.deriveFont(Font.PLAIN,15);
 			g.setFont(customFontG3);
 			g.setColor(Color.BLACK);
-			g.drawString("Points to obtain ( " + String.valueOf(puntLocal) +" )", 870, 40);						
-			g.drawString("Number of mistakes ( "+String.valueOf(numFallos)+" )", 845, 20);			
-
+			g.drawString("Points to obtain ( " + String.valueOf(puntLocal) +" )", 870, 20);						
+			g.drawString("Number of mistakes ( "+String.valueOf(numFallos)+" )", 845, 40);
+			if (numFallos>3) {
+				g.drawString("Too many mistakes :(", 845, 60);				
+			}
 		}
 		
 		if(start ==3) {
