@@ -228,6 +228,13 @@ public class media {
 	public static Image vidatrans_IMG;
 	public static Image vidalado_IMG;
 	
+	//PANTALLA FINAL
+	
+	public static ImageIcon panelTopJugadores;
+	
+	public static Image panelTopJugadores_IMG;
+	
+	
 	public media() {
 		
 		try {
@@ -338,6 +345,11 @@ public class media {
 			vida = new ImageIcon(Game.class.getResource("multimedia/vida.png").toURI().toURL() );
 			vidatrans = new ImageIcon(Game.class.getResource("multimedia/vidatrans.png").toURI().toURL() );
 			vidalado = new ImageIcon(Game.class.getResource("multimedia/vidalado.png").toURI().toURL() );
+			
+			// PANTALLA FINAL
+			
+			panelTopJugadores = new ImageIcon(Game.class.getResource("multimedia/pantallaFinal/grey_panel.png").toURI().toURL() );
+			
 			
 		} catch (Exception e1) {
 			e1.printStackTrace();
@@ -450,6 +462,9 @@ public class media {
 		vidatrans_IMG = vidatrans.getImage();
 		vidalado_IMG = vidalado.getImage();
 		
+		//PANTALLA FINAL
+		
+		panelTopJugadores_IMG = panelTopJugadores.getImage();
 		
 		//FONTS
 		

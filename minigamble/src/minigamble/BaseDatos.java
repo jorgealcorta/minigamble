@@ -456,4 +456,34 @@ public class BaseDatos {
 		}
 	}
 	
+	public static Integer cantiadPartidas(String idJ) {
+		try (Statement statement = conexion.createStatement()) {
+			String sent = "select count(*) as cantidad from partida where nombre = '" + idJ + "';";
+			logger.log( Level.INFO, "Statement: " + sent );
+			ResultSet rs = statement.executeQuery( sent );
+			int cantidad = rs.getInt("cantidad");
+			return cantidad;
+		} catch (Exception e) {
+			logger.log( Level.SEVERE, "Excepción", e );
+			return null;
+		}
+	}
+	
+	public static ArrayList<String> obtenerPuntuaciones(){
+		try (Statement statement = conexion.createStatement()) {
+			ArrayList<String> resultado = new ArrayList<String>();
+			String sent = "select nombre from jugador order by puntMax desc, nombre asc;";
+			logger.log( Level.INFO, "Statement: " + sent );
+			ResultSet rs = statement.executeQuery( sent );
+			while( rs.next() ) { // Leer el resultset
+				String nombre = rs.getString("nombre");
+				resultado.add(nombre);
+			}
+			return resultado;
+		} catch (Exception e) {
+			logger.log( Level.SEVERE, "Excepción", e );
+			return null;
+		}
+	}
+	
 }

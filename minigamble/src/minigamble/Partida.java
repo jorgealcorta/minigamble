@@ -66,8 +66,9 @@ public class Partida {
 
 
 
+
 		if(vidas<1 ) {
-			BaseDatos.cambiarPuntTotal(idPartida, puntuacion);
+			BaseDatos.cambiarPuntTotal(idPartida, puntuacionGeneral);
 			if(jugador != null) {
 				int puntos = BaseDatos.obtenerMaxPunt(jugador);
 				BaseDatos.cambiarMaxPunt(jugador, puntos);
