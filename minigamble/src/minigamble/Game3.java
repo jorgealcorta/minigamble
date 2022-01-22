@@ -71,7 +71,7 @@ public class Game3 implements MouseListener , MouseMotionListener {
 		jugador = nombreJugador;
 		idPartida = idPart;
 		
-		puntLocal = 1000;
+		puntLocal = 500;
 		numFallos = 0;
 		start = 1;
 			
@@ -104,11 +104,11 @@ public class Game3 implements MouseListener , MouseMotionListener {
 	 */
 	
 	public Laberinto getRandom( ArrayList<Laberinto> array, int puntTotal) {
-	    if (puntTotal<2000) {
+	    if (puntTotal<1500) {
 	    	return array.get(0);
-	    } else if (puntTotal < 4000) {
+	    } else if (puntTotal < 3000) {
 	    	return array.get(1);
-	    } else if (puntTotal < 6000) {
+	    } else if (puntTotal < 4500) {
 	    	return array.get(2);
 	    } else  {
 	    	return array.get(3);
