@@ -4,9 +4,13 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
-public class PantallaFinal {
+import minigamble.Game.ESTADO;
+
+public class PantallaFinal implements KeyListener{
 	
 	private int puntos;
 	private int maxPuntos;
@@ -92,6 +96,37 @@ public class PantallaFinal {
 		
 		
 		
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+
+		
+
+		int key = e.getKeyCode();
+		
+		if(key == 32 && Game.estadoJuego == ESTADO.PantallaFinal) {
+			
+			Game.estadoJuego = ESTADO.Start;
+			Game.again();
+			
+		}	
+		
+		
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 	

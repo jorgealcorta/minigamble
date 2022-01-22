@@ -74,8 +74,10 @@ public class Partida {
 				BaseDatos.cambiarMaxPunt(jugador, puntos);
 			
 			}
-			Game.estadoJuego= ESTADO.Start;
-			Game.again();
+			Game.pf = new PantallaFinal(idPartida, jugador, puntuacionGeneral);
+			Game.estadoJuego= ESTADO.PantallaFinal;
+			Game.eventoRaton();
+			
 		}else {				
 			if(rand == 0) {
 				Game.game1 = new Game1(puntuacionGeneral, jugador, idPartida);

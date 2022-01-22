@@ -109,7 +109,8 @@ public class PantallaIntermedia implements KeyListener{
 				}
 
 				hpd.interrupt();
-	
+				ThreadPuntosDisplay.puntos2.close();
+				
 				Game.partida  = new Partida(puntLocal, this.vidasRestadas, miniJugado, jugador, idPartida);
 			}	
 		}

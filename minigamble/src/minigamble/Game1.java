@@ -43,26 +43,23 @@ public class Game1  implements MouseMotionListener, MouseListener, Runnable {
 	private ArrayList<Carta> allCards = new ArrayList<Carta>();
 	private List<Carta> selectCards = new ArrayList<Carta>();
 	
-	private Carta c1 = new Carta("card_hearts_A", false, false);
-	private Carta c2 = new Carta("card_hearts_Q", false, false);
-	private Carta c3 = new Carta("card_hearts_K", false, false);
-	private Carta c4 = new Carta("card_hearts_A", false, false);
-	private Carta c5 = new Carta("card_hearts_Q", false, false);
-	private Carta c6 = new Carta("card_hearts_K", false, false);
-	private Carta c7 = new Carta("card_clubs_A", false, false);
-	private Carta c8 = new Carta("card_clubs_Q", false, false);
-	private Carta c9 = new Carta("card_clubs_K", false, false);
-	private Carta c10 = new Carta("card_clubs_A", false, false);
-	private Carta c11 = new Carta("card_clubs_Q", false, false);
-	private Carta c12 = new Carta("card_clubs_K", false, false);
-	private Carta c13 = new Carta("card_hearts_J", false, false);
-	private Carta c14 = new Carta("card_clubs_J", false, false);
-	private Carta c15 = new Carta("card_hearts_J", false, false);
-	private Carta c16 = new Carta("card_clubs_J", false, false);
-	private Carta c17 = new Carta("card_diamonds_A", false, false);
-	private Carta c18 = new Carta("card_diamonds_K", false, false);
-	private Carta c19 = new Carta("card_diamonds_A", false, false);
-	private Carta c20 = new Carta("card_diamonds_K", false, false);
+	private Carta c1 = new Carta("aNegra", false, false);
+	private Carta c2 = new Carta("aNegra", false, false);
+	private Carta c3 = new Carta("aRoja", false, false);
+	private Carta c4 = new Carta("aRoja", false, false);
+	private Carta c5 = new Carta("comodinNegro", false, false);
+	private Carta c6 = new Carta("comodinNegro", false, false);
+	private Carta c7 = new Carta("comodinRojo", false, false);
+	private Carta c8 = new Carta("comodinRojo", false, false);
+	private Carta c9 = new Carta("kNegra", false, false);
+	private Carta c10 = new Carta("kNegra", false, false);
+	private Carta c11 = new Carta("kRoja", false, false);
+	private Carta c12 = new Carta("kRoja", false, false);
+	private Carta c13 = new Carta("tresNegro", false, false);
+	private Carta c14 = new Carta("tresNegro", false, false);
+	private Carta c15 = new Carta("tresRojo", false, false);
+	private Carta c16 = new Carta("tresRojo", false, false);
+	
 	
 	private int start;
 	private int click1 = -1;
@@ -111,20 +108,20 @@ public class Game1  implements MouseMotionListener, MouseListener, Runnable {
 			maxFallos = 1;
 			dificultad = 1;
 		}else if(puntTotal < 3000) {
-			nCol = 3;
-			nFil = 3;
-			cartX = 120;
-			cartY = 164;
-			puntuacionPorCarta = 500/6;
-			maxFallos = 3;
+			nCol = 4;
+			nFil = 2;
+			cartX = 165;
+			cartY = 225;
+			puntuacionPorCarta = 500/4;
+			maxFallos = 2;
 			dificultad = 2;
 		}else if(puntTotal < 4500) {
 			nCol = 4;
 			nFil = 3;
 			cartX = 150;
 			cartY = 204;
-			puntuacionPorCarta = 500/8;
-			maxFallos = 5;
+			puntuacionPorCarta = 500/6;
+			maxFallos = 4;
 			dificultad = 3;
 		}else if(puntTotal >= 4500) {
 			nCol = 4;
@@ -135,14 +132,6 @@ public class Game1  implements MouseMotionListener, MouseListener, Runnable {
 			maxFallos = 5;
 			dificultad = 4;
 		}
-		
-		nCol = 4;
-		nFil = 4;
-		cartX = 98;
-		cartY = 133;
-		puntuacionPorCarta = 500/8;
-		maxFallos = 5;
-		dificultad = 3;
 		
 		puntTemp = puntuacionPorCarta;
 			
@@ -162,10 +151,6 @@ public class Game1  implements MouseMotionListener, MouseListener, Runnable {
 		allCards.add(c14);
 		allCards.add(c15);
 		allCards.add(c16);
-		allCards.add(c17);
-		allCards.add(c18);
-		allCards.add(c19);
-		allCards.add(c20);
 		
 		
 		selectCards  =  allCards.subList(0, nCol*nFil);
@@ -212,26 +197,22 @@ public class Game1  implements MouseMotionListener, MouseListener, Runnable {
 	
 	public Image getImagenCarta(int index) {
 		
-		if(selectCards.get(index).getId() == "card_hearts_A") {
-			return media.card_hearts_A_IMG;
-		}else if(selectCards.get(index).getId() == "card_hearts_Q") {
-			return media.card_hearts_Q_IMG;
-		}else if(selectCards.get(index).getId() == "card_hearts_K") {
-			return media.card_hearts_K_IMG;
-		}else if(selectCards.get(index).getId() == "card_clubs_A") {
-			return media.card_clubs_A_IMG;
-		}else if(selectCards.get(index).getId() == "card_clubs_Q") {
-			return media.card_clubs_Q_IMG;
-		}else if(selectCards.get(index).getId() == "card_clubs_K") {
-			return media.card_clubs_K_IMG;
-		}else if(selectCards.get(index).getId() == "card_hearts_J") {
-			return media.card_hearts_J_IMG;
-		}else if(selectCards.get(index).getId() == "card_clubs_J") {
-			return media.card_clubs_J_IMG;
-		}else if(selectCards.get(index).getId() == "card_diamonds_A") {
-			return media.card_diamonds_A_IMG;
-		}else if(selectCards.get(index).getId() == "card_diamonds_K") {
-			return media.card_diamonds_K_IMG;
+		if(selectCards.get(index).getId() == "aNegra") {
+			return media.aNegra_IMG;
+		}else if(selectCards.get(index).getId() == "aRoja") {
+			return media.aRoja_IMG;
+		}else if(selectCards.get(index).getId() == "comodinNegro") {
+			return media.comodinNegro_IMG;
+		}else if(selectCards.get(index).getId() == "comodinRojo") {
+			return media.comodinRojo_IMG;
+		}else if(selectCards.get(index).getId() == "tresNegro") {
+			return media.tresNegro_IMG;
+		}else if(selectCards.get(index).getId() == "tresRojo") {
+			return media.tresRojo_IMG;
+		}else if(selectCards.get(index).getId() == "kNegra") {
+			return media.kNegra_IMG;
+		}else if(selectCards.get(index).getId() == "kRoja") {
+			return media.kRoja_IMG;
 		}
 		return null;
 		
@@ -525,7 +506,7 @@ public class Game1  implements MouseMotionListener, MouseListener, Runnable {
 					if(selectCards.get(nCarta).isArriba()) {
 						g.drawImage(getImagenCarta(nCarta), columnas.get(0) , columnas.get(1) ,cartX, cartY, null);
 					}else {
-						g.drawImage(media.cardBackIMG, columnas.get(0) , columnas.get(1) ,cartX, cartY, null);
+						g.drawImage(media.reverso_IMG, columnas.get(0) , columnas.get(1) ,cartX, cartY, null);
 					}
 					nCarta++;
 				}
