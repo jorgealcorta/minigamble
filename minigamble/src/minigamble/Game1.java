@@ -105,36 +105,44 @@ public class Game1  implements MouseMotionListener, MouseListener, Runnable {
 		if (puntTotal < 1500) {
 			nCol = 3;
 			nFil = 2;
-			cartX = 140;//126
-			cartY = 190;//171
+			cartX = 165;
+			cartY = 225;
 			puntuacionPorCarta = (double) 500/3;
 			maxFallos = 1;
 			dificultad = 1;
 		}else if(puntTotal < 3000) {
 			nCol = 3;
-			nFil = 4;
-			cartX = 98;
-			cartY = 133;
+			nFil = 3;
+			cartX = 120;
+			cartY = 164;
 			puntuacionPorCarta = 500/6;
 			maxFallos = 3;
 			dificultad = 2;
 		}else if(puntTotal < 4500) {
+			nCol = 4;
+			nFil = 3;
+			cartX = 150;
+			cartY = 204;
+			puntuacionPorCarta = 500/8;
+			maxFallos = 5;
+			dificultad = 3;
+		}else if(puntTotal >= 4500) {
 			nCol = 4;
 			nFil = 4;
 			cartX = 98;
 			cartY = 133;
 			puntuacionPorCarta = 500/8;
 			maxFallos = 5;
-			dificultad = 3;
-		}else if(puntTotal >= 4500) {
-			nCol = 5;
-			nFil = 4;
-			cartX = 98;
-			cartY = 133;
-			puntuacionPorCarta = 500/10;
-			maxFallos = 6;
 			dificultad = 4;
 		}
+		
+		nCol = 4;
+		nFil = 4;
+		cartX = 98;
+		cartY = 133;
+		puntuacionPorCarta = 500/8;
+		maxFallos = 5;
+		dificultad = 3;
 		
 		puntTemp = puntuacionPorCarta;
 			

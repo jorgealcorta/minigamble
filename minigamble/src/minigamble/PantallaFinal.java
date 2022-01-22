@@ -1,5 +1,6 @@
 package minigamble;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
@@ -56,6 +57,7 @@ public class PantallaFinal {
 			g.drawImage(media.tapeteImg, 0, 0, 1200, 672, null);
 		}
 		
+		g.setColor(Color.BLACK);
 		fontPuntos = media.customFontFin.deriveFont(Font.PLAIN,75);
 		g.setFont(fontPuntos);
 		FontMetrics metrics = g.getFontMetrics();
