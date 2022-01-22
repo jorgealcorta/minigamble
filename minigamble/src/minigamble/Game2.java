@@ -399,13 +399,14 @@ public class Game2 implements KeyListener{
 		
 		if(start == 1) {
 			g.setFont(media.customFontBot);
+			//pasa de 520 a 536
 			
-			g.drawImage(media.upNegro_img, 520, 125, 128, 128, null);
-			g.drawImage(media.leftNegro_img, 350, 290, 128, 128, null);
-			g.drawImage(media.downNegro_img, 520, 450, 128, 128, null);
-			g.drawImage(media.rightNegro_img, 690, 290, 128, 128, null);
+			g.drawImage(media.upNegro_img, (1200/2)-64, 125, 128, 128, null);
+			g.drawImage(media.leftNegro_img, 366, 290, 128, 128, null);
+			g.drawImage(media.downNegro_img, (1200/2)-64, 450, 128, 128, null);
+			g.drawImage(media.rightNegro_img, 706, 290, 128, 128, null);
 			
-			g.drawImage(media.crossarrow_IMG, 505, 270, 160, 160, null);
+			g.drawImage(media.crossarrow_IMG, 521, 270, 160, 160, null);
 			
 			g.setColor(Color.BLACK);
 			
