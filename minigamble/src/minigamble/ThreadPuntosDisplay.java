@@ -10,7 +10,7 @@ public class ThreadPuntosDisplay extends Thread {
 	
 	int puntos = 0;
 	int puntLocal;
-	private static Clip puntos2;
+	public static Clip puntos2;
 	
 	
 	public ThreadPuntosDisplay(int puntos, int puntLocal) {

@@ -70,29 +70,25 @@ public class media {
 	
 	//GAME1
 	
-	public static ImageIcon card_hearts_A;
-	public static ImageIcon card_hearts_Q;
-	public static ImageIcon card_hearts_K;
-	public static ImageIcon card_clubs_A;
-	public static ImageIcon card_clubs_Q;
-	public static ImageIcon card_clubs_K;
-	public static ImageIcon card_clubs_J;
-	public static ImageIcon card_hearts_J;
-	public static ImageIcon card_diamonds_A;
-	public static ImageIcon card_diamonds_K;	
-	public static ImageIcon cardBack;
+	public static ImageIcon aNegra;
+	public static ImageIcon aRoja;
+	public static ImageIcon kNegra;
+	public static ImageIcon kRoja;
+	public static ImageIcon tresRojo;
+	public static ImageIcon tresNegro;
+	public static ImageIcon comodinRojo;
+	public static ImageIcon comodinNegro;	
+	public static ImageIcon reverso;
 	
-	public static Image card_hearts_A_IMG;
-	public static Image card_hearts_Q_IMG;
-	public static Image card_hearts_K_IMG;
-	public static Image card_clubs_A_IMG;
-	public static Image card_clubs_Q_IMG;
-	public static Image card_clubs_K_IMG;
-	public static Image card_clubs_J_IMG;
-	public static Image card_hearts_J_IMG;
-	public static Image card_diamonds_A_IMG;
-	public static Image card_diamonds_K_IMG;
-	public static Image cardBackIMG;
+	public static Image aNegra_IMG;
+	public static Image aRoja_IMG;
+	public static Image kNegra_IMG;
+	public static Image kRoja_IMG;
+	public static Image tresRojo_IMG;
+	public static Image tresNegro_IMG;
+	public static Image comodinRojo_IMG;
+	public static Image comodinNegro_IMG;
+	public static Image reverso_IMG;
 	
 	//GAME2
 	
@@ -264,18 +260,15 @@ public class media {
 			
 			//GAME1
 			
-			cardBack = new ImageIcon( Game.class.getResource("multimedia/cartas/reverso.png").toURI().toURL() );
-			card_hearts_A = new ImageIcon( Game.class.getResource("multimedia/cartas/aHearts.png").toURI().toURL() );
-			card_hearts_Q = new ImageIcon( Game.class.getResource("multimedia/cartas/3Hearts.png").toURI().toURL() );
-			card_hearts_K = new ImageIcon( Game.class.getResource("multimedia/cartas/kRoja.png").toURI().toURL() );
-			card_hearts_J = new ImageIcon( Game.class.getResource("multimedia/cartas/RedJoker.png").toURI().toURL() );
-			card_clubs_A = new ImageIcon( Game.class.getResource("multimedia/cartas/aClubs.png").toURI().toURL() );
-			card_clubs_Q = new ImageIcon( Game.class.getResource("multimedia/cartas/3Clubs.png").toURI().toURL() );
-			card_clubs_K = new ImageIcon( Game.class.getResource("multimedia/cartas/kNegra.png").toURI().toURL() );
-			card_clubs_J = new ImageIcon( Game.class.getResource("multimedia/cartas/BlackJoker.png").toURI().toURL() );
-			
-			card_diamonds_A = new ImageIcon( Game.class.getResource("multimedia/cartas/cardDiamondsA.png").toURI().toURL() );
-			card_diamonds_K = new ImageIcon( Game.class.getResource("multimedia/cartas/cardClubs8.png").toURI().toURL() );
+			reverso = new ImageIcon( Game.class.getResource("multimedia/cartas/reverso.png").toURI().toURL() );
+			comodinNegro = new ImageIcon( Game.class.getResource("multimedia/cartas/comodinNegro.png").toURI().toURL() );
+			comodinRojo = new ImageIcon( Game.class.getResource("multimedia/cartas/comodinRojo.png").toURI().toURL() );
+			aNegra = new ImageIcon( Game.class.getResource("multimedia/cartas/aNegra.png").toURI().toURL() );
+			aRoja = new ImageIcon( Game.class.getResource("multimedia/cartas/aRoja.png").toURI().toURL() );
+			tresNegro = new ImageIcon( Game.class.getResource("multimedia/cartas/tresNegro.png").toURI().toURL() );
+			tresRojo = new ImageIcon( Game.class.getResource("multimedia/cartas/tresRojo.png").toURI().toURL() );
+			kNegra = new ImageIcon( Game.class.getResource("multimedia/cartas/kNegra.png").toURI().toURL() );
+			kRoja = new ImageIcon( Game.class.getResource("multimedia/cartas/kRoja.png").toURI().toURL() );
 			
 			//GAME2
 			
@@ -378,17 +371,15 @@ public class media {
 		
 		//GAME1
 		
-		card_hearts_A_IMG = card_hearts_A.getImage();
-		card_hearts_Q_IMG = card_hearts_Q.getImage();
-		card_hearts_K_IMG = card_hearts_K.getImage();
-		card_clubs_A_IMG = card_clubs_A.getImage();
-		card_clubs_Q_IMG = card_clubs_Q.getImage();
-		card_clubs_K_IMG = card_clubs_K.getImage();
-		card_clubs_J_IMG = card_clubs_J.getImage();
-		card_hearts_J_IMG = card_hearts_J.getImage();
-		card_diamonds_A_IMG = card_diamonds_A.getImage();
-		card_diamonds_K_IMG = card_diamonds_K.getImage();
-		cardBackIMG = cardBack.getImage();
+		aNegra_IMG = aNegra.getImage();
+		aRoja_IMG = aRoja.getImage();
+		kNegra_IMG = kNegra.getImage();
+		kRoja_IMG = kRoja.getImage();
+		tresNegro_IMG = tresNegro.getImage();
+		tresRojo_IMG = tresRojo.getImage();
+		comodinNegro_IMG = comodinNegro.getImage();
+		comodinRojo_IMG = comodinRojo.getImage();
+		reverso_IMG = reverso.getImage();
 		
 		//GAME2
 		
