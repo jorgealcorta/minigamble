@@ -4,9 +4,15 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.File;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.TimeUnit;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+
 import minigamble.Game.ESTADO;
 
 public class Game6 implements KeyListener{
@@ -111,6 +117,75 @@ public class Game6 implements KeyListener{
 		
 	}
 	
+	/**
+	 * Reproduce el sonido Izquierda
+	 */
+	private void sonidoIzq() {
+		String filePath = new File("").getAbsolutePath();				// Ruta hasta el proyecto
+		String s1_filePath = filePath.concat("/minigamble/src/minigamble/sonido/simonSays/simonSound1.wav");	//Continuación de la ruta hasta el archivo de audio 1
+		try {																				
+	        Clip sonido = AudioSystem.getClip();
+			AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s1_filePath));
+	        sonido.open(ais);
+	        sonido.start();
+        }catch(Exception e2) {
+        	System.out.println("error sonido izq");
+        }
+		
+	}
+	
+	/**
+	 * Reproduce el sonido Arriba
+	 */
+	private void sonidoArriba() {
+		String filePath = new File("").getAbsolutePath();				// Ruta hasta el proyecto
+		String s1_filePath = filePath.concat("/minigamble/src/minigamble/sonido/simonSays/simonSound2.wav");	//Continuación de la ruta hasta el archivo de audio 1
+		try {																				
+	        Clip sonido = AudioSystem.getClip();
+			AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s1_filePath));
+	        sonido.open(ais);
+	        sonido.start();
+        }catch(Exception e2) {
+        	System.out.println("error sonido up");
+        }
+		
+	}
+	
+	/**
+	 * Reproduce el sonido Derecha
+	 */
+	private void sonidoDcha() {
+		String filePath = new File("").getAbsolutePath();				// Ruta hasta el proyecto
+		String s1_filePath = filePath.concat("/minigamble/src/minigamble/sonido/simonSays/simonSound3.wav");	//Continuación de la ruta hasta el archivo de audio 1
+		try {																				
+	        Clip sonido = AudioSystem.getClip();
+			AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s1_filePath));
+	        sonido.open(ais);
+	        sonido.start();
+        }catch(Exception e2) {
+        	System.out.println("error sonido derecha");
+        }
+		
+	}
+	
+	/**
+	 * Reproduce el sonido Abajo
+	 */
+	private void sonidoAbajo() {
+		String filePath = new File("").getAbsolutePath();				// Ruta hasta el proyecto
+		String s1_filePath = filePath.concat("/minigamble/src/minigamble/sonido/simonSays/simonSound4.wav");	//Continuación de la ruta hasta el archivo de audio 1
+		try {																				
+	        Clip sonido = AudioSystem.getClip();
+			AudioInputStream ais = AudioSystem.getAudioInputStream(new File(s1_filePath));
+	        sonido.open(ais);
+	        sonido.start();
+        }catch(Exception e2) {
+        	System.out.println("error sonido abajo");
+        }
+		
+	}
+
+	
 
 
 	@Override
@@ -127,6 +202,13 @@ public class Game6 implements KeyListener{
 //		arr 38
 //		abj 40
 //		dch 39
+		
+		switch(key) {
+			case 37: sonidoIzq(); break;
+			case 38: sonidoArriba(); break;
+			case 39: sonidoDcha(); break;
+			case 40: sonidoAbajo(); break;
+		}
 		
 		aciertoReciente = false;
 		
