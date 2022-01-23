@@ -6,9 +6,16 @@ import minigamble.Game.ESTADO;
 
 public class ThreadFlechasActivas extends Thread{
 	
+	// CopyOnWriteArrayList de las flechas creadas
 	private CopyOnWriteArrayList<Flecha> creadas = new CopyOnWriteArrayList<Flecha>();
+	
+	// CopyOnWriteArrayList de las flechas activas
 	private CopyOnWriteArrayList<Flecha> activas = new CopyOnWriteArrayList<Flecha>();
 	
+	/** Constructor de la clase ThreadFlechasActivas
+	 * @param creadas CopyOnWriteArrayList de las flechas creadas
+	 * @param activas CopyOnWriteArrayList de las flechas activas
+	 */
 	public ThreadFlechasActivas(CopyOnWriteArrayList<Flecha> creadas, CopyOnWriteArrayList<Flecha> activas) {
 		this.creadas = creadas;
 		this.activas = activas;
