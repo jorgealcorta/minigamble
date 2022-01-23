@@ -154,6 +154,9 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 				int idPart = BaseDatos.insertarPartida(usuario);
 				usuario_state = 1;
 				contrasena_state = 1;
+				Partida.vidas = 3;
+				Game.cancion.close();
+				Game.partida.puntuacionGeneral = 0;
 				Game.partida  = new Partida(0,0,0, usuario, idPart);
 				contrasena = "";
 				contrasena_oculta = "";
