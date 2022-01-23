@@ -12,15 +12,20 @@ public class ThreadVidasDisplay extends Thread {
 	PantallaIntermedia pi;
 	
 	
+	/**
+	 * @param pi instancia de Pantalla Intermedia
+	 */
 	public ThreadVidasDisplay(PantallaIntermedia pi) {
 
 		this.pi = pi;
 	}
 	
+	/**
+	 * Las vidas aparecen con intervalos de medio segundo. Una vez se muestran todas las vidas, se gestiona la animacion de estas.
+	 */
 	@Override
 	public void run() {
 		
-
 		pi.vida1.display = true;
 		try {
 			Thread.sleep(500);
