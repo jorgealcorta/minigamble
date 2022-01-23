@@ -125,8 +125,12 @@ public class PantallaIntermedia implements KeyListener{
 	}
 	
 	public void render(Graphics g) {
-		g.setColor(Color.decode("#208b3a"));
-		g.fillRect(0, 0, 1200, 700);
+		
+		if(VentanaPrincipal.soWindows) {
+			g.drawImage(media.tapeteVidas_img, 0, 0, 1184, 663, null);
+		}else {
+			g.drawImage(media.tapeteVidas_img, 0, 0, 1200, 672, null);
+		}
 		g.setColor(Color.BLACK);
 
 		

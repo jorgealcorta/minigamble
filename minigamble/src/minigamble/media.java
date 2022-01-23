@@ -219,6 +219,9 @@ public class media {
 	
 	//PANTALLA INTERMEDIA
 	
+	public static ImageIcon tapeteVidas;
+	public static Image tapeteVidas_img;
+	
 	public static ImageIcon vida;
 	public static ImageIcon vidatrans;
 	public static ImageIcon vidalado;
@@ -343,6 +346,8 @@ public class media {
 			vidatrans = new ImageIcon(Game.class.getResource("multimedia/vidatrans.png").toURI().toURL() );
 			vidalado = new ImageIcon(Game.class.getResource("multimedia/vidalado.png").toURI().toURL() );
 			
+			tapeteVidas = new ImageIcon( Game.class.getResource("multimedia/tapeteVidas.png").toURI().toURL() );
+			
 			// PANTALLA FINAL
 			
 			panelTopJugadores = new ImageIcon(Game.class.getResource("multimedia/pantallaFinal/grey_panel.png").toURI().toURL() );
@@ -457,6 +462,7 @@ public class media {
 		
 		//PANTALLA INTERMEDIA
 		
+		tapeteVidas_img = tapeteVidas.getImage();
 		vida_IMG = vida.getImage();
 		vidatrans_IMG = vidatrans.getImage();
 		vidalado_IMG = vidalado.getImage();
