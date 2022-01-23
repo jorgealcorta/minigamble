@@ -21,6 +21,10 @@ public class ThreadFlechasActivas extends Thread{
 		this.activas = activas;
 	}
 	
+	/**
+	 * Cada flecha aparece con un intervalo de medio segundo. Una vez han aparecido todas las flechas, gestiona que las que esten fuera de la ventana dejen de contarse como activas.
+	 * Si el usuario ha fallado alguna pulsacion y ninguna flecha esta activa, se llama al constructor de Partida desde aqui.
+	 */
 	@Override
 	public void run() {
 		for(Flecha f : creadas) {
