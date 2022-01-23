@@ -187,18 +187,18 @@ public class Inicio   implements MouseMotionListener, MouseListener  {
 					
 		if(b1_state == true) {				// Dibuja el boton 1 y texto del botón presionado
 			g.drawImage(media.bIMGYellow_True, 500, 294, null);
-			g.drawString("Comenzar", 512, 326);			
+			g.drawString("Start", 545, 326);			
 		}else {								// Dibuja el boton 1 y texto del boton sin presionar
 			g.drawImage(media.bIMGYellow_False, 500, 290, null);		
-			g.drawString("Comenzar", 512, 322);		
+			g.drawString("Start", 545, 322);		
 		}
 		
 		if(b2_state == true) {					// Dibuja el boton 2 y texto del boton presionado
 			g.drawImage(media.bStartIMG_True, 500, 394, null);
-			g.drawString("Salir", 550, 426);
+			g.drawString("Exit", 555, 426);
 		}else {									// Dibuja el boton 2 y texto del boton sin presionar
 			g.drawImage(media.bStartIMG_False, 500, 390, null);
-			g.drawString("Salir", 550, 422);
+			g.drawString("Exit", 558, 422);
 		}
 	
 				
