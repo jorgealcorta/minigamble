@@ -99,7 +99,7 @@ public class Game4 implements MouseMotionListener, MouseListener{ //Dianas
 			dificultad = 3;
 		}else if(puntos >= 4500) {
 			nDianas = 20;
-			dificultad = 0;
+			dificultad = 4;
 		}
 		
 		todasRotas = false;

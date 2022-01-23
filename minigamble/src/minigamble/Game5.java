@@ -56,9 +56,9 @@ public class Game5 implements Runnable , KeyListener{
 	private long tiempoTotal;
 	Clip sonido1;
 
-	public Game5(int dificultad, String nombreJugador, int idPart) {
+	public Game5(int puntos, String nombreJugador, int idPart) {
 
-		PuntTotal = dificultad;
+		PuntTotal = puntos;
 		idPartida = idPart;
 		jugador = nombreJugador;
 
