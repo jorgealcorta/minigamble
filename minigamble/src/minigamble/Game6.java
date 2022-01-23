@@ -15,7 +15,7 @@ import javax.sound.sampled.Clip;
 
 import minigamble.Game.ESTADO;
 
-public class Game6 implements KeyListener{
+public class Game6 implements KeyListener, Renderizable {
 	
 	private boolean aciertoReciente = false;
 	

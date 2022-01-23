@@ -20,7 +20,7 @@ import minigamble.Game.ESTADO;
  * Clase encargada del juego 3 (laberinto)
  */
 
-public class Game3 implements MouseListener , MouseMotionListener {
+public class Game3 implements MouseListener, MouseMotionListener, Renderizable {
 
 	
 	private String jugador;

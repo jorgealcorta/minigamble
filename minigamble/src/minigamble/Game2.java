@@ -15,7 +15,7 @@ import javax.sound.sampled.Clip;
 
 import minigamble.Game.ESTADO;
 
-public class Game2 implements KeyListener{
+public class Game2 implements KeyListener, Renderizable {
 	
 	private int start = 1; //1 = esperando, 2 = reproduciendo, 3 = jugando, 4 = ganado
 	
