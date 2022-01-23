@@ -150,8 +150,8 @@ public class BaseDatos {
 	
 	/**	Inserta un Jugador en la base de datos previamente abierta con {@link #abrirConexion(String, boolean)}
 	 * @param nombre Nombre del jugador que se quiere insertar
-	 * @param password Contraseña del jugador cifrada mediante {@link minigamble.Hash#md5(String)}
-	 * @return Devuelve True si se inserta correctamente
+	 * @param password Contraseña del jugador que se cifrada mediante {@link minigamble.Hash#md5(String)}
+	 * @return Devuelve True si se inserta correctamente y False si no
 	 */
 	public static boolean insertarJugador( String nombre, String password) {
 		try (Statement statement = conexion.createStatement()) {
@@ -169,7 +169,7 @@ public class BaseDatos {
 	
 	/** Inserta una Partida en la base de datos previamente abierta con {@link #abrirConexion(String, boolean)}
 	 * @param jugador Nombre del jugador que juega la partida
-	 * @return Devuelve True si se inserta correctamente
+	 * @return Devuelve True si se inserta correctamente y False si no
 	 */
 	public static int insertarPartida( String jugador) {
 		try (Statement statement = conexion.createStatement()) {
@@ -194,6 +194,8 @@ public class BaseDatos {
 	 * @param primeraCarta Primera carta levantada
 	 * @param tiempoPrimCar Tiempo hasta levantar la primera carta
 	 * @param tiempoTot Tiempo total en terminar el juego
+	 * @param superado "true" si se ha pasado sin perder vida y "false" si no
+	 * @param dificultad del 1 al 4 dependiendo de la ronda en la que se encuantre
 	 * @return devuelve True si se hace correctamente
 	 */
 	public static boolean insertarGame1( int idPartida, int puntuacion, int fallos, String primeraCarta, long tiempoPrimCar, long tiempoTot, String superado, int dificultad) {
@@ -209,6 +211,15 @@ public class BaseDatos {
 		}
 	}
 	
+	/** Inserta un Game2 en la base de datos previamente abierta con {@link #abrirConexion(String, boolean)}
+	 * @param idPartida ID de la partida que se esta jugando
+	 * @param puntuacion Puntuacion obtenida en Game3
+	 * @param fallos Numero de fallos cometidos
+	 * @param tiempoTot Tiempo total en terminar el juego
+	 * @param superado "true" si se ha pasado sin perder vida y "false" si no
+	 * @param dificultad del 1 al 4 dependiendo de la ronda en la que se encuantre
+	 * @return devuelve True si se hace correctamente
+	 */
 	public static boolean insertarGame2( int idPartida, int puntuacion, int fallos, long tiempoTot,  String superado, int dificultad) {
 		try (Statement statement = conexion.createStatement()) {
 			String sent = "insert into game2 (idPartida, puntuacion, fallos, tiempo_total, superado, dificultad ) values (" + idPartida + ", " + puntuacion + ", "+ fallos + ", " + tiempoTot + ", '" + superado + "', " + dificultad + " );";											
@@ -227,6 +238,8 @@ public class BaseDatos {
 	 * @param puntuacion Puntuacion obtenida en Game3
 	 * @param fallos Numero de fallos cometidos
 	 * @param tiempoTot Tiempo total en terminar el juego
+	 * @param superado "true" si se ha pasado sin perder vida y "false" si no
+	 * @param dificultad del 1 al 4 dependiendo de la ronda en la que se encuantre
 	 * @return devuelve True si se hace correctamente
 	 */
 	
@@ -243,6 +256,16 @@ public class BaseDatos {
 		}
 	}
 	
+	/** Inserta un Game4 en la base de datos previamente abierta con {@link #abrirConexion(String, boolean)}
+	 * @param idPartida ID de la partida que se esta jugando
+	 * @param puntuacion Puntuacion obtenida en Game3
+	 * @param fallos Numero de fallos cometidos
+	 * @param tiempoTot Tiempo total en terminar el juego
+	 * @param superado "true" si se ha pasado sin perder vida y "false" si no
+	 * @param dificultad del 1 al 4 dependiendo de la ronda en la que se encuantre
+	 * @return devuelve True si se hace correctamente
+	 */
+	
 	public static boolean insertarGame4( int idPartida, int puntuacion, int fallos, long tiempoTot, String superado, int dificultad) {
 		try (Statement statement = conexion.createStatement()) {
 			String sent = "insert into game4 (idPartida, puntuacion, fallos, tiempo_total, superado, dificultad) values (" + idPartida + ", " + puntuacion + ", "+ fallos + ", " + tiempoTot + ", '" + superado + "', " + dificultad + " );";											
@@ -258,9 +281,12 @@ public class BaseDatos {
 	
 	/** Inserta un Game5 en la base de datos previamente abierta con {@link #abrirConexion(String, boolean)}
 	 * @param idPartida ID de la partida que se esta jugando
-	 * @param puntuacion Puntuacion obtenida en Game5
-	 * @param premio Adquiere valor 1 si ha conseguido hacer 3 en linea, 0 en caso de que no
-	 * @param symbol String que indica qu� simbolo ha elegido el primero.
+	 * @param puntuacion Puntuacion obtenida en Game3
+	 * @param symbol primer simbolo que se ha seleccionado
+	 * @param fallos Numero de fallos cometidos
+	 * @param tiempoTot Tiempo total en terminar el juego
+	 * @param superado "true" si se ha pasado sin perder vida y "false" si no
+	 * @param dificultad del 1 al 4 dependiendo de la ronda en la que se encuantre
 	 * @return devuelve True si se hace correctamente
 	 */
 	
@@ -276,6 +302,16 @@ public class BaseDatos {
 			return false;
 		}
 	}
+	
+	/** Inserta un Game6 en la base de datos previamente abierta con {@link #abrirConexion(String, boolean)}
+	 * @param idPartida ID de la partida que se esta jugando
+	 * @param puntuacion Puntuacion obtenida en Game3
+	 * @param fallos Numero de fallos cometidos
+	 * @param tiempoTot Tiempo total en terminar el juego
+	 * @param superado "true" si se ha pasado sin perder vida y "false" si no
+	 * @param dificultad del 1 al 4 dependiendo de la ronda en la que se encuantre
+	 * @return devuelve True si se hace correctamente
+	 */
 	
 	public static boolean insertarGame6( int idPartida, int puntuacion, int fallos, long tiempoTot, String superado, int dificultad) {
 		try (Statement statement = conexion.createStatement()) {
@@ -377,6 +413,9 @@ public class BaseDatos {
 	
 	
 	
+	/**
+	 * @return Devuelve un HashMap con el id de la partida como clave y el nombre del jugador como valor
+	 */
 	public static HashMap<Integer, String> getPartidas(){
 		
 		try (Statement statement = conexion.createStatement()) {
@@ -398,6 +437,9 @@ public class BaseDatos {
 	
 	
 	
+	/**
+	 * @return	Devuelve un HashMap con el nombre del jugador como clave y la contraseña como valor
+	 */
 	public static HashMap<String, String> getJugadores(){
 		
 		try (Statement statement = conexion.createStatement()) {
@@ -417,6 +459,12 @@ public class BaseDatos {
 		}
 	}
 	
+	/**
+	 * Sustituye la puntuacion maxima de un jugador por la que recibe como atributo
+	 * @param nombre del jugador que se quiere modificar la puntuacion
+	 * @param puntuacion puntuacion por la que se sustituye
+	 * @return Devuelve true si se hace correctamente y false si no
+	 */
 	public static boolean cambiarMaxPunt(String nombre, Integer puntuacion) {
 		try (Statement statement = conexion.createStatement()) {
 			String sent = "update jugador set puntMax = " + puntuacion + " where nombre = '" + nombre + "';";
@@ -430,6 +478,11 @@ public class BaseDatos {
 		}
 	}
 	
+	/** Modifica la puntuacion total de una partida
+	 * @param id de la partida
+	 * @param puntuacion por la que se quiere cambiar
+	 * @return Devuelve true si se hace correctamente y false si no
+	 */
 	public static boolean cambiarPuntTotal(int id, Integer puntuacion) {
 		try (Statement statement = conexion.createStatement()) {
 			String sent = "update partida set puntTotal = " + puntuacion + " where id = '" + id + "';";
@@ -443,6 +496,11 @@ public class BaseDatos {
 		}
 	}
 	
+	
+	/**
+	 * @param nombre del jugador
+	 * @return Devuelve la puntuación máxima de un jugador
+	 */
 	public static Integer obtenerMaxPunt(String nombre) {
 		try (Statement statement = conexion.createStatement()) {
 			String sent = "select max(puntTotal) as puntuacion from partida where nombre = '" + nombre + "';";
@@ -456,6 +514,10 @@ public class BaseDatos {
 		}
 	}
 	
+	/**
+	 * @param idJ nombre del jugador
+	 * @return cantidad de partidas que ha jugado
+	 */
 	public static Integer cantiadPartidas(String idJ) {
 		try (Statement statement = conexion.createStatement()) {
 			String sent = "select count(*) as cantidad from partida where nombre = '" + idJ + "';";
@@ -469,6 +531,9 @@ public class BaseDatos {
 		}
 	}
 	
+	/**
+	 * @return Un arrayList con los nombres de los jugadores ordenados por puntuaciones de forma descendente
+	 */
 	public static ArrayList<String> obtenerPuntuaciones(){
 		try (Statement statement = conexion.createStatement()) {
 			ArrayList<String> resultado = new ArrayList<String>();
