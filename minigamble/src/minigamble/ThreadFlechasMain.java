@@ -4,8 +4,12 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ThreadFlechasMain extends Thread{
 	
+	// CopyOnWriteArrayList de las flechas activas
 	private CopyOnWriteArrayList<Flecha> activas = new CopyOnWriteArrayList<Flecha>();
 	
+	/** Constructor de la clase ThreadFlechasMain
+	 * @param activas CopyOnWriteArrayList de las flechas activas
+	 */
 	public ThreadFlechasMain(CopyOnWriteArrayList<Flecha> activas) {
 		this.activas = activas;
 	}
