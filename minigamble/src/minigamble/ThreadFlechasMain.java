@@ -14,6 +14,9 @@ public class ThreadFlechasMain extends Thread{
 		this.activas = activas;
 	}
 	
+	/**
+	 * Hace que cada flecha baje de 5 en 5 pixeles, con una velocidad marcada por la puntuacion de la partida
+	 */
 	@Override
 	public void run() {
 		while(activas.size() != 0) {
