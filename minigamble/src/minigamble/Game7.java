@@ -332,7 +332,7 @@ public class Game7 implements MouseListener {
 		
 
 					
-		if(start==1){
+		if(start==1){ 				//	primer click, recorre las posiciones de la matriz y pone un 1 en aquel que haya elegido el jugador
 			mox = e.getX();	
 			moy = e.getY();
 			
@@ -348,32 +348,28 @@ public class Game7 implements MouseListener {
 								firstY = (i-200)/100;
 							}
 							
-							if(checkRow(matrix)==1) {
+							if(checkRow(matrix)==1) {			//comprueba si con ele movimiento el jugador ha ganado o se puede seguir jugando
 								delayMS(500);
 								start=2;
 								
 								tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
 								BaseDatos.insertarGame7(idPartida, 500 , tiempoTotal, firstX, firstY );
 					
-								//Game.partida  = new Partida( 500 ,0 , 6	, jugador, idPartida);
-								
 								Game.pi = new PantallaIntermedia(puntTotal, 500, 0, 6, jugador, idPartida);
 								Game.estadoJuego = ESTADO.PantallaIntermedia;
 								Game.eventoRaton();
 								
-							} else if(count(matrix)==0){
+							} else if(count(matrix)==0){		// comprueba si, no queda ningun espacio libre y han empatado
 								delayMS(500);
 								start=4;
 								
 								tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
 								BaseDatos.insertarGame7(idPartida, 100 , tiempoTotal, firstX, firstY );
 								
-								//Game.partida  = new Partida( 100 ,0 , 6	, jugador, idPartida);
-								
 								Game.pi = new PantallaIntermedia(puntTotal, 100, 0, 6, jugador, idPartida);
 								Game.estadoJuego = ESTADO.PantallaIntermedia;
 								Game.eventoRaton();
-							}else {
+							}else {								//se calculan los posibles movimientos a partir de la posicion inicial
 								
 								ArrayList<Integer> positions= new ArrayList<Integer>();
 								ArrayList<Double> probabilities= new ArrayList<Double>();
@@ -387,9 +383,9 @@ public class Game7 implements MouseListener {
 											positions.add(a);
 											positions.add(b);
 											
-											int[][] newMatrix= copied(matrix);
+											int[][] newMatrix= copied(matrix); 			// se crean las matrices de los diferentes movimientos
 											newMatrix[a][b] = -1;											
-											double probab1 = probab(newMatrix, 2);											
+											double probab1 = probab(newMatrix, 2);			// se obtiene la probabilidad de las diferentres matrices obtenidas								
 											probabilities.add(probab1);
 										}
 										
@@ -412,7 +408,7 @@ public class Game7 implements MouseListener {
 								matrix[a][b] = -1;
 									
 								
-								if(checkRow(matrix) == -1) {
+								if(checkRow(matrix) == -1) {			// se comprueba si la maquina ha ganado
 									delayMS(500);
 									start=3;
 									tiempoTotal = System.currentTimeMillis() - tiempoComienzo;
@@ -421,7 +417,7 @@ public class Game7 implements MouseListener {
 									Game.estadoJuego = ESTADO.PantallaIntermedia;
 									Game.eventoRaton();
 								}
-								if(count(matrix)==0) {
+								if(count(matrix)==0) {					// se comprueba si la maquina ha empatado
 									delayMS(500);
 									start=4;
 									

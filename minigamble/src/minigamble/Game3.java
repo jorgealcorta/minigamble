@@ -66,7 +66,7 @@ public class Game3 implements MouseListener , MouseMotionListener {
 	
 	public Game3(int dificultad, String nombreJugador, int idPart) {
 		
-	
+	//reset de estadicticas locales
 		puntTotal = dificultad;				
 		jugador = nombreJugador;
 		idPartida = idPart;
@@ -75,7 +75,7 @@ public class Game3 implements MouseListener , MouseMotionListener {
 		numFallos = 0;
 		start = 1;
 			
-				
+		//load de los 4 laberintos disponibles		
 		Laberinto lab1 = new Laberinto(media.lab1Img, 001 );
 		Laberinto lab2 = new Laberinto(media.lab2Img, 002 );
 		Laberinto lab3 = new Laberinto(media.lab3Img, 003 );
@@ -86,6 +86,7 @@ public class Game3 implements MouseListener , MouseMotionListener {
 		allLabs.add(lab3);
 		allLabs.add(lab4);
 		
+		//eleccion del laberinto en funcion de la dificultad
 		thisLab = getRandom(allLabs, puntTotal);				
 		
 		try {
@@ -143,6 +144,7 @@ public class Game3 implements MouseListener , MouseMotionListener {
 		
 		if(Game.estadoJuego==Game.ESTADO.Game3) {
 			
+			//sistema del boton del comienzo
 			mox = e.getX();                               
 			moy = e.getY();
 						
@@ -186,7 +188,7 @@ public class Game3 implements MouseListener , MouseMotionListener {
 				if( mouseOver(mox, moy, 500, 290, 190, 50)){	
 					
 
-					
+					//desplazamiento inicial del cursor al lugar de inicio en el laberinto cuando se suelta el boton del inicio
 					startX= Game.ventana.frame.getLocationOnScreen().x+1100;
 					startY= Game.ventana.frame.getLocationOnScreen().y+600;
 					
@@ -212,8 +214,10 @@ public class Game3 implements MouseListener , MouseMotionListener {
 	public void mouseEntered(MouseEvent e) {
 		if(Game.estadoJuego == ESTADO.Game3) {
 			
-			if(start==2) {
 			
+			//desplazamiento el inicio del laberinto en caso de haber salido de la mantalla durante el juego
+			if(start==2) {
+							
 				startX= Game.ventana.frame.getLocationOnScreen().x+1100;
 				startY= Game.ventana.frame.getLocationOnScreen().y+600;
 				
@@ -232,6 +236,7 @@ public class Game3 implements MouseListener , MouseMotionListener {
 		if(Game.estadoJuego == Game.ESTADO.Game3 ) {
 			if(start==2) {
 					
+				//comparador del color dentro de la pantalla y del color del que debe ser el laberinto
 				Mox = e.getXOnScreen();	
 				Moy = e.getYOnScreen();
 				mox = e.getX();
@@ -240,16 +245,16 @@ public class Game3 implements MouseListener , MouseMotionListener {
 				
 				if(pathColor == null ) {
 					
-					pathColor = Color.decode("#c8bfe7");
-					pathColor2 = Color.decode("#CABEEA");
+					pathColor = Color.decode("#c8bfe7"); //version de windows
+					pathColor2 = Color.decode("#CABEEA"); //version de mac
 				}
 							
 							
-				if(robot.getPixelColor(Mox, Moy).getRGB() != pathColor.getRGB() && robot.getPixelColor(Mox, Moy).getRGB() != pathColor2.getRGB()) {
-					robot.mouseMove(startX, startY);	
+				if(robot.getPixelColor(Mox, Moy).getRGB() != pathColor.getRGB() && robot.getPixelColor(Mox, Moy).getRGB() != pathColor2.getRGB()) {		//comparar colores
+					robot.mouseMove(startX, startY);							
 					numFallos = numFallos +1;
-					puntLocal = (int)Math.round( puntLocal * 0.66);
-					delayMS(20);
+					puntLocal = (int)Math.round( puntLocal * 0.66);  			//restar a la puntuacion obtenida
+					delayMS(40);												//margen para no sumar muchos errores en un solo fallo
 					
 					
 				} else if ( mouseOver(mox, moy, 41, 43, 178, 88)) {

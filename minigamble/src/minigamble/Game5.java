@@ -155,7 +155,7 @@ public class Game5 implements Runnable , KeyListener{
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if(start==0) {
+		if(start==0) { 					//caso de primer click, comienza a mover los rodillos
 			if(e.getKeyCode()==32) {
 				start=1;
 				sonidoTragaperras();
@@ -169,7 +169,7 @@ public class Game5 implements Runnable , KeyListener{
 				sym8.setMoving(true);
 				sym9.setMoving(true);
 			}
-		} else if(start==1) {
+		} else if(start==1) {			// caso del segundo click, detiene el primer rodillo
 			if(e.getKeyCode()==32) {
 				if(count==0) {
 					sonidoPalanca();
@@ -189,7 +189,7 @@ public class Game5 implements Runnable , KeyListener{
 						chos1=sym3.getImage();
 					}
 
-					if(chos1 == 0) {
+					if(chos1 == 0) {					// elige el primer simpolo elegido para posterior almacenamiento
 						elegido="heart";
 					} else if (chos1 == 1) {
 						elegido="lemon";
@@ -200,7 +200,7 @@ public class Game5 implements Runnable , KeyListener{
 					}
 
 				}else if(count==1) {
-					sonidoPalanca();
+					sonidoPalanca();					// tercer click ,  detiene el segundo rodillo
 					count++;
 					sym4.setMoving(false);
 					sym5.setMoving(false);
@@ -216,7 +216,7 @@ public class Game5 implements Runnable , KeyListener{
 					}
 
 
-				}else if(count==2) {
+				}else if(count==2) {					// cuarto click, detiene el tercer rodillo y compara los identifiers de las tres imagenes situadas en el medio de los rodillos
 					sonidoPalanca();
 					count++;
 					sym7.setMoving(false);
