@@ -9,15 +9,24 @@ import javax.sound.sampled.Clip;
 public class ThreadPuntosDisplay extends Thread {
 	
 	int puntos = 0;
+	
 	int puntLocal;
+	
 	public static Clip puntos2;
 	
 	
+	/**
+	 * @param puntos Puntos que tenía la partida antes de finalizar el minijuego anterior
+	 * @param puntLocal Puntos sumados por el minijuego anterior
+	 */
 	public ThreadPuntosDisplay(int puntos, int puntLocal) {
 		this.puntos = puntos;
 		this.puntLocal = puntLocal;
 	}
 
+	/**
+	 * Aumenta la cantidad de puntos que se muestran, desde la puntuacion anterior hasta la actual, aumentando de 1 en 1 cada milisegundo
+	 */
 	@Override
 	public void run() {
 		puntos2();
