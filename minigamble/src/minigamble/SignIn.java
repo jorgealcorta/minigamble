@@ -14,10 +14,10 @@ import javax.sound.sampled.Clip;
 
 /** 
  * Ventana encargada de empezar el juego con jugadores nuevos: 
- * <h2>Textfield para nombre no registrado</h2>
- * <h2>Textfield para contraseña</h2>
- * <h2>Botón para comenzar si usuario y contraseña son correctos</h2>
- * <h2>Botón para volver atrás</h2>
+ * Textfield para nombre no registrado
+ * Textfield para contrasena
+ * Botón para comenzar si usuario y contraseña son correctos
+ * Botn para volver atras
  */
 public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 	
@@ -56,7 +56,7 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 			moy = e.getY();
 			
 			String filePath = new File("").getAbsolutePath();				// Ruta hasta el proyecto
-			String s1_filePath = filePath.concat("/minigamble/src/minigamble/sonido/click1.wav");	//Continuación de la ruta hasta el archivo de audio 1
+			String s1_filePath = filePath.concat("/minigamble/src/minigamble/sonido/click1.wav");	//Continuacion de la ruta hasta el archivo de audio 1
 			
 			
 			if( mouseOver(mox, moy, 500, 390, 190, 50)  && usuario_state == 2 && contrasena_state == 2 ){	// si se presiona encima del boton start se cambia su estado
@@ -138,7 +138,7 @@ public class SignIn implements MouseMotionListener, MouseListener, KeyListener{
 	public void mouseReleased(MouseEvent e) {
 		if(Game.estadoJuego == Game.ESTADO.SignIn) {
 			String filePath = new File("").getAbsolutePath();										// Ruta hasta el proyecto
-			String s2_filePath = filePath.concat("/minigamble/src/minigamble/sonido/click2.wav");	//Continuacio n de la ruta hasta el archivo de audio 2
+			String s2_filePath = filePath.concat("/minigamble/src/minigamble/sonido/click2.wav");	//Continuacion de la ruta hasta el archivo de audio 2
 			
 			if(bstart_state == true){ // si se ha presionado y soltado encima del primero suena
 				try {				  //Reproduce el archivo de sonido 2

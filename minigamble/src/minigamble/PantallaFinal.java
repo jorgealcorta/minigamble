@@ -122,7 +122,7 @@ public class PantallaFinal implements KeyListener{
 		if(key == 32 && Game.estadoJuego == ESTADO.PantallaFinal) {
 			Game.cancion();
 			Game.estadoJuego = ESTADO.Start;
-			Game.again();
+			//Game.again();
 			
 		}	
 		
