@@ -329,10 +329,8 @@ public class Game3 implements MouseListener , MouseMotionListener {
 			g.setFont(customFontG3);
 			g.setColor(Color.BLACK);
 			g.drawString("Points to obtain ( " + String.valueOf(puntLocal) +" )", 870, 20);						
-			g.drawString("Number of mistakes ( "+String.valueOf(numFallos)+" )", 845, 40);
-			if (numFallos>3) {
-				g.drawString("Too many mistakes :(", 845, 60);				
-			}
+			//g.drawString("Number of mistakes ( "+String.valueOf(numFallos)+" )", 845, 40);
+			
 		}
 		
 		if(start ==3) {
