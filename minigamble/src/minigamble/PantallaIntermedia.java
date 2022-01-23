@@ -34,9 +34,18 @@ public class PantallaIntermedia implements KeyListener{
 	
 	private Font fontPuntos;
 	
+	
+	/**Constructor de pantallaIntermedia
+	 * @param puntos de la partida antes de sumar el minijuego jugado previamente
+	 * @param puntLocal puntos obtenidos en el juego anterior
+	 * @param vidasRestadas int con valor 1 o 0 en funcion de si ha gaando o ha perdido.
+	 * @param miniJugado id de el minujuego jugado para almacenamiento en partida
+	 * @param jugador id del jugador para calmacenar en partida
+	 * @param idPartida id de la partida actual
+	 */
+	
 	public PantallaIntermedia(int puntos, int puntLocal, int vidasRestadas, int miniJugado, String jugador, int idPartida) {
-		
-		System.out.println("pi creada con vidas " + Game.partida.vidas  + " y vidas restadas "+ vidasRestadas);
+
 		
 		this.puntos = puntos;
 		this.vidasRestadas = vidasRestadas;
@@ -53,7 +62,7 @@ public class PantallaIntermedia implements KeyListener{
 		
 		PantallaIntermedia.miniJugado = miniJugado;
 
-		if(Partida.vidas - vidasRestadas == 3) {
+		if(Partida.vidas - vidasRestadas == 3) { // en funcion de las vidas restantes se muestran mas o menos coraxones
 			vida1.setVida(true);
 			vida2.setVida(true);
 			vida3.setVida(true);
@@ -100,7 +109,7 @@ public class PantallaIntermedia implements KeyListener{
 
 			int key = e.getKeyCode();
 			
-			if(key == 32 && Game.estadoJuego == ESTADO.PantallaIntermedia) {
+			if(key == 32 && Game.estadoJuego == ESTADO.PantallaIntermedia) { // se interrumpe el hilo y se pasa a partida para elegir otro juego
 				System.out.println("espacio intermedio");
 				while(hvd.isAlive()) {
 					try {
