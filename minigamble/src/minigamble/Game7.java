@@ -12,7 +12,7 @@ import minigamble.Game.ESTADO;
  * Clase encargada del juego 7 (tres en raya)
  */
 
-public class Game7 implements MouseListener, Renderizable {
+public class Game7 extends minigame implements MouseListener, Renderizable {
 	
 	private int[][] matrix = { {0,0,0},{0,0,0},{0,0,0}};
 	private int mox;

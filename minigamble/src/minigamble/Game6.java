@@ -15,7 +15,7 @@ import javax.sound.sampled.Clip;
 
 import minigamble.Game.ESTADO;
 
-public class Game6 implements KeyListener, Renderizable {
+public class Game6 extends minigame implements KeyListener, Renderizable {
 	
 	private boolean aciertoReciente = false;
 	
@@ -279,7 +279,7 @@ public class Game6 implements KeyListener, Renderizable {
 			System.out.println("acierto reciente es " + aciertoReciente + "check es " + check);
 			if(!aciertoReciente) {
 				fallos++;
-				System.out.println("fallo añadido");
+				System.out.println("fallo aï¿½adido");
 			}
 		}
 	}

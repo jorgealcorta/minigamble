@@ -16,7 +16,7 @@ import javax.sound.sampled.Clip;
 import minigamble.Game.ESTADO;
 
 
-public class Game4 implements MouseMotionListener, MouseListener, Renderizable { //Dianas
+public class Game4 extends minigame implements MouseMotionListener, MouseListener, Renderizable { //Dianas
 	
 			
 	// CopyOnWriteArrayList que almacena las dianas generadas aleatoriamente.

@@ -23,7 +23,7 @@ import minigamble.Game.ESTADO;
  * Clase encargada del juego 1 (Memory de cartas)
  */
 
-public class Game1  implements MouseMotionListener, MouseListener, Runnable, Renderizable { 
+public class Game1 extends minigame implements MouseMotionListener, MouseListener, Runnable, Renderizable { 
 	
 	private int mox;				
 	private int moy;

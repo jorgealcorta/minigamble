@@ -21,7 +21,7 @@ import minigamble.Game.ESTADO;
  *
  */
 
-public class Game5 implements Runnable, KeyListener, Renderizable {
+public class Game5 extends minigame implements Runnable, KeyListener, Renderizable {
 
 
 	private Font customFontG5;
