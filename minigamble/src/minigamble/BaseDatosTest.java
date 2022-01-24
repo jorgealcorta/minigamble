@@ -23,7 +23,7 @@ public class BaseDatosTest {
 	@Test
 	public void testGetPartidas() {
 		HashMap<Integer, String> lP = BaseDatos.getPartidas();
-		assertEquals( 9, lP.size() );
+		assertEquals( 5, lP.size() );
 		int antId = 0;
 		for (Integer id : lP.keySet()) {
 			assertTrue( id > antId );
@@ -80,7 +80,7 @@ public class BaseDatosTest {
 		
 		HashMap<String, String> lJ = BaseDatos.getJugadores();
 		
-		assertEquals( 4, lJ.size());
+		assertEquals( 5, lJ.size());
 		
 		for (String nombre : lJ.keySet()) {
 			String contrasena = lJ.get(nombre);
